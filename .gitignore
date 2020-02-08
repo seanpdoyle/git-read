@@ -1,2 +1,4 @@
 dist/
 build/
+tmp/
+source/index.html*
