@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title><%= current_page.data.title || "Middleman" %></title>
+    <%= stylesheet_link_tag "site" %>
+    <%= javascript_include_tag "site" %>
+  </head>
+  <body>
+    <aside>
+      <% data.commits.sequence.each do |commit| %>
+        <% link_to "/commits/#{commit}" do %>
+          <%= commit %>
+        <% end %>
+      <% end %>
+    </aside>
+
+    <main>
+      <nav>
+        <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
+          <% if current_page.data.id == commit && parent.present? %>
+            <% link_to "/commits/#{parent}" do %>
+              Previous
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
+          <% if current_page.data.id == commit && child.present? %>
+            <% link_to "/commits/#{child}" do %>
+              Next
+            <% end %>
+          <% end %>
+        <% end %>
+      </nav>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>
