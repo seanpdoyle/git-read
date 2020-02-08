@@ -21,7 +21,7 @@ source/commits/%/_diff.html: tmp/commits/%.txt
 
 data/commits.yml:
 	mkdir -p $(dir $@)
-	echo "sequence:\n$$(git log --reverse --format='  - %h')" > data/commits.yml
+	echo "sequence:\n$$(git log --reverse --format="$$(cat templates/commit.yml)")" > data/commits.yml
 
 source/commits/%/index.html.md.erb: tmp/commits/%.txt
 	mkdir -p $(dir $@)
