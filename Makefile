@@ -15,15 +15,15 @@ build:
 	mkdir -p tmp/commits/
 	$(git) log --format="tmp/commits/%h.txt" | xargs touch
 
-source/index.html.md: README.md
-	cp README.md source/index.html.md
-
-source/commits/%/_diff.html: tmp/commits/%.txt
-	$(git) show --cc --format="" $$(basename $< .txt) --output=$@
+source/index.html.md:
+	$(git) show HEAD:README.md > $@
 
 data/commits.yml:
 	mkdir -p $(dir $@)
 	echo "sequence:\n$$($(git) log --reverse --format="$$(cat templates/commit.yml)")" > data/commits.yml
+
+source/commits/%/_diff.html: tmp/commits/%.txt
+	$(git) show --cc --format="" $$(basename $< .txt) --output=$@
 
 source/commits/%/index.html.md.erb: tmp/commits/%.txt
 	mkdir -p $(dir $@)
