@@ -13,8 +13,8 @@
   <body>
     <aside>
       <% data.commits.sequence.each do |commit| %>
-        <% link_to "/commits/#{commit}" do %>
-          <%= commit %>
+        <% link_to "/commits/#{commit.id}" do %>
+          <%= commit.subject %>
         <% end %>
       <% end %>
     </aside>
@@ -22,16 +22,16 @@
     <main>
       <nav>
         <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
-          <% if current_page.data.id == commit && parent.present? %>
-            <% link_to "/commits/#{parent}" do %>
+          <% if current_page.data.id == commit.id && parent.present? %>
+            <% link_to "/commits/#{parent.id}" do %>
               Previous
             <% end %>
           <% end %>
         <% end %>
 
         <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
-          <% if current_page.data.id == commit && child.present? %>
-            <% link_to "/commits/#{child}" do %>
+          <% if current_page.data.id == commit.id && child.present? %>
+            <% link_to "/commits/#{child.id}" do %>
               Next
             <% end %>
           <% end %>
