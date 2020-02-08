@@ -1,2 +1,10 @@
 tmp/
-source/index.html*
+source/index.html.*
+source/commits/*
+data/*
+
+.bundle
+.cache
+.DS_Store
+.sass-cache
+build/
