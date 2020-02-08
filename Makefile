@@ -1,0 +1,2 @@
+all:
+	git log --reverse
