@@ -1,1 +1,1 @@
-- { id: '%h', subject: '%s' }
+- { id: "%h", subject: "%s" }
