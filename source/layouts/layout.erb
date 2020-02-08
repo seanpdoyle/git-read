@@ -21,19 +21,25 @@
 
     <main>
       <nav>
-        <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
-          <% if current_page.data.id == commit.id && parent.present? %>
-            <% link_to "/commits/#{parent.id}" do %>
-              Previous
+        <% if current_page.data.id.present? %>
+          <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
+            <% if current_page.data.id == commit.id && parent.present? %>
+              <% link_to "/commits/#{parent.id}" do %>
+                Previous
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
 
-        <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
-          <% if current_page.data.id == commit.id && child.present? %>
-            <% link_to "/commits/#{child.id}" do %>
-              Next
+          <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
+            <% if current_page.data.id == commit.id && child.present? %>
+              <% link_to "/commits/#{child.id}" do %>
+                Next
+              <% end %>
             <% end %>
+          <% end %>
+        <% else %>
+          <% link_to "/commits/#{data.commits.sequence.first.id}" do %>
+            Get Started
           <% end %>
         <% end %>
       </nav>
