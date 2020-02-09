@@ -1,4 +1,5 @@
 git := git --git-dir=$${GIT_DIR-.git/}
+babel := node_modules/.bin/babel
 
 commits := $(shell mkdir -p tmp/commits && find tmp/commits -name '*.txt')
 source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md.erb,$(commits))
@@ -6,10 +7,14 @@ diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits
 
 .PHONY: all clean build
 
-all: $(source_files) $(diff_files) source/index.html.md data/commits.yml
+all: $(source_files) \
+	$(diff_files) \
+	source/javascripts/site.js \
+	source/index.html.md \
+	data/commits.yml
 
 clean:
-	rm -rf tmp source/commits source/index.* build data
+	rm -rf tmp source/{commits,javascripts,index.*} build data
 
 build:
 	mkdir -p tmp/commits/
@@ -28,3 +33,7 @@ source/commits/%/_diff.html: tmp/commits/%.txt
 source/commits/%/index.html.md.erb: tmp/commits/%.txt
 	mkdir -p $(dir $@)
 	$(git) show --no-patch --output=$@ --format="$$(cat templates/commit.md)" $$(basename $< .txt)
+
+source/javascripts/%: javascripts/%
+	mkdir -p $(dir $@)
+	$(babel) $< --out-file $@ --source-maps
