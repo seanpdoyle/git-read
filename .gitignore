@@ -2,8 +2,7 @@ dist/
 build/
 tmp/
 source/index.html.*
-source/commits/*
-data/*
+/data/
 
 .bundle
 .cache

@@ -38,6 +38,15 @@ page '/*.txt', layout: false
 #     which_fake_page: 'Rendering a fake page with a local variable'
 #   },
 # )
+ignore "/commits/commit.html"
+
+data.history.commits.each do |id|
+  proxy(
+    "/commits/#{id}/index.html",
+    "/commits/commit.html",
+    locals: { id: id },
+  )
+end
 
 # Helpers
 # Methods defined in the helpers block are available in templates

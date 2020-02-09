@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title><%= current_page.data.title || "Middleman" %></title>
+    <title><%= current_page.data.title || yield_content(:title) || "git-read" %></title>
     <%= stylesheet_link_tag "site", "data-turbolinks-track": "reload" %>
     <%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "main", "data-turbolinks-track": "reload" %>
@@ -15,8 +15,8 @@
     <details id="table-of-contents" class="page__history" open>
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
-        <% data.commits.sequence.each do |commit| %>
-          <%= current_link_to escape_html(commit.subject), commit_path(commit) %>
+        <% data.history.commits.each do |commit| %>
+          <%= current_link_to escape_html(data.commits[commit].subject), commit_path(commit) %>
         <% end %>
       </nav>
     </details>
@@ -24,7 +24,7 @@
     <main class="page__content">
       <header>
         <% if commit? %>
-          <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
+          <% ([nil] + data.history.commits).each_cons(2) do |parent, commit| %>
             <% if current?(commit) && parent.present? %>
               <% link_to commit_path(parent) do %>
                 Previous
@@ -32,7 +32,7 @@
             <% end %>
           <% end %>
 
-          <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
+          <% (data.history.commits + [nil]).each_cons(2) do |commit, child| %>
             <% if current?(commit) && child.present? %>
               <% link_to commit_path(child) do %>
                 Next
@@ -40,7 +40,7 @@
             <% end %>
           <% end %>
         <% else %>
-          <% link_to(commit_path(data.commits.sequence.first)) do %>
+          <% link_to(commit_path(first_commit_sha)) do %>
             Get Started
           <% end %>
         <% end %>
@@ -53,7 +53,7 @@
       <% if commit? %>
 <!-- Lack of Leading Whitespace is Significant -->
 <% code("diff") do %>
-<%= partial("commits/#{current_page.data.id}/diff.html") %>
+<%= current_commit.diff %>
 <% end %>
       <% end %>
     </main>
