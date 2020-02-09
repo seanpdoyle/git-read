@@ -50,7 +50,7 @@
       </article>
 
       <% if current_page.data.id.present? %>
-        <article class="diff page__diff">
+        <article class="page__diff">
 <!-- Lack of Leading Whitespace is Significant -->
 <% code("diff") do %>
 <%= partial("commits/#{current_page.data.id}/diff.html") %>
