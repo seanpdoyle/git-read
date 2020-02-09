@@ -3,6 +3,7 @@ require "lib/commit_helpers"
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
+activate :aria_current
 activate :syntax
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"

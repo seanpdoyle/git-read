@@ -11,6 +11,6 @@ module CommitHelpers
   end
 
   def commit_path(commit)
-    "/commits/#{commit.id}"
+    "/commits/#{commit.id}/"
   end
 end
