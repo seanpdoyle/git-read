@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+set -e
+
+HISTORY=$1
+
+export GIT_HISTORY=$(echo "${HISTORY}" | sed -e 's/^/  /g')
+
+envsubst < templates/data/history.yml.tmpl

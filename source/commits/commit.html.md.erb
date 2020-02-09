@@ -1,0 +1,8 @@
+<% content_for(:id, id) %>
+
+<% content_for(:title, data.commits[id].subject) %>
+
+<%= data.commits[id].subject %>
+===
+
+<%= data.commits[id].message %>
