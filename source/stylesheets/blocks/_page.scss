@@ -4,18 +4,28 @@
 
   @media(min-width: $breakpoint--mobile) {
     display: grid;
-    grid-template-areas:  "history navigation navigation"
-                          "history commit     diff";
-    ;
+    grid-template-areas:  "history navigation"
+                          "history commit"
+                          "history diff";
+    grid-template-columns: 360px   1fr;
   }
 }
 
 .page__commit {
   grid-area: commit;
+  grid-column: 2fr;
+
+  @media(min-width: $breakpoint--mobile) {
+    width: 100%;
+  }
 }
 
 .page__diff {
   grid-area: diff;
+
+  @media(min-width: $breakpoint--mobile) {
+    min-width: 300px;
+  }
 }
 
 .page__history {
