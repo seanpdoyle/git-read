@@ -1,3 +1,5 @@
+require "lib/commit_helpers"
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
@@ -40,6 +42,7 @@ page '/*.txt', layout: false
 #     'Helping'
 #   end
 # end
+helpers CommitHelpers
 
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings

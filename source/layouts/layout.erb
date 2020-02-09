@@ -15,31 +15,31 @@
     <main class="page">
       <aside class="history page__history">
         <% data.commits.sequence.each do |commit| %>
-          <% link_to "/commits/#{commit.id}" do %>
+          <% link_to commit_path(commit) do %>
             <%= escape_html(commit.subject) %>
           <% end %>
         <% end %>
       </aside>
 
       <nav class="navigation page__navigation">
-        <% if current_page.data.id.present? %>
+        <% if commit? %>
           <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
-            <% if current_page.data.id == commit.id && parent.present? %>
-              <% link_to "/commits/#{parent.id}" do %>
+            <% if current?(commit) && parent.present? %>
+              <% link_to commit_path(parent) do %>
                 Previous
               <% end %>
             <% end %>
           <% end %>
 
           <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
-            <% if current_page.data.id == commit.id && child.present? %>
-              <% link_to "/commits/#{child.id}" do %>
+            <% if current?(commit) && child.present? %>
+              <% link_to commit_path(child) do %>
                 Next
               <% end %>
             <% end %>
           <% end %>
         <% else %>
-          <% link_to "/commits/#{data.commits.sequence.first.id}" do %>
+          <% link_to(commit_path(data.commits.sequence.first)) do %>
             Get Started
           <% end %>
         <% end %>
@@ -49,7 +49,7 @@
         <%= yield %>
       </article>
 
-      <% if current_page.data.id.present? %>
+      <% if commit? %>
         <article class="page__diff">
 <!-- Lack of Leading Whitespace is Significant -->
 <% code("diff") do %>
