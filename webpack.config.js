@@ -1,9 +1,5 @@
-const path = require('path')
+const path = require("path")
 
 module.exports = {
-  entry: "javascripts/main.js",
-  mode: "development",
-  output: {
-    path: path.resolve(__dirname, "source/javascripts")
-  },
+  entry: path.resolve(__dirname, "source/javascripts/main.js"),
 }

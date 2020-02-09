@@ -7,8 +7,7 @@ diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits
 TARGETS := \
 	$(source_files) \
 	$(diff_files) \
-	source/index.html.md \
-	source/javascripts/site.js
+	source/index.html.md
 
 .PHONY: all clean build compile
 
@@ -22,7 +21,7 @@ build:
 	$(git) log --format="tmp/commits/%h.txt" | xargs touch
 
 clean:
-	rm -rf tmp source/{commits,javascripts,index.*} build data
+	rm -rf tmp source/{commits,index.*} build data
 
 node_modules: package.json yarn.lock
 	yarn install
@@ -40,7 +39,3 @@ source/commits/%/_diff.html: tmp/commits/%.txt
 source/commits/%/index.html.md: tmp/commits/%.txt
 	mkdir -p $(dir $@)
 	$(git) show --no-patch --output=$@ --format="$$(cat templates/commit.md)" $$(basename $< .txt)
-
-source/javascripts/site.js: javascripts/site.js node_modules
-	mkdir -p $(dir $@)
-	node_modules/.bin/webpack --config webpack.config.js $<

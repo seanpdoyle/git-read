@@ -8,6 +8,11 @@ activate :syntax
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
+activate :external_pipeline,
+  name: :webpack,
+  command: build? ? "./node_modules/.bin/webpack --bail" : "./node_modules/.bin/webpack --watch -d",
+  source: "dist",
+  latency: 1
 
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
