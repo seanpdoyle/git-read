@@ -1,0 +1,27 @@
+.page {
+  display: flex;
+  flex-direction: column;
+
+  @media(min-width: $breakpoint--mobile) {
+    display: grid;
+    grid-template-areas:  "history navigation navigation"
+                          "history commit     diff";
+    ;
+  }
+}
+
+.page__commit {
+  grid-area: commit;
+}
+
+.page__diff {
+  grid-area: diff;
+}
+
+.page__history {
+  grid-area: history;
+}
+
+.page__navigation {
+  grid-area: navigation;
+}
