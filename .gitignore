@@ -3,6 +3,7 @@ build/
 tmp/
 source/index.html.*
 source/commits/*
+source/javascripts/*
 data/*
 
 .bundle
@@ -10,3 +11,4 @@ data/*
 .DS_Store
 .sass-cache
 build/
+node_modules/
