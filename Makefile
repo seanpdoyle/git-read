@@ -1,5 +1,5 @@
 git := git --git-dir=$${GIT_DIR-.git/}
-babel := node_modules/.bin/babel
+webpack := ./node_modules/.bin/webpack --config webpack.config.js
 
 commits := $(shell mkdir -p tmp/commits && find tmp/commits -name '*.txt')
 source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md.erb,$(commits))
@@ -9,9 +9,10 @@ diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits
 
 all: $(source_files) \
 	$(diff_files) \
-	source/javascripts/site.js \
 	source/index.html.md \
-	data/commits.yml
+	data/commits.yml \
+	node_modules \
+	source/javascripts/site.js
 
 clean:
 	rm -rf tmp source/{commits,javascripts,index.*} build data
@@ -19,6 +20,9 @@ clean:
 build:
 	mkdir -p tmp/commits/
 	$(git) log --format="tmp/commits/%h.txt" | xargs touch
+
+node_modules: package.json yarn.lock
+	yarn install
 
 source/index.html.md:
 	$(git) show HEAD:README.md > $@
@@ -34,6 +38,6 @@ source/commits/%/index.html.md.erb: tmp/commits/%.txt
 	mkdir -p $(dir $@)
 	$(git) show --no-patch --output=$@ --format="$$(cat templates/commit.md)" $$(basename $< .txt)
 
-source/javascripts/%: javascripts/%
+source/javascripts/site.js: javascripts/site.js
 	mkdir -p $(dir $@)
-	$(babel) $< --out-file $@ --source-maps
+	$(webpack) $<

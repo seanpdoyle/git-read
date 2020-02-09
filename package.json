@@ -4,9 +4,11 @@
   "description": "Generate a website based on a project's sequential Git history.",
   "author": "Sean Doyle <sean.p.doyle24@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "turbolinks": "^5.2.0"
+  },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4"
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   }
 }
