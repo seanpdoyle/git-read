@@ -7,7 +7,3 @@ id: "%h"
 ===
 
 %b
-
-~~~diff
-<%= partial("commits/%h/diff.html") %>
-~~~
