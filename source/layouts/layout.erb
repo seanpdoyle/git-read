@@ -8,6 +8,7 @@
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= current_page.data.title || "Middleman" %></title>
     <%= stylesheet_link_tag "site" %>
+    <%= stylesheet_link_tag "syntax" %>
     <%= javascript_include_tag "site" %>
   </head>
   <body>
@@ -49,9 +50,10 @@
       </article>
 
       <% if current_page.data.id.present? %>
-        <% code("diff") do %>
-          <%= partial("commits/#{current_page.data.id}/diff.html") %>
-        <% end %>
+<!-- Lack of Leading Whitespace is Significant -->
+<% code("diff") do %>
+<%= partial("commits/#{current_page.data.id}/diff.html") %>
+<% end %>
       <% end %>
     </main>
   </body>
