@@ -11,17 +11,17 @@
     <%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "main", "data-turbolinks-track": "reload" %>
   </head>
-  <body>
-    <main class="page">
-      <aside class="history page__history">
-        <% data.commits.sequence.each do |commit| %>
+  <body class="page">
+    <nav class="page__history history">
+      <% data.commits.sequence.each do |commit| %>
           <% link_to commit_path(commit) do %>
             <%= escape_html(commit.subject) %>
           <% end %>
-        <% end %>
-      </aside>
+      <% end %>
+    </nav>
 
-      <nav class="navigation page__navigation">
+    <main class="page__content">
+      <header>
         <% if commit? %>
           <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
             <% if current?(commit) && parent.present? %>
@@ -43,19 +43,17 @@
             Get Started
           <% end %>
         <% end %>
-      </nav>
+      </header>
 
-      <article class="commit page__commit">
+      <article>
         <%= yield %>
       </article>
 
       <% if commit? %>
-        <article class="page__diff">
 <!-- Lack of Leading Whitespace is Significant -->
 <% code("diff") do %>
 <%= partial("commits/#{current_page.data.id}/diff.html") %>
 <% end %>
-        </article>
       <% end %>
     </main>
   </body>
