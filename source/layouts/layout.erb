@@ -12,48 +12,50 @@
     <%= javascript_include_tag "site" %>
   </head>
   <body>
-    <aside>
-      <% data.commits.sequence.each do |commit| %>
-        <% link_to "/commits/#{commit.id}" do %>
-          <%= escape_html(commit.subject) %>
-        <% end %>
-      <% end %>
-    </aside>
-
-    <nav>
-      <% if current_page.data.id.present? %>
-        <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
-          <% if current_page.data.id == commit.id && parent.present? %>
-            <% link_to "/commits/#{parent.id}" do %>
-              Previous
-            <% end %>
+    <main class="page">
+      <aside class="history page__history">
+        <% data.commits.sequence.each do |commit| %>
+          <% link_to "/commits/#{commit.id}" do %>
+            <%= escape_html(commit.subject) %>
           <% end %>
         <% end %>
+      </aside>
 
-        <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
-          <% if current_page.data.id == commit.id && child.present? %>
-            <% link_to "/commits/#{child.id}" do %>
-              Next
+      <nav class="navigation page__navigation">
+        <% if current_page.data.id.present? %>
+          <% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %>
+            <% if current_page.data.id == commit.id && parent.present? %>
+              <% link_to "/commits/#{parent.id}" do %>
+                Previous
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      <% else %>
-        <% link_to "/commits/#{data.commits.sequence.first.id}" do %>
-          Get Started
-        <% end %>
-      <% end %>
-    </nav>
 
-    <main>
-      <article>
+          <% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %>
+            <% if current_page.data.id == commit.id && child.present? %>
+              <% link_to "/commits/#{child.id}" do %>
+                Next
+              <% end %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% link_to "/commits/#{data.commits.sequence.first.id}" do %>
+            Get Started
+          <% end %>
+        <% end %>
+      </nav>
+
+      <article class="commit page__commit">
         <%= yield %>
       </article>
 
       <% if current_page.data.id.present? %>
+        <article class="diff page__diff">
 <!-- Lack of Leading Whitespace is Significant -->
 <% code("diff") do %>
 <%= partial("commits/#{current_page.data.id}/diff.html") %>
 <% end %>
+        </article>
       <% end %>
     </main>
   </body>
