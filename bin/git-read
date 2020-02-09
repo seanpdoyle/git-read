@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+set -e
+
+export GIT_DIR=${1-.git/}
+
+make clean build
+make compile

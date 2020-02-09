@@ -4,13 +4,18 @@ commits := $(shell mkdir -p tmp/commits && find tmp/commits -name '*.txt')
 source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
 diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
 
-.PHONY: all clean build
-
-all: \
+TARGETS := \
 	$(source_files) \
 	$(diff_files) \
 	source/index.html.md \
 	source/javascripts/site.js
+
+.PHONY: all clean build compile
+
+all: $(TARGETS)
+
+compile: $(TARGETS)
+	middleman build
 
 build:
 	mkdir -p tmp/commits/
