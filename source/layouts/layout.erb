@@ -12,13 +12,11 @@
     <%= javascript_include_tag "main", "data-turbolinks-track": "reload" %>
   </head>
   <body class="page">
-    <details id="table-of-contents" class="page__history" open data-turbolinks-permanent>
+    <details id="table-of-contents" class="page__history" open>
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
         <% data.commits.sequence.each do |commit| %>
-            <% link_to commit_path(commit) do %>
-              <%= escape_html(commit.subject) %>
-            <% end %>
+          <%= current_link_to escape_html(commit.subject), commit_path(commit) %>
         <% end %>
       </nav>
     </details>

@@ -3,7 +3,6 @@
   flex-direction: column;
 }
 
-
 .history > * {
   display: flex;
   align-items: center;
@@ -21,6 +20,14 @@
     margin-left: calc(var(--spacing--small) * -0.5);
     margin-right: var(--spacing--small);
     height: var(--spacing--small);
+  }
+
+  &[aria-current]:not([aria-current="false"]) {
+    text-decoration: none;
+  }
+
+  &[aria-current]:not([aria-current="false"])::before {
+    background-color: green;
   }
 }
 
