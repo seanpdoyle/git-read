@@ -2,7 +2,6 @@
 
 set -e
 
-export GIT_DIR=${1-.git/}
+export GIT_DIR=${1-./}
 
-make clean build
-make compile
+make

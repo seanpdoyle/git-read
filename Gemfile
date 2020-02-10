@@ -5,6 +5,7 @@ gem 'middleman-aria_current'
 gem 'middleman-autoprefixer', '~> 2.7'
 gem 'middleman-syntax'
 
+gem 'git'
 gem 'redcarpet'
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
 gem 'wdm', '~> 0.1', platforms: [:mswin, :mingw, :x64_mingw]

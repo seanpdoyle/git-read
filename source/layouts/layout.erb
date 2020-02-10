@@ -15,32 +15,29 @@
     <details id="table-of-contents" class="page__history" open>
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
-        <% data.history.commits.each do |commit| %>
-          <%= current_link_to escape_html(data.commits[commit].subject), commit_path(commit) %>
+        <% repository.log.reverse_each do |commit| %>
+          <%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %>
         <% end %>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-        <% if commit? %>
-          <% ([nil] + data.history.commits).each_cons(2) do |parent, commit| %>
-            <% if current?(commit) && parent.present? %>
-              <% link_to commit_path(parent) do %>
-                Previous
-              <% end %>
+        <% if defined?(commit) %>
+          <% if commit.parent.present? %>
+            <% link_to commit_path(commit.parent) do %>
+              Previous
             <% end %>
           <% end %>
 
-          <% (data.history.commits + [nil]).each_cons(2) do |commit, child| %>
-            <% if current?(commit) && child.present? %>
-              <% link_to commit_path(child) do %>
-                Next
-              <% end %>
+          <% next_commit = repository.log.detect { |child| child.parent&.sha == commit.sha } %>
+          <% if next_commit.present? %>
+            <% link_to commit_path(next_commit) do %>
+              Next
             <% end %>
           <% end %>
         <% else %>
-          <% link_to(commit_path(first_commit_sha)) do %>
+          <% link_to(commit_path(repository.log.last)) do %>
             Get Started
           <% end %>
         <% end %>
@@ -49,13 +46,6 @@
       <article class="commit">
         <%= yield %>
       </article>
-
-      <% if commit? %>
-<!-- Lack of Leading Whitespace is Significant -->
-<% code("diff") do %>
-<%= current_commit.diff %>
-<% end %>
-      <% end %>
     </main>
   </body>
 </html>
