@@ -1,9 +1,3 @@
-dist/
-build/
-tmp/
-source/index.html.*
-/data/
-
 .bundle
 .cache
 .DS_Store

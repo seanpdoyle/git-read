@@ -1,3 +1,4 @@
+require "git"
 require "lib/commit_helpers"
 
 # Activate and configure extensions
@@ -38,15 +39,26 @@ page '/*.txt', layout: false
 #     which_fake_page: 'Rendering a fake page with a local variable'
 #   },
 # )
-ignore "/commits/commit.html"
 
-data.history.commits.each do |id|
+repository = Git.open(
+  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+)
+
+repository.log.reverse_each do |commit|
   proxy(
-    "/commits/#{id}/index.html",
+    "/commits/#{commit.sha}/index.html",
     "/commits/commit.html",
-    locals: { id: id },
+    locals: { repository: repository, commit: commit },
+    ignore: true,
   )
 end
+
+proxy(
+  "index.html",
+  "README.html",
+  locals: { repository: repository, readme: repository.object("HEAD:README.md") },
+  ignore: true,
+)
 
 # Helpers
 # Methods defined in the helpers block are available in templates

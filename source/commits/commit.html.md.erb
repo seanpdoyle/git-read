@@ -1,8 +1,11 @@
-<% content_for(:id, id) %>
+<% subject, *messages = commit.message.lines %>
 
-<% content_for(:title, data.commits[id].subject) %>
-
-<%= data.commits[id].subject %>
+<%= subject.strip %>
 ===
 
-<%= data.commits[id].message %>
+<%= messages.join %>
+
+```diff
+<%= commit.diff_parent.patch -%>
+
+```
