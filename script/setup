@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+set -e
+
+if ! command -v bundler > /dev/null; then
+  gem install bundler
+fi
+
+if ! command -v yarn > /dev/null; then
+  npm install --global yarn
+fi
+
+bundle check || bundle install --conservative
+yarn install
