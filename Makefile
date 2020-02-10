@@ -12,8 +12,11 @@ TARGETS := \
 
 all: $(TARGETS)
 
+install: Gemfile Gemfile.lock yarn.lock package.json
+	script/setup
+
 compile: $(TARGETS)
-	middleman build
+	bundle exec middleman build
 
 build:
 	mkdir -p tmp/commits/
