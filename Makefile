@@ -12,4 +12,4 @@ compile: build/
 	bundle exec middleman build
 
 clean:
-	rm -rf build/
+	rm -rf build/ dist/

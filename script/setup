@@ -7,8 +7,6 @@ if ! command -v yarn > /dev/null; then
 fi
 yarn install
 
-if ! command -v bundler > /dev/null; then
-  gem install bundler:2.1.4
-fi
+gem install bundler:2.1.4
 
 bundle check || bundle install
