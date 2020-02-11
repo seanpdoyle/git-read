@@ -1,0 +1,7 @@
+<details <%= ("open" if contents.lines.size < 100) %>>
+  <summary><%= name %></summary>
+  <% code(language) do %>
+<%# The lack of leading space is significant here %>
+<%= contents %>
+  <% end -%>
+</details>

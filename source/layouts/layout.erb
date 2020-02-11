@@ -48,6 +48,30 @@
 
       <article class="commit">
         <%= yield %>
+
+        <% if defined?(commit) %>
+          <% parent, _, _ = adjacent_commits(commit) %>
+
+          <% if parent.present? %>
+            <% parent.diff(commit).each do |file| %>
+              <%= partial("commits/file", locals: {
+                file: file,
+                name: file.path,
+                language: "diff",
+                contents: file.patch,
+              }) %>
+            <% end %>
+          <% else %>
+            <% commit.gtree.files.each do |name, file| %>
+              <%= partial("commits/file", locals: {
+                file: file,
+                name: name,
+                language: File.extname(name).gsub(".", ""),
+                contents: file.contents,
+              }) %>
+            <% end %>
+          <% end %>
+        <% end %>
       </article>
     </main>
   </body>
