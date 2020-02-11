@@ -7,20 +7,16 @@
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= current_page.data.title || yield_content(:title) || "git-read" %></title>
-    <%= stylesheet_link_tag "site", relative: true, "data-turbolinks-track": "reload" %>
-    <%= stylesheet_link_tag "syntax", relative: true, "data-turbolinks-track": "reload" %>
-    <%= javascript_include_tag "main", relative: true, "data-turbolinks-track": "reload" %>
+    <%= stylesheet_link_tag "site", "data-turbolinks-track": "reload" %>
+    <%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "main", "data-turbolinks-track": "reload" %>
   </head>
   <body class="page">
     <details id="table-of-contents" class="page__history" open>
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
         <% repository.log.reverse_each do |commit| %>
-          <%= current_link_to(
-            escape_html(commit.message.lines.first),
-            commit_path(commit),
-            relative: true,
-          ) %>
+          <%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %>
         <% end %>
       </nav>
     </details>
@@ -29,19 +25,19 @@
       <header>
         <% if defined?(commit) %>
           <% if commit.parent.present? %>
-            <% link_to commit_path(commit.parent), relative: true do %>
+            <% link_to commit_path(commit.parent) do %>
               Previous
             <% end %>
           <% end %>
 
           <% next_commit = repository.log.detect { |child| child.parent&.sha == commit.sha } %>
           <% if next_commit.present? %>
-            <% link_to commit_path(next_commit), relative: true do %>
+            <% link_to commit_path(next_commit) do %>
               Next
             <% end %>
           <% end %>
         <% else %>
-          <% link_to commit_path(repository.log.last), relative: true  do %>
+          <% link_to commit_path(repository.log.last) do %>
             Get Started
           <% end %>
         <% end %>

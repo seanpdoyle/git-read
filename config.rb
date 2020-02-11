@@ -14,7 +14,9 @@ activate :external_pipeline,
   command: build? ? "./node_modules/.bin/webpack --bail" : "./node_modules/.bin/webpack --watch -d",
   source: "dist",
   latency: 1
+activate :relative_assets
 
+set :relative_links, true
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
 
