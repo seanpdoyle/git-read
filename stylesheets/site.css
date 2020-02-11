@@ -380,6 +380,11 @@ hr {
 .history > *:last-child {
   padding-bottom: 0; }
 
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
 .page {
   --history-width: 360px;
   display: flex;
@@ -395,6 +400,14 @@ hr {
   @media (min-width: 36rem) {
     .page__content {
       width: calc(100vw - var(--history-width) - var(--spacing)); } }
+
+.page__history {
+  margin-bottom: var(--spacing--small);
+  margin-right: 0; }
+  @media (min-width: 36rem) {
+    .page__history {
+      margin-bottom: 0;
+      margin-right: var(--spacing); } }
 
 .page__history-summary {
   display: inherit; }

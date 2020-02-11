@@ -76,13 +76,14 @@
           <a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">add back caching, use sitemap branch of current</a>
           <a href="../5c92ba4caab28ce1289e9a8757183b08a1d9ffd9/">Add link to project root</a>
           <a href="../4cb91f9b9aabedf2263a0266e9c2e863bb5d979a/">configure command to take git directory and output</a>
+          <a href="../6de0f416bef628f42fe2bfbc9f143d6d2fba82b5/">improve spacing</a>
       </nav>
     </details>
 
     <main class="page__content">
-      <header>
+      <header class="navigation">
 
-<a href="../50b62fd3cb128262e291f714b9edfd7e6c6cb77b/">              Next
+<a href="../50b62fd3cb128262e291f714b9edfd7e6c6cb77b/">              Next &#8594;
 </a>      </header>
 
       <article class="commit">
@@ -534,7 +535,7 @@ rename to source/images/.keep
 +Turbolinks.start()
 </span><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..3311f60
+</span><span class="gh">index 0000000..686876b
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/source/layouts/layout.erb
 </span><span class="p">@@ -0,0 +1,53 @@</span>
@@ -564,23 +565,23 @@ rename to source/images/.keep
 +    &lt;/details&gt;
 +
 +    &lt;main class="page__content"&gt;
-+      &lt;header&gt;
++      &lt;header class="navigation"&gt;
 +        &lt;% if defined?(commit) %&gt;
 +          &lt;% if commit.parent.present? %&gt;
 +            &lt;% link_to commit_path(commit.parent) do %&gt;
-+              Previous
++              &amp;#8592; Previous
 +            &lt;% end %&gt;
 +          &lt;% end %&gt;
 +
 +          &lt;% next_commit = repository.log(nil).detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
 +          &lt;% if next_commit.present? %&gt;
 +            &lt;% link_to commit_path(next_commit) do %&gt;
-+              Next
++              Next &amp;#8594;
 +            &lt;% end %&gt;
 +          &lt;% end %&gt;
 +        &lt;% else %&gt;
 +          &lt;% link_to commit_path(repository.log(nil).last) do %&gt;
-+            Get Started
++            Get Started &amp;#8594;
 +          &lt;% end %&gt;
 +        &lt;% end %&gt;
 +      &lt;/header&gt;
@@ -1042,12 +1043,23 @@ rename to source/images/.keep
 +.history &gt; *:last-child {
 +  padding-bottom: 0;
 +}
+</span><span class="gh">diff --git a/source/stylesheets/blocks/_navigation.scss b/source/stylesheets/blocks/_navigation.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..0934224
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/blocks/_navigation.scss
+</span><span class="p">@@ -0,0 +1,5 @@</span>
+<span class="gi">+.navigation {
++  display: flex;
++  flex-direction: row;
++  justify-content: space-between;
++}
 </span><span class="gh">diff --git a/source/stylesheets/blocks/_page.scss b/source/stylesheets/blocks/_page.scss
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..3c0aa6a
+</span><span class="gh">index 0000000..17d1823
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/source/stylesheets/blocks/_page.scss
-</span><span class="p">@@ -0,0 +1,34 @@</span>
+</span><span class="p">@@ -0,0 +1,45 @@</span>
 <span class="gi">+.page {
 +  --history-width: 360px;
 +
@@ -1067,6 +1079,17 @@ rename to source/images/.keep
 +  @media(min-width: $breakpoint--mobile) {
 +    width: calc(100vw - var(--history-width) - var(--spacing));
 +  }
++}
++
++.page__history {
++  margin-bottom: var(--spacing--small);
++  margin-right: 0;
++
++  @media(min-width: $breakpoint--mobile) {
++    margin-bottom: 0;
++    margin-right: var(--spacing);
++  }
++
 +}
 +
 +.page__history-summary {
@@ -1092,16 +1115,17 @@ rename to source/images/.keep
 +$breakpoint--desktop: 48rem;
 </span><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..e8569b9
+</span><span class="gh">index 0000000..a58c688
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/source/stylesheets/site.css.scss
-</span><span class="p">@@ -0,0 +1,7 @@</span>
+</span><span class="p">@@ -0,0 +1,8 @@</span>
 <span class="gi">+@import "base/base";
 +
 +@import "settings/breakpoints";
 +
 +@import "blocks/commit";
 +@import "blocks/history";
++@import "blocks/navigation";
 +@import "blocks/page";
 </span><span class="gh">diff --git a/source/stylesheets/syntax.css.erb b/source/stylesheets/syntax.css.erb
 </span><span class="p">new file mode 100644

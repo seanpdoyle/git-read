@@ -65,7 +65,7 @@
           <a href="../8cea2bfc9a535eb13c4b212fabf2a72eecdd2804/">build without cache</a>
           <a href="../6334576e694c387171caf187924b3f0a0dfeec51/">publish with different Action</a>
           <a href="../cf73dbd144792d007c1df7ffc16d43c9affdd31c/">import assets relatively</a>
-          <a href="./" aria-current="page">add caching back</a>
+          <a href="../6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">add caching back</a>
           <a href="../1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">bust Gemfile cache, use relative links</a>
           <a href="../bce9dfe492eb4ab6fc1ab6b730bbcbf475cabf11/">integrate with sitemap</a>
           <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
@@ -76,36 +76,93 @@
           <a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">add back caching, use sitemap branch of current</a>
           <a href="../5c92ba4caab28ce1289e9a8757183b08a1d9ffd9/">Add link to project root</a>
           <a href="../4cb91f9b9aabedf2263a0266e9c2e863bb5d979a/">configure command to take git directory and output</a>
-          <a href="../6de0f416bef628f42fe2bfbc9f143d6d2fba82b5/">improve spacing</a>
+          <a href="./" aria-current="page">improve spacing</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header class="navigation">
-<a href="../cf73dbd144792d007c1df7ffc16d43c9affdd31c/">              &#8592; Previous
+<a href="../4cb91f9b9aabedf2263a0266e9c2e863bb5d979a/">              &#8592; Previous
 </a>
-<a href="../1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">              Next &#8594;
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>add caching back</h1>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
-index 9454358..a2e4985 100644
-</span><span class="gd">--- a/.github/workflows/git-read.yml
-</span><span class="gi">+++ b/.github/workflows/git-read.yml
-</span><span class="p">@@ -13,12 +13,6 @@</span> jobs:
-     - uses: actions/setup-ruby@v1
-       with:
-         ruby-version: "2.6"
-<span class="gd">-    - uses: actions/cache@v1
--      with:
--        path: vendor/bundle
--        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
--        restore-keys: |
--          ${{ runner.os }}-gems-
-</span>     - name: Build documentation
-       run: |
-         make install
+        <h1>improve spacing</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 686876b..3311f60 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -24,23 +24,23 @@</span>
+     &lt;/details&gt;
+
+     &lt;main class="page__content"&gt;
+<span class="gd">-      &lt;header class="navigation"&gt;
+</span><span class="gi">+      &lt;header&gt;
+</span>         &lt;% if defined?(commit) %&gt;
+           &lt;% if commit.parent.present? %&gt;
+             &lt;% link_to commit_path(commit.parent) do %&gt;
+<span class="gd">-              &amp;#8592; Previous
+</span><span class="gi">+              Previous
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+
+           &lt;% next_commit = repository.log(nil).detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
+           &lt;% if next_commit.present? %&gt;
+             &lt;% link_to commit_path(next_commit) do %&gt;
+<span class="gd">-              Next &amp;#8594;
+</span><span class="gi">+              Next
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+         &lt;% else %&gt;
+           &lt;% link_to commit_path(repository.log(nil).last) do %&gt;
+<span class="gd">-            Get Started &amp;#8594;
+</span><span class="gi">+            Get Started
+</span>           &lt;% end %&gt;
+         &lt;% end %&gt;
+       &lt;/header&gt;
+<span class="gh">diff --git a/source/stylesheets/blocks/_navigation.scss b/source/stylesheets/blocks/_navigation.scss
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 0934224..0000000
+</span><span class="gd">--- a/source/stylesheets/blocks/_navigation.scss
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,5 +0,0 @@</span>
+<span class="gd">-.navigation {
+-  display: flex;
+-  flex-direction: row;
+-  justify-content: space-between;
+-}
+</span><span class="gh">diff --git a/source/stylesheets/blocks/_page.scss b/source/stylesheets/blocks/_page.scss
+index 17d1823..3c0aa6a 100644
+</span><span class="gd">--- a/source/stylesheets/blocks/_page.scss
+</span><span class="gi">+++ b/source/stylesheets/blocks/_page.scss
+</span><span class="p">@@ -19,17 +19,6 @@</span>
+   }
+ }
+
+-.page__history {
+<span class="gd">-  margin-bottom: var(--spacing--small);
+-  margin-right: 0;
+-
+-  @media(min-width: $breakpoint--mobile) {
+-    margin-bottom: 0;
+-    margin-right: var(--spacing);
+-  }
+-
+-}
+-
+</span> .page__history-summary {
+   display: inherit;
+
+diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
+<span class="gh">index a58c688..e8569b9 100644
+</span><span class="gd">--- a/source/stylesheets/site.css.scss
+</span><span class="gi">+++ b/source/stylesheets/site.css.scss
+</span><span class="p">@@ -4,5 +4,4 @@</span>
+
+ @import "blocks/commit";
+ @import "blocks/history";
+<span class="gd">-@import "blocks/navigation";
+</span> @import "blocks/page";
 </code></pre></div>
       </article>
     </main>
