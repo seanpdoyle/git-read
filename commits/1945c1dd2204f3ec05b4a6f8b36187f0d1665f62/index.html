@@ -48,38 +48,82 @@
           <a href="/commits/dc0db42616f5c3c58f641103469efc1dbf888f89/">include Gemfile.lock for caching</a>
           <a href="/commits/8cea2bfc9a535eb13c4b212fabf2a72eecdd2804/">build without cache</a>
           <a href="/commits/6334576e694c387171caf187924b3f0a0dfeec51/">publish with different Action</a>
-          <a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/" aria-current="page">import assets relatively</a>
+          <a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/">import assets relatively</a>
           <a href="/commits/6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">add caching back</a>
-          <a href="/commits/1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">bust Gemfile cache, use relative links</a>
+          <a href="/commits/1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/" aria-current="page">bust Gemfile cache, use relative links</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-<a href="/commits/6334576e694c387171caf187924b3f0a0dfeec51/">              Previous
+<a href="/commits/6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">              Previous
 </a>
-<a href="/commits/6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">              Next
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>import assets relatively</h1>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 39ece11..fd7b1ef 100644
+        <h1>bust Gemfile cache, use relative links</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index b776046..af87bc8 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -15,7 +15,7 @@</span> GEM
+       coffee-script-source
+       execjs
+     coffee-script-source (1.12.2)
+<span class="gd">-    concurrent-ruby (1.1.6)
+</span><span class="gi">+    concurrent-ruby (1.1.5)
+</span>     contracts (0.13.0)
+     dotenv (2.7.5)
+     erubis (2.7.0)
+<span class="p">@@ -86,7 +86,7 @@</span> GEM
+       activesupport (&gt;= 3.1)
+     parallel (1.19.1)
+     public_suffix (4.0.3)
+<span class="gd">-    rack (2.2.2)
+</span><span class="gi">+    rack (2.1.2)
+</span>     rb-fsevent (0.10.3)
+     rb-inotify (0.10.1)
+       ffi (~&gt; 1.0)
+<span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index e9ca070..39ece11 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -7,9 +7,9 @@</span>
-           content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
-     &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
-     &lt;title&gt;&lt;%= current_page.data.title || yield_content(:title) || "git-read" %&gt;&lt;/title&gt;
-<span class="gd">-    &lt;%= stylesheet_link_tag "site", relative: true, "data-turbolinks-track": "reload" %&gt;
--    &lt;%= stylesheet_link_tag "syntax", relative: true, "data-turbolinks-track": "reload" %&gt;
--    &lt;%= javascript_include_tag "main", relative: true, "data-turbolinks-track": "reload" %&gt;
-</span><span class="gi">+    &lt;%= stylesheet_link_tag "site", "data-turbolinks-track": "reload" %&gt;
-+    &lt;%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %&gt;
-+    &lt;%= javascript_include_tag "main", "data-turbolinks-track": "reload" %&gt;
-</span>   &lt;/head&gt;
-   &lt;body class="page"&gt;
-     &lt;details id="table-of-contents" class="page__history" open&gt;
+</span><span class="p">@@ -16,11 +16,7 @@</span>
+       &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
+       &lt;nav class="history"&gt;
+         &lt;% repository.log.reverse_each do |commit| %&gt;
+<span class="gd">-          &lt;%= current_link_to(
+-            escape_html(commit.message.lines.first),
+-            commit_path(commit),
+-            relative: true,
+-          ) %&gt;
+</span><span class="gi">+          &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
+</span>         &lt;% end %&gt;
+       &lt;/nav&gt;
+     &lt;/details&gt;
+<span class="p">@@ -29,19 +25,19 @@</span>
+       &lt;header&gt;
+         &lt;% if defined?(commit) %&gt;
+           &lt;% if commit.parent.present? %&gt;
+<span class="gd">-            &lt;% link_to commit_path(commit.parent), relative: true do %&gt;
+</span><span class="gi">+            &lt;% link_to commit_path(commit.parent) do %&gt;
+</span>               Previous
+             &lt;% end %&gt;
+           &lt;% end %&gt;
+
+           &lt;% next_commit = repository.log.detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
+           &lt;% if next_commit.present? %&gt;
+<span class="gd">-            &lt;% link_to commit_path(next_commit), relative: true do %&gt;
+</span><span class="gi">+            &lt;% link_to commit_path(next_commit) do %&gt;
+</span>               Next
+             &lt;% end %&gt;
+           &lt;% end %&gt;
+         &lt;% else %&gt;
+<span class="gd">-          &lt;% link_to commit_path(repository.log.last), relative: true  do %&gt;
+</span><span class="gi">+          &lt;% link_to(commit_path(repository.log.last)) do %&gt;
+</span>             Get Started
+           &lt;% end %&gt;
+         &lt;% end %&gt;
 </code></pre></div>
       </article>
     </main>

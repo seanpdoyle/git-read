@@ -48,38 +48,38 @@
           <a href="/commits/dc0db42616f5c3c58f641103469efc1dbf888f89/">include Gemfile.lock for caching</a>
           <a href="/commits/8cea2bfc9a535eb13c4b212fabf2a72eecdd2804/">build without cache</a>
           <a href="/commits/6334576e694c387171caf187924b3f0a0dfeec51/">publish with different Action</a>
-          <a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/" aria-current="page">import assets relatively</a>
-          <a href="/commits/6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">add caching back</a>
+          <a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/">import assets relatively</a>
+          <a href="/commits/6a64abc978e3d2063fb96b38d2eee4e2f840fd30/" aria-current="page">add caching back</a>
           <a href="/commits/1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">bust Gemfile cache, use relative links</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-<a href="/commits/6334576e694c387171caf187924b3f0a0dfeec51/">              Previous
+<a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/">              Previous
 </a>
-<a href="/commits/6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">              Next
+<a href="/commits/1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>import assets relatively</h1>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 39ece11..fd7b1ef 100644
-</span><span class="gd">--- a/source/layouts/layout.erb
-</span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -7,9 +7,9 @@</span>
-           content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
-     &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
-     &lt;title&gt;&lt;%= current_page.data.title || yield_content(:title) || "git-read" %&gt;&lt;/title&gt;
-<span class="gd">-    &lt;%= stylesheet_link_tag "site", relative: true, "data-turbolinks-track": "reload" %&gt;
--    &lt;%= stylesheet_link_tag "syntax", relative: true, "data-turbolinks-track": "reload" %&gt;
--    &lt;%= javascript_include_tag "main", relative: true, "data-turbolinks-track": "reload" %&gt;
-</span><span class="gi">+    &lt;%= stylesheet_link_tag "site", "data-turbolinks-track": "reload" %&gt;
-+    &lt;%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %&gt;
-+    &lt;%= javascript_include_tag "main", "data-turbolinks-track": "reload" %&gt;
-</span>   &lt;/head&gt;
-   &lt;body class="page"&gt;
-     &lt;details id="table-of-contents" class="page__history" open&gt;
+        <h1>add caching back</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+index 9454358..a2e4985 100644
+</span><span class="gd">--- a/.github/workflows/git-read.yml
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -13,12 +13,6 @@</span> jobs:
+     - uses: actions/setup-ruby@v1
+       with:
+         ruby-version: "2.6"
+<span class="gd">-    - uses: actions/cache@v1
+-      with:
+-        path: vendor/bundle
+-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+-        restore-keys: |
+-          ${{ runner.os }}-gems-
+</span>     - name: Build documentation
+       run: |
+         make install
 </code></pre></div>
       </article>
     </main>
