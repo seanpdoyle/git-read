@@ -1,14 +1,14 @@
-.PHONY: all clean build compile
+.PHONY: all clean compile
 
 all: install compile
 
 serve: install
 	bundle exec middleman serve
 
-install: Gemfile Gemfile.lock yarn.lock package.json
+install:
 	script/setup
 
-compile: build
+compile:
 	bundle exec middleman build --verbose
 
 clean:
