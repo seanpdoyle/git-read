@@ -37,7 +37,7 @@
           <a href="../7fa5a9b178e979bc8a3329b7b7af0f0fee3f7809/">install Turbolinks, bundle with webpack</a>
           <a href="../1e1d4d0ebea82e4e055314feae8021bf86dfd90a/">streamline Makefile</a>
           <a href="../69b031bbfefced5d6682d60a9bcb56de33d208ec/">start to style layout</a>
-          <a href="./" aria-current="page">introduce CommitHelpers
+          <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
 </a>
           <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
           <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
@@ -71,124 +71,89 @@
           <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
           <a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">sync ruby versions</a>
           <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
-          <a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">add back caching, use sitemap branch of current</a>
+          <a href="./" aria-current="page">add back caching, use sitemap branch of current</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-<a href="../69b031bbfefced5d6682d60a9bcb56de33d208ec/">              Previous
+<a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">              Previous
 </a>
-<a href="../087382863fffed6c44f094765dee4558af986dfe/">              Next
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>introduce CommitHelpers</h1>
+        <h1>add back caching, use sitemap branch of current</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+index c7f5cf7..5bc405b 100644
+</span><span class="gd">--- a/.github/workflows/git-read.yml
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -13,12 +13,6 @@</span> jobs:
+     - uses: actions/setup-ruby@v1
+       with:
+         ruby-version: "2.6.5"
+<span class="gd">-    - uses: actions/cache@v1
+-      with:
+-        path: vendor/bundle
+-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+-        restore-keys: |
+-          ${{ runner.os }}-gems-
+</span>     - name: Build documentation
+       run: |
+         make install
+<span class="gh">diff --git a/Gemfile b/Gemfile
+index e4baf26..cbdd478 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -1,14 +1,9 @@</span>
+ source 'https://rubygems.org'
 
-<p>Declare <a href="https://middlemanapp.com/basics/helper-methods/#custom-defined-helpers">Custom Helpers</a></p>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-index 7234914..54cd2cd 100644
-</span><span class="gd">--- a/config.rb
-</span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -1,5 +1,3 @@</span>
-<span class="gd">-require "lib/commit_helpers"
--
-</span> # Activate and configure extensions
- # https://middlemanapp.com/advanced/configuration/#configuring-extensions
-
-@@ -42,7 +40,6 @@ page '/*.txt', layout: false
- #     'Helping'
- #   end
- # end
-<span class="gd">-helpers CommitHelpers
-</span>
- # Build-specific configuration
- # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
-<span class="gh">diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
-</span><span class="p">deleted file mode 100644
-</span><span class="gh">index 65876f0..0000000
-</span><span class="gd">--- a/lib/commit_helpers.rb
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,16 +0,0 @@</span>
-<span class="gd">-module CommitHelpers
--  def commit?
--    current_page.data.id.present?
--  end
--
--  def current?(commit)
--    [
--      current_page.data.id,
--      commit.id
--    ].map(&amp;:to_s).uniq.size == 1
--  end
--
--  def commit_path(commit)
--    "/commits/#{commit.id}"
--  end
+-git_source(:github) do |repo_name|
+<span class="gd">-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+-  "https://github.com/#{repo_name}.git"
 -end
-</span><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 771d411..fdaede8 100644
-</span><span class="gd">--- a/source/layouts/layout.erb
-</span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -15,31 +15,31 @@</span>
-     &lt;main class="page"&gt;
-       &lt;aside class="history page__history"&gt;
-         &lt;% data.commits.sequence.each do |commit| %&gt;
-<span class="gd">-          &lt;% link_to commit_path(commit) do %&gt;
-</span><span class="gi">+          &lt;% link_to "/commits/#{commit.id}" do %&gt;
-</span>             &lt;%= escape_html(commit.subject) %&gt;
-           &lt;% end %&gt;
-         &lt;% end %&gt;
-       &lt;/aside&gt;
+-
+</span> ruby '2.6.5'
 
-       &lt;nav class="navigation page__navigation"&gt;
-<span class="gd">-        &lt;% if commit? %&gt;
-</span><span class="gi">+        &lt;% if current_page.data.id.present? %&gt;
-</span>           &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
-<span class="gd">-            &lt;% if current?(commit) &amp;&amp; parent.present? %&gt;
--              &lt;% link_to commit_path(parent) do %&gt;
-</span><span class="gi">+            &lt;% if current_page.data.id == commit.id &amp;&amp; parent.present? %&gt;
-+              &lt;% link_to "/commits/#{parent.id}" do %&gt;
-</span>                 Previous
-               &lt;% end %&gt;
-             &lt;% end %&gt;
-           &lt;% end %&gt;
+ gem 'middleman', '~&gt; 4.2'
+<span class="gd">-gem 'middleman-aria_current', github: "thoughtbot/middleman-aria_current", branch: "sitemap"
+</span><span class="gi">+gem 'middleman-aria_current'
+</span> gem 'middleman-autoprefixer', '~&gt; 2.7'
+ gem 'middleman-syntax'
 
-           &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
-<span class="gd">-            &lt;% if current?(commit) &amp;&amp; child.present? %&gt;
--              &lt;% link_to commit_path(child) do %&gt;
-</span><span class="gi">+            &lt;% if current_page.data.id == commit.id &amp;&amp; child.present? %&gt;
-+              &lt;% link_to "/commits/#{child.id}" do %&gt;
-</span>                 Next
-               &lt;% end %&gt;
-             &lt;% end %&gt;
-           &lt;% end %&gt;
-         &lt;% else %&gt;
-<span class="gd">-          &lt;% link_to(commit_path(data.commits.sequence.first)) do %&gt;
-</span><span class="gi">+          &lt;% link_to "/commits/#{data.commits.sequence.first.id}" do %&gt;
-</span>             Get Started
-           &lt;% end %&gt;
-         &lt;% end %&gt;
-<span class="p">@@ -49,7 +49,7 @@</span>
-         &lt;%= yield %&gt;
-       &lt;/article&gt;
-
--      &lt;% if commit? %&gt;
-<span class="gi">+      &lt;% if current_page.data.id.present? %&gt;
-</span>         &lt;article class="page__diff"&gt;
- &lt;!-- Lack of Leading Whitespace is Significant --&gt;
- &lt;% code("diff") do %&gt;
-<span class="gh">diff --git a/templates/commit.md b/templates/commit.md
-index 3e64aed..4122de5 100644
-</span><span class="gd">--- a/templates/commit.md
-</span><span class="gi">+++ b/templates/commit.md
-</span><span class="p">@@ -1,5 +1,5 @@</span>
- ---
-<span class="gd">-title: %s
-</span><span class="gi">+title: "%s"
-</span> id: "%h"
- ---
-
+diff --git a/Gemfile.lock b/Gemfile.lock
+<span class="gh">index 82e6064..609634f 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -1,11 +1,3 @@</span>
+<span class="gd">-GIT
+-  remote: https://github.com/thoughtbot/middleman-aria_current.git
+-  revision: 27c5f328ac36d641a1afa4a55223673e3688f89b
+-  branch: sitemap
+-  specs:
+-    middleman-aria_current (0.1.1)
+-      middleman-core (~&gt; 4.0)
+-
+</span> GEM
+   remote: https://rubygems.org/
+   specs:
+<span class="p">@@ -52,6 +44,8 @@</span> GEM
+       kramdown (~&gt; 1.2)
+       middleman-cli (= 4.3.5)
+       middleman-core (= 4.3.5)
+<span class="gi">+    middleman-aria_current (0.1.1)
++      middleman-core (~&gt; 4.0)
+</span>     middleman-autoprefixer (2.10.1)
+       autoprefixer-rails (~&gt; 9.1)
+       middleman-core (&gt;= 3.3.3)
+<span class="p">@@ -117,7 +111,7 @@</span> PLATFORMS
+ DEPENDENCIES
+   git
+   middleman (~&gt; 4.2)
+<span class="gd">-  middleman-aria_current!
+</span><span class="gi">+  middleman-aria_current
+</span>   middleman-autoprefixer (~&gt; 2.7)
+   middleman-syntax
+   redcarpet
 </code></pre></div>
       </article>
     </main>

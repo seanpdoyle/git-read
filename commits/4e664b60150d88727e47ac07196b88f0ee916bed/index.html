@@ -15,7 +15,7 @@
     <details id="table-of-contents" class="page__history" open>
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
-          <a href="./">Ensure `tmp&#x2F;` and `source&#x2F;` directories exist
+          <a href="./" aria-current="page">Ensure `tmp&#x2F;` and `source&#x2F;` directories exist
 </a>
           <a href="../50b62fd3cb128262e291f714b9edfd7e6c6cb77b/">Introduce `Makefile`
 </a>
@@ -71,6 +71,7 @@
           <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
           <a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">sync ruby versions</a>
           <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
+          <a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">add back caching, use sitemap branch of current</a>
       </nav>
     </details>
 
@@ -94,10 +95,10 @@ our revision history.</p>
 the project&rsquo;s source code will reside in that directory.</p>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..5bc405b
+</span><span class="gh">index 0000000..c7f5cf7
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/.github/workflows/git-read.yml
-</span><span class="p">@@ -0,0 +1,27 @@</span>
+</span><span class="p">@@ -0,0 +1,33 @@</span>
 <span class="gi">+name: git-read
 +
 +on: [push]
@@ -113,6 +114,12 @@ the project&rsquo;s source code will reside in that directory.</p>
 +    - uses: actions/setup-ruby@v1
 +      with:
 +        ruby-version: "2.6.5"
++    - uses: actions/cache@v1
++      with:
++        path: vendor/bundle
++        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
++        restore-keys: |
++          ${{ runner.os }}-gems-
 +    - name: Build documentation
 +      run: |
 +        make install
@@ -140,16 +147,21 @@ the project&rsquo;s source code will reside in that directory.</p>
 +dist/
 </span><span class="gh">diff --git a/Gemfile b/Gemfile
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..cbdd478
+</span><span class="gh">index 0000000..e4baf26
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/Gemfile
-</span><span class="p">@@ -0,0 +1,13 @@</span>
+</span><span class="p">@@ -0,0 +1,18 @@</span>
 <span class="gi">+source 'https://rubygems.org'
++
++git_source(:github) do |repo_name|
++  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
++  "https://github.com/#{repo_name}.git"
++end
 +
 +ruby '2.6.5'
 +
 +gem 'middleman', '~&gt; 4.2'
-+gem 'middleman-aria_current'
++gem 'middleman-aria_current', github: "thoughtbot/middleman-aria_current", branch: "sitemap"
 +gem 'middleman-autoprefixer', '~&gt; 2.7'
 +gem 'middleman-syntax'
 +
@@ -159,11 +171,19 @@ the project&rsquo;s source code will reside in that directory.</p>
 +gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
 </span><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..609634f
+</span><span class="gh">index 0000000..82e6064
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/Gemfile.lock
-</span><span class="p">@@ -0,0 +1,125 @@</span>
-<span class="gi">+GEM
+</span><span class="p">@@ -0,0 +1,131 @@</span>
+<span class="gi">+GIT
++  remote: https://github.com/thoughtbot/middleman-aria_current.git
++  revision: 27c5f328ac36d641a1afa4a55223673e3688f89b
++  branch: sitemap
++  specs:
++    middleman-aria_current (0.1.1)
++      middleman-core (~&gt; 4.0)
++
++GEM
 +  remote: https://rubygems.org/
 +  specs:
 +    activesupport (5.0.7.2)
@@ -209,8 +229,6 @@ the project&rsquo;s source code will reside in that directory.</p>
 +      kramdown (~&gt; 1.2)
 +      middleman-cli (= 4.3.5)
 +      middleman-core (= 4.3.5)
-+    middleman-aria_current (0.1.1)
-+      middleman-core (~&gt; 4.0)
 +    middleman-autoprefixer (2.10.1)
 +      autoprefixer-rails (~&gt; 9.1)
 +      middleman-core (&gt;= 3.3.3)
@@ -276,7 +294,7 @@ the project&rsquo;s source code will reside in that directory.</p>
 +DEPENDENCIES
 +  git
 +  middleman (~&gt; 4.2)
-+  middleman-aria_current
++  middleman-aria_current!
 +  middleman-autoprefixer (~&gt; 2.7)
 +  middleman-syntax
 +  redcarpet
