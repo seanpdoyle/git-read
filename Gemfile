@@ -1,9 +1,14 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 ruby '2.6.5'
 
 gem 'middleman', '~> 4.2'
-gem 'middleman-aria_current'
+gem 'middleman-aria_current', github: "thoughtbot/middleman-aria_current", branch: "sitemap"
 gem 'middleman-autoprefixer', '~> 2.7'
 gem 'middleman-syntax'
 
