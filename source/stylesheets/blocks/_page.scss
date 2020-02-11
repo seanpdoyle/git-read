@@ -19,6 +19,17 @@
   }
 }
 
+.page__history {
+  margin-bottom: var(--spacing--small);
+  margin-right: 0;
+
+  @media(min-width: $breakpoint--mobile) {
+    margin-bottom: 0;
+    margin-right: var(--spacing);
+  }
+
+}
+
 .page__history-summary {
   display: inherit;
 

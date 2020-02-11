@@ -24,23 +24,23 @@
     </details>
 
     <main class="page__content">
-      <header>
+      <header class="navigation">
         <% if defined?(commit) %>
           <% if commit.parent.present? %>
             <% link_to commit_path(commit.parent) do %>
-              Previous
+              &#8592; Previous
             <% end %>
           <% end %>
 
           <% next_commit = repository.log(nil).detect { |child| child.parent&.sha == commit.sha } %>
           <% if next_commit.present? %>
             <% link_to commit_path(next_commit) do %>
-              Next
+              Next &#8594;
             <% end %>
           <% end %>
         <% else %>
           <% link_to commit_path(repository.log(nil).last) do %>
-            Get Started
+            Get Started &#8594;
           <% end %>
         <% end %>
       </header>
