@@ -8,7 +8,7 @@ serve: install
 install: Gemfile Gemfile.lock yarn.lock package.json
 	script/setup
 
-compile: build/
+compile: build
 	bundle exec middleman build
 
 clean:

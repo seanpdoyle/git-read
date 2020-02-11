@@ -9,4 +9,4 @@ yarn install
 
 gem install bundler:2.1.4
 
-bundle check || bundle install
+bundle check || bundle install --jobs 4 --retry 3
