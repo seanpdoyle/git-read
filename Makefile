@@ -9,7 +9,7 @@ install: Gemfile Gemfile.lock yarn.lock package.json
 	script/setup
 
 compile: build
-	bundle exec middleman build
+	bundle exec middleman build --verbose
 
 clean:
 	rm -rf build/ dist/

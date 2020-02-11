@@ -6,7 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: "2.6"
@@ -16,12 +15,13 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
-    - name: Install git-read
-      run: make install
+    - uses: actions/checkout@v2
+    - name: Build documentation
+      run: |
+        make install
+        make
       env:
         BUNDLE_PATH: vendor/bundle
-    - name: Build documentation
-      run: make
     - name: Commit files
       run: |
         git add -A
