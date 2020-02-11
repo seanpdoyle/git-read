@@ -30,7 +30,7 @@
 </a>
           <a href="../fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
 </a>
-          <a href="./">fixup JS&#x2F;webpack, external pipelines</a>
+          <a href="../f2dffaa26cab49fa2c500ea8a84b01321bfa9853/">fixup JS&#x2F;webpack, external pipelines</a>
           <a href="../eae4c716f1df42a0c3edae2ad0919c2cdf6e1011/">generate data, don&#x27;t generate templates</a>
           <a href="../e1b59e44a5d4f87dedfe075ae21270fc9dd03b76/">Improve installation and cross-platform capabilities</a>
           <a href="../fc198bb88f843c4713f6482eeecbfe70410a8954/">Make your life easier with `ruby-git`
@@ -49,103 +49,29 @@
           <a href="../6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">add caching back</a>
           <a href="../1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">bust Gemfile cache, use relative links</a>
           <a href="../bce9dfe492eb4ab6fc1ab6b730bbcbf475cabf11/">integrate with sitemap</a>
-          <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
+          <a href="./">make it relative</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-<a href="../fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">              Previous
+<a href="../bce9dfe492eb4ab6fc1ab6b730bbcbf475cabf11/">              Previous
 </a>
-<a href="../eae4c716f1df42a0c3edae2ad0919c2cdf6e1011/">              Next
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>fixup JS/webpack, external pipelines</h1>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.gitignore b/.gitignore
-index b27bd03..be774d7 100644
-</span><span class="gd">--- a/.gitignore
-</span><span class="gi">+++ b/.gitignore
-</span><span class="p">@@ -1,6 +1,7 @@</span>
- tmp/
- source/index.html.*
- source/commits/*
-<span class="gi">+source/javascripts/*
-</span> data/*
-
- .bundle
-<span class="p">@@ -9,4 +10,3 @@</span> data/*
- .sass-cache
- build/
- node_modules/
-<span class="gd">-dist/
-</span><span class="gh">diff --git a/Makefile b/Makefile
-index d7592f6..c0d3029 100644
-</span><span class="gd">--- a/Makefile
-</span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -7,7 +7,8 @@</span> diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits
- TARGETS := \
-    $(source_files) \
-    $(diff_files) \
-<span class="gd">-   source/index.html.md
-</span><span class="gi">+   source/index.html.md \
-+   source/javascripts/site.js
-</span>
- .PHONY: all clean build compile
-
-@@ -21,7 +22,7 @@ build:
-    $(git) log --format="tmp/commits/%h.txt" | xargs touch
-
- clean:
-<span class="gd">-   rm -rf tmp source/{commits,index.*} build data
-</span><span class="gi">+   rm -rf tmp source/{commits,javascripts,index.*} build data
-</span>
- node_modules: package.json yarn.lock
-    yarn install
-<span class="p">@@ -39,3 +40,7 @@</span> source/commits/%/_diff.html: tmp/commits/%.txt
- source/commits/%/index.html.md: tmp/commits/%.txt
-    mkdir -p $(dir $@)
-    $(git) show --no-patch --output=$@ --format="$$(cat templates/commit.md)" $$(basename $&lt; .txt)
-<span class="gi">+
-+source/javascripts/site.js: javascripts/site.js node_modules
-+   mkdir -p $(dir $@)
-+   node_modules/.bin/webpack --config webpack.config.js $&lt;
-</span><span class="gh">diff --git a/config.rb b/config.rb
-index 27281f5..5c5768d 100644
-</span><span class="gd">--- a/config.rb
-</span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -8,11 +8,6 @@</span> activate :syntax
- activate :autoprefixer do |prefix|
-   prefix.browsers = "last 2 versions"
+        <h1>make it relative</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
+index d120834..6aee426 100644
+</span><span class="gd">--- a/lib/commit_helpers.rb
+</span><span class="gi">+++ b/lib/commit_helpers.rb
+</span><span class="p">@@ -1,5 +1,5 @@</span>
+ module CommitHelpers
+   def commit_path(commit)
+<span class="gd">-    "/commits/#{commit.sha}/index.html"
+</span><span class="gi">+    "commits/#{commit.sha}/index.html"
+</span>   end
  end
-<span class="gd">-activate :external_pipeline,
--  name: :webpack,
--  command: build? ? "./node_modules/.bin/webpack --bail" : "./node_modules/.bin/webpack --watch -d",
--  source: "dist",
--  latency: 1
-</span>
- set :markdown_engine, :redcarpet
- set :markdown, fenced_code_blocks: true, smartypants: true
-<span class="gh">diff --git a/source/javascripts/main.js b/javascripts/site.js
-</span><span class="p">similarity index 100%
-rename from source/javascripts/main.js
-rename to javascripts/site.js
-</span><span class="gh">diff --git a/webpack.config.js b/webpack.config.js
-index 632d8f4..5786dc3 100644
-</span><span class="gd">--- a/webpack.config.js
-</span><span class="gi">+++ b/webpack.config.js
-</span><span class="p">@@ -1,5 +1,9 @@</span>
-<span class="gd">-const path = require("path")
-</span><span class="gi">+const path = require('path')
-</span>
- module.exports = {
-<span class="gd">-  entry: path.resolve(__dirname, "source/javascripts/main.js"),
-</span><span class="gi">+  entry: "javascripts/main.js",
-+  mode: "development",
-+  output: {
-+    path: path.resolve(__dirname, "source/javascripts")
-+  },
-</span> }
 </code></pre></div>
       </article>
     </main>
