@@ -31,7 +31,7 @@
           <a href="/commits/4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="/commits/137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
-          <a href="/commits/ed204eec065852b1c90f85ee9abe88c9b610268a/" aria-current="page">Restore default `ul` and `ol` within Markdown
+          <a href="/commits/ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
 </a>
           <a href="/commits/fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
 </a>
@@ -50,86 +50,35 @@
           <a href="/commits/dc0db42616f5c3c58f641103469efc1dbf888f89/">include Gemfile.lock for caching</a>
           <a href="/commits/8cea2bfc9a535eb13c4b212fabf2a72eecdd2804/">build without cache</a>
           <a href="/commits/6334576e694c387171caf187924b3f0a0dfeec51/">publish with different Action</a>
-          <a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/">import assets relatively</a>
+          <a href="/commits/cf73dbd144792d007c1df7ffc16d43c9affdd31c/" aria-current="page">import assets relatively</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-<a href="/commits/137dee07d04d0e0124b72b45b193fc30cd67a797/">              Previous
+<a href="/commits/6334576e694c387171caf187924b3f0a0dfeec51/">              Previous
 </a>
-<a href="/commits/fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">              Next
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>Restore default <code>ul</code> and <code>ol</code> within Markdown</h1>
-
-<p>Render commit messages that contain Markdown lists as the browser
-defaults.</p>
-
-<p>For instance, a commit with an <code>&lt;ul&gt;</code> element&rsquo;s items will be declared
-as:</p>
-
-<ul>
-<li>item one</li>
-<li>item two</li>
-<li>items three</li>
-</ul>
-
-<p>Whereas an <code>&lt;ol&gt;</code> element&rsquo;s items will be declared as:</p>
-
-<ol>
-<li>item one</li>
-<li>item two</li>
-<li>item three</li>
-</ol>
-
-<p>These styles were originally overridden in the <code>base/base</code> SCSS
-generated while installing <code>bitters</code>.</p>
+        <h1>import assets relatively</h1>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 8708f3b..14c04c8 100644
+index 39ece11..fd7b1ef 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -48,7 +48,7 @@</span>
-         &lt;% end %&gt;
-       &lt;/header&gt;
-
--      &lt;article class="commit"&gt;
-<span class="gi">+      &lt;article&gt;
-</span>         &lt;%= yield %&gt;
-       &lt;/article&gt;
-
-diff --git a/source/stylesheets/blocks/_commit.scss b/source/stylesheets/blocks/_commit.scss
-<span class="p">deleted file mode 100644
-</span><span class="gh">index 98e1134..0000000
-</span><span class="gd">--- a/source/stylesheets/blocks/_commit.scss
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,14 +0,0 @@</span>
-<span class="gd">-.commit {
--  ul,
--  ol {
--    padding-left: var(--spacing);
--  }
--
--  ul {
--    list-style-type: disc;
--  }
--
--  ol {
--    list-style-type: decimal;
--  }
--}
-</span><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
-index e8569b9..449ba7f 100644
-</span><span class="gd">--- a/source/stylesheets/site.css.scss
-</span><span class="gi">+++ b/source/stylesheets/site.css.scss
-</span><span class="p">@@ -2,6 +2,5 @@</span>
-
- @import "settings/breakpoints";
-
--@import "blocks/commit";
- @import "blocks/history";
- @import "blocks/page";
+</span><span class="p">@@ -7,9 +7,9 @@</span>
+           content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+     &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
+     &lt;title&gt;&lt;%= current_page.data.title || yield_content(:title) || "git-read" %&gt;&lt;/title&gt;
+<span class="gd">-    &lt;%= stylesheet_link_tag "site", relative: true, "data-turbolinks-track": "reload" %&gt;
+-    &lt;%= stylesheet_link_tag "syntax", relative: true, "data-turbolinks-track": "reload" %&gt;
+-    &lt;%= javascript_include_tag "main", relative: true, "data-turbolinks-track": "reload" %&gt;
+</span><span class="gi">+    &lt;%= stylesheet_link_tag "site", "data-turbolinks-track": "reload" %&gt;
++    &lt;%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %&gt;
++    &lt;%= javascript_include_tag "main", "data-turbolinks-track": "reload" %&gt;
+</span>   &lt;/head&gt;
+   &lt;body class="page"&gt;
+     &lt;details id="table-of-contents" class="page__history" open&gt;
 </code></pre></div>
       </article>
     </main>
