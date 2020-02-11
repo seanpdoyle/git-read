@@ -75,6 +75,7 @@
           <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
           <a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">add back caching, use sitemap branch of current</a>
           <a href="../5c92ba4caab28ce1289e9a8757183b08a1d9ffd9/">Add link to project root</a>
+          <a href="../4cb91f9b9aabedf2263a0266e9c2e863bb5d979a/">configure command to take git directory and output</a>
       </nav>
     </details>
 
@@ -98,10 +99,10 @@ our revision history.</p>
 the project&rsquo;s source code will reside in that directory.</p>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..c7f5cf7
+</span><span class="gh">index 0000000..12b906c
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/.github/workflows/git-read.yml
-</span><span class="p">@@ -0,0 +1,33 @@</span>
+</span><span class="p">@@ -0,0 +1,28 @@</span>
 <span class="gi">+name: git-read
 +
 +on: [push]
@@ -111,24 +112,19 @@ the project&rsquo;s source code will reside in that directory.</p>
 +    runs-on: ubuntu-latest
 +    steps:
 +    - uses: actions/checkout@v2
-+    - name: Fetch full Git History
-+      run: |
-+        git fetch --prune --unshallow
++    - uses: actions/cache@v1
++      with:
++        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
++        restore-keys: ${{ runner.os }}-gems-
++        path: vendor/bundle
 +    - uses: actions/setup-ruby@v1
 +      with:
 +        ruby-version: "2.6.5"
-+    - uses: actions/cache@v1
-+      with:
-+        path: vendor/bundle
-+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-+        restore-keys: |
-+          ${{ runner.os }}-gems-
-+    - name: Build documentation
++        run: bundle config path vendor/bundle
++    - name: Fetch full Git History and build documentation
 +      run: |
-+        make install
-+        make
-+      env:
-+        BUNDLE_PATH: vendor/bundle
++        git fetch --prune --unshallow
++        bin/git-read ./ ./build
 +    - name: Deploy
 +      uses: peaceiris/actions-gh-pages@v3
 +      with:
@@ -311,25 +307,29 @@ the project&rsquo;s source code will reside in that directory.</p>
 +   2.1.4
 </span><span class="gh">diff --git a/Makefile b/Makefile
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..67c129f
+</span><span class="gh">index 0000000..409e902
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -0,0 +1,15 @@</span>
-<span class="gi">+.PHONY: all clean compile
+</span><span class="p">@@ -0,0 +1,19 @@</span>
+<span class="gi">+GIT_DIR := $(shell echo "$${GIT_DIR-./}")
++OUTPUT_DIR := $(shell echo "$${OUTPUT_DIR-./build}")
++
++.PHONY: all clean compile
 +
 +all: install compile
 +
 +serve: install
-+   bundle exec middleman serve
++   GIT_DIR=$(GIT_DIR) bundle exec middleman serve
 +
 +install:
 +   script/setup
 +
 +compile:
-+   bundle exec middleman build --verbose
++   mkdir -p $(OUTPUT_DIR)
++   GIT_DIR=$(GIT_DIR) bundle exec middleman build --verbose --build-dir=$(OUTPUT_DIR)
 +
 +clean:
-+   rm -rf build/ dist/
++   rm -rf dist/ $(OUTPUT_DIR)
 </span><span class="gh">diff --git a/README.md b/README.md
 </span><span class="p">new file mode 100644
 </span><span class="gh">index 0000000..f4eeb86
@@ -346,15 +346,16 @@ the project&rsquo;s source code will reside in that directory.</p>
 +* Parse commit messages as Markdown
 </span><span class="gh">diff --git a/bin/git-read b/bin/git-read
 </span><span class="p">new file mode 100755
-</span><span class="gh">index 0000000..5e61c4d
+</span><span class="gh">index 0000000..da0f334
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/bin/git-read
-</span><span class="p">@@ -0,0 +1,7 @@</span>
+</span><span class="p">@@ -0,0 +1,8 @@</span>
 <span class="gi">+#! /usr/bin/env sh
 +
 +set -e
 +
 +export GIT_DIR=${1-./}
++export OUTPUT_DIR=${2-./build}
 +
 +make
 </span><span class="gh">diff --git a/config.rb b/config.rb
