@@ -7,24 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Fetch full Git History
-      run: |
-        git fetch --prune --unshallow
+    - uses: actions/cache@v1
+      with:
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: ${{ runner.os }}-gems-
+        path: vendor/bundle
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: "2.6.5"
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: Build documentation
+        run: bundle config path vendor/bundle
+    - name: Fetch full Git History and build documentation
       run: |
-        make install
-        make
-      env:
-        BUNDLE_PATH: vendor/bundle
+        git fetch --prune --unshallow
+        bin/git-read ./ ./build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:

@@ -3,5 +3,6 @@
 set -e
 
 export GIT_DIR=${1-./}
+export OUTPUT_DIR=${2-./build}
 
 make
