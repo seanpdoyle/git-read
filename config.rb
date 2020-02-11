@@ -50,7 +50,7 @@ repository.log(nil).reverse_each do |commit|
   proxy(
     "/commits/#{commit.sha}/index.html",
     "/commits/commit.html",
-    locals: { repository: repository, commit: commit },
+    locals: { commit: commit },
     ignore: true,
   )
 end
@@ -58,7 +58,7 @@ end
 proxy(
   "index.html",
   "README.html",
-  locals: { repository: repository, readme: repository.object("HEAD:README.md") },
+  locals: { readme: repository.object("HEAD:README.md") },
   ignore: true,
 )
 
@@ -71,6 +71,7 @@ proxy(
 #     'Helping'
 #   end
 # end
+CommitHelpers.repository = repository
 helpers CommitHelpers
 
 # Build-specific configuration

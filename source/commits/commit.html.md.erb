@@ -5,7 +5,13 @@
 
 <%= messages.join %>
 
-```diff
-<%= commit.diff_parent.patch -%>
+<% parent, _, _ = adjacent_commits(commit) %>
 
+<% (parent.present? ? parent.diff(commit) : commit.diff(commit)).each do |diff| %>
+<%= diff.path %>
+---
+
+```diff
+<%= diff.patch %>
 ```
+<% end %>
