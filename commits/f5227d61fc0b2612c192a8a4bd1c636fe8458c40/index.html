@@ -157,7 +157,7 @@
               <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
             </li>
             <li>
-              <a href="./" aria-current="page">properly call no limit on git log</a>
+              <a href="../f804de86ffc529785969be4706d6de7b61a1bee6/">properly call no limit on git log</a>
             </li>
             <li>
               <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
@@ -172,7 +172,7 @@
               <a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">add back caching, use sitemap branch of current</a>
             </li>
             <li>
-              <a href="../f5227d61fc0b2612c192a8a4bd1c636fe8458c40/">Add link to project root</a>
+              <a href="./" aria-current="page">Add link to project root</a>
             </li>
         </ul>
       </nav>
@@ -180,56 +180,39 @@
 
     <main class="page__content">
       <header>
-<a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">              Previous
+<a href="../99bbdab82c0cb6ac2a77a4f55a407a4b4f579acd/">              Previous
 </a>
-<a href="../9435ce9ac60cba888e24326f71288032d93235e2/">              Next
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>properly call no limit on git log</h1>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-index 617bb77..e571674 100644
-</span><span class="gd">--- a/config.rb
-</span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -46,7 +46,7 @@</span> repository = Git.open(
-   Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
- )
-
--repository.log(nil).reverse_each do |commit|
-<span class="gi">+repository.log.reverse_each do |commit|
-</span>   proxy(
-     "/commits/#{commit.sha}/index.html",
-     "/commits/commit.html",
-<span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 9777bc1..306dc7f 100644
+        <h1>Add link to project root</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 76052ba..9777bc1 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -15,7 +15,7 @@</span>
+</span><span class="p">@@ -14,18 +14,10 @@</span>
+   &lt;body class="page"&gt;
      &lt;details id="table-of-contents" class="page__history" open&gt;
        &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
-       &lt;nav class="history"&gt;
-<span class="gd">-        &lt;% repository.log(nil).reverse_each do |commit| %&gt;
-</span><span class="gi">+        &lt;% repository.log.reverse_each do |commit| %&gt;
-</span>           &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
-         &lt;% end %&gt;
-       &lt;/nav&gt;
-<span class="p">@@ -30,14 +30,14 @@</span>
-             &lt;% end %&gt;
-           &lt;% end %&gt;
+<span class="gd">-      &lt;nav&gt;
+-        &lt;ul class="history"&gt;
+-          &lt;li&gt;
+-            &lt;%= current_link_to escape_html(File.basename(repository.dir.to_s)), "/index.html" %&gt;
+-          &lt;/li&gt;
+-
+-          &lt;% repository.log(nil).reverse_each do |commit| %&gt;
+-            &lt;li&gt;
+-              &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
+-            &lt;/li&gt;
+-          &lt;% end %&gt;
+-        &lt;/ul&gt;
+</span><span class="gi">+      &lt;nav class="history"&gt;
++        &lt;% repository.log(nil).reverse_each do |commit| %&gt;
++          &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
++        &lt;% end %&gt;
+</span>       &lt;/nav&gt;
+     &lt;/details&gt;
 
--          &lt;% next_commit = repository.log(nil).detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
-<span class="gi">+          &lt;% next_commit = repository.log.detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
-</span>           &lt;% if next_commit.present? %&gt;
-             &lt;% link_to commit_path(next_commit) do %&gt;
-               Next
-             &lt;% end %&gt;
-           &lt;% end %&gt;
-         &lt;% else %&gt;
-<span class="gd">-          &lt;% link_to commit_path(repository.log(nil).last) do %&gt;
-</span><span class="gi">+          &lt;% link_to commit_path(repository.log.last) do %&gt;
-</span>             Get Started
-           &lt;% end %&gt;
-         &lt;% end %&gt;
 </code></pre></div>
       </article>
     </main>
