@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>git-read</title>
+    <link href="../../stylesheets/site.css" rel="stylesheet" data-turbolinks-track="reload" />
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" data-turbolinks-track="reload" />
+    <script src="../../main.js" data-turbolinks-track="reload"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">Table of Contents</summary>
+      <nav class="history">
+          <a href="../4e664b60150d88727e47ac07196b88f0ee916bed/">Ensure `tmp&#x2F;` and `source&#x2F;` directories exist
+</a>
+          <a href="../50b62fd3cb128262e291f714b9edfd7e6c6cb77b/">Introduce `Makefile`
+</a>
+          <a href="../897dcce0e8c0845dd8f26d9f48c4fc26802195ce/">Created `README.md`
+</a>
+          <a href="../dc1b90e8a53274ad814f2b59cb3f241cf109be6b/">Create the `.gitignore` file
+</a>
+          <a href="./">template things out</a>
+          <a href="../61ae964ec642707192c529c7297e559de64d9018/">generate more data</a>
+          <a href="../af6f848fad8885555685392f773585c63b77d608/">make available in other git directory</a>
+          <a href="../c1052a06dba99083707e21ffd5f503224d7c031c/">current README, fix data file</a>
+          <a href="../3cfe0645d6143923f91ae90e5df3ad79bd7b5044/">move partial to top level template</a>
+          <a href="../b81309db3fece8d686bae82bf52f23140714e6c2/">include CSS from Syntax highlighting</a>
+          <a href="../02886efef8e37022a2a64aea2d1abe0d1562a003/">Install `bitters` for base styles
+</a>
+          <a href="../aae72aa96e7aa0c4ea925af106bfbba4448cce80/">start to style page</a>
+          <a href="../7e3bea6b871f1d518a5e67946979b961f2908581/">Prepare to generate JavaScript with Make</a>
+          <a href="../7ab91b73a386bb411d8ea3cf63a07e5d71419f0a/">build JavaScript assets with Make</a>
+          <a href="../7fa5a9b178e979bc8a3329b7b7af0f0fee3f7809/">install Turbolinks, bundle with webpack</a>
+          <a href="../1e1d4d0ebea82e4e055314feae8021bf86dfd90a/">streamline Makefile</a>
+          <a href="../69b031bbfefced5d6682d60a9bcb56de33d208ec/">start to style layout</a>
+          <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
+</a>
+          <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
+          <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
+</a>
+          <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
+          <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
+</a>
+          <a href="../fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="../f2dffaa26cab49fa2c500ea8a84b01321bfa9853/">fixup JS&#x2F;webpack, external pipelines</a>
+          <a href="../eae4c716f1df42a0c3edae2ad0919c2cdf6e1011/">generate data, don&#x27;t generate templates</a>
+          <a href="../e1b59e44a5d4f87dedfe075ae21270fc9dd03b76/">Improve installation and cross-platform capabilities</a>
+          <a href="../fc198bb88f843c4713f6482eeecbfe70410a8954/">Make your life easier with `ruby-git`
+</a>
+          <a href="../d1fe4acd9eba54ce09ab898340e09dbcd7d904e3/">improve setup</a>
+          <a href="../c395b613fd1fcb9b6d4a64ebb0eb51a966219b3f/">workflow</a>
+          <a href="../f1c91dacfa5801de3a2ac4de37ee5ce7a77c902d/">parallelize, cache</a>
+          <a href="../79975deba403e84d2719d32e5a7e30249ee6d316/">combine calls to make</a>
+          <a href="../eaabc9feb4c5e5f4a3fa4557a970b5c56e467eb7/">fetch SHAs</a>
+          <a href="../77da41d7a756ccf2457da7c1ac20bfd692f3162f/">minimize output, try and get whole tree</a>
+          <a href="../d57f9780d10f539629fe46ed60b5548b5ff2c075/">move files around after building</a>
+          <a href="../dc0db42616f5c3c58f641103469efc1dbf888f89/">include Gemfile.lock for caching</a>
+          <a href="../8cea2bfc9a535eb13c4b212fabf2a72eecdd2804/">build without cache</a>
+          <a href="../6334576e694c387171caf187924b3f0a0dfeec51/">publish with different Action</a>
+          <a href="../cf73dbd144792d007c1df7ffc16d43c9affdd31c/">import assets relatively</a>
+          <a href="../6a64abc978e3d2063fb96b38d2eee4e2f840fd30/">add caching back</a>
+          <a href="../1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">bust Gemfile cache, use relative links</a>
+          <a href="../bce9dfe492eb4ab6fc1ab6b730bbcbf475cabf11/">integrate with sitemap</a>
+          <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
+          <a href="../f804de86ffc529785969be4706d6de7b61a1bee6/">properly call no limit on git log</a>
+          <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
+          <a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">sync ruby versions</a>
+          <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+<a href="../dc1b90e8a53274ad814f2b59cb3f241cf109be6b/">              Previous
+</a>
+<a href="../61ae964ec642707192c529c7297e559de64d9018/">              Next
+</a>      </header>
+
+      <article class="commit">
+        <h1>template things out</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.gitignore b/.gitignore
+index 48e0ccd..767c7cc 100644
+</span><span class="gd">--- a/.gitignore
+</span><span class="gi">+++ b/.gitignore
+</span><span class="p">@@ -1,10 +1,2 @@</span>
+ tmp/
+<span class="gd">-source/index.html.*
+-source/commits/*
+-data/*
+-
+-.bundle
+-.cache
+-.DS_Store
+-.sass-cache
+-build/
+</span><span class="gi">+source/index.html*
+</span><span class="gh">diff --git a/Gemfile b/Gemfile
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 7701d14..0000000
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,7 +0,0 @@</span>
+<span class="gd">-source 'https://rubygems.org'
+-
+-gem 'middleman', '~&gt; 4.2'
+-gem 'middleman-autoprefixer', '~&gt; 2.7'
+-gem 'middleman-syntax'
+-gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
+-gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
+</span><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 351a3c0..0000000
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,113 +0,0 @@</span>
+<span class="gd">-GEM
+-  remote: https://rubygems.org/
+-  specs:
+-    activesupport (5.0.7.2)
+-      concurrent-ruby (~&gt; 1.0, &gt;= 1.0.2)
+-      i18n (&gt;= 0.7, &lt; 2)
+-      minitest (~&gt; 5.1)
+-      tzinfo (~&gt; 1.1)
+-    addressable (2.7.0)
+-      public_suffix (&gt;= 2.0.2, &lt; 5.0)
+-    autoprefixer-rails (9.7.4)
+-      execjs
+-    backports (3.16.0)
+-    coffee-script (2.4.1)
+-      coffee-script-source
+-      execjs
+-    coffee-script-source (1.12.2)
+-    concurrent-ruby (1.1.5)
+-    contracts (0.13.0)
+-    dotenv (2.7.5)
+-    erubis (2.7.0)
+-    execjs (2.7.0)
+-    fast_blank (1.0.0)
+-    fastimage (2.1.7)
+-    ffi (1.12.2)
+-    haml (5.1.2)
+-      temple (&gt;= 0.8.0)
+-      tilt
+-    hamster (3.0.0)
+-      concurrent-ruby (~&gt; 1.0)
+-    hashie (3.6.0)
+-    i18n (0.9.5)
+-      concurrent-ruby (~&gt; 1.0)
+-    kramdown (1.17.0)
+-    listen (3.0.8)
+-      rb-fsevent (~&gt; 0.9, &gt;= 0.9.4)
+-      rb-inotify (~&gt; 0.9, &gt;= 0.9.7)
+-    memoist (0.16.2)
+-    middleman (4.3.5)
+-      coffee-script (~&gt; 2.2)
+-      haml (&gt;= 4.0.5)
+-      kramdown (~&gt; 1.2)
+-      middleman-cli (= 4.3.5)
+-      middleman-core (= 4.3.5)
+-    middleman-autoprefixer (2.10.1)
+-      autoprefixer-rails (~&gt; 9.1)
+-      middleman-core (&gt;= 3.3.3)
+-    middleman-cli (4.3.5)
+-      thor (&gt;= 0.17.0, &lt; 2.0)
+-    middleman-core (4.3.5)
+-      activesupport (&gt;= 4.2, &lt; 5.1)
+-      addressable (~&gt; 2.3)
+-      backports (~&gt; 3.6)
+-      bundler
+-      contracts (~&gt; 0.13.0)
+-      dotenv
+-      erubis
+-      execjs (~&gt; 2.0)
+-      fast_blank
+-      fastimage (~&gt; 2.0)
+-      hamster (~&gt; 3.0)
+-      hashie (~&gt; 3.4)
+-      i18n (~&gt; 0.9.0)
+-      listen (~&gt; 3.0.0)
+-      memoist (~&gt; 0.14)
+-      padrino-helpers (~&gt; 0.13.0)
+-      parallel
+-      rack (&gt;= 1.4.5, &lt; 3)
+-      sassc (~&gt; 2.0)
+-      servolux
+-      tilt (~&gt; 2.0.9)
+-      uglifier (~&gt; 3.0)
+-    middleman-syntax (3.2.0)
+-      middleman-core (&gt;= 3.2)
+-      rouge (~&gt; 3.2)
+-    minitest (5.14.0)
+-    padrino-helpers (0.13.3.4)
+-      i18n (~&gt; 0.6, &gt;= 0.6.7)
+-      padrino-support (= 0.13.3.4)
+-      tilt (&gt;= 1.4.1, &lt; 3)
+-    padrino-support (0.13.3.4)
+-      activesupport (&gt;= 3.1)
+-    parallel (1.19.1)
+-    public_suffix (4.0.3)
+-    rack (2.1.2)
+-    rb-fsevent (0.10.3)
+-    rb-inotify (0.10.1)
+-      ffi (~&gt; 1.0)
+-    rouge (3.15.0)
+-    sassc (2.2.1)
+-      ffi (~&gt; 1.9)
+-    servolux (0.13.0)
+-    temple (0.8.2)
+-    thor (1.0.1)
+-    thread_safe (0.3.6)
+-    tilt (2.0.10)
+-    tzinfo (1.2.6)
+-      thread_safe (~&gt; 0.1)
+-    uglifier (3.2.0)
+-      execjs (&gt;= 0.3.0, &lt; 3)
+-
+-PLATFORMS
+-  ruby
+-
+-DEPENDENCIES
+-  middleman (~&gt; 4.2)
+-  middleman-autoprefixer (~&gt; 2.7)
+-  middleman-syntax
+-  tzinfo-data
+-  wdm (~&gt; 0.1)
+-
+-BUNDLED WITH
+-   2.1.4
+</span><span class="gh">diff --git a/Makefile b/Makefile
+index 350c129..887ad9d 100644
+</span><span class="gd">--- a/Makefile
+</span><span class="gi">+++ b/Makefile
+</span><span class="p">@@ -1,28 +1,2 @@</span>
+<span class="gd">-commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
+-source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md.erb,$(commits))
+-diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
+-
+-.PHONY: all clean build
+-
+-all: $(source_files) $(diff_files) source/index.html.md data/commits.yml
+-
+-clean:
+-   rm -rf tmp source/commits source/index.* build data
+-
+-build:
+-   mkdir -p tmp/commits/
+-   git log --format="tmp/commits/%h.txt" | xargs touch
+-
+-source/index.html.md: README.md
+-   cp README.md source/index.html.md
+-
+-source/commits/%/_diff.html: tmp/commits/%.txt
+-   git show --cc --format="" $$(basename $&lt; .txt) --output=$@
+-
+-data/commits.yml:
+-   mkdir -p $(dir $@)
+-   echo "sequence:\n$$(git log --reverse --format='  - %h')" &gt; data/commits.yml
+-
+-source/commits/%/index.html.md.erb: tmp/commits/%.txt
+-   mkdir -p $(dir $@)
+-   git show --no-patch --output=$@ --format="$$(cat templates/commit.md)" $$(basename $&lt; .txt)
+</span><span class="gi">+all:
++   git log --reverse
+</span><span class="gh">diff --git a/config.rb b/config.rb
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 580edb9..0000000
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,47 +0,0 @@</span>
+<span class="gd">-# Activate and configure extensions
+-# https://middlemanapp.com/advanced/configuration/#configuring-extensions
+-
+-activate :syntax
+-activate :autoprefixer do |prefix|
+-  prefix.browsers = "last 2 versions"
+-end
+-
+-# Layouts
+-# https://middlemanapp.com/basics/layouts/
+-
+-# Per-page layout changes
+-page '/*.xml', layout: false
+-page '/*.json', layout: false
+-page '/*.txt', layout: false
+-
+-# With alternative layout
+-# page '/path/to/file.html', layout: 'other_layout'
+-
+-# Proxy pages
+-# https://middlemanapp.com/advanced/dynamic-pages/
+-
+-# proxy(
+-#   '/this-page-has-no-template.html',
+-#   '/template-file.html',
+-#   locals: {
+-#     which_fake_page: 'Rendering a fake page with a local variable'
+-#   },
+-# )
+-
+-# Helpers
+-# Methods defined in the helpers block are available in templates
+-# https://middlemanapp.com/basics/helper-methods/
+-
+-# helpers do
+-#   def some_helper
+-#     'Helping'
+-#   end
+-# end
+-
+-# Build-specific configuration
+-# https://middlemanapp.com/advanced/configuration/#environment-specific-settings
+-
+-# configure :build do
+-#   activate :minify_css
+-#   activate :minify_javascript
+-# end
+</span><span class="gh">diff --git a/source/images/.keep b/source/.gitkeep
+</span><span class="p">similarity index 100%
+rename from source/images/.keep
+rename to source/.gitkeep
+</span><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 9de6ff3..0000000
+</span><span class="gd">--- a/source/javascripts/site.js
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1 +0,0 @@</span>
+<span class="gd">-// This is where it all goes :)
+</span><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 308e384..0000000
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,44 +0,0 @@</span>
+<span class="gd">-&lt;!doctype html&gt;
+-&lt;html&gt;
+-  &lt;head&gt;
+-    &lt;meta charset="utf-8"&gt;
+-    &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
+-    &lt;meta name="viewport"
+-          content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+-    &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
+-    &lt;title&gt;&lt;%= current_page.data.title || "Middleman" %&gt;&lt;/title&gt;
+-    &lt;%= stylesheet_link_tag "site" %&gt;
+-    &lt;%= javascript_include_tag "site" %&gt;
+-  &lt;/head&gt;
+-  &lt;body&gt;
+-    &lt;aside&gt;
+-      &lt;% data.commits.sequence.each do |commit| %&gt;
+-        &lt;% link_to "/commits/#{commit}" do %&gt;
+-          &lt;%= commit %&gt;
+-        &lt;% end %&gt;
+-      &lt;% end %&gt;
+-    &lt;/aside&gt;
+-
+-    &lt;main&gt;
+-      &lt;nav&gt;
+-        &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
+-          &lt;% if current_page.data.id == commit &amp;&amp; parent.present? %&gt;
+-            &lt;% link_to "/commits/#{parent}" do %&gt;
+-              Previous
+-            &lt;% end %&gt;
+-          &lt;% end %&gt;
+-        &lt;% end %&gt;
+-
+-        &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
+-          &lt;% if current_page.data.id == commit &amp;&amp; child.present? %&gt;
+-            &lt;% link_to "/commits/#{child}" do %&gt;
+-              Next
+-            &lt;% end %&gt;
+-          &lt;% end %&gt;
+-        &lt;% end %&gt;
+-      &lt;/nav&gt;
+-
+-      &lt;%= yield %&gt;
+-    &lt;/main&gt;
+-  &lt;/body&gt;
+-&lt;/html&gt;
+</span><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 849ac4f..0000000
+</span><span class="gd">--- a/source/stylesheets/site.css.scss
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,102 +0,0 @@</span>
+<span class="gd">-body {
+-  background-color: #fbc547;
+-  color: #333;
+-  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
+-    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
+-    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
+-    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+-  padding: 18vh 1rem;
+-}
+-
+-a {
+-  color: rgba(#000, 0.7);
+-
+-  &amp;:focus,
+-  &amp;:hover {
+-    color: rgba(#000, 0.6);
+-  }
+-}
+-
+-.middleman-logo {
+-  margin-bottom: 1rem;
+-  width: 10rem;
+-}
+-
+-.highlight .hll { background-color: #404040 }
+-.highlight  { background: #202020; color: #d0d0d0 }
+-.highlight .c { color: #999999; font-style: italic } /* Comment */
+-.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+-.highlight .esc { color: #d0d0d0 } /* Escape */
+-.highlight .g { color: #d0d0d0 } /* Generic */
+-.highlight .k { color: #6ab825; font-weight: bold } /* Keyword */
+-.highlight .l { color: #d0d0d0 } /* Literal */
+-.highlight .n { color: #d0d0d0 } /* Name */
+-.highlight .o { color: #d0d0d0 } /* Operator */
+-.highlight .x { color: #d0d0d0 } /* Other */
+-.highlight .p { color: #d0d0d0 } /* Punctuation */
+-.highlight .ch { color: #999999; font-style: italic } /* Comment.Hashbang */
+-.highlight .cm { color: #999999; font-style: italic } /* Comment.Multiline */
+-.highlight .cp { color: #cd2828; font-weight: bold } /* Comment.Preproc */
+-.highlight .cpf { color: #999999; font-style: italic } /* Comment.PreprocFile */
+-.highlight .c1 { color: #999999; font-style: italic } /* Comment.Single */
+-.highlight .cs { color: #e50808; font-weight: bold; background-color: #520000 } /* Comment.Special */
+-.highlight .gd { color: #d22323 } /* Generic.Deleted */
+-.highlight .ge { color: #d0d0d0; font-style: italic } /* Generic.Emph */
+-.highlight .gr { color: #d22323 } /* Generic.Error */
+-.highlight .gh { color: #ffffff; font-weight: bold } /* Generic.Heading */
+-.highlight .gi { color: #589819 } /* Generic.Inserted */
+-.highlight .go { color: #cccccc } /* Generic.Output */
+-.highlight .gp { color: #aaaaaa } /* Generic.Prompt */
+-.highlight .gs { color: #d0d0d0; font-weight: bold } /* Generic.Strong */
+-.highlight .gu { color: #ffffff; text-decoration: underline } /* Generic.Subheading */
+-.highlight .gt { color: #d22323 } /* Generic.Traceback */
+-.highlight .kc { color: #6ab825; font-weight: bold } /* Keyword.Constant */
+-.highlight .kd { color: #6ab825; font-weight: bold } /* Keyword.Declaration */
+-.highlight .kn { color: #6ab825; font-weight: bold } /* Keyword.Namespace */
+-.highlight .kp { color: #6ab825 } /* Keyword.Pseudo */
+-.highlight .kr { color: #6ab825; font-weight: bold } /* Keyword.Reserved */
+-.highlight .kt { color: #6ab825; font-weight: bold } /* Keyword.Type */
+-.highlight .ld { color: #d0d0d0 } /* Literal.Date */
+-.highlight .m { color: #3677a9 } /* Literal.Number */
+-.highlight .s { color: #ed9d13 } /* Literal.String */
+-.highlight .na { color: #bbbbbb } /* Name.Attribute */
+-.highlight .nb { color: #24909d } /* Name.Builtin */
+-.highlight .nc { color: #447fcf; text-decoration: underline } /* Name.Class */
+-.highlight .no { color: #40ffff } /* Name.Constant */
+-.highlight .nd { color: #ffa500 } /* Name.Decorator */
+-.highlight .ni { color: #d0d0d0 } /* Name.Entity */
+-.highlight .ne { color: #bbbbbb } /* Name.Exception */
+-.highlight .nf { color: #447fcf } /* Name.Function */
+-.highlight .nl { color: #d0d0d0 } /* Name.Label */
+-.highlight .nn { color: #447fcf; text-decoration: underline } /* Name.Namespace */
+-.highlight .nx { color: #d0d0d0 } /* Name.Other */
+-.highlight .py { color: #d0d0d0 } /* Name.Property */
+-.highlight .nt { color: #6ab825; font-weight: bold } /* Name.Tag */
+-.highlight .nv { color: #40ffff } /* Name.Variable */
+-.highlight .ow { color: #6ab825; font-weight: bold } /* Operator.Word */
+-.highlight .w { color: #666666 } /* Text.Whitespace */
+-.highlight .mb { color: #3677a9 } /* Literal.Number.Bin */
+-.highlight .mf { color: #3677a9 } /* Literal.Number.Float */
+-.highlight .mh { color: #3677a9 } /* Literal.Number.Hex */
+-.highlight .mi { color: #3677a9 } /* Literal.Number.Integer */
+-.highlight .mo { color: #3677a9 } /* Literal.Number.Oct */
+-.highlight .sa { color: #ed9d13 } /* Literal.String.Affix */
+-.highlight .sb { color: #ed9d13 } /* Literal.String.Backtick */
+-.highlight .sc { color: #ed9d13 } /* Literal.String.Char */
+-.highlight .dl { color: #ed9d13 } /* Literal.String.Delimiter */
+-.highlight .sd { color: #ed9d13 } /* Literal.String.Doc */
+-.highlight .s2 { color: #ed9d13 } /* Literal.String.Double */
+-.highlight .se { color: #ed9d13 } /* Literal.String.Escape */
+-.highlight .sh { color: #ed9d13 } /* Literal.String.Heredoc */
+-.highlight .si { color: #ed9d13 } /* Literal.String.Interpol */
+-.highlight .sx { color: #ffa500 } /* Literal.String.Other */
+-.highlight .sr { color: #ed9d13 } /* Literal.String.Regex */
+-.highlight .s1 { color: #ed9d13 } /* Literal.String.Single */
+-.highlight .ss { color: #ed9d13 } /* Literal.String.Symbol */
+-.highlight .bp { color: #24909d } /* Name.Builtin.Pseudo */
+-.highlight .fm { color: #447fcf } /* Name.Function.Magic */
+-.highlight .vc { color: #40ffff } /* Name.Variable.Class */
+-.highlight .vg { color: #40ffff } /* Name.Variable.Global */
+-.highlight .vi { color: #40ffff } /* Name.Variable.Instance */
+-.highlight .vm { color: #40ffff } /* Name.Variable.Magic */
+-.highlight .il { color: #3677a9 } /* Literal.Number.Integer.Long */
+</span><span class="gh">diff --git a/templates/commit.md b/templates/commit.md
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 9a90a94..0000000
+</span><span class="gd">--- a/templates/commit.md
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,13 +0,0 @@</span>
+<span class="gd">----
+-title: "%s"
+-id: "%h"
+----
+-
+-%s
+-===
+-
+-%b
+-
+-~~~diff
+-&lt;%= partial("commits/%h/diff.html") %&gt;
+-~~~
+</span></code></pre></div>
+      </article>
+    </main>
+  </body>
+</html>

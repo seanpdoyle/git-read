@@ -17,7 +17,7 @@
       <nav class="history">
           <a href="../4e664b60150d88727e47ac07196b88f0ee916bed/">Ensure `tmp&#x2F;` and `source&#x2F;` directories exist
 </a>
-          <a href="../50b62fd3cb128262e291f714b9edfd7e6c6cb77b/">Introduce `Makefile`
+          <a href="./">Introduce `Makefile`
 </a>
           <a href="../897dcce0e8c0845dd8f26d9f48c4fc26802195ce/">Created `README.md`
 </a>
@@ -40,7 +40,7 @@
           <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
 </a>
           <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
-          <a href="./">Introduce `bin&#x2F;git-read`
+          <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
           <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
@@ -76,60 +76,27 @@
 
     <main class="page__content">
       <header>
-<a href="../087382863fffed6c44f094765dee4558af986dfe/">              Previous
+<a href="../4e664b60150d88727e47ac07196b88f0ee916bed/">              Previous
 </a>
-<a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">              Next
+<a href="../897dcce0e8c0845dd8f26d9f48c4fc26802195ce/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>Introduce <code>bin/git-read</code></h1>
+        <h1>Introduce <code>Makefile</code></h1>
 
-<p>Refactor out the <code>TARGETS</code> variable in our Makefile.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Makefile"><code>Makefile</code></a> defines our build tasks in a way that
+<a href="https://linux.die.net/man/1/make"><code>make(1)</code></a> can execute.</p>
 
-<p>Create the <code>bin/git-read</code> shell script, which will be available as a
-<code>git read</code> subcommand once the <code>bin/</code> directory is available on the
-system&rsquo;s <code>$PATH</code>.</p>
+<p>For starters, declare the <code>all</code> task to write this project&rsquo;s <code>git</code>
+history.</p>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index c0d3029..f2da7b8 100644
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 887ad9d..0000000
 </span><span class="gd">--- a/Makefile
-</span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -4,19 +4,14 @@</span> commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
- source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
- diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
-
--TARGETS := \
-<span class="gi">+.PHONY: all clean build
-+
-+all: \
-</span>    $(source_files) \
-    $(diff_files) \
-    source/index.html.md \
-    source/javascripts/site.js
-
--.PHONY: all clean build compile
-<span class="gd">-
--all: $(TARGETS)
--
--compile: $(TARGETS)
--   middleman build
--
-</span> build:
-    mkdir -p tmp/commits/
-    $(git) log --format="tmp/commits/%h.txt" | xargs touch
-<span class="gh">diff --git a/bin/git-read b/bin/git-read
-</span><span class="p">deleted file mode 100755
-</span><span class="gh">index d62bb0c..0000000
-</span><span class="gd">--- a/bin/git-read
 </span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,8 +0,0 @@</span>
-<span class="gd">-#! /usr/bin/env sh
--
--set -e
--
--export GIT_DIR=${1-.git/}
--
--make clean build
--make compile
+</span><span class="p">@@ -1,2 +0,0 @@</span>
+<span class="gd">-all:
+-   git log --reverse
 </span></code></pre></div>
       </article>
     </main>

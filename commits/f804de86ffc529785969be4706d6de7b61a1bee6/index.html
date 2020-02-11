@@ -40,7 +40,7 @@
           <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
 </a>
           <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
-          <a href="./">Introduce `bin&#x2F;git-read`
+          <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
           <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
@@ -67,7 +67,7 @@
           <a href="../1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/">bust Gemfile cache, use relative links</a>
           <a href="../bce9dfe492eb4ab6fc1ab6b730bbcbf475cabf11/">integrate with sitemap</a>
           <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
-          <a href="../f804de86ffc529785969be4706d6de7b61a1bee6/">properly call no limit on git log</a>
+          <a href="./">properly call no limit on git log</a>
           <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
           <a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">sync ruby versions</a>
           <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
@@ -76,61 +76,57 @@
 
     <main class="page__content">
       <header>
-<a href="../087382863fffed6c44f094765dee4558af986dfe/">              Previous
+<a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">              Previous
 </a>
-<a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">              Next
+<a href="../9435ce9ac60cba888e24326f71288032d93235e2/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>Introduce <code>bin/git-read</code></h1>
+        <h1>properly call no limit on git log</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 617bb77..e571674 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -46,7 +46,7 @@</span> repository = Git.open(
+   Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+ )
 
-<p>Refactor out the <code>TARGETS</code> variable in our Makefile.</p>
+-repository.log(nil).reverse_each do |commit|
+<span class="gi">+repository.log.reverse_each do |commit|
+</span>   proxy(
+     "/commits/#{commit.sha}/index.html",
+     "/commits/commit.html",
+<span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 9777bc1..306dc7f 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -15,7 +15,7 @@</span>
+     &lt;details id="table-of-contents" class="page__history" open&gt;
+       &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
+       &lt;nav class="history"&gt;
+<span class="gd">-        &lt;% repository.log(nil).reverse_each do |commit| %&gt;
+</span><span class="gi">+        &lt;% repository.log.reverse_each do |commit| %&gt;
+</span>           &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
+         &lt;% end %&gt;
+       &lt;/nav&gt;
+<span class="p">@@ -30,14 +30,14 @@</span>
+             &lt;% end %&gt;
+           &lt;% end %&gt;
 
-<p>Create the <code>bin/git-read</code> shell script, which will be available as a
-<code>git read</code> subcommand once the <code>bin/</code> directory is available on the
-system&rsquo;s <code>$PATH</code>.</p>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index c0d3029..f2da7b8 100644
-</span><span class="gd">--- a/Makefile
-</span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -4,19 +4,14 @@</span> commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
- source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
- diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
-
--TARGETS := \
-<span class="gi">+.PHONY: all clean build
-+
-+all: \
-</span>    $(source_files) \
-    $(diff_files) \
-    source/index.html.md \
-    source/javascripts/site.js
-
--.PHONY: all clean build compile
-<span class="gd">-
--all: $(TARGETS)
--
--compile: $(TARGETS)
--   middleman build
--
-</span> build:
-    mkdir -p tmp/commits/
-    $(git) log --format="tmp/commits/%h.txt" | xargs touch
-<span class="gh">diff --git a/bin/git-read b/bin/git-read
-</span><span class="p">deleted file mode 100755
-</span><span class="gh">index d62bb0c..0000000
-</span><span class="gd">--- a/bin/git-read
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,8 +0,0 @@</span>
-<span class="gd">-#! /usr/bin/env sh
--
--set -e
--
--export GIT_DIR=${1-.git/}
--
--make clean build
--make compile
-</span></code></pre></div>
+-          &lt;% next_commit = repository.log(nil).detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
+<span class="gi">+          &lt;% next_commit = repository.log.detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
+</span>           &lt;% if next_commit.present? %&gt;
+             &lt;% link_to commit_path(next_commit) do %&gt;
+               Next
+             &lt;% end %&gt;
+           &lt;% end %&gt;
+         &lt;% else %&gt;
+<span class="gd">-          &lt;% link_to commit_path(repository.log(nil).last) do %&gt;
+</span><span class="gi">+          &lt;% link_to commit_path(repository.log.last) do %&gt;
+</span>             Get Started
+           &lt;% end %&gt;
+         &lt;% end %&gt;
+</code></pre></div>
       </article>
     </main>
   </body>

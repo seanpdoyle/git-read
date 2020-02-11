@@ -40,7 +40,7 @@
           <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
 </a>
           <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
-          <a href="./">Introduce `bin&#x2F;git-read`
+          <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
           <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
@@ -69,68 +69,81 @@
           <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
           <a href="../f804de86ffc529785969be4706d6de7b61a1bee6/">properly call no limit on git log</a>
           <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
-          <a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">sync ruby versions</a>
+          <a href="./">sync ruby versions</a>
           <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header>
-<a href="../087382863fffed6c44f094765dee4558af986dfe/">              Previous
+<a href="../9435ce9ac60cba888e24326f71288032d93235e2/">              Previous
 </a>
-<a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">              Next
+<a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>Introduce <code>bin/git-read</code></h1>
+        <h1>sync ruby versions</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+index c7f5cf7..9454358 100644
+</span><span class="gd">--- a/.github/workflows/git-read.yml
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -12,7 +12,7 @@</span> jobs:
+         git fetch --prune --unshallow
+     - uses: actions/setup-ruby@v1
+       with:
+<span class="gd">-        ruby-version: "2.6.5"
+</span><span class="gi">+        ruby-version: "2.6"
+</span>     - uses: actions/cache@v1
+       with:
+         path: vendor/bundle
+<span class="gh">diff --git a/Gemfile b/Gemfile
+index cbdd478..e4b1e5f 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -1,6 +1,6 @@</span>
+ source 'https://rubygems.org'
 
-<p>Refactor out the <code>TARGETS</code> variable in our Makefile.</p>
+-ruby '2.6.5'
+<span class="gi">+ruby '2.6.2'
+</span>
+ gem 'middleman', '~&gt; 4.2'
+ gem 'middleman-aria_current'
+<span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index 609634f..cc1da6b 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -119,7 +119,7 @@</span> DEPENDENCIES
+   wdm (~&gt; 0.1)
 
-<p>Create the <code>bin/git-read</code> shell script, which will be available as a
-<code>git read</code> subcommand once the <code>bin/</code> directory is available on the
-system&rsquo;s <code>$PATH</code>.</p>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index c0d3029..f2da7b8 100644
+ RUBY VERSION
+<span class="gd">-   ruby 2.6.5p114
+</span><span class="gi">+   ruby 2.6.2p47
+</span>
+ BUNDLED WITH
+    2.1.4
+<span class="gh">diff --git a/Makefile b/Makefile
+index 67c129f..0d5af14 100644
 </span><span class="gd">--- a/Makefile
 </span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -4,19 +4,14 @@</span> commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
- source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
- diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
+</span><span class="p">@@ -1,14 +1,14 @@</span>
+<span class="gd">-.PHONY: all clean compile
+</span><span class="gi">+.PHONY: all clean build compile
+</span>
+ all: install compile
 
--TARGETS := \
-<span class="gi">+.PHONY: all clean build
-+
-+all: \
-</span>    $(source_files) \
-    $(diff_files) \
-    source/index.html.md \
-    source/javascripts/site.js
+ serve: install
+    bundle exec middleman serve
 
--.PHONY: all clean build compile
-<span class="gd">-
--all: $(TARGETS)
--
--compile: $(TARGETS)
--   middleman build
--
-</span> build:
-    mkdir -p tmp/commits/
-    $(git) log --format="tmp/commits/%h.txt" | xargs touch
-<span class="gh">diff --git a/bin/git-read b/bin/git-read
-</span><span class="p">deleted file mode 100755
-</span><span class="gh">index d62bb0c..0000000
-</span><span class="gd">--- a/bin/git-read
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,8 +0,0 @@</span>
-<span class="gd">-#! /usr/bin/env sh
--
--set -e
--
--export GIT_DIR=${1-.git/}
--
--make clean build
--make compile
-</span></code></pre></div>
+-install:
+<span class="gi">+install: Gemfile Gemfile.lock yarn.lock package.json
+</span>    script/setup
+
+-compile:
+<span class="gi">+compile: build
+</span>    bundle exec middleman build --verbose
+
+ clean:
+</code></pre></div>
       </article>
     </main>
   </body>

@@ -26,7 +26,7 @@
           <a href="../9d24f656874752ba10489b890cf074ffa98bd912/">template things out</a>
           <a href="../61ae964ec642707192c529c7297e559de64d9018/">generate more data</a>
           <a href="../af6f848fad8885555685392f773585c63b77d608/">make available in other git directory</a>
-          <a href="../c1052a06dba99083707e21ffd5f503224d7c031c/">current README, fix data file</a>
+          <a href="./">current README, fix data file</a>
           <a href="../3cfe0645d6143923f91ae90e5df3ad79bd7b5044/">move partial to top level template</a>
           <a href="../b81309db3fece8d686bae82bf52f23140714e6c2/">include CSS from Syntax highlighting</a>
           <a href="../02886efef8e37022a2a64aea2d1abe0d1562a003/">Install `bitters` for base styles
@@ -40,7 +40,7 @@
           <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
 </a>
           <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
-          <a href="./">Introduce `bin&#x2F;git-read`
+          <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
           <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
@@ -76,60 +76,88 @@
 
     <main class="page__content">
       <header>
-<a href="../087382863fffed6c44f094765dee4558af986dfe/">              Previous
+<a href="../af6f848fad8885555685392f773585c63b77d608/">              Previous
 </a>
-<a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">              Next
+<a href="../3cfe0645d6143923f91ae90e5df3ad79bd7b5044/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>Introduce <code>bin/git-read</code></h1>
-
-<p>Refactor out the <code>TARGETS</code> variable in our Makefile.</p>
-
-<p>Create the <code>bin/git-read</code> shell script, which will be available as a
-<code>git read</code> subcommand once the <code>bin/</code> directory is available on the
-system&rsquo;s <code>$PATH</code>.</p>
+        <h1>current README, fix data file</h1>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index c0d3029..f2da7b8 100644
+index fb29483..b5d69f0 100644
 </span><span class="gd">--- a/Makefile
 </span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -4,19 +4,14 @@</span> commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
- source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
- diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
-
--TARGETS := \
-<span class="gi">+.PHONY: all clean build
-+
-+all: \
-</span>    $(source_files) \
-    $(diff_files) \
-    source/index.html.md \
-    source/javascripts/site.js
-
--.PHONY: all clean build compile
-<span class="gd">-
--all: $(TARGETS)
--
--compile: $(TARGETS)
--   middleman build
--
-</span> build:
+</span><span class="p">@@ -15,16 +15,16 @@</span> build:
     mkdir -p tmp/commits/
     $(git) log --format="tmp/commits/%h.txt" | xargs touch
-<span class="gh">diff --git a/bin/git-read b/bin/git-read
-</span><span class="p">deleted file mode 100755
-</span><span class="gh">index d62bb0c..0000000
-</span><span class="gd">--- a/bin/git-read
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,8 +0,0 @@</span>
-<span class="gd">-#! /usr/bin/env sh
+
+-source/index.html.md:
+<span class="gd">-   $(git) show HEAD:README.md &gt; $@
+</span><span class="gi">+source/index.html.md: README.md
++   cp README.md source/index.html.md
++
++source/commits/%/_diff.html: tmp/commits/%.txt
++   $(git) show --cc --format="" $$(basename $&lt; .txt) --output=$@
+</span>
+ data/commits.yml:
+    mkdir -p $(dir $@)
+    echo "sequence:\n$$($(git) log --reverse --format="$$(cat templates/commit.yml)")" &gt; data/commits.yml
+
+-source/commits/%/_diff.html: tmp/commits/%.txt
+<span class="gd">-   $(git) show --cc --format="" $$(basename $&lt; .txt) --output=$@
 -
--set -e
--
--export GIT_DIR=${1-.git/}
--
--make clean build
--make compile
+</span> source/commits/%/index.html.md.erb: tmp/commits/%.txt
+    mkdir -p $(dir $@)
+    $(git) show --no-patch --output=$@ --format="$$(cat templates/commit.md)" $$(basename $&lt; .txt)
+<span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 44df26d..8acd5dc 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -21,26 +21,20 @@</span>
+
+     &lt;main&gt;
+       &lt;nav&gt;
+<span class="gd">-        &lt;% if current_page.data.id.present? %&gt;
+-          &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
+-            &lt;% if current_page.data.id == commit.id &amp;&amp; parent.present? %&gt;
+-              &lt;% link_to "/commits/#{parent.id}" do %&gt;
+-                Previous
+-              &lt;% end %&gt;
+</span><span class="gi">+        &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
++          &lt;% if current_page.data.id == commit.id &amp;&amp; parent.present? %&gt;
++            &lt;% link_to "/commits/#{parent.id}" do %&gt;
++              Previous
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+<span class="gi">+        &lt;% end %&gt;
+</span>
+-          &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
+<span class="gd">-            &lt;% if current_page.data.id == commit.id &amp;&amp; child.present? %&gt;
+-              &lt;% link_to "/commits/#{child.id}" do %&gt;
+-                Next
+-              &lt;% end %&gt;
+</span><span class="gi">+        &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
++          &lt;% if current_page.data.id == commit.id &amp;&amp; child.present? %&gt;
++            &lt;% link_to "/commits/#{child.id}" do %&gt;
++              Next
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+<span class="gd">-        &lt;% else %&gt;
+-          &lt;% link_to "/commits/#{data.commits.sequence.first.id}" do %&gt;
+-            Get Started
+-          &lt;% end %&gt;
+</span>         &lt;% end %&gt;
+       &lt;/nav&gt;
+
+diff --git a/templates/commit.yml b/templates/commit.yml
+<span class="gh">index 2971ef5..9a7901f 100644
+</span><span class="gd">--- a/templates/commit.yml
+</span><span class="gi">+++ b/templates/commit.yml
+</span><span class="p">@@ -1,3 +1 @@</span>
+<span class="gd">-  -
+-   id: "%h"
+-   subject: %s
+</span><span class="gi">+- { id: "%h", subject: "%s" }
 </span></code></pre></div>
       </article>
     </main>

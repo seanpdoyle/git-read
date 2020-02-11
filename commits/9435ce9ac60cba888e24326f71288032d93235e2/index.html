@@ -40,7 +40,7 @@
           <a href="../65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
 </a>
           <a href="../087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
-          <a href="./">Introduce `bin&#x2F;git-read`
+          <a href="../4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
           <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
@@ -68,7 +68,7 @@
           <a href="../bce9dfe492eb4ab6fc1ab6b730bbcbf475cabf11/">integrate with sitemap</a>
           <a href="../d7806e9b18d58051694ea0f8f5222375c59b01b2/">make it relative</a>
           <a href="../f804de86ffc529785969be4706d6de7b61a1bee6/">properly call no limit on git log</a>
-          <a href="../9435ce9ac60cba888e24326f71288032d93235e2/">bust cache</a>
+          <a href="./">bust cache</a>
           <a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">sync ruby versions</a>
           <a href="../309c5e276dfccc47801e7876f52759c0dbf3d6e4/">do not cache</a>
       </nav>
@@ -76,61 +76,39 @@
 
     <main class="page__content">
       <header>
-<a href="../087382863fffed6c44f094765dee4558af986dfe/">              Previous
+<a href="../f804de86ffc529785969be4706d6de7b61a1bee6/">              Previous
 </a>
-<a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">              Next
+<a href="../217743eaca5a12e3030b12dceecdd76fe77394ae/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>Introduce <code>bin/git-read</code></h1>
+        <h1>bust cache</h1>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
+index e4b1e5f..0ab57c0 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -1,7 +1,5 @@</span>
+ source 'https://rubygems.org'
 
-<p>Refactor out the <code>TARGETS</code> variable in our Makefile.</p>
-
-<p>Create the <code>bin/git-read</code> shell script, which will be available as a
-<code>git read</code> subcommand once the <code>bin/</code> directory is available on the
-system&rsquo;s <code>$PATH</code>.</p>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index c0d3029..f2da7b8 100644
-</span><span class="gd">--- a/Makefile
-</span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -4,19 +4,14 @@</span> commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
- source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
- diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
-
--TARGETS := \
-<span class="gi">+.PHONY: all clean build
-+
-+all: \
-</span>    $(source_files) \
-    $(diff_files) \
-    source/index.html.md \
-    source/javascripts/site.js
-
--.PHONY: all clean build compile
+-ruby '2.6.2'
 <span class="gd">-
--all: $(TARGETS)
+</span> gem 'middleman', '~&gt; 4.2'
+ gem 'middleman-aria_current'
+ gem 'middleman-autoprefixer', '~&gt; 2.7'
+<span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index cc1da6b..b776046 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -118,8 +118,5 @@</span> DEPENDENCIES
+   tzinfo-data
+   wdm (~&gt; 0.1)
+
+-RUBY VERSION
+<span class="gd">-   ruby 2.6.2p47
 -
--compile: $(TARGETS)
--   middleman build
--
-</span> build:
-    mkdir -p tmp/commits/
-    $(git) log --format="tmp/commits/%h.txt" | xargs touch
-<span class="gh">diff --git a/bin/git-read b/bin/git-read
-</span><span class="p">deleted file mode 100755
-</span><span class="gh">index d62bb0c..0000000
-</span><span class="gd">--- a/bin/git-read
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,8 +0,0 @@</span>
-<span class="gd">-#! /usr/bin/env sh
--
--set -e
--
--export GIT_DIR=${1-.git/}
--
--make clean build
--make compile
-</span></code></pre></div>
+</span> BUNDLED WITH
+    2.1.4
+</code></pre></div>
       </article>
     </main>
   </body>

@@ -27,7 +27,7 @@
           <a href="../61ae964ec642707192c529c7297e559de64d9018/">generate more data</a>
           <a href="../af6f848fad8885555685392f773585c63b77d608/">make available in other git directory</a>
           <a href="../c1052a06dba99083707e21ffd5f503224d7c031c/">current README, fix data file</a>
-          <a href="../3cfe0645d6143923f91ae90e5df3ad79bd7b5044/">move partial to top level template</a>
+          <a href="./">move partial to top level template</a>
           <a href="../b81309db3fece8d686bae82bf52f23140714e6c2/">include CSS from Syntax highlighting</a>
           <a href="../02886efef8e37022a2a64aea2d1abe0d1562a003/">Install `bitters` for base styles
 </a>
@@ -45,7 +45,7 @@
           <a href="../137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
           <a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
 </a>
-          <a href="./">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+          <a href="../fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
 </a>
           <a href="../f2dffaa26cab49fa2c500ea8a84b01321bfa9853/">fixup JS&#x2F;webpack, external pipelines</a>
           <a href="../eae4c716f1df42a0c3edae2ad0919c2cdf6e1011/">generate data, don&#x27;t generate templates</a>
@@ -76,133 +76,141 @@
 
     <main class="page__content">
       <header>
-<a href="../ed204eec065852b1c90f85ee9abe88c9b610268a/">              Previous
+<a href="../c1052a06dba99083707e21ffd5f503224d7c031c/">              Previous
 </a>
-<a href="../f2dffaa26cab49fa2c500ea8a84b01321bfa9853/">              Next
+<a href="../b81309db3fece8d686bae82bf52f23140714e6c2/">              Next
 </a>      </header>
 
       <article class="commit">
-        <h1>Add &ldquo;current&rdquo; styles to <code>&lt;a&gt;</code> elements</h1>
-
-<p>When browsing the history, the current page (as determined by the
-<a href="https://github.com/thoughtbot/middleman-aria_current"><code>middleman-aria_current</code></a> extension, will
-annotate the <code>&lt;a&gt;</code> element with the <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques"><code>[aria-current=&quot;page&quot;]</code>
-attribute</a>.</p>
-
-<p>According to the <code>middleman-aria_current</code> documentation, the
-<code>:not([aria-current=&quot;false&quot;])</code> portion of the CSS declaration is
-significant and intentional:</p>
-
-<blockquote>
-<p>Note that we <em>exclude</em> styling the link if <code>aria-current</code> has a value
-of <code>false</code>. This is because <code>false</code> is a valid and useful value for
-denoting a link that does not represent the current item within a set.</p>
-</blockquote>
+        <h1>move partial to top level template</h1>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
-index 1e5986e..37d2c16 100644
+index ec7d561..7701d14 100644
 </span><span class="gd">--- a/Gemfile
 </span><span class="gi">+++ b/Gemfile
-</span><span class="p">@@ -1,7 +1,6 @@</span>
- source 'https://rubygems.org'
-
+</span><span class="p">@@ -3,6 +3,5 @@</span> source 'https://rubygems.org'
  gem 'middleman', '~&gt; 4.2'
-<span class="gd">-gem 'middleman-aria_current'
-</span> gem 'middleman-autoprefixer', '~&gt; 2.7'
+ gem 'middleman-autoprefixer', '~&gt; 2.7'
  gem 'middleman-syntax'
-
-diff --git a/Gemfile.lock b/Gemfile.lock
-<span class="gh">index 0605a68..2cbb3dc 100644
+<span class="gd">-gem 'redcarpet'
+</span> gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
+ gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
+<span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index 2cbb3dc..351a3c0 100644
 </span><span class="gd">--- a/Gemfile.lock
 </span><span class="gi">+++ b/Gemfile.lock
-</span><span class="p">@@ -42,8 +42,6 @@</span> GEM
-       kramdown (~&gt; 1.2)
-       middleman-cli (= 4.3.5)
-       middleman-core (= 4.3.5)
-<span class="gd">-    middleman-aria_current (0.1.1)
--      middleman-core (~&gt; 4.0)
-</span>     middleman-autoprefixer (2.10.1)
-       autoprefixer-rails (~&gt; 9.1)
-       middleman-core (&gt;= 3.3.3)
-<span class="p">@@ -107,7 +105,6 @@</span> PLATFORMS
-
- DEPENDENCIES
+</span><span class="p">@@ -86,7 +86,6 @@</span> GEM
+     rb-fsevent (0.10.3)
+     rb-inotify (0.10.1)
+       ffi (~&gt; 1.0)
+<span class="gd">-    redcarpet (3.5.0)
+</span>     rouge (3.15.0)
+     sassc (2.2.1)
+       ffi (~&gt; 1.9)
+<span class="p">@@ -107,7 +106,6 @@</span> DEPENDENCIES
    middleman (~&gt; 4.2)
-<span class="gd">-  middleman-aria_current
-</span>   middleman-autoprefixer (~&gt; 2.7)
+   middleman-autoprefixer (~&gt; 2.7)
    middleman-syntax
-   redcarpet
-<span class="gh">diff --git a/config.rb b/config.rb
-index 5c5768d..7234914 100644
+<span class="gd">-  redcarpet
+</span>   tzinfo-data
+   wdm (~&gt; 0.1)
+
+diff --git a/config.rb b/config.rb
+<span class="gh">index 01b802b..580edb9 100644
 </span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -3,7 +3,6 @@</span> require "lib/commit_helpers"
- # Activate and configure extensions
- # https://middlemanapp.com/advanced/configuration/#configuring-extensions
-
--activate :aria_current
- activate :syntax
- activate :autoprefixer do |prefix|
+</span><span class="p">@@ -6,9 +6,6 @@</span> activate :autoprefixer do |prefix|
    prefix.browsers = "last 2 versions"
-<span class="gh">diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
-index 129e0e2..65876f0 100644
-</span><span class="gd">--- a/lib/commit_helpers.rb
-</span><span class="gi">+++ b/lib/commit_helpers.rb
-</span><span class="p">@@ -11,6 +11,6 @@</span> module CommitHelpers
-   end
-
-   def commit_path(commit)
-<span class="gd">-    "/commits/#{commit.id}/"
-</span><span class="gi">+    "/commits/#{commit.id}"
-</span>   end
  end
-<span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 0b28696..8708f3b 100644
+
+-set :markdown_engine, :redcarpet
+<span class="gd">-set :markdown, :fenced_code_blocks =&gt; true, :smartypants =&gt; true
+-
+</span> # Layouts
+ # https://middlemanapp.com/basics/layouts/
+
+diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+<span class="gh">index f5529c5..44df26d 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -12,11 +12,13 @@</span>
-     &lt;%= javascript_include_tag "main", "data-turbolinks-track": "reload" %&gt;
-   &lt;/head&gt;
-   &lt;body class="page"&gt;
-<span class="gd">-    &lt;details id="table-of-contents" class="page__history" open&gt;
-</span><span class="gi">+    &lt;details id="table-of-contents" class="page__history" open data-turbolinks-permanent&gt;
-</span>       &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
-       &lt;nav class="history"&gt;
-         &lt;% data.commits.sequence.each do |commit| %&gt;
-<span class="gd">-          &lt;%= current_link_to escape_html(commit.subject), commit_path(commit) %&gt;
-</span><span class="gi">+            &lt;% link_to commit_path(commit) do %&gt;
-+              &lt;%= escape_html(commit.subject) %&gt;
-+            &lt;% end %&gt;
+</span><span class="p">@@ -14,45 +14,37 @@</span>
+     &lt;aside&gt;
+       &lt;% data.commits.sequence.each do |commit| %&gt;
+         &lt;% link_to "/commits/#{commit.id}" do %&gt;
+<span class="gd">-          &lt;%= escape_html(commit.subject) %&gt;
+</span><span class="gi">+          &lt;%= commit.subject %&gt;
 </span>         &lt;% end %&gt;
-       &lt;/nav&gt;
-     &lt;/details&gt;
-<span class="gh">diff --git a/source/stylesheets/blocks/_history.scss b/source/stylesheets/blocks/_history.scss
-index 20d6185..026e69a 100644
-</span><span class="gd">--- a/source/stylesheets/blocks/_history.scss
-</span><span class="gi">+++ b/source/stylesheets/blocks/_history.scss
-</span><span class="p">@@ -3,6 +3,7 @@</span>
-   flex-direction: column;
- }
+       &lt;% end %&gt;
+     &lt;/aside&gt;
 
-+
- .history &gt; * {
-   display: flex;
-   align-items: center;
-<span class="p">@@ -21,14 +22,6 @@</span>
-     margin-right: var(--spacing--small);
-     height: var(--spacing--small);
-   }
-<span class="gd">-
--  &amp;[aria-current]:not([aria-current="false"]) {
--    text-decoration: none;
--  }
+-    &lt;nav&gt;
+<span class="gd">-      &lt;% if current_page.data.id.present? %&gt;
+-        &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
+-          &lt;% if current_page.data.id == commit.id &amp;&amp; parent.present? %&gt;
+-            &lt;% link_to "/commits/#{parent.id}" do %&gt;
+-              Previous
+</span><span class="gi">+    &lt;main&gt;
++      &lt;nav&gt;
++        &lt;% if current_page.data.id.present? %&gt;
++          &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
++            &lt;% if current_page.data.id == commit.id &amp;&amp; parent.present? %&gt;
++              &lt;% link_to "/commits/#{parent.id}" do %&gt;
++                Previous
++              &lt;% end %&gt;
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+<span class="gd">-        &lt;% end %&gt;
+</span>
+-        &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
+<span class="gd">-          &lt;% if current_page.data.id == commit.id &amp;&amp; child.present? %&gt;
+-            &lt;% link_to "/commits/#{child.id}" do %&gt;
+-              Next
+</span><span class="gi">+          &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
++            &lt;% if current_page.data.id == commit.id &amp;&amp; child.present? %&gt;
++              &lt;% link_to "/commits/#{child.id}" do %&gt;
++                Next
++              &lt;% end %&gt;
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+<span class="gi">+        &lt;% else %&gt;
++          &lt;% link_to "/commits/#{data.commits.sequence.first.id}" do %&gt;
++            Get Started
++          &lt;% end %&gt;
+</span>         &lt;% end %&gt;
+<span class="gd">-      &lt;% else %&gt;
+-        &lt;% link_to "/commits/#{data.commits.sequence.first.id}" do %&gt;
+-          Get Started
+-        &lt;% end %&gt;
+-      &lt;% end %&gt;
+-    &lt;/nav&gt;
+</span><span class="gi">+      &lt;/nav&gt;
+</span>
+-    &lt;main&gt;
+<span class="gd">-      &lt;article&gt;
+-        &lt;%= yield %&gt;
+-      &lt;/article&gt;
 -
--  &amp;[aria-current]:not([aria-current="false"])::before {
--    background-color: green;
--  }
-</span> }
+-      &lt;% if current_page.data.id.present? %&gt;
+-        &lt;% code("diff") do %&gt;
+-          &lt;%= partial("commits/#{current_page.data.id}/diff.html") %&gt;
+-        &lt;% end %&gt;
+-      &lt;% end %&gt;
+</span><span class="gi">+      &lt;%= yield %&gt;
+</span>     &lt;/main&gt;
+   &lt;/body&gt;
+ &lt;/html&gt;
+<span class="gh">diff --git a/templates/commit.md b/templates/commit.md
+index 4122de5..9a90a94 100644
+</span><span class="gd">--- a/templates/commit.md
+</span><span class="gi">+++ b/templates/commit.md
+</span><span class="p">@@ -7,3 +7,7 @@</span> id: "%h"
+ ===
 
- .history &gt; *:last-child {
-</code></pre></div>
+ %b
+<span class="gi">+
++~~~diff
++&lt;%= partial("commits/%h/diff.html") %&gt;
++~~~
+</span></code></pre></div>
       </article>
     </main>
   </body>
