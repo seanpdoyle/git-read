@@ -6,8 +6,10 @@ module CommitHelpers
   end
 
   def adjacent_commits(commit)
-    log = [nil].chain(repository.log(nil).reverse_each).chain([nil])
+    history.each_cons(3).detect { |_, middle, _| commit.sha == middle.sha }
+  end
 
-    log.each_cons(3).detect { |_, middle, _| commit.sha == middle.sha }
+  def history
+    @history ||= [nil].chain(repository.log(nil).reverse_each).chain([nil])
   end
 end
