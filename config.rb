@@ -46,7 +46,7 @@ repository = Git.open(
   Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
 )
 
-repository.log.reverse_each do |commit|
+repository.log(nil).reverse_each do |commit|
   proxy(
     "/commits/#{commit.sha}/index.html",
     "/commits/commit.html",

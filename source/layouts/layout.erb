@@ -15,7 +15,7 @@
     <details id="table-of-contents" class="page__history" open>
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
-        <% repository.log.reverse_each do |commit| %>
+        <% repository.log(nil).reverse_each do |commit| %>
           <%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %>
         <% end %>
       </nav>
@@ -30,14 +30,14 @@
             <% end %>
           <% end %>
 
-          <% next_commit = repository.log.detect { |child| child.parent&.sha == commit.sha } %>
+          <% next_commit = repository.log(nil).detect { |child| child.parent&.sha == commit.sha } %>
           <% if next_commit.present? %>
             <% link_to commit_path(next_commit) do %>
               Next
             <% end %>
           <% end %>
         <% else %>
-          <% link_to commit_path(repository.log.last) do %>
+          <% link_to commit_path(repository.log(nil).last) do %>
             Get Started
           <% end %>
         <% end %>
