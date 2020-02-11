@@ -23,6 +23,9 @@ jobs:
       run: |
         make install
         make
+        rm -rf $(ls | grep -v build | xargs)
+        mv build/* .
+        rm -rf build/
       env:
         BUNDLE_PATH: vendor/bundle
     - name: Commit files
@@ -36,4 +39,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages
-        directory: build/
+        force: true
