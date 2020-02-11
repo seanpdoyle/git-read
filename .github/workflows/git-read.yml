@@ -23,7 +23,7 @@ jobs:
       run: |
         make install
         make
-        rm -rf $(ls | grep -v build | xargs)
+        rm -rf $(ls | grep -v build | grep -v Gemfile.lock | xargs)
         mv build/* .
         rm -rf build/
       env:
