@@ -16,7 +16,11 @@
       <summary class="page__history-summary">Table of Contents</summary>
       <nav class="history">
         <% repository.log.reverse_each do |commit| %>
-          <%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %>
+          <%= current_link_to(
+            escape_html(commit.message.lines.first),
+            commit_path(commit),
+            relative: true,
+          ) %>
         <% end %>
       </nav>
     </details>
@@ -25,19 +29,19 @@
       <header>
         <% if defined?(commit) %>
           <% if commit.parent.present? %>
-            <% link_to commit_path(commit.parent) do %>
+            <% link_to commit_path(commit.parent), relative: true do %>
               Previous
             <% end %>
           <% end %>
 
           <% next_commit = repository.log.detect { |child| child.parent&.sha == commit.sha } %>
           <% if next_commit.present? %>
-            <% link_to commit_path(next_commit) do %>
+            <% link_to commit_path(next_commit), relative: true do %>
               Next
             <% end %>
           <% end %>
         <% else %>
-          <% link_to(commit_path(repository.log.last)) do %>
+          <% link_to commit_path(repository.log.last), relative: true  do %>
             Get Started
           <% end %>
         <% end %>
