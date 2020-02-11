@@ -1,0 +1,568 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>git-read</title>
+    <link href="../../stylesheets/site.css" rel="stylesheet" data-turbolinks-track="reload" />
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" data-turbolinks-track="reload" />
+    <script src="../../main.js" data-turbolinks-track="reload"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">Table of Contents</summary>
+      <nav class="history">
+        <a href="../../">git-read</a>
+
+          <a href="../5d59b45ece450d98e2c4149b9db57bc1e4a9041f/">Ensure `tmp&#x2F;` and `source&#x2F;` directories exist
+</a>
+          <a href="../42a35c8343ae3ed962c3b21f62e1ec917ce34eec/">Introduce `Makefile`
+</a>
+          <a href="../87314ace144e16df7dba371f5106ec669f41aa17/">Created `README.md`
+</a>
+          <a href="../11f450c4b9b84d5d248dfcea206e34a4d8fb78c2/">Create the `.gitignore` file
+</a>
+          <a href="../43e0f6109cf2640ca94f90adf30a49de0b4c45d9/">template things out</a>
+          <a href="../1966ee21ea7ad0dafeea2e930090fa3833c8514e/">generate more data</a>
+          <a href="../c96f22474b8ae1153843de9c5262479a4c362626/">make available in other git directory</a>
+          <a href="../dd647ec9cf6dc7c70a05b3896a464fda75113999/">current README, fix data file</a>
+          <a href="../af567ecfe89778417d201afdb21d066ab21005d3/">move partial to top level template</a>
+          <a href="../32a94acaae522a307bb2e83c3e4d197812b36609/">include CSS from Syntax highlighting</a>
+          <a href="./" aria-current="page">Install `bitters` for base styles
+</a>
+          <a href="../e9eda25546b8a590fac97a6de1ec9823a42fc888/">start to style page</a>
+          <a href="../f83e06a9192e77bfaf8c66d8c33384ee68282193/">Prepare to generate JavaScript with Make</a>
+          <a href="../11ccf674d47028ee591149134ea1b8c2eb28024a/">build JavaScript assets with Make</a>
+          <a href="../532b5734e3b10910123cf899bc097c8ece44b749/">install Turbolinks, bundle with webpack</a>
+          <a href="../93187d4cfbd11eb151de1685a770ecf72365f35b/">streamline Makefile</a>
+          <a href="../e52955299c3c900a20d8e153c9be17069dca7c5c/">start to style layout</a>
+          <a href="../f9d59463eccada46f3089f226ec6b787f877b4a9/">introduce CommitHelpers
+</a>
+          <a href="../13df0b4af96c16f7e021eb7fbb25ea79ccea471c/">more styling</a>
+          <a href="../2aaa7efa50385d8983c28272dcf4233d1c4e9957/">Introduce `bin&#x2F;git-read`
+</a>
+          <a href="../03b2b6a853548bc7321e6018ce08ee44e5a74fa0/">make history collapsible on mobile</a>
+          <a href="../63110797e2ae4d436da0839e56b60ff3f04a47bd/">Restore default `ul` and `ol` within Markdown
+</a>
+          <a href="../8f80bdd482310d51c9493e1dc75ce6b94f33d3d0/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="../5e6606a521316b80384903080d5cfdfc4c688343/">fixup JS&#x2F;webpack, external pipelines</a>
+          <a href="../34e7b71a490ed1618c670ed25ac1b9aa2039015d/">generate data, don&#x27;t generate templates</a>
+          <a href="../23ea6e6eef66f47579380e27bcdea4617fb3b67a/">Improve installation and cross-platform capabilities</a>
+          <a href="../04020914d6e90696220867eed07b4f361dab0127/">Make your life easier with `ruby-git`
+</a>
+          <a href="../ce8d2db85a79d0acea721fb9c572102e8252025f/">improve setup</a>
+          <a href="../319fb52a8833df9f36c31f3508e1a0e1997568da/">workflow</a>
+          <a href="../ac343c8b674197a76aa02cf4596ac7b335fca9b5/">parallelize, cache</a>
+          <a href="../f2ca94be72c920820b0f6830c48e8a9b2dc13a04/">combine calls to make</a>
+          <a href="../5b66b59687169a79cf5ff8e606763cdd1c4e8e52/">fetch SHAs</a>
+          <a href="../e216028c90ac13e9bd00abb412def411cead51dc/">minimize output, try and get whole tree</a>
+          <a href="../92dc79b152dbb924565d533bf653238e49c01eca/">move files around after building</a>
+          <a href="../79d2aa7bf8632500ff72b7aa0dbd1105ee850a66/">include Gemfile.lock for caching</a>
+          <a href="../a3261a4a1f7c03e6cdae192d781bac32c63b301b/">build without cache</a>
+          <a href="../d45d05f7dda519945cfe8b1b6de1ef523b28e6cf/">publish with different Action</a>
+          <a href="../f10c24c94183013b17a22c8d348682fffa658347/">import assets relatively</a>
+          <a href="../1abe4d0b0560fd6561fbc015c061e4340f90ad2d/">add caching back</a>
+          <a href="../b2c8bc4325f38c8605bd400cc0d6056b32dfbfcb/">bust Gemfile cache, use relative links</a>
+          <a href="../37c8d237d1821ac5255b0dc493dd0b07b189311b/">integrate with sitemap</a>
+          <a href="../4de4aed13cdd07ee8de9e421f31249023bc8f218/">make it relative</a>
+          <a href="../e19722f077e0c9df4c232229ae69534b4b50cb2d/">properly call no limit on git log</a>
+          <a href="../31826742a47eecc7666a32dfc81643b55e5bebb1/">bust cache</a>
+          <a href="../d19b75814f4a66e2ec2bc1a49b4226e71352376b/">sync ruby versions</a>
+          <a href="../8ceee65d0eeb9c029b56d0a502d32aa5cba58db2/">do not cache</a>
+          <a href="../88630325e3adad1b4f6922d9c66270d0953a63c8/">add back caching, use sitemap branch of current</a>
+          <a href="../a08ee4e2c6f42e34749e903815054950d9569ab5/">Add link to project root</a>
+          <a href="../406938f2d1f25bb6c83353df84718db343421b84/">configure command to take git directory and output</a>
+          <a href="../63d6e19355548a1c9ccb389cfcb3e326339ae1ad/">improve spacing</a>
+          <a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">WIP</a>
+          <a href="../f9d2e835af4ec5454876b02a604f88f372f8c43b/">Render files when initial commit</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header class="navigation">
+
+<a href="../32a94acaae522a307bb2e83c3e4d197812b36609/">              &#8592; Previous
+</a>
+<a href="../e9eda25546b8a590fac97a6de1ec9823a42fc888/">              Next &#8594;
+</a>      </header>
+
+      <article class="commit">
+        <h1>Install <code>bitters</code> for base styles</h1>
+
+<p>Remove Middleman-generated styles from <code>site.css.scss</code>.</p>
+
+<p>Install <a href="https://github.com/thoughtbot/bitters">bitters</a>-sourced stylesheets to serve as the project&rsquo;s style
+baseline.</p>
+
+<p>The contents of this commit were generated by running the following:</p>
+<div class="highlight"><pre class="highlight shell"><code>❯ gem <span class="nb">install </span>bitters
+❯ <span class="nb">cd source</span>/stylesheets <span class="o">&amp;&amp;</span> bitters <span class="nb">install</span>
+</code></pre></div>
+
+
+              <details open>
+  <summary>source/stylesheets/base/_base.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_base.scss b/source/stylesheets/base/_base.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..6bf4ebc
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_base.scss
+</span><span class="p">@@ -0,0 +1,14 @@</span>
+<span class="gi">+// Bitters 2.0.3
++// https://github.com/thoughtbot/bitters
++// Copyright 2013-2019 thoughtbot, inc.
++// MIT License
++
++@import "variables";
++
++@import "buttons";
++@import "forms";
++@import "layout";
++@import "lists";
++@import "media";
++@import "tables";
++@import "typography";
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_buttons.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_buttons.scss b/source/stylesheets/base/_buttons.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..992044c
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_buttons.scss
+</span><span class="p">@@ -0,0 +1,38 @@</span>
+<span class="gi">+button,
++[type="button"],
++[type="reset"],
++[type="submit"] {
++  appearance: none;
++  background-color: $action-color;
++  border: 0;
++  border-radius: var(--border-radius);
++  color: $action-color--contrast;
++  cursor: pointer;
++  display: inline-block;
++  font-family: var(--font-family-base);
++  font-size: 1rem;
++  -webkit-font-smoothing: antialiased;
++  font-weight: 600;
++  line-height: 1;
++  padding: var(--spacing--small) var(--spacing);
++  text-align: center;
++  text-decoration: none;
++  transition: background-color var(--duration) var(--timing);
++  user-select: none;
++  vertical-align: middle;
++  white-space: nowrap;
++
++  &amp;:hover {
++    background-color: $action-color--alt;
++  }
++
++  &amp;:focus {
++    outline: var(--focus-outline);
++    outline-offset: var(--focus-outline-offset);
++  }
++
++  &amp;:disabled {
++    cursor: not-allowed;
++    opacity: 0.5;
++  }
++}
+</span></code></pre></div></details>
+
+              <details >
+  <summary>source/stylesheets/base/_forms.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_forms.scss b/source/stylesheets/base/_forms.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..a4ded3f
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_forms.scss
+</span><span class="p">@@ -0,0 +1,110 @@</span>
+<span class="gi">+:root {
++  --form-box-shadow: inset 0 --border-width 0.1875rem rgba(#000, 0.06);
++  --form-box-shadow-focus: var(--form-box-shadow), 0 0 0.3125rem #{$action-color};
++}
++
++fieldset {
++  background-color: transparent;
++  border: 0;
++  margin: 0;
++  padding: 0;
++}
++
++legend {
++  font-weight: 600;
++  margin-bottom: var(--spacing--small);
++  padding: 0;
++}
++
++label {
++  display: block;
++  font-weight: 600;
++  margin-bottom: var(--spacing--small);
++}
++
++input,
++select,
++textarea {
++  display: block;
++  font-family: var(--font-family);
++  font-size: 1rem;
++}
++
++[type="color"],
++[type="date"],
++[type="datetime"],
++[type="datetime-local"],
++[type="email"],
++[type="month"],
++[type="number"],
++[type="password"],
++[type="search"],
++[type="tel"],
++[type="text"],
++[type="time"],
++[type="url"],
++[type="week"],
++input:not([type]),
++textarea {
++  appearance: none;
++  background-color: transparent;
++  border: var(--border);
++  border-radius: var(--border-radius);
++  box-shadow: var(--form-box-shadow);
++  box-sizing: border-box;
++  margin-bottom: var(--spacing--small);
++  padding: calc(var(--spacing) / 3);
++  transition: border-color var(--duration) var(--timing);
++  width: 100%;
++
++  &amp;:focus {
++    box-shadow: var(--form-box-shadow-focus);
++  }
++
++  &amp;:disabled {
++    cursor: not-allowed;
++
++    &amp;:hover {
++      border: var(--border);
++    }
++  }
++
++  &amp;::placeholder {
++    color: $font-color--base;
++    opacity: 0.25;
++  }
++}
++
++[type="search"] {
++  -webkit-appearance: textfield;
++}
++
++textarea {
++  resize: vertical;
++}
++
++[type="checkbox"],
++[type="radio"] {
++  display: inline;
++  margin-right: var(--spacing--small);
++}
++
++[type="file"] {
++  margin-bottom: var(--spacing--small);
++  width: 100%;
++}
++
++select {
++  margin-bottom: var(--spacing--small);
++  width: 100%;
++}
++
++[type="checkbox"],
++[type="radio"],
++[type="file"],
++select {
++  &amp;:focus {
++    outline: var(--focus-outline);
++    outline-offset: var(--focus-outline-offset);
++  }
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_layout.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_layout.scss b/source/stylesheets/base/_layout.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..4f4001e
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_layout.scss
+</span><span class="p">@@ -0,0 +1,19 @@</span>
+<span class="gi">+html {
++  background-color: $viewport-background-color;
++  box-sizing: border-box;
++}
++
++*,
++*::before,
++*::after {
++  box-sizing: inherit;
++}
++
++html,
++body {
++  height: 100%;
++}
++
++body {
++  margin: 0;
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_lists.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_lists.scss b/source/stylesheets/base/_lists.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..06a7c0a
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_lists.scss
+</span><span class="p">@@ -0,0 +1,19 @@</span>
+<span class="gi">+ul,
++ol {
++  list-style-type: none;
++  margin: 0;
++  padding: 0;
++}
++
++dl {
++  margin: 0;
++}
++
++dt {
++  font-weight: 600;
++  margin: 0;
++}
++
++dd {
++  margin: 0;
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_media.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_media.scss b/source/stylesheets/base/_media.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..dfa22ea
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_media.scss
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+figure {
++  margin: 0;
++}
++
++img,
++picture {
++  margin: 0;
++  max-width: 100%;
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_tables.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_tables.scss b/source/stylesheets/base/_tables.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..5da75d8
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_tables.scss
+</span><span class="p">@@ -0,0 +1,29 @@</span>
+<span class="gi">+table {
++  border-collapse: collapse;
++  margin: var(--spacing) 0;
++  table-layout: fixed;
++  text-align: left;
++  width: 100%;
++}
++
++thead {
++  line-height: var(--line-height--heading);
++  vertical-align: bottom;
++}
++
++tbody {
++  vertical-align: top;
++}
++
++tr {
++  border-bottom: var(--border);
++}
++
++th {
++  font-weight: 600;
++}
++
++th,
++td {
++  padding: var(--spacing--small) var(--spacing--small) var(--spacing--small) 0;
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_typography.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_typography.scss b/source/stylesheets/base/_typography.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..bce8ea1
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_typography.scss
+</span><span class="p">@@ -0,0 +1,45 @@</span>
+<span class="gi">+html {
++  color: $font-color--base;
++  font-family: var(--font-family);
++  font-size: 100%;
++  line-height: var(--line-height);
++}
++
++h1,
++h2,
++h3,
++h4,
++h5,
++h6 {
++  font-family: var(--font-family--heading);
++  font-size: 1.25rem;
++  line-height: var(--line-height--heading);
++  margin: 0 0 var(--spacing--small);
++}
++
++p {
++  margin: 0 0 var(--spacing--small);
++}
++
++a {
++  color: $action-color;
++  text-decoration-skip-ink: auto;
++  transition: color var(--duration) var(--timing);
++
++  &amp;:hover {
++    color: $action-color--alt;
++  }
++
++  &amp;:focus {
++    outline: var(--focus-outline);
++    outline-offset: var(--focus-outline-offset);
++  }
++}
++
++hr {
++  border-bottom: var(--border);
++  border-left: 0;
++  border-right: 0;
++  border-top: 0;
++  margin: var(--spacing) 0;
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/base/_variables.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/base/_variables.scss b/source/stylesheets/base/_variables.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..799624e
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/base/_variables.scss
+</span><span class="p">@@ -0,0 +1,52 @@</span>
+<span class="gi">+// Colors
++$blue: #1565c0;
++$blue-light: #3b83d5;
++$gray: #333;
++$white: #fff;
++
++// Font Colors
++$font-color--base: $gray;
++$action-color: $blue;
++$action-color--alt: $blue-light;
++$action-color--contrast: $white;
++
++// Background Colors
++$viewport-background-color: $white;
++
++:root {
++  // Typography
++  --font-family: system-ui, sans-serif;
++  --font-family--heading: var(--font-family);
++
++  --font-weight--thin: 100;
++  --font-weight--extra-light: 200;
++  --font-weight--light: 300;
++  --font-weight--normal: 400;
++  --font-weight--medium: 500;
++  --font-weight--semi-bold: 600;
++  --font-weight--bold: 700;
++  --font-weight--extra-bold: 800;
++  --font-weight--black: 900;
++
++  // Line heights
++  --line-height: 1.5;
++  --line-height--heading: 1.2;
++
++  // Other Sizes
++  --border-radius: 0.1875rem;
++  --spacing: 1.5rem;
++  --spacing--small: 0.75rem;
++
++  // Borders
++  --border-width: 0.0625rem;
++  --border: var(--border-width) solid currentColor;
++
++  // Focus
++  --focus-outline-width: 0.1875rem;
++  --focus-outline-offset: 0.125rem;
++  --focus-outline: var(--focus-outline-width) solid #{$action-color};
++
++  // Animations
++  --duration: 150ms;
++  --timing: ease;
++}
+</span></code></pre></div></details>
+
+              <details open>
+  <summary>source/stylesheets/site.css.scss</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
+index c4635d7..9961f50 100644
+</span><span class="gd">--- a/source/stylesheets/site.css.scss
+</span><span class="gi">+++ b/source/stylesheets/site.css.scss
+</span><span class="p">@@ -1,23 +1 @@</span>
+<span class="gd">-body {
+-  background-color: #fbc547;
+-  color: #333;
+-  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
+-    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
+-    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
+-    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+-  padding: 18vh 1rem;
+-}
+-
+-a {
+-  color: rgba(#000, 0.7);
+-
+-  &amp;:focus,
+-  &amp;:hover {
+-    color: rgba(#000, 0.6);
+-  }
+-}
+-
+-.middleman-logo {
+-  margin-bottom: 1rem;
+-  width: 10rem;
+-}
+</span><span class="gi">+@import "base/base";
+</span></code></pre></div></details>
+
+      </article>
+    </main>
+  </body>
+</html>
