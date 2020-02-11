@@ -1,7 +1,0 @@
-#! /usr/bin/env sh
-
-set -e
-
-export GIT_DIR=${1-./}
-
-make

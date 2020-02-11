@@ -1,0 +1,406 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>git-read</title>
+    <link href="/stylesheets/site.css" rel="stylesheet" data-turbolinks-track="reload" />
+    <link href="/stylesheets/syntax.css" rel="stylesheet" data-turbolinks-track="reload" />
+    <script src="/main.js" data-turbolinks-track="reload"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">Table of Contents</summary>
+      <nav class="history">
+          <a href="/commits/af6f848fad8885555685392f773585c63b77d608/">make available in other git directory</a>
+          <a href="/commits/c1052a06dba99083707e21ffd5f503224d7c031c/">current README, fix data file</a>
+          <a href="/commits/3cfe0645d6143923f91ae90e5df3ad79bd7b5044/">move partial to top level template</a>
+          <a href="/commits/b81309db3fece8d686bae82bf52f23140714e6c2/">include CSS from Syntax highlighting</a>
+          <a href="/commits/02886efef8e37022a2a64aea2d1abe0d1562a003/">Install `bitters` for base styles
+</a>
+          <a href="/commits/aae72aa96e7aa0c4ea925af106bfbba4448cce80/">start to style page</a>
+          <a href="/commits/7e3bea6b871f1d518a5e67946979b961f2908581/">Prepare to generate JavaScript with Make</a>
+          <a href="/commits/7ab91b73a386bb411d8ea3cf63a07e5d71419f0a/">build JavaScript assets with Make</a>
+          <a href="/commits/7fa5a9b178e979bc8a3329b7b7af0f0fee3f7809/">install Turbolinks, bundle with webpack</a>
+          <a href="/commits/1e1d4d0ebea82e4e055314feae8021bf86dfd90a/">streamline Makefile</a>
+          <a href="/commits/69b031bbfefced5d6682d60a9bcb56de33d208ec/">start to style layout</a>
+          <a href="/commits/65c22c45a952256bf9a8b8f949db9e2cc73555e4/">introduce CommitHelpers
+</a>
+          <a href="/commits/087382863fffed6c44f094765dee4558af986dfe/">more styling</a>
+          <a href="/commits/4be3836bac2f92ba085d58d9580044bc1dbaa7c5/">Introduce `bin&#x2F;git-read`
+</a>
+          <a href="/commits/137dee07d04d0e0124b72b45b193fc30cd67a797/">make history collapsible on mobile</a>
+          <a href="/commits/ed204eec065852b1c90f85ee9abe88c9b610268a/">Restore default `ul` and `ol` within Markdown
+</a>
+          <a href="/commits/fa4ec81caafda71bcf4868f714653d48a5ff8d0d/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="/commits/f2dffaa26cab49fa2c500ea8a84b01321bfa9853/">fixup JS&#x2F;webpack, external pipelines</a>
+          <a href="/commits/eae4c716f1df42a0c3edae2ad0919c2cdf6e1011/">generate data, don&#x27;t generate templates</a>
+          <a href="/commits/e1b59e44a5d4f87dedfe075ae21270fc9dd03b76/">Improve installation and cross-platform capabilities</a>
+          <a href="/commits/fc198bb88f843c4713f6482eeecbfe70410a8954/" aria-current="page">Make your life easier with `ruby-git`
+</a>
+          <a href="/commits/d1fe4acd9eba54ce09ab898340e09dbcd7d904e3/">improve setup</a>
+          <a href="/commits/c395b613fd1fcb9b6d4a64ebb0eb51a966219b3f/">workflow</a>
+          <a href="/commits/f1c91dacfa5801de3a2ac4de37ee5ce7a77c902d/">parallelize, cache</a>
+          <a href="/commits/79975deba403e84d2719d32e5a7e30249ee6d316/">combine calls to make</a>
+          <a href="/commits/eaabc9feb4c5e5f4a3fa4557a970b5c56e467eb7/">fetch SHAs</a>
+          <a href="/commits/77da41d7a756ccf2457da7c1ac20bfd692f3162f/">minimize output, try and get whole tree</a>
+          <a href="/commits/d57f9780d10f539629fe46ed60b5548b5ff2c075/">move files around after building</a>
+          <a href="/commits/dc0db42616f5c3c58f641103469efc1dbf888f89/">include Gemfile.lock for caching</a>
+          <a href="/commits/8cea2bfc9a535eb13c4b212fabf2a72eecdd2804/">build without cache</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+<a href="/commits/e1b59e44a5d4f87dedfe075ae21270fc9dd03b76/">              Previous
+</a>
+<a href="/commits/d1fe4acd9eba54ce09ab898340e09dbcd7d904e3/">              Next
+</a>      </header>
+
+      <article class="commit">
+        <h1>Make your life easier with <code>ruby-git</code></h1>
+
+<p>The <a href="https://github.com/ruby-git/ruby-git/tree/v1.6.0#examples"><code>ruby-git</code></a> gem provides Ruby-level access to the Git
+history.</p>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.gitignore b/.gitignore
+index 0b15eb7..515d373 100644
+</span><span class="gd">--- a/.gitignore
+</span><span class="gi">+++ b/.gitignore
+</span><span class="p">@@ -1,3 +1,7 @@</span>
+<span class="gi">+tmp/
++source/index.html.*
++/data/
++
+</span> .bundle
+ .cache
+ .DS_Store
+<span class="gh">diff --git a/Gemfile b/Gemfile
+index 0ab57c0..1e5986e 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -5,7 +5,6 @@</span> gem 'middleman-aria_current'
+ gem 'middleman-autoprefixer', '~&gt; 2.7'
+ gem 'middleman-syntax'
+
+-gem 'git'
+ gem 'redcarpet'
+ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
+ gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
+<span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index af87bc8..0605a68 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -23,8 +23,6 @@</span> GEM
+     fast_blank (1.0.0)
+     fastimage (2.1.7)
+     ffi (1.12.2)
+<span class="gd">-    git (1.6.0)
+-      rchardet (~&gt; 1.8)
+</span>     haml (5.1.2)
+       temple (&gt;= 0.8.0)
+       tilt
+<span class="p">@@ -90,7 +88,6 @@</span> GEM
+     rb-fsevent (0.10.3)
+     rb-inotify (0.10.1)
+       ffi (~&gt; 1.0)
+<span class="gd">-    rchardet (1.8.0)
+</span>     redcarpet (3.5.0)
+     rouge (3.15.0)
+     sassc (2.2.1)
+<span class="p">@@ -109,7 +106,6 @@</span> PLATFORMS
+   ruby
+
+ DEPENDENCIES
+<span class="gd">-  git
+</span>   middleman (~&gt; 4.2)
+   middleman-aria_current
+   middleman-autoprefixer (~&gt; 2.7)
+<span class="gh">diff --git a/Makefile b/Makefile
+index f51f436..934c80d 100644
+</span><span class="gd">--- a/Makefile
+</span><span class="gi">+++ b/Makefile
+</span><span class="p">@@ -1,15 +1,37 @@</span>
+<span class="gd">-.PHONY: all clean build compile
+</span><span class="gi">+git := git --git-dir=$${GIT_DIR-.git/}
++
++commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
++data_files := $(patsubst tmp/commits/%.txt,data/commits/%.yml,$(commits))
+</span>
+-all: install compile
+<span class="gi">+TARGETS := \
++   $(data_files) \
++   data/history.yml \
++   source/index.html.md
++
++.PHONY: all clean build compile
+</span>
+-serve: install
+<span class="gd">-   bundle exec middleman serve
+</span><span class="gi">+all: $(TARGETS)
+</span>
+ install: Gemfile Gemfile.lock yarn.lock package.json
+    script/setup
+
+-compile: build/
+<span class="gi">+compile: $(TARGETS)
+</span>    bundle exec middleman build
+
++build:
+<span class="gi">+   mkdir -p tmp/commits/
++   $(git) log --format="tmp/commits/%h.txt" | xargs touch
++
+</span> clean:
+<span class="gd">-   rm -rf build/
+</span><span class="gi">+   rm -rf tmp source/index.* build data
++
++source/index.html.md:
++   $(git) show HEAD:README.md &gt; $@
++
++data/commits/%.yml: tmp/commits/%.txt
++   mkdir -p $(dir $@)
++   script/template-data $$(basename $&lt; .txt) &gt; $@
++
++data/history.yml:
++   mkdir -p $(dir $@)
++   script/template-history "$$($(git) log --reverse --root --format='- %h')" &gt; $@
+</span><span class="gh">diff --git a/bin/git-read b/bin/git-read
+index 5e61c4d..d62bb0c 100755
+</span><span class="gd">--- a/bin/git-read
+</span><span class="gi">+++ b/bin/git-read
+</span><span class="p">@@ -2,6 +2,7 @@</span>
+
+ set -e
+
+-export GIT_DIR=${1-./}
+<span class="gi">+export GIT_DIR=${1-.git/}
+</span>
+-make
+<span class="gi">+make clean build
++make compile
+</span><span class="gh">diff --git a/config.rb b/config.rb
+index ade661b..aabe4e4 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -1,4 +1,3 @@</span>
+<span class="gd">-require "git"
+</span> require "lib/commit_helpers"
+
+ # Activate and configure extensions
+<span class="p">@@ -39,27 +38,16 @@</span> page '/*.txt', layout: false
+ #     which_fake_page: 'Rendering a fake page with a local variable'
+ #   },
+ # )
+<span class="gi">+ignore "/commits/commit.html"
+</span>
+-repository = Git.open(
+<span class="gd">-  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+-)
+-
+-repository.log.reverse_each do |commit|
+</span><span class="gi">+data.history.commits.each do |id|
+</span>   proxy(
+<span class="gd">-    "/commits/#{commit.sha}/index.html",
+</span><span class="gi">+    "/commits/#{id}/index.html",
+</span>     "/commits/commit.html",
+<span class="gd">-    locals: { repository: repository, commit: commit },
+-    ignore: true,
+</span><span class="gi">+    locals: { id: id },
+</span>   )
+ end
+
+-proxy(
+<span class="gd">-  "index.html",
+-  "README.html",
+-  locals: { repository: repository, readme: repository.object("HEAD:README.md") },
+-  ignore: true,
+-)
+-
+</span> # Helpers
+ # Methods defined in the helpers block are available in templates
+ # https://middlemanapp.com/basics/helper-methods/
+<span class="gh">diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
+index e50c952..62e52c2 100644
+</span><span class="gd">--- a/lib/commit_helpers.rb
+</span><span class="gi">+++ b/lib/commit_helpers.rb
+</span><span class="p">@@ -1,5 +1,26 @@</span>
+ module CommitHelpers
+<span class="gi">+  def commit?
++    current_commit.present?
++  end
++
++  def current?(commit)
++    [
++      current_commit.id,
++      commit,
++    ].map(&amp;:to_s).uniq.size == 1
++  end
++
++  def first_commit_sha
++    data.history.commits.first
++  end
++
++  def current_commit
++    sha = current_page.data.id || yield_content(:id)
++
++    data.commits[sha]
++  end
++
+</span>   def commit_path(commit)
+<span class="gd">-    "/commits/#{commit.sha}/"
+</span><span class="gi">+    "/commits/#{commit}/"
+</span>   end
+ end
+<span class="gh">diff --git a/script/template-data b/script/template-data
+</span><span class="p">new file mode 100755
+</span><span class="gh">index 0000000..dd405f4
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/script/template-data
+</span><span class="p">@@ -0,0 +1,13 @@</span>
+<span class="gi">+#!/usr/bin/env sh
++
++set -e
++
++SHA=$1
++
++export LANG=C
++export GIT_SHA=${SHA}
++export GIT_SUBJECT="$(git show --no-patch --format='%s' $SHA | sed -e 's/\"/\\"/g')"
++export GIT_MESSAGE="$(git show --no-patch --format='%b' $SHA | sed -e 's/^/  /g')"
++export GIT_DIFF="$(git show --cc --format='' $SHA | sed -e 's/^/  /g')"
++
++envsubst &lt; templates/data/commit.yml.tmpl
+</span><span class="gh">diff --git a/script/template-history b/script/template-history
+</span><span class="p">new file mode 100755
+</span><span class="gh">index 0000000..132ece7
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/script/template-history
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+#!/usr/bin/env sh
++
++set -e
++
++HISTORY=$1
++
++export GIT_HISTORY=$(echo "${HISTORY}" | sed -e 's/^/  /g')
++
++envsubst &lt; templates/data/history.yml.tmpl
+</span><span class="gh">diff --git a/source/README.html.md.erb b/source/README.html.md.erb
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 537c2c2..0000000
+</span><span class="gd">--- a/source/README.html.md.erb
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1 +0,0 @@</span>
+<span class="gd">-&lt;%= readme.contents %&gt;
+</span><span class="gh">diff --git a/source/commits/commit.html.md.erb b/source/commits/commit.html.md.erb
+index 28763fa..c470810 100644
+</span><span class="gd">--- a/source/commits/commit.html.md.erb
+</span><span class="gi">+++ b/source/commits/commit.html.md.erb
+</span><span class="p">@@ -1,11 +1,8 @@</span>
+<span class="gd">-&lt;% subject, *messages = commit.message.lines %&gt;
+</span><span class="gi">+&lt;% content_for(:id, id) %&gt;
+</span>
+-&lt;%= subject.strip %&gt;
+<span class="gd">-===
+-
+-&lt;%= messages.join %&gt;
+</span><span class="gi">+&lt;% content_for(:title, data.commits[id].subject) %&gt;
+</span>
+-```diff
+<span class="gd">-&lt;%= commit.diff_parent.patch -%&gt;
+</span><span class="gi">+&lt;%= data.commits[id].subject %&gt;
++===
+</span>
+-```
+<span class="gi">+&lt;%= data.commits[id].message %&gt;
+</span><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index fd7b1ef..5f09c47 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -15,29 +15,32 @@</span>
+     &lt;details id="table-of-contents" class="page__history" open&gt;
+       &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
+       &lt;nav class="history"&gt;
+<span class="gd">-        &lt;% repository.log.reverse_each do |commit| %&gt;
+-          &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
+</span><span class="gi">+        &lt;% data.history.commits.each do |commit| %&gt;
++          &lt;%= current_link_to escape_html(data.commits[commit].subject), commit_path(commit) %&gt;
+</span>         &lt;% end %&gt;
+       &lt;/nav&gt;
+     &lt;/details&gt;
+
+     &lt;main class="page__content"&gt;
+       &lt;header&gt;
+<span class="gd">-        &lt;% if defined?(commit) %&gt;
+-          &lt;% if commit.parent.present? %&gt;
+-            &lt;% link_to commit_path(commit.parent) do %&gt;
+-              Previous
+</span><span class="gi">+        &lt;% if commit? %&gt;
++          &lt;% ([nil] + data.history.commits).each_cons(2) do |parent, commit| %&gt;
++            &lt;% if current?(commit) &amp;&amp; parent.present? %&gt;
++              &lt;% link_to commit_path(parent) do %&gt;
++                Previous
++              &lt;% end %&gt;
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+
+-          &lt;% next_commit = repository.log.detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
+<span class="gd">-          &lt;% if next_commit.present? %&gt;
+-            &lt;% link_to commit_path(next_commit) do %&gt;
+-              Next
+</span><span class="gi">+          &lt;% (data.history.commits + [nil]).each_cons(2) do |commit, child| %&gt;
++            &lt;% if current?(commit) &amp;&amp; child.present? %&gt;
++              &lt;% link_to commit_path(child) do %&gt;
++                Next
++              &lt;% end %&gt;
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+         &lt;% else %&gt;
+<span class="gd">-          &lt;% link_to(commit_path(repository.log.last)) do %&gt;
+</span><span class="gi">+          &lt;% link_to(commit_path(first_commit_sha)) do %&gt;
+</span>             Get Started
+           &lt;% end %&gt;
+         &lt;% end %&gt;
+<span class="p">@@ -46,6 +49,13 @@</span>
+       &lt;article class="commit"&gt;
+         &lt;%= yield %&gt;
+       &lt;/article&gt;
+<span class="gi">+
++      &lt;% if commit? %&gt;
++&lt;!-- Lack of Leading Whitespace is Significant --&gt;
++&lt;% code("diff") do %&gt;
++&lt;%= current_commit.diff %&gt;
++&lt;% end %&gt;
++      &lt;% end %&gt;
+</span>     &lt;/main&gt;
+   &lt;/body&gt;
+ &lt;/html&gt;
+<span class="gh">diff --git a/templates/data/commit.yml.tmpl b/templates/data/commit.yml.tmpl
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..239d160
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/templates/data/commit.yml.tmpl
+</span><span class="p">@@ -0,0 +1,7 @@</span>
+<span class="gi">+---
++id: "${GIT_SHA}"
++subject: "${GIT_SUBJECT}"
++message: |
++${GIT_MESSAGE}
++diff: |
++${GIT_DIFF}
+</span><span class="gh">diff --git a/templates/data/history.yml.tmpl b/templates/data/history.yml.tmpl
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..f598bf4
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/templates/data/history.yml.tmpl
+</span><span class="p">@@ -0,0 +1,2 @@</span>
+<span class="gi">+commits:
++${GIT_HISTORY}
+</span></code></pre></div>
+      </article>
+    </main>
+  </body>
+</html>
