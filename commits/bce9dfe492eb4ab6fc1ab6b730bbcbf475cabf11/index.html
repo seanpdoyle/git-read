@@ -55,118 +55,89 @@
 
     <main class="page__content">
       <header>
-<a href="commits/69b031bbfefced5d6682d60a9bcb56de33d208ec/index.html">              Previous
+<a href="commits/1945c1dd2204f3ec05b4a6f8b36187f0d1665f62/index.html">              Previous
 </a>
-<a href="commits/087382863fffed6c44f094765dee4558af986dfe/index.html">              Next
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>introduce CommitHelpers</h1>
-
-<p>Declare <a href="https://middlemanapp.com/basics/helper-methods/#custom-defined-helpers">Custom Helpers</a></p>
+        <h1>integrate with sitemap</h1>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-index 7234914..54cd2cd 100644
+index e571674..ade661b 100644
 </span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -1,5 +1,3 @@</span>
-<span class="gd">-require "lib/commit_helpers"
--
-</span> # Activate and configure extensions
- # https://middlemanapp.com/advanced/configuration/#configuring-extensions
-
-@@ -42,7 +40,6 @@ page '/*.txt', layout: false
- #     'Helping'
- #   end
- # end
-<span class="gd">-helpers CommitHelpers
+</span><span class="p">@@ -14,9 +14,7 @@</span> activate :external_pipeline,
+   command: build? ? "./node_modules/.bin/webpack --bail" : "./node_modules/.bin/webpack --watch -d",
+   source: "dist",
+   latency: 1
+<span class="gd">-activate :relative_assets
 </span>
- # Build-specific configuration
- # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
-<span class="gh">diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
-</span><span class="p">deleted file mode 100644
-</span><span class="gh">index 65876f0..0000000
+-set :relative_links, true
+ set :markdown_engine, :redcarpet
+ set :markdown, fenced_code_blocks: true, smartypants: true
+
+diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
+<span class="gh">index 6aee426..e50c952 100644
 </span><span class="gd">--- a/lib/commit_helpers.rb
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,16 +0,0 @@</span>
-<span class="gd">-module CommitHelpers
--  def commit?
--    current_page.data.id.present?
--  end
--
--  def current?(commit)
--    [
--      current_page.data.id,
--      commit.id
--    ].map(&amp;:to_s).uniq.size == 1
--  end
--
--  def commit_path(commit)
--    "/commits/#{commit.id}"
--  end
--end
-</span><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 771d411..fdaede8 100644
+</span><span class="gi">+++ b/lib/commit_helpers.rb
+</span><span class="p">@@ -1,5 +1,5 @@</span>
+ module CommitHelpers
+   def commit_path(commit)
+<span class="gd">-    "commits/#{commit.sha}/index.html"
+</span><span class="gi">+    "/commits/#{commit.sha}/"
+</span>   end
+ end
+<span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 306dc7f..e9ca070 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -15,31 +15,31 @@</span>
-     &lt;main class="page"&gt;
-       &lt;aside class="history page__history"&gt;
-         &lt;% data.commits.sequence.each do |commit| %&gt;
-<span class="gd">-          &lt;% link_to commit_path(commit) do %&gt;
-</span><span class="gi">+          &lt;% link_to "/commits/#{commit.id}" do %&gt;
-</span>             &lt;%= escape_html(commit.subject) %&gt;
-           &lt;% end %&gt;
-         &lt;% end %&gt;
-       &lt;/aside&gt;
-
-       &lt;nav class="navigation page__navigation"&gt;
-<span class="gd">-        &lt;% if commit? %&gt;
-</span><span class="gi">+        &lt;% if current_page.data.id.present? %&gt;
-</span>           &lt;% ([nil] + data.commits.sequence).each_cons(2) do |parent, commit| %&gt;
-<span class="gd">-            &lt;% if current?(commit) &amp;&amp; parent.present? %&gt;
--              &lt;% link_to commit_path(parent) do %&gt;
-</span><span class="gi">+            &lt;% if current_page.data.id == commit.id &amp;&amp; parent.present? %&gt;
-+              &lt;% link_to "/commits/#{parent.id}" do %&gt;
-</span>                 Previous
-               &lt;% end %&gt;
+</span><span class="p">@@ -7,16 +7,20 @@</span>
+           content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+     &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
+     &lt;title&gt;&lt;%= current_page.data.title || yield_content(:title) || "git-read" %&gt;&lt;/title&gt;
+<span class="gd">-    &lt;%= stylesheet_link_tag "site", "data-turbolinks-track": "reload" %&gt;
+-    &lt;%= stylesheet_link_tag "syntax", "data-turbolinks-track": "reload" %&gt;
+-    &lt;%= javascript_include_tag "main", "data-turbolinks-track": "reload" %&gt;
+</span><span class="gi">+    &lt;%= stylesheet_link_tag "site", relative: true, "data-turbolinks-track": "reload" %&gt;
++    &lt;%= stylesheet_link_tag "syntax", relative: true, "data-turbolinks-track": "reload" %&gt;
++    &lt;%= javascript_include_tag "main", relative: true, "data-turbolinks-track": "reload" %&gt;
+</span>   &lt;/head&gt;
+   &lt;body class="page"&gt;
+     &lt;details id="table-of-contents" class="page__history" open&gt;
+       &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
+       &lt;nav class="history"&gt;
+         &lt;% repository.log.reverse_each do |commit| %&gt;
+<span class="gd">-          &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
+</span><span class="gi">+          &lt;%= current_link_to(
++            escape_html(commit.message.lines.first),
++            commit_path(commit),
++            relative: true,
++          ) %&gt;
+</span>         &lt;% end %&gt;
+       &lt;/nav&gt;
+     &lt;/details&gt;
+<span class="p">@@ -25,19 +29,19 @@</span>
+       &lt;header&gt;
+         &lt;% if defined?(commit) %&gt;
+           &lt;% if commit.parent.present? %&gt;
+<span class="gd">-            &lt;% link_to commit_path(commit.parent) do %&gt;
+</span><span class="gi">+            &lt;% link_to commit_path(commit.parent), relative: true do %&gt;
+</span>               Previous
              &lt;% end %&gt;
            &lt;% end %&gt;
 
-           &lt;% (data.commits.sequence + [nil]).each_cons(2) do |commit, child| %&gt;
-<span class="gd">-            &lt;% if current?(commit) &amp;&amp; child.present? %&gt;
--              &lt;% link_to commit_path(child) do %&gt;
-</span><span class="gi">+            &lt;% if current_page.data.id == commit.id &amp;&amp; child.present? %&gt;
-+              &lt;% link_to "/commits/#{child.id}" do %&gt;
-</span>                 Next
-               &lt;% end %&gt;
+           &lt;% next_commit = repository.log.detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
+           &lt;% if next_commit.present? %&gt;
+<span class="gd">-            &lt;% link_to commit_path(next_commit) do %&gt;
+</span><span class="gi">+            &lt;% link_to commit_path(next_commit), relative: true do %&gt;
+</span>               Next
              &lt;% end %&gt;
            &lt;% end %&gt;
          &lt;% else %&gt;
-<span class="gd">-          &lt;% link_to(commit_path(data.commits.sequence.first)) do %&gt;
-</span><span class="gi">+          &lt;% link_to "/commits/#{data.commits.sequence.first.id}" do %&gt;
+<span class="gd">-          &lt;% link_to commit_path(repository.log.last) do %&gt;
+</span><span class="gi">+          &lt;% link_to commit_path(repository.log.last), relative: true  do %&gt;
 </span>             Get Started
            &lt;% end %&gt;
          &lt;% end %&gt;
-<span class="p">@@ -49,7 +49,7 @@</span>
-         &lt;%= yield %&gt;
-       &lt;/article&gt;
-
--      &lt;% if commit? %&gt;
-<span class="gi">+      &lt;% if current_page.data.id.present? %&gt;
-</span>         &lt;article class="page__diff"&gt;
- &lt;!-- Lack of Leading Whitespace is Significant --&gt;
- &lt;% code("diff") do %&gt;
-<span class="gh">diff --git a/templates/commit.md b/templates/commit.md
-index 3e64aed..4122de5 100644
-</span><span class="gd">--- a/templates/commit.md
-</span><span class="gi">+++ b/templates/commit.md
-</span><span class="p">@@ -1,5 +1,5 @@</span>
- ---
-<span class="gd">-title: %s
-</span><span class="gi">+title: "%s"
-</span> id: "%h"
- ---
-
 </code></pre></div>
       </article>
     </main>
