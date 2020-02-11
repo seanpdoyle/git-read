@@ -21,7 +21,7 @@
 </a>
           <a href="../42a35c8343ae3ed962c3b21f62e1ec917ce34eec/">Introduce `Makefile`
 </a>
-          <a href="./" aria-current="page">Created `README.md`
+          <a href="../87314ace144e16df7dba371f5106ec669f41aa17/">Created `README.md`
 </a>
           <a href="../11f450c4b9b84d5d248dfcea206e34a4d8fb78c2/">Create the `.gitignore` file
 </a>
@@ -79,43 +79,42 @@
           <a href="../63d6e19355548a1c9ccb389cfcb3e326339ae1ad/">improve spacing</a>
           <a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">WIP</a>
           <a href="../f9d2e835af4ec5454876b02a604f88f372f8c43b/">Render files when initial commit</a>
-          <a href="../e775a2985b99a0b02bfa566943b351269271c1c1/">memoize</a>
+          <a href="./" aria-current="page">memoize</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header class="navigation">
 
-<a href="../42a35c8343ae3ed962c3b21f62e1ec917ce34eec/">              &#8592; Previous
+<a href="../f9d2e835af4ec5454876b02a604f88f372f8c43b/">              &#8592; Previous
 </a>
-<a href="../11f450c4b9b84d5d248dfcea206e34a4d8fb78c2/">              Next &#8594;
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>Created <code>README.md</code></h1>
-
-<p>Introduce the project&rsquo;s README.md. This file will serve as the home page
-for the generated website.</p>
+        <h1>memoize</h1>
 
 
 
               <details open>
-  <summary>README.md</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..f4eeb86
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,8 @@</span>
-<span class="gi">+git-read
-+===
-+
-+Generate a website based on a project's sequential Git history.
-+
-+* Serve the project's `README.md` as the homepage
-+* Create a table of contents
-+* Parse commit messages as Markdown
-</span></code></pre></div></details>
+  <summary>lib/commit_helpers.rb</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/commit_helpers.rb b/lib/commit_helpers.rb
+index 93ca59e..e0bd77b 100644
+</span><span class="gd">--- a/lib/commit_helpers.rb
+</span><span class="gi">+++ b/lib/commit_helpers.rb
+</span><span class="p">@@ -6,8 +6,10 @@</span> module CommitHelpers
+   end
+ 
+   def adjacent_commits(commit)
+<span class="gd">-    log = [nil].chain(repository.log(nil).reverse_each).chain([nil])
+</span><span class="gi">+    history.each_cons(3).detect { |_, middle, _| commit.sha == middle.sha }
++  end
+</span> 
+<span class="gd">-    log.each_cons(3).detect { |_, middle, _| commit.sha == middle.sha }
+</span><span class="gi">+  def history
++    @history ||= [nil].chain(repository.log(nil).reverse_each).chain([nil])
+</span>   end
+ end
+</code></pre></div></details>
 
       </article>
     </main>
