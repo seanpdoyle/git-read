@@ -19,7 +19,7 @@ jobs:
     - name: Fetch full Git History and build documentation
       run: |
         git fetch --prune --unshallow
-        bin/git-read ./ ./build
+        bin/git-read --git-dir ./ --build-dir ./build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:

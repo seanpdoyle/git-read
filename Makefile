@@ -13,7 +13,9 @@ install:
 
 compile:
 	mkdir -p $(OUTPUT_DIR)
-	GIT_DIR=$(GIT_DIR) bundle exec middleman build --verbose --build-dir=$(OUTPUT_DIR)
+	GIT_DIR=$(GIT_DIR) bundle exec middleman build \
+					--build-dir=$(OUTPUT_DIR) \
+					$${VERBOSE}
 
 clean:
 	rm -rf dist/ $(OUTPUT_DIR)

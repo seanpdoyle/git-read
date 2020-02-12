@@ -1,8 +1,68 @@
-#! /usr/bin/env sh
+#! /usr/bin/env bash
 
 set -e
 
-export GIT_DIR=${1-./}
-export OUTPUT_DIR=${2-./build}
+VERBOSE=""
+FLAGS="--silent"
+TARGETS=""
 
-make
+ARGS=( "$@" )
+
+for i in "${!ARGS[@]}"; do
+  case "${ARGS[i]}" in
+    "")
+      continue
+      ;;
+    -o|--output-dir)
+      OUTPUT_DIR="${ARGS[i+1]}"
+      unset 'ARGS[i+1]'
+      ;;
+    -g|--git-dir)
+      GIT_DIR="${ARGS[i+1]}"
+      unset 'ARGS[i+1]'
+      ;;
+    -s|--server|--serve)
+      TARGETS="serve"
+      ;;
+    -v|--verbose)
+      VERBOSE="--verbose"
+      FLAGS=""
+      ;;
+    -h|--help)
+      cat <<-HELP
+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
+                [-g | --git-dir <path>] [-o | --output-dir <path>]
+
+Generate HTML from your project's Git history
+
+OPTIONS
+
+      --output-dir
+          specify the directory where the site will be built
+
+      --git-dir
+          specify the parent directory of the project's .git/ directory
+
+      --verbose
+          print debugging information during the build process
+
+      --server
+          build and serve assets with a server available at
+          http://127.0.0.1;4567
+
+      --help
+          generate this help output
+HELP
+      ;;
+    *)
+      continue
+      ;;
+  esac
+  unset 'ARGS[i]'
+done
+
+export GIT_DIR=${GIT_DIR-./}
+export OUTPUT_DIR=${OUTPUT_DIR-./build}
+export VERBOSE=$VERBOSE
+
+make ${FLAGS} ${TARGETS}
