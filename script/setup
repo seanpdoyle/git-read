@@ -14,6 +14,6 @@ yarn install
 
 cd -
 
-gem install bundler:2.1.4
+gem install bundler --conservative
 
 bundle check || bundle install --jobs 4 --retry 3 --gemfile="$PROJECT_ROOT/Gemfile"
