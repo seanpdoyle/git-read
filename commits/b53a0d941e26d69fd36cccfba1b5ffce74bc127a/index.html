@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Introduce `bin/git-read`
+    <title>Use block-accepting `current_link_to`
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" data-turbolinks-track="reload" />
     <link href="../../stylesheets/syntax.css" rel="stylesheet" data-turbolinks-track="reload" />
@@ -42,7 +42,7 @@
           <a href="../f9d59463eccada46f3089f226ec6b787f877b4a9/">introduce CommitHelpers
 </a>
           <a href="../13df0b4af96c16f7e021eb7fbb25ea79ccea471c/">more styling</a>
-          <a href="./" aria-current="page">Introduce `bin&#x2F;git-read`
+          <a href="../2aaa7efa50385d8983c28272dcf4233d1c4e9957/">Introduce `bin&#x2F;git-read`
 </a>
           <a href="../03b2b6a853548bc7321e6018ce08ee44e5a74fa0/">make history collapsible on mobile</a>
           <a href="../63110797e2ae4d436da0839e56b60ff3f04a47bd/">Restore default `ul` and `ol` within Markdown
@@ -89,7 +89,7 @@
           <a href="../cebc9db90d27697e3dbf5566548201e259a6e602/">don&#x27;t tie to specific bundler version</a>
           <a href="../8c0a95be2d3ea0e73b9b918e3bb445a9c22b7082/">make arguments flexible, resolve with realpath</a>
           <a href="../459485710e02f2b4c73e5897c17c2e261b81a179/">page title and make `--serve` work</a>
-          <a href="../b53a0d941e26d69fd36cccfba1b5ffce74bc127a/">Use block-accepting `current_link_to`
+          <a href="./" aria-current="page">Use block-accepting `current_link_to`
 </a>
       </nav>
     </details>
@@ -97,70 +97,36 @@
     <main class="page__content">
       <header class="navigation">
 
-<a href="../13df0b4af96c16f7e021eb7fbb25ea79ccea471c/">              &#8592; Previous
+<a href="../459485710e02f2b4c73e5897c17c2e261b81a179/">              &#8592; Previous
 </a>
-<a href="../03b2b6a853548bc7321e6018ce08ee44e5a74fa0/">              Next &#8594;
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>Introduce <code>bin/git-read</code></h1>
+        <h1>Use block-accepting <code>current_link_to</code></h1>
 
-<p>Refactor out the <code>TARGETS</code> variable in our Makefile.</p>
-
-<p>Create the <code>bin/git-read</code> shell script, which will be available as a
-<code>git read</code> subcommand once the <code>bin/</code> directory is available on the
-system&rsquo;s <code>$PATH</code>.</p>
+<p>Makes use of the issue resolved by
+<a href="https://github.com/thoughtbot/middleman-aria_current/pull/20"><code>thoughtbot/middleman-aria_current#20</code></a>.</p>
 
 
 
               <details open>
-  <summary>Makefile</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index f2da7b8..c0d3029 100644
-</span><span class="gd">--- a/Makefile
-</span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -4,14 +4,19 @@</span> commits := $(shell mkdir -p tmp/commits &amp;&amp; find tmp/commits -name '*.txt')
- source_files := $(patsubst tmp/commits/%.txt,source/commits/%/index.html.md,$(commits))
- diff_files := $(patsubst tmp/commits/%.txt,source/commits/%/_diff.html,$(commits))
- 
-<span class="gd">-.PHONY: all clean build
--
--all: \
-</span><span class="gi">+TARGETS := \
-</span> 	$(source_files) \
- 	$(diff_files) \
- 	source/index.html.md \
- 	source/javascripts/site.js
- 
-<span class="gi">+.PHONY: all clean build compile
-+
-+all: $(TARGETS)
-+
-+compile: $(TARGETS)
-+	middleman build
-+
-</span> build:
- 	mkdir -p tmp/commits/
- 	$(git) log --format="tmp/commits/%h.txt" | xargs touch
+  <summary>source/layouts/layout.erb</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 592dd3f..49ab8b6 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -15,7 +15,9 @@</span>
+     &lt;details id="table-of-contents" class="page__history" open&gt;
+       &lt;summary class="page__history-summary"&gt;Table of Contents&lt;/summary&gt;
+       &lt;nav class="history"&gt;
+<span class="gd">-        &lt;%= current_link_to escape_html(File.basename(repository.dir.to_s)), "/index.html" %&gt;
+</span><span class="gi">+        &lt;% current_link_to "/index.html" do %&gt;
++          &lt;%= escape_html(File.basename(repository.dir.to_s)) %&gt;
++        &lt;% end %&gt;
+</span> 
+         &lt;% repository.log(nil).reverse_each do |commit| %&gt;
+           &lt;%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %&gt;
 </code></pre></div></details>
-
-              <details open>
-  <summary>bin/git-read</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
-</span><span class="p">new file mode 100755
-</span><span class="gh">index 0000000..d62bb0c
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/bin/git-read
-</span><span class="p">@@ -0,0 +1,8 @@</span>
-<span class="gi">+#! /usr/bin/env sh
-+
-+set -e
-+
-+export GIT_DIR=${1-.git/}
-+
-+make clean build
-+make compile
-</span></code></pre></div></details>
 
       </article>
     </main>
