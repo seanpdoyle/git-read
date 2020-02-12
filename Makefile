@@ -1,6 +1,7 @@
 GIT_DIR := $(realpath $(shell echo "$${GIT_DIR-./}"))
-OUTPUT_DIR := $(realpath $(shell echo "$${OUTPUT_DIR-./build}"))
 TOOL_DIR := $(realpath $(shell echo "$${TOOL_DIR-./}"))
+
+OUTPUT_DIR := $(shell echo "$${OUTPUT_DIR-./build}")
 
 .PHONY: all clean compile
 
@@ -14,16 +15,11 @@ install:
 
 compile:
 	mkdir -p $(OUTPUT_DIR)
-	cd $(TOOL_DIR)
-
-	echo "Building from $(TOOL_DIR) to $(OUTPUT_DIR):"
-	echo
-
-	GIT_DIR=$(GIT_DIR) bundle exec middleman build \
+	cd $(TOOL_DIR) && \
+		GIT_DIR=$(GIT_DIR) bundle exec middleman build \
 		--build-dir=$(OUTPUT_DIR) \
-		$${VERBOSE}
-
-	cd $(GIT_DIR)
+		$${VERBOSE} && \
+		cd $(GIT_DIR)
 
 clean:
 	rm -rf $(TOOL_DIR)/dist/ $(OUTPUT_DIR)
