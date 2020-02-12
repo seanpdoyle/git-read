@@ -2,6 +2,7 @@
 
 set -e
 
+TOOL_DIR="$(dirname "${BASH_SOURCE[0]}")/../"
 VERBOSE=""
 FLAGS="--silent"
 TARGETS=""
@@ -64,5 +65,6 @@ done
 export GIT_DIR=${GIT_DIR-./}
 export OUTPUT_DIR=${OUTPUT_DIR-./build}
 export VERBOSE=$VERBOSE
+export TOOL_DIR=$TOOL_DIR
 
-make ${FLAGS} ${TARGETS}
+make --makefile=$TOOL_DIR/Makefile $FLAGS ${TARGETS}
