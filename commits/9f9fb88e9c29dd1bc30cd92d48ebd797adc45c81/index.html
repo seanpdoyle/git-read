@@ -76,7 +76,7 @@
           <a href="../88630325e3adad1b4f6922d9c66270d0953a63c8/">add back caching, use sitemap branch of current</a>
           <a href="../a08ee4e2c6f42e34749e903815054950d9569ab5/">Add link to project root</a>
           <a href="../406938f2d1f25bb6c83353df84718db343421b84/">configure command to take git directory and output</a>
-          <a href="./" aria-current="page">improve spacing</a>
+          <a href="../63d6e19355548a1c9ccb389cfcb3e326339ae1ad/">improve spacing</a>
           <a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">WIP</a>
           <a href="../f9d2e835af4ec5454876b02a604f88f372f8c43b/">Render files when initial commit</a>
           <a href="../e775a2985b99a0b02bfa566943b351269271c1c1/">memoize</a>
@@ -84,112 +84,59 @@
 </a>
           <a href="../0acb182e86da666baad5e41388bf1e55ebe01d68/">don&#x27;t peg to Ruby version</a>
           <a href="../e4f3451f10170b510e5f9cade1d8dc1185f61c85/">make executable account for being run from elsewhere</a>
-          <a href="../9f9fb88e9c29dd1bc30cd92d48ebd797adc45c81/">don&#x27;t use realpath on OUTPUT_DIR, it doesn&#x27;t exist</a>
+          <a href="./" aria-current="page">don&#x27;t use realpath on OUTPUT_DIR, it doesn&#x27;t exist</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header class="navigation">
 
-<a href="../406938f2d1f25bb6c83353df84718db343421b84/">              &#8592; Previous
+<a href="../e4f3451f10170b510e5f9cade1d8dc1185f61c85/">              &#8592; Previous
 </a>
-<a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">              Next &#8594;
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>improve spacing</h1>
+        <h1>don&rsquo;t use realpath on OUTPUT_DIR, it doesn&rsquo;t exist</h1>
 
 
 
               <details open>
-  <summary>source/layouts/layout.erb</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 3311f60..686876b 100644
-</span><span class="gd">--- a/source/layouts/layout.erb
-</span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -24,23 +24,23 @@</span>
-     &lt;/details&gt;
+  <summary>Makefile</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
+index cfdda8a..365022a 100644
+</span><span class="gd">--- a/Makefile
+</span><span class="gi">+++ b/Makefile
+</span><span class="p">@@ -1,7 +1,8 @@</span>
+ GIT_DIR := $(realpath $(shell echo "$${GIT_DIR-./}"))
+<span class="gd">-OUTPUT_DIR := $(realpath $(shell echo "$${OUTPUT_DIR-./build}"))
+</span> TOOL_DIR := $(realpath $(shell echo "$${TOOL_DIR-./}"))
  
-     &lt;main class="page__content"&gt;
-<span class="gd">-      &lt;header&gt;
-</span><span class="gi">+      &lt;header class="navigation"&gt;
-</span>         &lt;% if defined?(commit) %&gt;
-           &lt;% if commit.parent.present? %&gt;
-             &lt;% link_to commit_path(commit.parent) do %&gt;
-<span class="gd">-              Previous
-</span><span class="gi">+              &amp;#8592; Previous
-</span>             &lt;% end %&gt;
-           &lt;% end %&gt;
- 
-           &lt;% next_commit = repository.log(nil).detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
-           &lt;% if next_commit.present? %&gt;
-             &lt;% link_to commit_path(next_commit) do %&gt;
-<span class="gd">-              Next
-</span><span class="gi">+              Next &amp;#8594;
-</span>             &lt;% end %&gt;
-           &lt;% end %&gt;
-         &lt;% else %&gt;
-           &lt;% link_to commit_path(repository.log(nil).last) do %&gt;
-<span class="gd">-            Get Started
-</span><span class="gi">+            Get Started &amp;#8594;
-</span>           &lt;% end %&gt;
-         &lt;% end %&gt;
-       &lt;/header&gt;
-</code></pre></div></details>
-
-              <details open>
-  <summary>source/stylesheets/blocks/_navigation.scss</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/blocks/_navigation.scss b/source/stylesheets/blocks/_navigation.scss
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..0934224
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/stylesheets/blocks/_navigation.scss
-</span><span class="p">@@ -0,0 +1,5 @@</span>
-<span class="gi">+.navigation {
-+  display: flex;
-+  flex-direction: row;
-+  justify-content: space-between;
-+}
-</span></code></pre></div></details>
-
-              <details open>
-  <summary>source/stylesheets/blocks/_page.scss</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/blocks/_page.scss b/source/stylesheets/blocks/_page.scss
-index 3c0aa6a..17d1823 100644
-</span><span class="gd">--- a/source/stylesheets/blocks/_page.scss
-</span><span class="gi">+++ b/source/stylesheets/blocks/_page.scss
-</span><span class="p">@@ -19,6 +19,17 @@</span>
-   }
- }
- 
-<span class="gi">+.page__history {
-+  margin-bottom: var(--spacing--small);
-+  margin-right: 0;
+<span class="gi">+OUTPUT_DIR := $(shell echo "$${OUTPUT_DIR-./build}")
 +
-+  @media(min-width: $breakpoint--mobile) {
-+    margin-bottom: 0;
-+    margin-right: var(--spacing);
-+  }
-+
-+}
-+
-</span> .page__history-summary {
-   display: inherit;
+</span> .PHONY: all clean compile
  
-</code></pre></div></details>
-
-              <details open>
-  <summary>source/stylesheets/site.css.scss</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
-index e8569b9..a58c688 100644
-</span><span class="gd">--- a/source/stylesheets/site.css.scss
-</span><span class="gi">+++ b/source/stylesheets/site.css.scss
-</span><span class="p">@@ -4,4 +4,5 @@</span>
+ all: install compile
+<span class="p">@@ -14,16 +15,11 @@</span> install:
  
- @import "blocks/commit";
- @import "blocks/history";
-<span class="gi">+@import "blocks/navigation";
-</span> @import "blocks/page";
+ compile:
+ 	mkdir -p $(OUTPUT_DIR)
+<span class="gd">-	cd $(TOOL_DIR)
+-
+-	echo "Building from $(TOOL_DIR) to $(OUTPUT_DIR):"
+-	echo
+-
+-	GIT_DIR=$(GIT_DIR) bundle exec middleman build \
+</span><span class="gi">+	cd $(TOOL_DIR) &amp;&amp; \
++		GIT_DIR=$(GIT_DIR) bundle exec middleman build \
+</span> 		--build-dir=$(OUTPUT_DIR) \
+<span class="gd">-		$${VERBOSE}
+-
+-	cd $(GIT_DIR)
+</span><span class="gi">+		$${VERBOSE} &amp;&amp; \
++		cd $(GIT_DIR)
+</span> 
+ clean:
+ 	rm -rf $(TOOL_DIR)/dist/ $(OUTPUT_DIR)
 </code></pre></div></details>
 
       </article>

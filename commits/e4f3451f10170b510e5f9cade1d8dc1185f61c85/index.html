@@ -76,14 +76,14 @@
           <a href="../88630325e3adad1b4f6922d9c66270d0953a63c8/">add back caching, use sitemap branch of current</a>
           <a href="../a08ee4e2c6f42e34749e903815054950d9569ab5/">Add link to project root</a>
           <a href="../406938f2d1f25bb6c83353df84718db343421b84/">configure command to take git directory and output</a>
-          <a href="./" aria-current="page">improve spacing</a>
+          <a href="../63d6e19355548a1c9ccb389cfcb3e326339ae1ad/">improve spacing</a>
           <a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">WIP</a>
           <a href="../f9d2e835af4ec5454876b02a604f88f372f8c43b/">Render files when initial commit</a>
           <a href="../e775a2985b99a0b02bfa566943b351269271c1c1/">memoize</a>
           <a href="../90a9873b074ffca4def61bd176a33c099bdef501/">extend the `bin&#x2F;git-read` command to take flags:
 </a>
           <a href="../0acb182e86da666baad5e41388bf1e55ebe01d68/">don&#x27;t peg to Ruby version</a>
-          <a href="../e4f3451f10170b510e5f9cade1d8dc1185f61c85/">make executable account for being run from elsewhere</a>
+          <a href="./" aria-current="page">make executable account for being run from elsewhere</a>
           <a href="../9f9fb88e9c29dd1bc30cd92d48ebd797adc45c81/">don&#x27;t use realpath on OUTPUT_DIR, it doesn&#x27;t exist</a>
       </nav>
     </details>
@@ -91,106 +91,142 @@
     <main class="page__content">
       <header class="navigation">
 
-<a href="../406938f2d1f25bb6c83353df84718db343421b84/">              &#8592; Previous
+<a href="../0acb182e86da666baad5e41388bf1e55ebe01d68/">              &#8592; Previous
 </a>
-<a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">              Next &#8594;
+<a href="../9f9fb88e9c29dd1bc30cd92d48ebd797adc45c81/">              Next &#8594;
 </a>      </header>
 
       <article class="commit">
-        <h1>improve spacing</h1>
+        <h1>make executable account for being run from elsewhere</h1>
 
 
 
               <details open>
-  <summary>source/layouts/layout.erb</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 3311f60..686876b 100644
-</span><span class="gd">--- a/source/layouts/layout.erb
-</span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -24,23 +24,23 @@</span>
-     &lt;/details&gt;
- 
-     &lt;main class="page__content"&gt;
-<span class="gd">-      &lt;header&gt;
-</span><span class="gi">+      &lt;header class="navigation"&gt;
-</span>         &lt;% if defined?(commit) %&gt;
-           &lt;% if commit.parent.present? %&gt;
-             &lt;% link_to commit_path(commit.parent) do %&gt;
-<span class="gd">-              Previous
-</span><span class="gi">+              &amp;#8592; Previous
-</span>             &lt;% end %&gt;
-           &lt;% end %&gt;
- 
-           &lt;% next_commit = repository.log(nil).detect { |child| child.parent&amp;.sha == commit.sha } %&gt;
-           &lt;% if next_commit.present? %&gt;
-             &lt;% link_to commit_path(next_commit) do %&gt;
-<span class="gd">-              Next
-</span><span class="gi">+              Next &amp;#8594;
-</span>             &lt;% end %&gt;
-           &lt;% end %&gt;
-         &lt;% else %&gt;
-           &lt;% link_to commit_path(repository.log(nil).last) do %&gt;
-<span class="gd">-            Get Started
-</span><span class="gi">+            Get Started &amp;#8594;
-</span>           &lt;% end %&gt;
-         &lt;% end %&gt;
-       &lt;/header&gt;
+  <summary>.github/workflows/git-read.yml</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+index 51435d0..cc6576f 100644
+</span><span class="gd">--- a/.github/workflows/git-read.yml
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -7,6 +7,8 @@</span> jobs:
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v2
+<span class="gi">+      with:
++        fetch-depth: 0
+</span>     - uses: actions/cache@v1
+       with:
+         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+<span class="p">@@ -16,9 +18,8 @@</span> jobs:
+       with:
+         ruby-version: "2.6.5"
+         run: bundle config path vendor/bundle
+<span class="gd">-    - name: Fetch full Git History and build documentation
+</span><span class="gi">+    - name: Build documentation from Git History
+</span>       run: |
+<span class="gd">-        git fetch --prune --unshallow
+</span>         bin/git-read --git-dir ./ --build-dir ./build
+     - name: Deploy
+       uses: peaceiris/actions-gh-pages@v3
 </code></pre></div></details>
 
               <details open>
-  <summary>source/stylesheets/blocks/_navigation.scss</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/blocks/_navigation.scss b/source/stylesheets/blocks/_navigation.scss
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..0934224
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/stylesheets/blocks/_navigation.scss
-</span><span class="p">@@ -0,0 +1,5 @@</span>
-<span class="gi">+.navigation {
-+  display: flex;
-+  flex-direction: row;
-+  justify-content: space-between;
-+}
+  <summary>Makefile</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
+index d48cc0b..cfdda8a 100644
+</span><span class="gd">--- a/Makefile
+</span><span class="gi">+++ b/Makefile
+</span><span class="p">@@ -1,21 +1,29 @@</span>
+<span class="gd">-GIT_DIR := $(shell echo "$${GIT_DIR-./}")
+-OUTPUT_DIR := $(shell echo "$${OUTPUT_DIR-./build}")
+</span><span class="gi">+GIT_DIR := $(realpath $(shell echo "$${GIT_DIR-./}"))
++OUTPUT_DIR := $(realpath $(shell echo "$${OUTPUT_DIR-./build}"))
++TOOL_DIR := $(realpath $(shell echo "$${TOOL_DIR-./}"))
+</span> 
+ .PHONY: all clean compile
+ 
+ all: install compile
+ 
+ serve: install
+<span class="gd">-	GIT_DIR=$(GIT_DIR) bundle exec middleman serve
+</span><span class="gi">+	GIT_DIR=$(GIT_DIR) bundle exec --gemfile="$(TOOL_DIR)/Gemfile" middleman serve
+</span> 
+ install:
+<span class="gd">-	script/setup
+</span><span class="gi">+	$(TOOL_DIR)/script/setup
+</span> 
+ compile:
+ 	mkdir -p $(OUTPUT_DIR)
+<span class="gi">+	cd $(TOOL_DIR)
++
++	echo "Building from $(TOOL_DIR) to $(OUTPUT_DIR):"
++	echo
++
+</span> 	GIT_DIR=$(GIT_DIR) bundle exec middleman build \
+<span class="gd">-					--build-dir=$(OUTPUT_DIR) \
+-					$${VERBOSE}
+</span><span class="gi">+		--build-dir=$(OUTPUT_DIR) \
++		$${VERBOSE}
++
++	cd $(GIT_DIR)
+</span> 
+ clean:
+<span class="gd">-	rm -rf dist/ $(OUTPUT_DIR)
+</span><span class="gi">+	rm -rf $(TOOL_DIR)/dist/ $(OUTPUT_DIR)
 </span></code></pre></div></details>
 
               <details open>
-  <summary>source/stylesheets/blocks/_page.scss</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/blocks/_page.scss b/source/stylesheets/blocks/_page.scss
-index 3c0aa6a..17d1823 100644
-</span><span class="gd">--- a/source/stylesheets/blocks/_page.scss
-</span><span class="gi">+++ b/source/stylesheets/blocks/_page.scss
-</span><span class="p">@@ -19,6 +19,17 @@</span>
-   }
- }
+  <summary>bin/git-read</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
+index 9290480..345f250 100755
+</span><span class="gd">--- a/bin/git-read
+</span><span class="gi">+++ b/bin/git-read
+</span><span class="p">@@ -2,6 +2,7 @@</span>
  
-<span class="gi">+.page__history {
-+  margin-bottom: var(--spacing--small);
-+  margin-right: 0;
-+
-+  @media(min-width: $breakpoint--mobile) {
-+    margin-bottom: 0;
-+    margin-right: var(--spacing);
-+  }
-+
-+}
-+
-</span> .page__history-summary {
-   display: inherit;
+ set -e
  
-</code></pre></div></details>
+<span class="gi">+TOOL_DIR="$(dirname "${BASH_SOURCE[0]}")/../"
+</span> VERBOSE=""
+ FLAGS="--silent"
+ TARGETS=""
+<span class="p">@@ -64,5 +65,6 @@</span> done
+ export GIT_DIR=${GIT_DIR-./}
+ export OUTPUT_DIR=${OUTPUT_DIR-./build}
+ export VERBOSE=$VERBOSE
+<span class="gi">+export TOOL_DIR=$TOOL_DIR
+</span> 
+<span class="gd">-make ${FLAGS} ${TARGETS}
+</span><span class="gi">+make --makefile=$TOOL_DIR/Makefile $FLAGS ${TARGETS}
+</span></code></pre></div></details>
 
               <details open>
-  <summary>source/stylesheets/site.css.scss</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
-index e8569b9..a58c688 100644
-</span><span class="gd">--- a/source/stylesheets/site.css.scss
-</span><span class="gi">+++ b/source/stylesheets/site.css.scss
-</span><span class="p">@@ -4,4 +4,5 @@</span>
+  <summary>script/setup</summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/script/setup b/script/setup
+index 155a878..139ddd9 100755
+</span><span class="gd">--- a/script/setup
+</span><span class="gi">+++ b/script/setup
+</span><span class="p">@@ -1,12 +1,19 @@</span>
+<span class="gd">-#!/usr/bin/env sh
+</span><span class="gi">+#!/usr/bin/env bash
+</span> 
+ set -e
  
- @import "blocks/commit";
- @import "blocks/history";
-<span class="gi">+@import "blocks/navigation";
-</span> @import "blocks/page";
-</code></pre></div></details>
+<span class="gi">+PROJECT_ROOT=$(dirname "${BASH_SOURCE[0]}")/../
++
+</span> if ! command -v yarn &gt; /dev/null; then
+   npm install --global yarn
+ fi
+<span class="gi">+
++cd $PROJECT_ROOT
++
+</span> yarn install
+ 
+<span class="gi">+cd -
++
+</span> gem install bundler:2.1.4
+ 
+<span class="gd">-bundle check || bundle install --jobs 4 --retry 3
+</span><span class="gi">+bundle check || bundle install --jobs 4 --retry 3 --gemfile="$PROJECT_ROOT/Gemfile"
+</span></code></pre></div></details>
 
       </article>
     </main>
