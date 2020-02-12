@@ -8,7 +8,9 @@ OUTPUT_DIR := $(shell echo "$${OUTPUT_DIR-./build}")
 all: install compile
 
 serve: install
-	GIT_DIR=$(GIT_DIR) bundle exec --gemfile="$(TOOL_DIR)/Gemfile" middleman serve
+	cd $(TOOL_DIR) && \
+		GIT_DIR=$(GIT_DIR) bundle exec middleman serve
+	cd $(GIT_DIR)
 
 install:
 	$(TOOL_DIR)/script/setup
