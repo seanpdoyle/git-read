@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.6.5'
-
 gem 'middleman', '~> 4.2'
 gem 'middleman-aria_current', github: "thoughtbot/middleman-aria_current", branch: "sitemap"
 gem 'middleman-autoprefixer', '~> 2.7'
