@@ -14,7 +14,7 @@ for i in "${!ARGS[@]}"; do
     "")
       continue
       ;;
-    -o|--output-dir)
+    -o|--output-dir|--build-dir)
       OUTPUT_DIR="${ARGS[i+1]}"
       unset 'ARGS[i+1]'
       ;;
@@ -62,8 +62,8 @@ HELP
   unset 'ARGS[i]'
 done
 
-export GIT_DIR=${GIT_DIR-./}
-export OUTPUT_DIR=${OUTPUT_DIR-./build}
+export GIT_DIR=$(realpath ${GIT_DIR-./})
+export OUTPUT_DIR=$(realpath ${OUTPUT_DIR-./build/})
 export VERBOSE=$VERBOSE
 export TOOL_DIR=$TOOL_DIR
 
