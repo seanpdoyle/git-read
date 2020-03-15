@@ -1,5 +1,6 @@
-require "git"
-require "lib/commit_helpers"
+Bundler.require(:default)
+
+require_relative "./lib/commit_helpers"
 
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
@@ -11,7 +12,13 @@ activate :autoprefixer do |prefix|
 end
 activate :external_pipeline,
   name: :webpack,
-  command: build? ? "./node_modules/.bin/webpack --bail" : "./node_modules/.bin/webpack --watch -d",
+  command: (
+    if ENV.fetch("RACK_ENV", "development") == "test" || build?
+      "./node_modules/.bin/webpack --bail"
+    else
+      "./node_modules/.bin/webpack --watch -d"
+    end
+  ),
   source: "dist",
   latency: 1
 activate :relative_assets
