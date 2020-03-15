@@ -6,8 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>extend the `bin/git-read` command to take flags:
-</title>
+    <title>don't run when passed --help</title>
     <link href="../../stylesheets/site.css" rel="stylesheet" data-turbolinks-track="reload" />
     <link href="../../stylesheets/syntax.css" rel="stylesheet" data-turbolinks-track="reload" />
     <script src="../../main.js" data-turbolinks-track="reload"></script>
@@ -80,7 +79,7 @@
           <a href="../b2e8cd2780b51aa41ad60922e73231007c89b963/">WIP</a>
           <a href="../f9d2e835af4ec5454876b02a604f88f372f8c43b/">Render files when initial commit</a>
           <a href="../e775a2985b99a0b02bfa566943b351269271c1c1/">memoize</a>
-          <a href="./" aria-current="page">extend the `bin&#x2F;git-read` command to take flags:
+          <a href="../90a9873b074ffca4def61bd176a33c099bdef501/">extend the `bin&#x2F;git-read` command to take flags:
 </a>
           <a href="../0acb182e86da666baad5e41388bf1e55ebe01d68/">don&#x27;t peg to Ruby version</a>
           <a href="../e4f3451f10170b510e5f9cade1d8dc1185f61c85/">make executable account for being run from elsewhere</a>
@@ -91,141 +90,37 @@
           <a href="../459485710e02f2b4c73e5897c17c2e261b81a179/">page title and make `--serve` work</a>
           <a href="../b53a0d941e26d69fd36cccfba1b5ffce74bc127a/">Use block-accepting `current_link_to`
 </a>
-          <a href="../3c87b016d0e66abd228d48c6f0de21a03a99613c/">don&#x27;t run when passed --help</a>
+          <a href="./" aria-current="page">don&#x27;t run when passed --help</a>
       </nav>
     </details>
 
     <main class="page__content">
       <header class="navigation">
 
-<a href="../e775a2985b99a0b02bfa566943b351269271c1c1/">              &#8592; Previous
+<a href="../b53a0d941e26d69fd36cccfba1b5ffce74bc127a/">              &#8592; Previous
 </a>
-<a href="../0acb182e86da666baad5e41388bf1e55ebe01d68/">              Next &#8594;
-</a>      </header>
+      </header>
 
       <article class="commit">
-        <h1>extend the <code>bin/git-read</code> command to take flags:</h1>
-
-<p>https://gist.github.com/Decstasy/19814b80a3551b34d78e8be7f3b5e8d8</p>
+        <h1>don&rsquo;t run when passed &ndash;help</h1>
 
 
-
-              <details open>
-  <summary>.github/workflows/git-read.yml</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
-index 12b906c..51435d0 100644
-</span><span class="gd">--- a/.github/workflows/git-read.yml
-</span><span class="gi">+++ b/.github/workflows/git-read.yml
-</span><span class="p">@@ -19,7 +19,7 @@</span> jobs:
-     - name: Fetch full Git History and build documentation
-       run: |
-         git fetch --prune --unshallow
-<span class="gd">-        bin/git-read ./ ./build
-</span><span class="gi">+        bin/git-read --git-dir ./ --build-dir ./build
-</span>     - name: Deploy
-       uses: peaceiris/actions-gh-pages@v3
-       with:
-</code></pre></div></details>
-
-              <details open>
-  <summary>Makefile</summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Makefile b/Makefile
-index 409e902..d48cc0b 100644
-</span><span class="gd">--- a/Makefile
-</span><span class="gi">+++ b/Makefile
-</span><span class="p">@@ -13,7 +13,9 @@</span> install:
- 
- compile:
- 	mkdir -p $(OUTPUT_DIR)
-<span class="gd">-	GIT_DIR=$(GIT_DIR) bundle exec middleman build --verbose --build-dir=$(OUTPUT_DIR)
-</span><span class="gi">+	GIT_DIR=$(GIT_DIR) bundle exec middleman build \
-+					--build-dir=$(OUTPUT_DIR) \
-+					$${VERBOSE}
-</span> 
- clean:
- 	rm -rf dist/ $(OUTPUT_DIR)
-</code></pre></div></details>
 
               <details open>
   <summary>bin/git-read</summary>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
-index da0f334..9290480 100755
+index f3427e6..a2d97f7 100755
 </span><span class="gd">--- a/bin/git-read
 </span><span class="gi">+++ b/bin/git-read
-</span><span class="p">@@ -1,8 +1,68 @@</span>
-<span class="gd">-#! /usr/bin/env sh
-</span><span class="gi">+#! /usr/bin/env bash
-</span> 
- set -e
- 
-<span class="gd">-export GIT_DIR=${1-./}
--export OUTPUT_DIR=${2-./build}
-</span><span class="gi">+VERBOSE=""
-+FLAGS="--silent"
-+TARGETS=""
-</span> 
-<span class="gd">-make
-</span><span class="gi">+ARGS=( "$@" )
-+
-+for i in "${!ARGS[@]}"; do
-+  case "${ARGS[i]}" in
-+    "")
-+      continue
-+      ;;
-+    -o|--output-dir)
-+      OUTPUT_DIR="${ARGS[i+1]}"
-+      unset 'ARGS[i+1]'
-+      ;;
-+    -g|--git-dir)
-+      GIT_DIR="${ARGS[i+1]}"
-+      unset 'ARGS[i+1]'
-+      ;;
-+    -s|--server|--serve)
-+      TARGETS="serve"
-+      ;;
-+    -v|--verbose)
-+      VERBOSE="--verbose"
-+      FLAGS=""
-+      ;;
-+    -h|--help)
-+      cat &lt;&lt;-HELP
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1;4567
-+
-+      --help
-+          generate this help output
-+HELP
-+      ;;
-+    *)
-+      continue
-+      ;;
-+  esac
-+  unset 'ARGS[i]'
-+done
-+
-+export GIT_DIR=${GIT_DIR-./}
-+export OUTPUT_DIR=${OUTPUT_DIR-./build}
-+export VERBOSE=$VERBOSE
-+
-+make ${FLAGS} ${TARGETS}
-</span></code></pre></div></details>
+</span><span class="p">@@ -54,6 +54,7 @@</span> OPTIONS
+       --help
+           generate this help output
+ HELP
+<span class="gi">+      exit 0
+</span>       ;;
+     *)
+       continue
+</code></pre></div></details>
 
       </article>
     </main>
