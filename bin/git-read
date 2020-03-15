@@ -54,6 +54,7 @@ OPTIONS
       --help
           generate this help output
 HELP
+      exit 0
       ;;
     *)
       continue
