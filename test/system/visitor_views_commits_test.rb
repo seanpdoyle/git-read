@@ -17,6 +17,7 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
 
       assert_selector "h1", text: "The commit subject"
       assert_selector "p", text: "The commit body"
+      assert_selector "[aria-current]", text: "The commit subject"
     end
   end
 
