@@ -21,6 +21,6 @@ class VisitorViewsReadmeTest < ActiveSupport::TestCase
   test "visitor views README" do
     visit "/index.html"
 
-    assert_text "git-read"
+    assert_selector "h1", text: "git-read"
   end
 end
