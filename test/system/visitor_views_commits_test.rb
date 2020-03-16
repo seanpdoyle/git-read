@@ -12,7 +12,7 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
     MARKDOWN
 
     with_git_repository do
-      visit "/index.html"
+      visit root_path
       expand_history
       click_on "The commit subject"
 
@@ -26,7 +26,7 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
     commit("This subject has a `<h1>` in it")
 
     with_git_repository do
-      visit "/index.html"
+      visit root_path
 
       assert_text "This subject has a <h1> in it"
     end

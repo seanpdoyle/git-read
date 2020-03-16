@@ -1,4 +1,7 @@
 require "lib/models/history"
+require "helpers/url_helpers"
+
+include UrlHelpers
 
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
