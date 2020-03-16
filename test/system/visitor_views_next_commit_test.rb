@@ -10,7 +10,7 @@ class VisitorViewsNextCommitTest < ApplicationSystemTestCase
     commit("Last commit")
 
     with_git_repository do
-      visit "/index.html"
+      visit root_path
       expand_history
       click_on "First commit"
       click_on "Next"
@@ -24,7 +24,7 @@ class VisitorViewsNextCommitTest < ApplicationSystemTestCase
     commit("First commit")
 
     with_git_repository do
-      visit "/index.html"
+      visit root_path
       expand_history
       click_on "First commit"
 

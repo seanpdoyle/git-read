@@ -11,16 +11,16 @@
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
       <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
-        <a href="/index.html">
+        <% link_to root_path do %>
           <%= escape_html(history.name) %>
-        </a>
+        <% end %>
       </h1>
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
         <% parent, _, child = adjacent_commits(history.commits, commit: commit) %>
 
         <% if parent.present? %>
-          <% link_to "/commits/#{parent.sha}/index.html" do %>
+          <% link_to commit_path(parent) do %>
             &#8592; Previous
           <% end %>
         <% end %>
@@ -28,7 +28,7 @@
         <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
         <% if child.present? %>
-          <% link_to "/commits/#{child.sha}/index.html" do %>
+          <% link_to commit_path(child) do %>
             Next &#8594;
           <% end %>
         <% end %>

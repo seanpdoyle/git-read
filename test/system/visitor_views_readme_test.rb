@@ -11,7 +11,7 @@ class VisitorViewsReadmeTest < ApplicationSystemTestCase
     commit("Initial Commit")
 
     with_git_repository do
-      visit "/index.html"
+      visit root_path
 
       assert_title "git-read"
       assert_selector "h1", text: "git-read"
@@ -26,7 +26,7 @@ class VisitorViewsReadmeTest < ApplicationSystemTestCase
     commit("Last commit")
 
     with_git_repository do |directory|
-      visit "/index.html"
+      visit root_path
       expand_history
       click_on "Last commit"
       click_on directory.basename.to_s
