@@ -1,0 +1,18 @@
+.commit {
+  ol,
+  ul {
+    padding-left: var(--spacing);
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
