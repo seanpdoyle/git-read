@@ -29,6 +29,10 @@ class ApplicationSystemTestCase < ActiveSupport::TestCase
     end
   end
 
+  def expand_history
+    find("summary", text: "Expand History").click
+  end
+
   def stage_file(filename, contents)
     Pathname(@repository.dir.path).join(filename).write(contents)
 

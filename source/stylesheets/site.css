@@ -26,6 +26,10 @@ summary::-webkit-details-marker {
   @apply absolute;
 }
 
+.current-within\:font-bold [aria-current="page"] {
+  @apply font-bold;
+}
+
 @screen md {
   .md\:h-screen-fit {
     height: calc(100vh - 3rem); /* 3rem is our header height */
