@@ -20,13 +20,11 @@
           git-read
         </a>
 
-        <a href="#">
-          [GENERATED]: Scaffold the project with Middleman
-        </a>
-
-        <a href="#">
-          Elaborate on the project's goals in the README.md
-        </a>
+        <% history[:commits].each do |commit| %>
+          <% link_to "/commits/#{commit.sha}/index.html" do %>
+            <%= escape_html(commit.message.lines.first) %>
+          <% end %>
+        <% end %>
       </nav>
     </details>
 

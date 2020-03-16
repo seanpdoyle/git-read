@@ -34,17 +34,37 @@ repository = Git.open(
   Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
 )
 
+locals = {
+  history: {
+    commits: repository.log(nil).reverse_each,
+  },
+}
+
 proxy(
   "index.html",
   "README.html",
-  locals: {
+  locals: locals.merge(
     commit: repository.object("HEAD"),
     page: {
       title: repository.object("HEAD:README.md").contents.lines.first,
     },
-  },
+  ),
   ignore: true,
 )
+
+locals.dig(:history, :commits).each do |commit|
+  proxy(
+    "/commits/#{commit.sha}/index.html",
+    "/commits/commit.html",
+    locals: locals.merge(
+      commit: commit,
+      page: {
+        title: commit.message.lines.first,
+      }
+    ),
+    ignore: true,
+  )
+end
 
 # Helpers
 # Methods defined in the helpers block are available in templates
