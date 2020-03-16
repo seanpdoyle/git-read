@@ -1,0 +1,477 @@
+$breakpoint--desktop: 100rem;
+$breakpoint--mobile: 60rem;
+
+:root {
+  --accordion-toggle-width: 2rem;
+  --accordion-toggle-border-width: 1px;
+
+  --header-height: 3rem;
+  --header-border-width: 2px;
+
+  --commit-history-padding: 1rem;
+  --commit-history-padding: 1rem;
+  --commit-history-width: 25rem;
+
+  --spacing: 1.5rem;
+  --spacing--small: 0.75rem;
+
+  --fixed-footer-navigation-height: calc(
+    var(--spacing--small) +
+    1rem +
+    var(--spacing--small)
+  );
+}
+
+html {
+  font-size: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+.accordion {
+  position: relative;
+}
+
+.accordion--desktop {
+  display: none;
+
+  @media (min-width: $breakpoint--mobile) {
+    display: inherit;
+  }
+}
+
+.accordion--mobile {
+  display: inherit;
+
+  @media (min-width: $breakpoint--mobile) {
+    display: none;
+  }
+}
+
+.accordion[open] {
+  padding-right: 2rem;
+}
+
+.accordion[open] .accordion__summary {
+  height: 0;
+}
+
+.accordion__summary {
+  display: flex;
+  height: 100%;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.accordion[open] .accordion__closed {
+  display: none;
+}
+
+.accordion__closed {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: row;
+  }
+}
+
+.accordion[open] .accordion__opened {
+  display: block;
+}
+
+.accordion__opened {
+  display: none;
+}
+
+.accordion__toggle {
+  align-items: center;
+  border-bottom: solid var(--accordion-toggle-border-width) black;
+  border-top: solid var(--accordion-toggle-border-width) black;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  height: var(--accordion-toggle-width);
+  justify-content: center;
+
+  @media (min-width: $breakpoint--mobile) {
+    border-bottom: inherit;
+    border-left: solid var(--accordion-toggle-border-width) black;
+    border-right: solid var(--accordion-toggle-border-width) black;
+    border-top: inherit;
+    height: auto;
+    width: var(--accordion-toggle-width);
+  }
+}
+
+.accordion__toggle--fill {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+
+  @media (min-width: $breakpoint--mobile) {
+    left: inherit;
+    right: 0;
+    top: 0;
+  }
+}
+
+.banner {
+  padding: var(--commit-font-size);
+  text-align: center;
+}
+
+.content {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: row;
+  }
+}
+
+.content__item {
+  @media (min-width: $breakpoint--mobile) {
+    height: calc(
+      100vh -
+      var(--header-height) -
+      var(--header-border-width)
+    );
+  }
+}
+
+.content__item--grow {
+  flex-grow: 1;
+}
+
+.commit {
+  --commit-font-size: 1.12rem;
+
+  font-size: var(--commit-font-size);
+
+  @media (min-width: $breakpoint--mobile) {
+    overflow-y: auto;
+  }
+}
+
+.commit--message {
+  padding: calc(var(--commit-font-size) * 0.5);
+
+  @media (min-width: $breakpoint--mobile) {
+    padding: calc(var(--commit-font-size) * 2);
+  }
+
+  @media (min-width: $breakpoint--desktop) {
+    padding: calc(var(--commit-font-size) * 2) calc(var(--commit-font-size) * 6);
+  }
+}
+
+.commit--message {
+  --commit-message-margin: 1.5rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin-bottom: var(--commit-message-margin);
+    word-wrap: break-word;
+  }
+
+  h1 {
+    font-size: 1.728em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 2.0736em;
+    }
+  }
+
+  h2 {
+    font-size: 1.44em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 1.728em;
+    }
+  }
+
+  h3 {
+    font-size: 1.2em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 1.44em;
+    }
+  }
+
+  h4 {
+    font-size: 1em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 1.2em;
+    }
+  }
+
+  img {
+    box-shadow:
+      inset 0 -3em 3em rgba(0,0,0,0.1),
+            0 0  0 2px rgb(255,255,255),
+            0.3em 0.3em 1em rgba(0,0,0,0.3);
+    max-width: 100%;
+  }
+
+  pre {
+    margin: 0;
+  }
+
+  code pre,
+  pre code {
+    overflow-x: auto;
+  }
+
+  pre code {
+    padding: 0;
+  }
+
+  code pre {
+    margin-bottom: var(--commit-message-margin);
+    padding: var(--commit-font-size);
+  }
+}
+
+.commit-content {
+  --commit-content-columns: 1fr;
+
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--fixed-footer-navigation-height);
+
+  @media (min-width: $breakpoint--mobile) {
+    display: grid;
+    grid-template-columns: var(--commit-content-columns);
+    padding-bottom: inherit;
+  }
+}
+
+.commit-content--double {
+  --commit-content-columns: 1fr 1fr;
+}
+
+.commit-history {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: column;
+    padding: calc(var(--commit-history-padding) * 0.5);
+    width: inherit;
+  }
+}
+
+.commit-history--full {
+  margin-bottom: var(--accordion-toggle-width);
+
+  @media (min-width: $breakpoint--mobile) {
+    margin-bottom: inherit;
+    width: var(--commit-history-width);
+  }
+}
+
+.commit-node {
+  --circle-size: 1rem;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing--small);
+  position: relative;
+
+  &::before {
+    background-color: black;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: var(--circle-size);
+    margin-right: var(--spacing--small);
+    width: var(--circle-size);
+    z-index: 1;
+  }
+
+  &::after {
+    background-color: black;
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    width: 100%;
+    left: 48%;
+    top: calc(
+      var(--circle-size) * 0.5 +
+      var(--spacing--small)
+    );
+
+    @media (min-width: $breakpoint--mobile) {
+      height: 100%;
+      left: calc(var(--circle-size) * 0.5);
+      top: var(--circle-size);
+      width: 1px;
+    }
+  }
+
+  &:last-child {
+    padding-right: 0;
+
+    @media (min-width: $breakpoint--mobile) {
+      padding-right: inherit;
+      padding-bottom: 0;
+    }
+  }
+
+  &:last-of-type::after {
+    width: 48%;
+
+    @media (min-width: $breakpoint--mobile) {
+      display: none;
+    }
+  }
+
+  &[aria-current]:not([aria-current="false"]) {
+    &::before {
+      background-color: green;
+    }
+  }
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: row;
+    padding: 0;
+    padding-bottom: var(--spacing--small);
+  }
+}
+
+.commit-node--collapsed {
+  &::before {
+    margin-right: 0;
+  }
+}
+
+.commit-node--full {
+  &:first-of-type::after {
+    display: inherit;
+  }
+
+  &:last-of-type::after {
+    left: 48%;
+    width: 0;
+  }
+
+  @media (min-width: $breakpoint--mobile) {
+    &:first-of-type::after {
+      display: inherit;
+    }
+
+    &:last-of-type::after {
+      display: none;
+    }
+  }
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: var(--header-height);
+  border-bottom: solid var(--header-border-width) black;
+}
+
+.header__name {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  width: calc(
+    var(--commit-history-width) +
+    var(--commit-history-padding) +
+    var(--accordion-toggle-width) -
+    var(--accordion-toggle-border-width)
+  );
+
+  @media (min-width: $breakpoint--mobile) {
+    border-right: solid calc(var(--header-border-width) *0.5) black;
+  }
+}
+
+.header__navigation {
+  background-color: white;
+  border-top: solid calc(var(--header-border-width) *0.5) black;
+  bottom: 0;
+  flex-grow: 1;
+  left: 0;
+  padding: var(--spacing--small);
+  position: fixed;
+  right: 0;
+  max-height: var(--fixed-footer-navigation-height);
+
+  @media (min-width: $breakpoint--mobile) {
+    background-color: none;
+    border: none;
+    position: inherit;
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+
+  @media (min-width: $breakpoint--mobile) {
+    padding: 0 1rem;
+  }
+}
+
+.navigation--next {
+  justify-content: flex-end;
+}
+
+.navigation--previous {
+  justify-content: flex-start;
+}
+
+.page {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.u-db-overflow-y--auto {
+  @media (min-width: $breakpoint--mobile) {
+    overflow-y: auto;
+  }
+}
+
+.u-mb-overflow-x--scroll {
+  overflow-x: scroll;
+
+  @media (min-width: $breakpoint--mobile) {
+    overflow-x: initial;
+  }
+}
