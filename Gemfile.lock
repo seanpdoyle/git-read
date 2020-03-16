@@ -56,6 +56,8 @@ GEM
       kramdown (~> 1.2)
       middleman-cli (= 4.3.6)
       middleman-core (= 4.3.6)
+    middleman-aria_current (0.1.2)
+      middleman-core (~> 4.0)
     middleman-autoprefixer (2.10.1)
       autoprefixer-rails (~> 9.1)
       middleman-core (>= 3.3.3)
@@ -147,6 +149,7 @@ DEPENDENCIES
   climate_control
   git
   middleman (~> 4.2)
+  middleman-aria_current
   middleman-autoprefixer (~> 2.7)
   minitest-around
   redcarpet

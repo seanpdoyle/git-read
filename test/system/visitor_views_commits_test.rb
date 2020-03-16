@@ -14,9 +14,11 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
     with_git_repository do
       visit root_path
       click_on "The commit subject"
+      expand_history
 
       assert_selector "h1", text: "The commit subject"
       assert_selector "p", text: "The commit body"
+      assert_selector "[aria-current]", text: "The commit subject"
     end
   end
 
@@ -26,6 +28,7 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
 
     with_git_repository do
       visit root_path
+      expand_history
 
       assert_text "This subject has a <h1> in it"
     end

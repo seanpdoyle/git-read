@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'git'
 gem 'middleman', '~> 4.2'
+gem 'middleman-aria_current'
 gem 'middleman-autoprefixer', '~> 2.7'
 gem 'redcarpet'
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]

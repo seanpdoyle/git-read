@@ -13,8 +13,11 @@ class VisitorViewsNextCommitTest < ApplicationSystemTestCase
       visit root_path
       click_on "First commit"
       click_on "Next"
+      expand_history
 
       assert_selector "h1", text: "Middle commit"
+      assert_no_selector "[aria-current]", text: "First commit"
+      assert_selector "[aria-current]", text: "Middle commit"
     end
   end
 
