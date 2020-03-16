@@ -17,15 +17,21 @@
       </h1>
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
-        <% if commit.parent.present? %>
-          <% link_to "/commits/#{commit.parent.sha}/index.html" do %>
+        <% parent, _, child = adjacent_commits(history.commits, commit: commit) %>
+
+        <% if parent.present? %>
+          <% link_to "/commits/#{parent.sha}/index.html" do %>
             &#8592; Previous
           <% end %>
         <% end %>
 
-        <a href="#">
-          Next &#8594;
-        </a>
+        <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+        <% if child.present? %>
+          <% link_to "/commits/#{child.sha}/index.html" do %>
+            Next &#8594;
+          <% end %>
+        <% end %>
       </nav>
     </header>
 
