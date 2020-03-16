@@ -5,6 +5,9 @@ activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
 
+set :markdown_engine, :redcarpet
+set :markdown, fenced_code_blocks: true, smartypants: true, with_toc_data: true
+
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 
