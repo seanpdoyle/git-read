@@ -30,12 +30,13 @@ page '/*.txt', layout: false
 #   },
 # )
 
-repository = Git.open(
-  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
-)
+repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
+
+repository = Git.open(repository_directory)
 
 locals = {
   history: {
+    root: repository_directory.basename,
     commits: repository.log(nil).reverse_each,
   },
 }

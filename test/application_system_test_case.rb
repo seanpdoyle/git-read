@@ -38,7 +38,7 @@ class ApplicationSystemTestCase < ActiveSupport::TestCase
     ClimateControl.modify(GIT_DIR: @repository.dir.path) do
       Capybara.app = Middleman.server
 
-      block.call
+      block.call Pathname(@repository.dir.path)
     end
   end
 
