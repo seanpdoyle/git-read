@@ -11,6 +11,14 @@ GEM
     autoprefixer-rails (9.7.4)
       execjs
     backports (3.17.0)
+    capybara (3.31.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.5)
+      xpath (~> 3.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -73,7 +81,16 @@ GEM
       servolux
       tilt (~> 2.0.9)
       uglifier (~> 3.0)
+    mini_mime (1.0.2)
+    mini_portile2 (2.4.0)
     minitest (5.14.0)
+    nokogiri (1.10.9)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.9-java)
+    nokogiri (1.10.9-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.9-x86-mingw32)
+      mini_portile2 (~> 2.4.0)
     padrino-helpers (0.13.3.4)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.13.3.4)
@@ -83,9 +100,12 @@ GEM
     parallel (1.19.1)
     public_suffix (4.0.3)
     rack (2.2.2)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    regexp_parser (1.7.0)
     sassc (2.2.1)
       ffi (~> 1.9)
     sassc (2.2.1-x64-mingw32)
@@ -105,6 +125,8 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     wdm (0.1.1)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   java
@@ -114,6 +136,7 @@ PLATFORMS
   x86-mswin32
 
 DEPENDENCIES
+  capybara
   middleman (~> 4.2)
   middleman-autoprefixer (~> 2.7)
   tzinfo-data
