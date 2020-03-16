@@ -16,12 +16,12 @@
         Table of Contents
       </summary>
       <nav class="history">
-        <a href="/index.html">
+        <% link_to root_path do %>
           <%= escape_html(history[:root]) %>
-        </a>
+        <% end %>
 
         <% history[:commits].each do |commit| %>
-          <% link_to "/commits/#{commit.sha}/index.html" do %>
+          <% link_to commit_path(commit) do %>
             <%= escape_html(commit.message.lines.first) %>
           <% end %>
         <% end %>
@@ -33,13 +33,13 @@
         <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
 
         <% if parent.present? %>
-          <% link_to "/commits/#{parent.sha}/index.html" do %>
+          <% link_to commit_path(parent) do %>
             &#8592; Previous
           <% end %>
         <% end %>
 
         <% if child.present? %>
-          <% link_to "/commits/#{child.sha}/index.html" do %>
+          <% link_to commit_path(child) do %>
             Next &#8594;
           <% end %>
         <% end %>
