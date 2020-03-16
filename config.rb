@@ -40,6 +40,7 @@ repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
 repository = Git.open(repository_directory)
 
 history = History.new(
+  name: repository_directory.basename,
   readme: repository.show("HEAD:README.md"),
   repository: repository,
 )

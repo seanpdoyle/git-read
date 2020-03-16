@@ -1,7 +1,8 @@
 class History
-  attr_reader :readme, :repository
+  attr_reader :name, :readme, :repository
 
-  def initialize(readme:, repository:)
+  def initialize(name:, readme:, repository:)
+    @name = name
     @readme = readme
     @repository = repository
   end
