@@ -78,6 +78,14 @@ end
 #   end
 # end
 
+helpers do
+  def adjacent_commits(history, commit:)
+    [nil].chain(history).chain([nil]).each_cons(3).detect do |_, middle, _|
+      commit.sha == middle.sha
+    end
+  end
+end
+
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 

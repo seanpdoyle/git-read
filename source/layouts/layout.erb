@@ -30,7 +30,7 @@
 
     <main class="page__content">
       <header class="navigation">
-        <% parent = commit.parent %>
+        <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
 
         <% if parent.present? %>
           <% link_to "/commits/#{parent.sha}/index.html" do %>
@@ -38,9 +38,11 @@
           <% end %>
         <% end %>
 
-        <a href="#">
-          Next &#8594;
-        </a>
+        <% if child.present? %>
+          <% link_to "/commits/#{child.sha}/index.html" do %>
+            Next &#8594;
+          <% end %>
+        <% end %>
       </header>
 
       <article class="commit">
