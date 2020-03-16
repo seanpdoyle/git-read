@@ -17,7 +17,7 @@
       </summary>
       <nav class="history">
         <a href="/index.html">
-          git-read
+          <%= escape_html(history[:root]) %>
         </a>
 
         <% history[:commits].each do |commit| %>
