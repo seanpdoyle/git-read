@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+summary::-webkit-details-marker {
+  @apply hidden;
+}
+
+[open].open\:hidden,
+[open] .open\:hidden {
+  @apply hidden;
+}
+
+[open].open\:initial,
+[open] .open\:initial {
+  display: initial;
+}
+
+[open].open\:-rotate-90,
+[open] .open\:-rotate-90 {
+  @apply -rotate-90;
+}
+
+[open].open\:absolute,
+[open] .open\:absolute {
+  @apply absolute;
+}
+
+@screen md {
+  .md\:h-screen-fit {
+    height: calc(100vh - 3rem); /* 3rem is our header height */
+  }
+
+  [open].md\:open\:rotate-180,
+  [open] .md\:open\:rotate-180 {
+    @apply rotate-180;
+  }
+}
