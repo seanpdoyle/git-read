@@ -17,21 +17,30 @@
         </a>
       </h1>
 
+      <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
+
       <nav class="
         header__navigation
         navigation
+        <%= (
+          if parent.blank? && child.present?
+            "navigation--next"
+          elsif parent.present? && child.blank?
+            "navigation--previous"
+          end
+        ) %>
       ">
-        <% parent = commit.parent %>
-
         <% if parent.present? %>
           <% link_to "/commits/#{parent.sha}/index.html" do %>
             &#8592; Previous
           <% end %>
         <% end %>
 
-        <a href="#">
-          Next &#8594;
-        </a>
+        <% if child.present? %>
+          <% link_to "/commits/#{child.sha}/index.html" do %>
+            Next &#8594;
+          <% end %>
+        <% end %>
       </nav>
     </header>
 
