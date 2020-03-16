@@ -40,11 +40,14 @@
               u-db-overflow-y--auto
               u-mb-overflow-x--scroll
             ">
-              <a href="#" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman">
-              </a>
-
-              <a href="#" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md">
-              </a>
+              <% history[:commits].each do |commit| %>
+                <%= link_to(
+                  "",
+                  "/commits/#{commit.sha}/index.html",
+                  class: "commit-node commit-node--collapsed",
+                  title: commit.message.lines.first
+                ) %>
+              <% end %>
             </nav>
 
             <div class="accordion__toggle">
@@ -89,13 +92,14 @@
           u-db-overflow-y--auto
           u-mb-overflow-x--scroll
         ">
-          <a href="#" class="commit-node commit-node--full">
-            [GENERATED]: Scaffold the project with Middleman
-          </a>
-
-          <a href="#" class="commit-node commit-node--full">
-            Elaborate on the project's goals in the README.md
-          </a>
+          <% history[:commits].each do |commit| %>
+            <% link_to(
+              "/commits/#{commit.sha}/index.html",
+              class: "commit-node commit-node--full",
+            ) do %>
+              <%= markdown(commit.message.lines.first) %>
+            <% end %>
+          <% end %>
         </nav>
       </details>
 
