@@ -5,6 +5,7 @@ require "lib/models/history"
 
 config[:mode] = (ENV.fetch("MODE") { build? ? "build" : "server" }).to_sym
 
+activate :aria_current
 activate :external_pipeline,
          name: :webpack,
          command: build? ?  "yarn build" : "yarn start",
