@@ -21,9 +21,13 @@
         header__navigation
         navigation
       ">
-        <a href="#">
-          &#8592; Previous
-        </a>
+        <% parent = commit.parent %>
+
+        <% if parent.present? %>
+          <% link_to "/commits/#{parent.sha}/index.html" do %>
+            &#8592; Previous
+          <% end %>
+        <% end %>
 
         <a href="#">
           Next &#8594;
