@@ -64,6 +64,7 @@ proxy(
   "README.html",
   locals: {
     history: history,
+    commit: history.initial_commit,
     contents: history.readme,
     page: {
       title: history.readme.lines.first,
