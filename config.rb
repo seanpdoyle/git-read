@@ -30,6 +30,22 @@ page '/*.txt', layout: false
 #   },
 # )
 
+repository = Git.open(
+  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+)
+
+proxy(
+  "index.html",
+  "README.html",
+  locals: {
+    commit: repository.object("HEAD"),
+    page: {
+      title: repository.object("HEAD:README.md").contents.lines.first,
+    },
+  },
+  ignore: true,
+)
+
 # Helpers
 # Methods defined in the helpers block are available in templates
 # https://middlemanapp.com/basics/helper-methods/
