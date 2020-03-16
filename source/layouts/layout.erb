@@ -1,15 +1,60 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= current_page.data.title || "Middleman" %></title>
     <%= javascript_include_tag "site" %>
   </head>
-  <body>
-    <%= yield %>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+        <a href="#">
+          git-read
+        </a>
+      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+        <a href="#">
+          &#8592; Previous
+        </a>
+
+        <a href="#">
+          Next &#8594;
+        </a>
+      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details class="relative pb-8 md:h-screen-fit">
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+          <a href="#">
+            [GENERATED]: Scaffold the project with Middleman
+          </a>
+
+          <a href="#">
+            Elaborate on the project's goals in the README.md
+          </a>
+        </nav>
+      </details>
+
+      <article class="flex-grow justify-center p-4 md:flex md:h-screen-fit md:p-8 md:overflow-y-auto">
+        <section class="prose prose-lg md:prose-xl">
+          <%= yield %>
+        </section>
+      </article>
+    </main>
   </body>
 </html>
