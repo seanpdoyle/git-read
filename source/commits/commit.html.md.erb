@@ -1,0 +1,6 @@
+<% subject, *messages = commit.message.lines %>
+
+<%= subject.strip %>
+===
+
+<%= messages.join %>
