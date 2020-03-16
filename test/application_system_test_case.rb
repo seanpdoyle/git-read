@@ -44,6 +44,10 @@ class ApplicationSystemTestCase < ActiveSupport::TestCase
     end
   end
 
+  def expand_history
+    find("details > summary", text: "Expand History").click
+  end
+
   teardown do
     Capybara.reset_sessions!
     Capybara.use_default_driver

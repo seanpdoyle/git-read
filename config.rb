@@ -41,12 +41,29 @@ repository = Git.open(repository_directory)
 
 history = History.new(
   readme: repository.show("HEAD:README.md"),
+  repository: repository,
 )
+
+history.commits.each do |commit|
+  proxy(
+    "/commits/#{commit.sha}/index.html",
+    "/commits/commit.html",
+    locals: {
+      history: history,
+      commit: commit,
+      page: {
+        title: commit.message.lines.first,
+      }
+    },
+    ignore: true,
+  )
+end
 
 proxy(
   "index.html",
   "README.html",
   locals: {
+    history: history,
     contents: history.readme,
     page: {
       title: history.readme.lines.first,
@@ -64,6 +81,14 @@ proxy(
 #     'Helping'
 #   end
 # end
+
+helpers do
+  def markdown(content)
+    template = Tilt[:md].new { content }
+
+    template.render
+  end
+end
 
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
