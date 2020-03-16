@@ -39,6 +39,14 @@
   &:last-of-type::after {
     display: none;
   }
+
+  &[aria-current]:not([aria-current="false"]) {
+    text-decoration: none;
+  }
+
+  &[aria-current]:not([aria-current="false"])::before {
+    background-color: green;
+  }
 }
 
 .history > *:last-child {

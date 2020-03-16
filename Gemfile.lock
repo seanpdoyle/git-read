@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/thoughtbot/middleman-aria_current.git
+  revision: 27c5f328ac36d641a1afa4a55223673e3688f89b
+  branch: sitemap
+  specs:
+    middleman-aria_current (0.1.1)
+      middleman-core (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -147,6 +155,7 @@ DEPENDENCIES
   climate_control
   git
   middleman (~> 4.2)
+  middleman-aria_current!
   middleman-autoprefixer (~> 2.7)
   minitest-around
   redcarpet
