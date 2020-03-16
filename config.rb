@@ -1,3 +1,5 @@
+require "lib/models/history"
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
@@ -33,6 +35,25 @@ page '/*.txt', layout: false
 #     which_fake_page: 'Rendering a fake page with a local variable'
 #   },
 # )
+
+repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
+repository = Git.open(repository_directory)
+
+history = History.new(
+  readme: repository.show("HEAD:README.md"),
+)
+
+proxy(
+  "index.html",
+  "README.html",
+  locals: {
+    contents: history.readme,
+    page: {
+      title: history.readme.lines.first,
+    },
+  },
+  ignore: true,
+)
 
 # Helpers
 # Methods defined in the helpers block are available in templates
