@@ -10,9 +10,12 @@ require "tmpdir"
 
 require "middleman/rack"
 
+require_relative "../helpers/url_helpers"
+
 class ApplicationSystemTestCase < ActiveSupport::TestCase
   include Capybara::DSL
   include Capybara::Minitest::Assertions
+  include UrlHelpers
 
   def around(&block)
     directory = Dir.mktmpdir
