@@ -40,13 +40,11 @@
         </summary>
 
         <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
-          <a href="#">
-            [GENERATED]: Scaffold the project with Middleman
-          </a>
-
-          <a href="#">
-            Elaborate on the project's goals in the README.md
-          </a>
+          <% history.commits.each do |commit| %>
+            <% link_to("/commits/#{commit.sha}/index.html") do %>
+              <%= markdown(commit.message.lines.first) %>
+            <% end %>
+          <% end %>
         </nav>
       </details>
 
