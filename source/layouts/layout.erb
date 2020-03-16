@@ -12,9 +12,9 @@
   <body class="page">
     <header class="header">
       <h1 class="header__name">
-        <a href="/index.html">
+        <% link_to root_path do %>
           <%= escape_html(history[:root]) %>
-        </a>
+        <% end %>
       </h1>
 
       <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
@@ -31,13 +31,13 @@
         ) %>
       ">
         <% if parent.present? %>
-          <% link_to "/commits/#{parent.sha}/index.html" do %>
+          <% link_to commit_path(parent) do %>
             &#8592; Previous
           <% end %>
         <% end %>
 
         <% if child.present? %>
-          <% link_to "/commits/#{child.sha}/index.html" do %>
+          <% link_to commit_path(child) do %>
             Next &#8594;
           <% end %>
         <% end %>
@@ -56,7 +56,7 @@
               <% history[:commits].each do |commit| %>
                 <%= link_to(
                   "",
-                  "/commits/#{commit.sha}/index.html",
+                  commit_path(commit),
                   class: "commit-node commit-node--collapsed",
                   title: commit.message.lines.first
                 ) %>
@@ -107,7 +107,7 @@
         ">
           <% history[:commits].each do |commit| %>
             <% link_to(
-              "/commits/#{commit.sha}/index.html",
+              commit_path(commit),
               class: "commit-node commit-node--full",
             ) do %>
               <%= markdown(commit.message.lines.first) %>
