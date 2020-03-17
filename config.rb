@@ -41,7 +41,31 @@ locals = {
     root: repository_directory.basename,
     commits: repository.log(nil).reverse_each,
   },
+  out_of_date: false,
 }
+
+repository.tags.each do |tag|
+  commits = tag.log(nil).reverse_each
+
+  commits.each do |commit|
+    proxy(
+      "/commits/#{commit.sha}/index.html",
+      "/commits/commit.html",
+      locals: locals.merge(
+        commit: commit,
+        out_of_date: true,
+        page: {
+          title: commit.message.lines.first,
+        },
+        history: {
+          root: repository_directory.basename,
+          commits: commits,
+        }
+      ),
+      ignore: true,
+    )
+  end
+end
 
 proxy(
   "index.html",
