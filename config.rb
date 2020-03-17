@@ -42,15 +42,23 @@ locals = {
   history: {
     root: repository_directory.basename,
     commits: repository.log(nil).reverse_each.map do |commit|
-      Commit.new(commit: commit)
+      Commit.new(
+        commit: commit,
+        repository: repository,
+      )
     end,
   },
   out_of_date: false,
+  render_diffs: true,
+  repository: repository,
 }
 
 repository.tags.each do |tag|
   commits = tag.log(nil).reverse_each.map do |commit|
-    Commit.new(commit: commit)
+    Commit.new(
+      commit: commit,
+      repository: repository,
+    )
   end
 
   commits.each do |commit|
@@ -83,12 +91,16 @@ proxy(
     page: {
       title: latest_readme.lines.first,
     },
+    render_diffs: false,
   ),
   ignore: true,
 )
 
 locals.dig(:history, :commits).each do |commit|
-  commit = Commit.new(commit: commit)
+  commit = Commit.new(
+    commit: commit,
+    repository: repository,
+  )
 
   proxy(
     "/commits/#{commit.sha}/index.html",

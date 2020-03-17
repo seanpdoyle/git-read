@@ -173,6 +173,18 @@ p {
   }
 }
 
+.commit--diff {
+  --commit-font-size: 0.8333rem;
+
+  @media (min-width: $breakpoint--mobile) {
+  --commit-font-size: 1.12rem;
+  }
+
+  .highlight {
+    overflow-x: auto;
+  }
+}
+
 .commit--message {
   padding: calc(var(--commit-font-size) * 0.5);
 
@@ -463,6 +475,43 @@ p {
 .page {
   margin: 0;
   min-height: 100vh;
+}
+
+.file {
+  border: solid 1px black;
+}
+
+.file__toggle {
+  margin-right: 1rem;
+}
+
+.file__toggle--close {
+  display: none;
+}
+
+.file[open] .file__toggle--close {
+  display: inherit;
+}
+
+.file__toggle--open {
+  display: inherit;
+}
+
+.file[open] .file__toggle--open {
+  display: none;
+}
+
+.file__name {
+  align-items: baseline;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 1rem;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
 }
 
 .u-db-overflow-y--auto {
