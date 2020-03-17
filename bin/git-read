@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+set -e
+
+ARGS=( "$@" )
+
+for i in "${!ARGS[@]}"; do
+  case "${ARGS[i]}" in
+    "")
+      continue
+      ;;
+    -o|--output-dir|--build-dir)
+      OUTPUT_DIR="${ARGS[i+1]}"
+      unset 'ARGS[i+1]'
+      ;;
+    -g|--git-dir)
+      GIT_DIR="${ARGS[i+1]}"
+      unset 'ARGS[i+1]'
+      ;;
+    -h|--help)
+      cat <<-HELP
+usage: git read [--help] [-g | --git-dir <path>] [-o | --output-dir <path>]
+
+Generate HTML from your project's Git history
+
+OPTIONS
+      --output-dir
+          specify the directory where the site will be built
+
+      --git-dir
+          specify the parent directory of the project's .git/ directory
+HELP
+      exit 0
+      ;;
+    *)
+      continue
+      ;;
+  esac
+  unset 'ARGS[i]'
+done
+
+build_site() {
+  git_dir="${1}"
+  output_dir="${2}"
+  tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
+
+  export GIT_DIR=$git_dir
+
+  mkdir -p $output_dir
+  cd $tool_dir
+  bundle exec middleman build --build-dir=$output_dir
+  cd $git_dir
+}
+
+build_site \
+  $(realpath ${GIT_DIR-./}) \
+  $(realpath ${OUTPUT_DIR-./build/})
