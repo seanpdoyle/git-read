@@ -122,6 +122,18 @@
         content__item--grow
       ">
         <section class="commit commit--message">
+          <% if out_of_date %>
+            <aside class="banner">
+              <mark>
+                You're viewing an out-of-date version of the project.
+
+                <% link_to root_path do %>
+                  Read the latest version.
+                <% end %>
+              </mark>
+            </aside>
+          <% end %>
+
           <%= yield %>
         </section>
       </article>
