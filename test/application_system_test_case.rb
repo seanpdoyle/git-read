@@ -1,9 +1,4 @@
-require "bundler"
-Bundler.require(:default, :test)
-
-require "minitest/autorun"
-require "active_support"
-require "active_support/test_case"
+require "test_helper"
 
 require "pathname"
 require "tmpdir"
@@ -35,6 +30,29 @@ class ApplicationSystemTestCase < ActiveSupport::TestCase
 
   def commit(message)
     @repository.commit(message)
+  end
+
+  def with_built_output(&block)
+    git_directory = Pathname(@repository.dir.path)
+    build_directory = git_directory.join("build")
+
+    system <<~BASH, exception: true
+      bin/git-read \
+        --verbose \
+        --git-dir #{git_directory} \
+        --output-dir #{build_directory}
+    BASH
+
+    Capybara.app = Rack::Builder.new do
+      use Rack::Static,
+        urls: [""],
+        root: build_directory,
+        index: "index.html"
+
+      run -> (*) {}
+    end
+
+    block.call
   end
 
   def with_git_repository(&block)
