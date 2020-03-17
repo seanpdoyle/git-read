@@ -118,6 +118,7 @@
 
       <article class="
         commit-content
+        <%= ("commit-content--double" if render_diffs) %>
         content__item
         content__item--grow
       ">
@@ -136,6 +137,14 @@
 
           <%= yield %>
         </section>
+
+        <% if render_diffs %>
+          <aside class="commit commit--diff commit--long-content">
+            <% commit.diff_files.each do |diff_file| %>
+              <%= partial("commits/file", locals: diff_file) %>
+            <% end %>
+          </aside>
+        <% end %>
       </article>
     </main>
   </body>
