@@ -54,4 +54,24 @@ module GitHelpers
       FileUtils.rm_rf(directory)
     end
   end
+
+  def switch_branch(branch_name, &block)
+    current_branch = @repository.branch
+
+    branch = @repository.branch(branch_name)
+
+    branch.checkout
+
+    block.call
+
+    branch_head = branch.gcommit
+
+    current_branch.checkout
+
+    branch_head
+  end
+
+  def tag_head_commit(tag_name)
+    @repository.add_tag(tag_name)
+  end
 end

@@ -26,20 +26,34 @@
     </details>
 
     <main class="page__content">
-      <header class="navigation">
-        <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
+      <header>
+        <% if out_of_date %>
+          <aside class="banner">
+            <h2>
+              You're viewing an out-of-date version of the project.
 
-        <% if parent.present? %>
-          <% link_to commit_path(parent) do %>
-            &#8592; Previous
-          <% end %>
+              <% link_to root_path do %>
+                Read the latest version.
+              <% end %>
+            </h2>
+          </aside>
         <% end %>
 
-        <% if child.present? %>
-          <% link_to commit_path(child) do %>
-            Next &#8594;
+        <nav class="navigation">
+          <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
+
+          <% if parent.present? %>
+            <% link_to commit_path(parent) do %>
+              &#8592; Previous
+            <% end %>
           <% end %>
-        <% end %>
+
+          <% if child.present? %>
+            <% link_to commit_path(child) do %>
+              Next &#8594;
+            <% end %>
+          <% end %>
+        </nav>
       </header>
 
       <article class="commit">
