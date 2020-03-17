@@ -15,6 +15,9 @@ for i in "${!ARGS[@]}"; do
       OUTPUT_DIR="${ARGS[i+1]}"
       unset 'ARGS[i+1]'
       ;;
+    -s|--server|--serve)
+      TARGET="serve"
+      ;;
     -g|--git-dir)
       GIT_DIR="${ARGS[i+1]}"
       unset 'ARGS[i+1]'
@@ -24,7 +27,8 @@ for i in "${!ARGS[@]}"; do
       ;;
     -h|--help)
       cat <<-HELP
-usage: git read [--help] [-v|--verbose] [-g|--git-dir <path>] [-o|--output-dir <path>]
+usage: git read [--help] [-v|--verbose] [-g|--git-dir <path>]
+                [-s|--server|--serve] [-o|--output-dir <path>]
 
 Generate HTML from your project's Git history
 
@@ -38,6 +42,10 @@ OPTIONS
 
       --verbose
           print debugging information during the build process
+
+      --server
+            build and serve assets with a server available at
+            http://127.0.0.1:4567
 HELP
       exit 0
       ;;
@@ -51,18 +59,25 @@ done
 build_site() {
   git_dir="${1}"
   output_dir="${2}"
-  verbosity="${@}"
+  target="${3}"
+  verbosity="${4}"
   tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
 
   export GIT_DIR=$git_dir
 
   mkdir -p $output_dir
   cd $tool_dir
-  bundle exec middleman build --build-dir=$output_dir $verbosity
+
+  if [ "$target" == "serve" ]; then
+    bundle exec middleman server
+  else
+    bundle exec middleman build --build-dir=$output_dir $verbosity
+  fi
   cd $git_dir
 }
 
 build_site \
   $(realpath ${GIT_DIR-./}) \
   $(realpath ${OUTPUT_DIR-./build/}) \
+  "${TARGET}" \
   "${VERBOSE}"
