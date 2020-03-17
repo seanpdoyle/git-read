@@ -8,6 +8,7 @@
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= page[:title] || current_page.data.title %></title>
     <%= stylesheet_link_tag "site" %>
+    <%= stylesheet_link_tag "syntax" %>
     <%= javascript_include_tag "site" %>
   </head>
   <body class="page">
