@@ -51,4 +51,22 @@ module GitHelpers
   ensure
     FileUtils.rm_rf(directory)
   end
+
+  def switch_branch(branch_name, from: main_branch, &block)
+    branch = @repository.branch(branch_name)
+
+    branch.checkout
+
+    block.call(branch).tap { branch.gcommit }
+  ensure
+    from.checkout
+  end
+
+  def main_branch
+    %i[ main master ].map { |name| @repository.branches[name] }.find(&:present?)
+  end
+
+  def tag_head_commit(tag_name)
+    @repository.add_tag(tag_name)
+  end
 end

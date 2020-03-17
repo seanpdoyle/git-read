@@ -44,10 +44,50 @@ page '/*.txt', layout: false
 repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
 repository = Git.open(repository_directory)
 
+repository.tags.each do |tag|
+  stale_history = History.new(
+    name: repository_directory.basename,
+    readme: repository.show("#{tag.name}:README.md") ,
+    repository: repository,
+    root: tag,
+    out_of_date: true,
+  )
+
+  stale_history.commits.each do |commit|
+    proxy(
+      commit_path(commit),
+      "/commits/commit.html",
+      locals: {
+        history: stale_history,
+        commit: commit,
+        page: {
+          title: commit.message.lines.first,
+        },
+      },
+      ignore: true,
+    )
+  end
+
+  proxy(
+    tag_path(tag),
+    "README.html",
+    locals: {
+      history: stale_history,
+      commit: stale_history.initial_commit,
+      contents: stale_history.readme,
+      page: {
+        title: stale_history.readme.lines.first,
+      },
+    },
+    ignore: true,
+  )
+end
+
 history = History.new(
   name: repository_directory.basename,
   readme: repository.show("HEAD:README.md"),
   repository: repository,
+  root: repository
 )
 
 history.commits.each do |commit|

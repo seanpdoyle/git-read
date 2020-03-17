@@ -12,7 +12,7 @@
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
       <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
-        <% current_link_to root_path do %>
+        <% current_link_to root_path(history.root) do %>
           <%= escape_html(history.name) %>
         <% end %>
       </h1>
@@ -59,6 +59,18 @@
 
       <article class="flex-grow justify-center p-4 md:flex md:h-screen-fit md:p-8 md:overflow-y-auto">
         <section class="prose prose-lg md:prose-xl">
+          <% if history.out_of_date? %>
+            <aside class="text-center p-5">
+              <mark>
+                You're viewing an out-of-date version of the project.
+
+                <% link_to root_path do %>
+                  Read the latest version.
+                <% end %>
+              </mark>
+            </aside>
+          <% end %>
+
           <%= yield %>
         </section>
       </article>

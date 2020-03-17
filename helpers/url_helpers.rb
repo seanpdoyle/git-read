@@ -3,7 +3,15 @@ module UrlHelpers
     "/commits/#{commit.sha}/index.html"
   end
 
-  def root_path
-    "/index.html"
+  def tag_path(tag)
+    "/tags/#{tag.name}/index.html"
+  end
+
+  def root_path(root = nil)
+    if root.respond_to? :name
+      tag_path(root)
+    else
+      "/index.html"
+    end
   end
 end
