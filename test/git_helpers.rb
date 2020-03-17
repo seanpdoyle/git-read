@@ -12,6 +12,8 @@ module GitHelpers
 
   def commit(message)
     @repository.commit(message)
+
+    @repository.object("HEAD")
   end
 
   def with_built_output(&block)

@@ -56,9 +56,18 @@
         </nav>
       </header>
 
-      <article class="commit">
-        <%= yield %>
-      </article>
+      <section class="container">
+        <article class="container__item commit">
+          <%= yield %>
+        </article>
+        <% if render_diffs %>
+          <aside class="container__item diff">
+            <% commit.diff_files.each do |diff_file| %>
+              <%= partial("commits/file", locals: diff_file) %>
+            <% end %>
+          </aside>
+        <% end %>
+      </section>
     </main>
   </body>
 </html>

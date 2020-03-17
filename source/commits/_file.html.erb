@@ -1,0 +1,17 @@
+<details
+  id="<%= name %>"
+  <%= (
+    if expanded
+      "open"
+    end
+  ) %>
+>
+  <summary>
+    <%= name %>
+  </summary>
+
+  <% code(language) do %>
+<%# The lack of leading indentation is significant %>
+<%= contents %>
+  <% end -%>
+</details>

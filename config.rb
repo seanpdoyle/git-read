@@ -42,15 +42,23 @@ locals = {
   history: {
     root: repository_directory.basename,
     commits: repository.log(nil).reverse_each.map do |commit|
-      Commit.new(commit: commit)
+      Commit.new(
+        commit: commit,
+        repository: repository,
+      )
     end,
   },
   out_of_date: false,
+  render_diffs: true,
+  repository: repository,
 }
 
 repository.tags.each do |tag|
   commits = tag.log(nil).reverse_each.map do |commit|
-    Commit.new(commit: commit)
+    Commit.new(
+      commit: commit,
+      repository: repository,
+    )
   end
 
   commits.each do |commit|
@@ -78,6 +86,7 @@ proxy(
   "README.html",
   locals: locals.merge(
     commit: repository.object("HEAD"),
+    render_diffs: false,
     page: {
       title: repository.object("HEAD:README.md").contents.lines.first,
     },
@@ -86,7 +95,10 @@ proxy(
 )
 
 locals.dig(:history, :commits).each do |commit|
-  commit = Commit.new(commit: commit)
+  commit = Commit.new(
+    commit: commit,
+    repository: repository,
+  )
 
   proxy(
     "/commits/#{commit.sha}/index.html",
