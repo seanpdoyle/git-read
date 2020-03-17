@@ -244,15 +244,18 @@ p {
   }
 
   code pre,
-  pre code {
+  pre code,
+  > .highlight {
     overflow-x: auto;
   }
 
   pre code {
+    overflow-x: auto;
     padding: 0;
   }
 
-  code pre {
+  code pre,
+  > .highlight {
     margin-bottom: var(--commit-message-margin);
     padding: var(--commit-font-size);
   }
@@ -475,3 +478,5 @@ p {
     overflow-x: initial;
   }
 }
+
+<%= Rouge::Themes::Github.render(scope: ".highlight") %>
