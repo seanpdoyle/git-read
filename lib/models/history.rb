@@ -1,3 +1,5 @@
+require "lib/models/commit"
+
 class History
   attr_reader :name, :readme, :repository, :root
 
@@ -14,7 +16,9 @@ class History
   end
 
   def commits
-    root.log(nil).reverse_each
+    root.log(nil).reverse_each.map do |commit|
+      Commit.new(commit: commit)
+    end
   end
 
   def out_of_date?

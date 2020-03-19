@@ -61,7 +61,7 @@ repository.tags.each do |tag|
         history: stale_history,
         commit: commit,
         page: {
-          title: commit.message.lines.first,
+          title: commit.subject,
         },
       },
       ignore: true,
@@ -98,7 +98,7 @@ history.commits.each do |commit|
       history: history,
       commit: commit,
       page: {
-        title: commit.message.lines.first,
+        title: commit.subject,
       }
     },
     ignore: true,
