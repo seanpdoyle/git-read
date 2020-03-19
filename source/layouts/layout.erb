@@ -20,7 +20,7 @@
         <%= current_link_to escape_html(history[:root]), root_path %>
 
         <% history[:commits].each do |commit| %>
-          <%= current_link_to escape_html(commit.message.lines.first), commit_path(commit) %>
+          <%= current_link_to escape_html(commit.subject), commit_path(commit) %>
         <% end %>
       </nav>
     </details>
