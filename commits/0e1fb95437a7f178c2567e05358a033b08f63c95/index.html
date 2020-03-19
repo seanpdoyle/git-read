@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>git-read
+    <title>Add `bin/git-read --server` flag
 </title>
     <link href="/stylesheets/site.css" rel="stylesheet" />
     <link href="/stylesheets/syntax.css" rel="stylesheet" />
@@ -18,7 +18,7 @@
         Table of Contents
       </summary>
       <nav class="history">
-        <a href="/" aria-current="page">git-read</a>
+        <a href="/">git-read</a>
 
           <a href="/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
 </a>
@@ -50,7 +50,7 @@
 </a>
           <a href="/commits/0db12a01e729b7046ee3050572972e3bb7d2a451/">Introduce `bin&#x2F;git-read` command line interface
 </a>
-          <a href="/commits/0e1fb95437a7f178c2567e05358a033b08f63c95/">Add `bin&#x2F;git-read --server` flag
+          <a href="/commits/0e1fb95437a7f178c2567e05358a033b08f63c95/" aria-current="page">Add `bin&#x2F;git-read --server` flag
 </a>
           <a href="/commits/556a2e5bcb4a2f79b21af01b53b3d4b49163a780/">Extract `GitHelpers` from System Test Cases
 </a>
@@ -70,72 +70,94 @@
 
         <nav class="navigation">
 
-
-        </nav>
+<a href="/commits/0db12a01e729b7046ee3050572972e3bb7d2a451/">              &#8592; Previous
+</a>
+<a href="/commits/556a2e5bcb4a2f79b21af01b53b3d4b49163a780/">              Next &#8594;
+</a>        </nav>
       </header>
 
       <section class="container">
         <article class="container__item commit">
-          <h1>git-read</h1>
+          <h1>Add <code>bin/git-read --server</code> flag</h1>
 
-<p>Generate a website based on a project&rsquo;s Git history.</p>
-
-<ul>
-<li>Serve the project&rsquo;s <code>README.md</code> as the homepage</li>
-<li>Index the history through its commits</li>
-<li>Transforms commit messages HTML through a syntax-aware Markdown parser</li>
-<li>Display the commits alongside their code changes</li>
-</ul>
-
-<h2>Command-line Interface</h2>
-
-<p>Once installed, make sure that the <code>bin/git-read</code> executable is available on
-your path so that the <a href="http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html"><code>git</code> program can invoke it as a subcommand</a>.</p>
-
-<p>To learn of the ways to to invoke the command, execute <code>git read --help</code>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-
-Generate HTML from your project's Git history
-
-OPTIONS
-
-      --output-dir
-          specify the directory where the site will be built
-
-      --git-dir
-          specify the parent directory of the project's .git/ directory
-
-      --verbose
-          print debugging information during the build process
-
-      --server
-          build and serve assets with a server available at
-          http://127.0.0.1:4567
-
-      --help
-          generate this help output
-</code></pre></div>
-<h2>Revising a Project&rsquo;s History</h2>
-
-<p>If you&rsquo;re consuming this tool and using it to tell the story of your
-project&rsquo;s origins and growth, you might be tempted to become a bit of a
-revisionist historian.</p>
-
-<p>This might come as a shock, but this project was not perfected
-implemented from the start, and is in fact the result of countless
-<a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_changing_multiple"><code>pick</code>, <code>squash</code>, <code>reword</code>, <code>fixup</code>, and <code>drop</code> rebase
-operations</a>.</p>
-
-<p>While this can be harmless for pre-released projects, rewriting history
-once the resulting website is deployed and publicized would result in
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"><code>404</code>s and broken URLs</a>.</p>
-
-<p>To counteract this, <code>git-read</code> will include and compile pages for any
-commits that are <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging"><code>git tag</code>-ed</a>, along with the rest of their
-history.</p>
+<p>Extend the <code>bin/git-read</code> command line interface to accept <code>-s</code>,
+<code>--server</code>, or <code>--server</code> to execute a long-running process that manages
+the Middleman preview server, serving the site at
+[http:localhost:4567][].</p>
 
         </article>
+          <aside class="container__item diff">
+              <details
+  id="bin/git-read"
+  open
+>
+  <summary>
+    bin/git-read
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
+index 93f91e6..c05702d 100755
+</span><span class="gd">--- a/bin/git-read
+</span><span class="gi">+++ b/bin/git-read
+</span><span class="p">@@ -13,13 +13,17 @@</span> for i in "${!ARGS[@]}"; do
+       OUTPUT_DIR="${ARGS[i+1]}"
+       unset 'ARGS[i+1]'
+       ;;
+<span class="gi">+    -s|--server|--serve)
++      TARGET="serve"
++      ;;
+</span>     -g|--git-dir)
+       GIT_DIR="${ARGS[i+1]}"
+       unset 'ARGS[i+1]'
+       ;;
+     -h|--help)
+       cat &lt;&lt;-HELP
+<span class="gd">-usage: git read [--help] [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
+</span><span class="gi">+usage: git read [--help] [-g | --git-dir &lt;path&gt;]
++                [-s|--server|--serve] [-o | --output-dir &lt;path&gt;]
+</span> 
+ Generate HTML from your project's Git history
+ 
+<span class="p">@@ -29,6 +33,10 @@</span> OPTIONS
+ 
+       --git-dir
+           specify the parent directory of the project's .git/ directory
+<span class="gi">+
++      --server
++            build and serve assets with a server available at
++            http://127.0.0.1:4567
+</span> HELP
+       exit 0
+       ;;
+<span class="p">@@ -42,16 +50,23 @@</span> done
+ build_site() {
+   git_dir="${1}"
+   output_dir="${2}"
+<span class="gi">+  target="${3}"
+</span>   tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
+ 
+   export GIT_DIR=$git_dir
+ 
+   mkdir -p $output_dir
+   cd $tool_dir
+<span class="gd">-  bundle exec middleman build --build-dir=$output_dir
+</span><span class="gi">+
++  if [ "$target" == "serve" ]; then
++    bundle exec middleman server
++  else
++    bundle exec middleman build --build-dir=$output_dir
++  fi
+</span>   cd $git_dir
+ }
+ 
+ build_site \
+   $(realpath ${GIT_DIR-./}) \
+<span class="gd">-  $(realpath ${OUTPUT_DIR-./build/})
+</span><span class="gi">+  $(realpath ${OUTPUT_DIR-./build/}) \
++  "${TARGET}"
+</span></code></pre></div></details>
+
+          </aside>
       </section>
     </main>
   </body>

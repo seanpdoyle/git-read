@@ -1,0 +1,541 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Render how a commit changes the project's files
+</title>
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <link href="/stylesheets/syntax.css" rel="stylesheet" />
+    <script src="/javascripts/site.js"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">
+        Table of Contents
+      </summary>
+      <nav class="history">
+        <a href="/">git-read</a>
+
+          <a href="/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+</a>
+          <a href="/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
+</a>
+          <a href="/commits/f2859800cec5f90bb8146d5c7108429a22f25c18/">Replace Generated Files with Static HTML and CSS
+</a>
+          <a href="/commits/49d1766f58a627a8a084f1377fc6ad17755e6ff0/">Exercise the application through a System Test
+</a>
+          <a href="/commits/8160f2abba85592b84535bfa3011fa84f606f776/">Introduce Redcarpet Markdown Engine
+</a>
+          <a href="/commits/4fe99ee1ce3065d8b660b3610e73b757d5b8b1fa/">Generate `&#x2F;index.html` dynamically
+</a>
+          <a href="/commits/0dd760a67ec2b51117152cb31773c1d6e5f536f4/">Extract `ApplicationSystemTestCase`
+</a>
+          <a href="/commits/3c9c89d56b1324dc2b25ecee7de846fce189f68a/">Render the contents of a Commit&#x27;s Message
+</a>
+          <a href="/commits/619b2ca977b180e73d56092d3a85d0a8656c0b2c/">Navigate to previous commit
+</a>
+          <a href="/commits/5cc450efada669809417cf49275c26d48e69f2d6/">Navigate to next commit
+</a>
+          <a href="/commits/2ed248c6751b4cd8e64689c14a938bc8fd96cc16/">Dynamically determine project title
+</a>
+          <a href="/commits/6c8cffef434204fabf9aa5eff4a2f16981798545/">Extract `UrlHelpers`
+</a>
+          <a href="/commits/9469b52bbdf746fdd6a8da332425202c03aa3e49/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="/commits/e2efb6370ec88f15ebdfe63c51842850061922a1/">Syntax highlight Markdown fenced code blocks
+</a>
+          <a href="/commits/0db12a01e729b7046ee3050572972e3bb7d2a451/">Introduce `bin&#x2F;git-read` command line interface
+</a>
+          <a href="/commits/0e1fb95437a7f178c2567e05358a033b08f63c95/">Add `bin&#x2F;git-read --server` flag
+</a>
+          <a href="/commits/556a2e5bcb4a2f79b21af01b53b3d4b49163a780/">Extract `GitHelpers` from System Test Cases
+</a>
+          <a href="/commits/05834e9d919ce697cc2c6f88b13658670b8042cf/">Add support for re-writing a project&#x27;s history
+</a>
+          <a href="/commits/eedc1bf989c5a77a9b6017a00387ffc21e0c0ae7/">Extract `Commit` model
+</a>
+          <a href="/commits/3c2c609577f76758cf29b51f9959466c93f2da65/" aria-current="page">Render how a commit changes the project&#x27;s files
+</a>
+          <a href="/commits/6b1388a4d0e3acaff8785afbddbf170a15fcd85f/">Integrate with GitHub Actions
+</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+
+        <nav class="navigation">
+
+<a href="/commits/eedc1bf989c5a77a9b6017a00387ffc21e0c0ae7/">              &#8592; Previous
+</a>
+<a href="/commits/6b1388a4d0e3acaff8785afbddbf170a15fcd85f/">              Next &#8594;
+</a>        </nav>
+      </header>
+
+      <section class="container">
+        <article class="container__item commit">
+          <h1>Render how a commit changes the project&rsquo;s files</h1>
+
+<p>To provide the reader with ample context, render each commits&rsquo; file
+changes alongside their commit messages.</p>
+
+<p>This commit introduces a wrapping
+[<code>.container</code>][source/stylesheets/blocks/_container.scss]] CSS class, to
+serve as a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_flex">flex box parent</a>.</p>
+
+<p>Descendants will split the remaining page width amongst themselves.</p>
+
+<p>In the case of the project root, the diff will be omitted, and the
+commit message will span the width of the page (by virtue of it being
+the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child"><code>:only-child</code> to the <code>.container</code></a>.
+for project root</p>
+
+<p>When a file&rsquo;s diff is longer than 100 lines, render the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code>
+element</a> as collapsed by default. To do so, omit the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>open</code>
+attribute</a>.</p>
+
+<p>Likewise, when a commit&rsquo;s subject starts with <code>[GENERATED]</code>, don&rsquo;t
+render the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> with an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>open</code>
+attribute</a>.</p>
+
+<h2>Determining the diff contents</h2>
+
+<p>When a commit has a parent, generating the diff with the <a href="https://github.com/ruby-git/ruby-git/tree/v1.6.0#examples"><code>ruby-git</code>
+provided interface</a> is straightforward:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">diff</span> <span class="o">=</span> <span class="n">parent</span><span class="p">.</span><span class="nf">diff</span><span class="p">(</span><span class="n">commit</span><span class="p">)</span>
+</code></pre></div>
+<p>However, when the commit is the project&rsquo;s root, it has no parent, and
+cannot be &ldquo;diffed&rdquo;.</p>
+
+<p>To counteract this restriction, this commit invokes a <a href="https://git-scm.com/docs/git-show"><code>git
+show</code></a> command for each file included in the commit, passing
+the <a href="https://git-scm.com/docs/git-show#_combined_diff_format"><code>--cc</code> combined diff flag</a>. The <code>--cc</code> flag will ensure
+that the output contains the code diff. In order to separate out the
+code from the prose, pass the command a <a href="https://git-scm.com/docs/pretty-formats"><code>--format=%n</code>
+flag</a> which includes the <code>%n</code> as a &ldquo;newline&rdquo; placeholder,
+intended to serve as an omission of the prose.</p>
+
+<p>The padding <code>\n</code> character is subsequently omitted by the trailing
+Ruby-side call to <a href="https://ruby-doc.org/core-2.7.0/String.html#method-i-strip"><code>String#strip</code></a>.</p>
+
+<p>The net result is that the contents of the diff include the changes to
+the code, and <em>do not</em> include the prose in the commit&rsquo;s message.</p>
+
+<h2>Test Coverage</h2>
+
+<p>To ensure that this new behavior is covered, this commit includes
+corresponding System Tests.</p>
+
+<p>To enable direct navigation to a commit, modify the existing <code>commit</code>
+test helper to return the new commit object, so that the test can pass
+it directly to the <code>commit_path</code> helper.</p>
+
+<h2>Desktop</h2>
+
+<p><img src="https://user-images.githubusercontent.com/2575027/77105568-42179580-69f4-11ea-8bb0-17b51cf9be2a.png" alt="desktop view" /></p>
+
+<h2>Mobile</h2>
+
+<p><img src="https://user-images.githubusercontent.com/2575027/77105584-4479ef80-69f4-11ea-83a0-7d25d9daca07.png" alt="mobile view" /></p>
+
+        </article>
+          <aside class="container__item diff">
+              <details
+  id="config.rb"
+  open
+>
+  <summary>
+    config.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index ce7ca32..6f216ab 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -42,15 +42,23 @@</span> locals = {
+   history: {
+     root: repository_directory.basename,
+     commits: repository.log(nil).reverse_each.map do |commit|
+<span class="gd">-      Commit.new(commit: commit)
+</span><span class="gi">+      Commit.new(
++        commit: commit,
++        repository: repository,
++      )
+</span>     end,
+   },
+   out_of_date: false,
+<span class="gi">+  render_diffs: true,
++  repository: repository,
+</span> }
+ 
+ repository.tags.each do |tag|
+   commits = tag.log(nil).reverse_each.map do |commit|
+<span class="gd">-    Commit.new(commit: commit)
+</span><span class="gi">+    Commit.new(
++      commit: commit,
++      repository: repository,
++    )
+</span>   end
+ 
+   commits.each do |commit|
+<span class="p">@@ -78,6 +86,7 @@</span> proxy(
+   "README.html",
+   locals: locals.merge(
+     commit: repository.object("HEAD"),
+<span class="gi">+    render_diffs: false,
+</span>     page: {
+       title: repository.object("HEAD:README.md").contents.lines.first,
+     },
+<span class="p">@@ -86,7 +95,10 @@</span> proxy(
+ )
+ 
+ locals.dig(:history, :commits).each do |commit|
+<span class="gd">-  commit = Commit.new(commit: commit)
+</span><span class="gi">+  commit = Commit.new(
++    commit: commit,
++    repository: repository,
++  )
+</span> 
+   proxy(
+     "/commits/#{commit.sha}/index.html",
+</code></pre></div></details>
+
+              <details
+  id="lib/models/commit.rb"
+  open
+>
+  <summary>
+    lib/models/commit.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/commit.rb b/lib/models/commit.rb
+index 0f1316a..fb0103d 100644
+</span><span class="gd">--- a/lib/models/commit.rb
+</span><span class="gi">+++ b/lib/models/commit.rb
+</span><span class="p">@@ -1,9 +1,58 @@</span>
+ class Commit &lt; SimpleDelegator
+<span class="gd">-  def initialize(commit:)
+</span><span class="gi">+  def initialize(commit:, repository:)
+</span>     super(commit)
+<span class="gi">+    @repository = repository
+</span>   end
+ 
+   def subject
+     message.lines.first
+   end
+<span class="gi">+
++  def diff_files
++    if parent.present?
++      parent.diff(self).map do |file|
++        contents = file.patch
++
++        {
++          subject: subject,
++          name: file.path,
++          language: "diff",
++          contents: contents,
++          expanded: expanded?(contents),
++        }
++      end
++    else
++      gtree.files.map do |filename, _|
++        contents = show_root_diff(filename)
++
++        {
++          subject: subject,
++          name: filename,
++          language: "diff",
++          contents: contents,
++          expanded: expanded?(contents),
++        }
++      end
++    end
++  end
++
++  private
++
++  def generated?
++    subject.start_with?("[GENERATED]")
++  end
++
++  def expanded?(contents)
++    !generated? &amp;&amp; contents.lines.count &lt; 100
++  end
++
++  def show_root_diff(filename)
++    @repository.lib.send(:command, "show", [
++      "--cc",
++      %(--format=%n),
++      sha,
++      "--",
++      filename,
++    ]).strip
++  end
+</span> end
+</code></pre></div></details>
+
+              <details
+  id="source/commits/_file.html.erb"
+  open
+>
+  <summary>
+    source/commits/_file.html.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/commits/_file.html.erb b/source/commits/_file.html.erb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..6a6aa45
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/commits/_file.html.erb
+</span><span class="p">@@ -0,0 +1,17 @@</span>
+<span class="gi">+&lt;details
++  id="&lt;%= name %&gt;"
++  &lt;%= (
++    if expanded
++      "open"
++    end
++  ) %&gt;
++&gt;
++  &lt;summary&gt;
++    &lt;%= name %&gt;
++  &lt;/summary&gt;
++
++  &lt;% code(language) do %&gt;
++&lt;%# The lack of leading indentation is significant %&gt;
++&lt;%= contents %&gt;
++  &lt;% end -%&gt;
++&lt;/details&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/layouts/layout.erb"
+  open
+>
+  <summary>
+    source/layouts/layout.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 212b507..42da825 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -56,9 +56,18 @@</span>
+         &lt;/nav&gt;
+       &lt;/header&gt;
+ 
+<span class="gd">-      &lt;article class="commit"&gt;
+-        &lt;%= yield %&gt;
+-      &lt;/article&gt;
+</span><span class="gi">+      &lt;section class="container"&gt;
++        &lt;article class="container__item commit"&gt;
++          &lt;%= yield %&gt;
++        &lt;/article&gt;
++        &lt;% if render_diffs %&gt;
++          &lt;aside class="container__item diff"&gt;
++            &lt;% commit.diff_files.each do |diff_file| %&gt;
++              &lt;%= partial("commits/file", locals: diff_file) %&gt;
++            &lt;% end %&gt;
++          &lt;/aside&gt;
++        &lt;% end %&gt;
++      &lt;/section&gt;
+</span>     &lt;/main&gt;
+   &lt;/body&gt;
+ &lt;/html&gt;
+</code></pre></div></details>
+
+              <details
+  id="source/stylesheets/blocks/_container.scss"
+  open
+>
+  <summary>
+    source/stylesheets/blocks/_container.scss
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/blocks/_container.scss b/source/stylesheets/blocks/_container.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..f6332af
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/blocks/_container.scss
+</span><span class="p">@@ -0,0 +1,18 @@</span>
+<span class="gi">+.container {
++  display: flex;
++  flex-direction: column;
++
++  @media(min-width: $breakpoint--mobile) {
++    flex-direction: row;
++  }
++}
++
++.container__item {
++  @media(min-width: $breakpoint--mobile) {
++    width: 50%;
++
++    &amp;:only-child {
++      width: 100%;
++    }
++  }
++}
+</span></code></pre></div></details>
+
+              <details
+  id="source/stylesheets/blocks/_highlight.scss"
+  open
+>
+  <summary>
+    source/stylesheets/blocks/_highlight.scss
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/blocks/_highlight.scss b/source/stylesheets/blocks/_highlight.scss
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..7bdc46d
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/stylesheets/blocks/_highlight.scss
+</span><span class="p">@@ -0,0 +1,3 @@</span>
+<span class="gi">+.highlight {
++  overflow-x: scroll;
++}
+</span></code></pre></div></details>
+
+              <details
+  id="source/stylesheets/site.css.scss"
+  open
+>
+  <summary>
+    source/stylesheets/site.css.scss
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
+index 1ed0aa2..3175bb7 100644
+</span><span class="gd">--- a/source/stylesheets/site.css.scss
+</span><span class="gi">+++ b/source/stylesheets/site.css.scss
+</span><span class="p">@@ -3,6 +3,8 @@</span>
+ 
+ @import "blocks/banner";
+ @import "blocks/commit";
+<span class="gi">+@import "blocks/container";
++@import "blocks/highlight";
+</span> @import "blocks/history";
+ @import "blocks/navigation";
+ @import "blocks/page";
+</code></pre></div></details>
+
+              <details
+  id="test/git_helpers.rb"
+  open
+>
+  <summary>
+    test/git_helpers.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/git_helpers.rb b/test/git_helpers.rb
+index f32513d..af880f6 100644
+</span><span class="gd">--- a/test/git_helpers.rb
+</span><span class="gi">+++ b/test/git_helpers.rb
+</span><span class="p">@@ -12,6 +12,8 @@</span> module GitHelpers
+ 
+   def commit(message)
+     @repository.commit(message)
+<span class="gi">+
++    @repository.object("HEAD")
+</span>   end
+ 
+   def with_built_output(&amp;block)
+</code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_commit_diff_test.rb"
+  open
+>
+  <summary>
+    test/system/visitor_views_commit_diff_test.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_commit_diff_test.rb b/test/system/visitor_views_commit_diff_test.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..bfd9cd4
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/system/visitor_views_commit_diff_test.rb
+</span><span class="p">@@ -0,0 +1,72 @@</span>
+<span class="gi">+require "application_system_test_case"
++
++class VisitorViewsCommitDiffTest &lt; ApplicationSystemTestCase
++  test "visitor views commit diff when it is the first commit" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", "File contents")
++    git_commit = commit("First commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_selector "details summary", text: "file.txt"
++      assert_selector "details[open]", text: "File contents"
++    end
++  end
++
++  test "visitor views commit diff when it has parents" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", &lt;&lt;~TEXT)
++      First line
++    TEXT
++    commit("First commit")
++    stage_file("file.txt", &lt;&lt;~TEXT)
++      First line
++      Next line
++    TEXT
++    git_commit = commit("Last commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_selector "details summary", text: "file.txt"
++      assert_selector "details[open]", text: "+Next line"
++    end
++  end
++
++  test "collapses diffs for files that have more than 100 lines" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", 101.times.reduce("") { |lines| lines + "\ndiff line" })
++    git_commit = commit("First commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_no_selector "details[open]", text: "diff line"
++    end
++  end
++
++  test "collapses diffs for commits that start with [GENERATED]" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", "File contents")
++    git_commit = commit("[GENERATED] Initial Commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_no_selector "details[open]", text: "File contents"
++    end
++  end
++
++  test "visitor views home page" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", "File contents")
++    commit("First commit")
++
++    with_git_repository do
++      visit root_path
++
++      assert_no_text "File contents"
++    end
++  end
++end
+</span></code></pre></div></details>
+
+          </aside>
+      </section>
+    </main>
+  </body>
+</html>

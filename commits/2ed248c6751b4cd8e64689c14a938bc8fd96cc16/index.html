@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Dynamically determine project title
+</title>
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <link href="/stylesheets/syntax.css" rel="stylesheet" />
+    <script src="/javascripts/site.js"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">
+        Table of Contents
+      </summary>
+      <nav class="history">
+        <a href="/">git-read</a>
+
+          <a href="/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+</a>
+          <a href="/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
+</a>
+          <a href="/commits/f2859800cec5f90bb8146d5c7108429a22f25c18/">Replace Generated Files with Static HTML and CSS
+</a>
+          <a href="/commits/49d1766f58a627a8a084f1377fc6ad17755e6ff0/">Exercise the application through a System Test
+</a>
+          <a href="/commits/8160f2abba85592b84535bfa3011fa84f606f776/">Introduce Redcarpet Markdown Engine
+</a>
+          <a href="/commits/4fe99ee1ce3065d8b660b3610e73b757d5b8b1fa/">Generate `&#x2F;index.html` dynamically
+</a>
+          <a href="/commits/0dd760a67ec2b51117152cb31773c1d6e5f536f4/">Extract `ApplicationSystemTestCase`
+</a>
+          <a href="/commits/3c9c89d56b1324dc2b25ecee7de846fce189f68a/">Render the contents of a Commit&#x27;s Message
+</a>
+          <a href="/commits/619b2ca977b180e73d56092d3a85d0a8656c0b2c/">Navigate to previous commit
+</a>
+          <a href="/commits/5cc450efada669809417cf49275c26d48e69f2d6/">Navigate to next commit
+</a>
+          <a href="/commits/2ed248c6751b4cd8e64689c14a938bc8fd96cc16/" aria-current="page">Dynamically determine project title
+</a>
+          <a href="/commits/6c8cffef434204fabf9aa5eff4a2f16981798545/">Extract `UrlHelpers`
+</a>
+          <a href="/commits/9469b52bbdf746fdd6a8da332425202c03aa3e49/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="/commits/e2efb6370ec88f15ebdfe63c51842850061922a1/">Syntax highlight Markdown fenced code blocks
+</a>
+          <a href="/commits/0db12a01e729b7046ee3050572972e3bb7d2a451/">Introduce `bin&#x2F;git-read` command line interface
+</a>
+          <a href="/commits/0e1fb95437a7f178c2567e05358a033b08f63c95/">Add `bin&#x2F;git-read --server` flag
+</a>
+          <a href="/commits/556a2e5bcb4a2f79b21af01b53b3d4b49163a780/">Extract `GitHelpers` from System Test Cases
+</a>
+          <a href="/commits/05834e9d919ce697cc2c6f88b13658670b8042cf/">Add support for re-writing a project&#x27;s history
+</a>
+          <a href="/commits/eedc1bf989c5a77a9b6017a00387ffc21e0c0ae7/">Extract `Commit` model
+</a>
+          <a href="/commits/3c2c609577f76758cf29b51f9959466c93f2da65/">Render how a commit changes the project&#x27;s files
+</a>
+          <a href="/commits/6b1388a4d0e3acaff8785afbddbf170a15fcd85f/">Integrate with GitHub Actions
+</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+
+        <nav class="navigation">
+
+<a href="/commits/5cc450efada669809417cf49275c26d48e69f2d6/">              &#8592; Previous
+</a>
+<a href="/commits/6c8cffef434204fabf9aa5eff4a2f16981798545/">              Next &#8594;
+</a>        </nav>
+      </header>
+
+      <section class="container">
+        <article class="container__item commit">
+          <h1>Dynamically determine project title</h1>
+
+<p>Prior to this commit, the application&rsquo;s page title was hard-coded to be
+<code>git-read</code>.</p>
+
+<p>For consumer projects, that title won&rsquo;t apply. In order to determine the
+value to render as the title, invoke
+<a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/pathname/rdoc/Pathname.html#method-i-basename"><code>Pathname#basename</code></a>, which delegates to
+<a href="https://ruby-doc.org/core-2.7.0/File.html#method-c-basename"><code>File.basename</code></a> to determine the name of the working
+directory that the Git repository exists in.</p>
+
+<p>Once that value is determined, make it available as part of the
+<code>history</code> Hash declared as a template-local variable.</p>
+
+<p>To ensure that an operating system&rsquo;s path quirks don&rsquo;t result in invalid
+HTML, wrap the project name with a call to <a href="https://middlemanapp.com/basics/helper-methods/#format-helpers"><code>escape_html</code></a>.</p>
+
+        </article>
+          <aside class="container__item diff">
+              <details
+  id="config.rb"
+  open
+>
+  <summary>
+    config.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index b3d8a3b..b04c46f 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -30,12 +30,13 @@</span> page '/*.txt', layout: false
+ #   },
+ # )
+ 
+<span class="gd">-repository = Git.open(
+-  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+-)
+</span><span class="gi">+repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
++
++repository = Git.open(repository_directory)
+</span> 
+ locals = {
+   history: {
+<span class="gi">+    root: repository_directory.basename,
+</span>     commits: repository.log(nil).reverse_each,
+   },
+ }
+</code></pre></div></details>
+
+              <details
+  id="source/layouts/layout.erb"
+  open
+>
+  <summary>
+    source/layouts/layout.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index e2ac2bb..5522690 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -17,7 +17,7 @@</span>
+       &lt;/summary&gt;
+       &lt;nav class="history"&gt;
+         &lt;a href="/index.html"&gt;
+<span class="gd">-          git-read
+</span><span class="gi">+          &lt;%= escape_html(history[:root]) %&gt;
+</span>         &lt;/a&gt;
+ 
+         &lt;% history[:commits].each do |commit| %&gt;
+</code></pre></div></details>
+
+              <details
+  id="test/application_system_test_case.rb"
+  open
+>
+  <summary>
+    test/application_system_test_case.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+index 5bd5c3f..a61a8f8 100644
+</span><span class="gd">--- a/test/application_system_test_case.rb
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -38,7 +38,7 @@</span> class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
+     ClimateControl.modify(GIT_DIR: @repository.dir.path) do
+       Capybara.app = Middleman.server
+ 
+<span class="gd">-      block.call
+</span><span class="gi">+      block.call Pathname(@repository.dir.path)
+</span>     end
+   end
+ 
+</code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_readme_test.rb"
+  open
+>
+  <summary>
+    test/system/visitor_views_readme_test.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
+index a38ba2f..0557896 100644
+</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
+</span><span class="p">@@ -18,4 +18,19 @@</span> class VisitorViewsReadmeTest &lt; ApplicationSystemTestCase
+       assert_selector "p", text: "Hello, from tests!"
+     end
+   end
+<span class="gi">+
++  test "visitor navigates to README from another page" do
++    stage_file("README.md", "The README")
++    commit("Initial Commit")
++    stage_file("ignored.txt", "ignore me")
++    commit("Last commit")
++
++    with_git_repository do |directory|
++      visit "/index.html"
++      click_on "Last commit"
++      click_on directory.basename.to_s
++
++      assert_text "The README"
++    end
++  end
+</span> end
+</code></pre></div></details>
+
+          </aside>
+      </section>
+    </main>
+  </body>
+</html>

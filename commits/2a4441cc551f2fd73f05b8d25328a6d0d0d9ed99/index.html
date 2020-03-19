@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>git-read
+    <title>Elaborate on the project's goals in the README.md
 </title>
     <link href="/stylesheets/site.css" rel="stylesheet" />
     <link href="/stylesheets/syntax.css" rel="stylesheet" />
@@ -18,9 +18,9 @@
         Table of Contents
       </summary>
       <nav class="history">
-        <a href="/" aria-current="page">git-read</a>
+        <a href="/">git-read</a>
 
-          <a href="/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+          <a href="/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" aria-current="page">Elaborate on the project&#x27;s goals in the README.md
 </a>
           <a href="/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
 </a>
@@ -71,71 +71,84 @@
         <nav class="navigation">
 
 
-        </nav>
+<a href="/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">              Next &#8594;
+</a>        </nav>
       </header>
 
       <section class="container">
         <article class="container__item commit">
-          <h1>git-read</h1>
+          <h1>Elaborate on the project&rsquo;s goals in the README.md</h1>
 
-<p>Generate a website based on a project&rsquo;s Git history.</p>
+<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
+the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
+contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
 
-<ul>
-<li>Serve the project&rsquo;s <code>README.md</code> as the homepage</li>
-<li>Index the history through its commits</li>
-<li>Transforms commit messages HTML through a syntax-aware Markdown parser</li>
-<li>Display the commits alongside their code changes</li>
-</ul>
-
-<h2>Command-line Interface</h2>
-
-<p>Once installed, make sure that the <code>bin/git-read</code> executable is available on
-your path so that the <a href="http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html"><code>git</code> program can invoke it as a subcommand</a>.</p>
-
-<p>To learn of the ways to to invoke the command, execute <code>git read --help</code>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-
-Generate HTML from your project's Git history
-
-OPTIONS
-
-      --output-dir
-          specify the directory where the site will be built
-
-      --git-dir
-          specify the parent directory of the project's .git/ directory
-
-      --verbose
-          print debugging information during the build process
-
-      --server
-          build and serve assets with a server available at
-          http://127.0.0.1:4567
-
-      --help
-          generate this help output
-</code></pre></div>
-<h2>Revising a Project&rsquo;s History</h2>
-
-<p>If you&rsquo;re consuming this tool and using it to tell the story of your
-project&rsquo;s origins and growth, you might be tempted to become a bit of a
-revisionist historian.</p>
-
-<p>This might come as a shock, but this project was not perfected
-implemented from the start, and is in fact the result of countless
-<a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_changing_multiple"><code>pick</code>, <code>squash</code>, <code>reword</code>, <code>fixup</code>, and <code>drop</code> rebase
-operations</a>.</p>
-
-<p>While this can be harmless for pre-released projects, rewriting history
-once the resulting website is deployed and publicized would result in
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"><code>404</code>s and broken URLs</a>.</p>
-
-<p>To counteract this, <code>git-read</code> will include and compile pages for any
-commits that are <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging"><code>git tag</code>-ed</a>, along with the rest of their
-history.</p>
+<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
+serve as the home page for the generated website.</p>
 
         </article>
+          <aside class="container__item diff">
+              <details
+  id="README.md"
+  open
+>
+  <summary>
+    README.md
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..7762285
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/README.md
+</span><span class="p">@@ -0,0 +1,44 @@</span>
+<span class="gi">+git-read
++===
++
++Generate a website based on a project's Git history.
++
++* Serve the project's `README.md` as the homepage
++* Index the history through its commits
++* Transforms commit messages HTML through a syntax-aware Markdown parser
++* Display the commits alongside their code changes
++
++Command-line Interface
++---
++
++Once installed, make sure that the `bin/git-read` executable is available on
++your path so that the [`git` program can invoke it as a subcommand][subcommand].
++
++To learn of the ways to to invoke the command, execute `git read --help`:
++
++```
++usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
++                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
++
++Generate HTML from your project's Git history
++
++OPTIONS
++
++      --output-dir
++          specify the directory where the site will be built
++
++      --git-dir
++          specify the parent directory of the project's .git/ directory
++
++      --verbose
++          print debugging information during the build process
++
++      --server
++          build and serve assets with a server available at
++          http://127.0.0.1:4567
++
++      --help
++          generate this help output
++```
++
++[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
+</span></code></pre></div></details>
+
+          </aside>
       </section>
     </main>
   </body>

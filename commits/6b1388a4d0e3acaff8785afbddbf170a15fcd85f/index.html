@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Integrate with GitHub Actions
+</title>
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <link href="/stylesheets/syntax.css" rel="stylesheet" />
+    <script src="/javascripts/site.js"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">
+        Table of Contents
+      </summary>
+      <nav class="history">
+        <a href="/">git-read</a>
+
+          <a href="/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+</a>
+          <a href="/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
+</a>
+          <a href="/commits/f2859800cec5f90bb8146d5c7108429a22f25c18/">Replace Generated Files with Static HTML and CSS
+</a>
+          <a href="/commits/49d1766f58a627a8a084f1377fc6ad17755e6ff0/">Exercise the application through a System Test
+</a>
+          <a href="/commits/8160f2abba85592b84535bfa3011fa84f606f776/">Introduce Redcarpet Markdown Engine
+</a>
+          <a href="/commits/4fe99ee1ce3065d8b660b3610e73b757d5b8b1fa/">Generate `&#x2F;index.html` dynamically
+</a>
+          <a href="/commits/0dd760a67ec2b51117152cb31773c1d6e5f536f4/">Extract `ApplicationSystemTestCase`
+</a>
+          <a href="/commits/3c9c89d56b1324dc2b25ecee7de846fce189f68a/">Render the contents of a Commit&#x27;s Message
+</a>
+          <a href="/commits/619b2ca977b180e73d56092d3a85d0a8656c0b2c/">Navigate to previous commit
+</a>
+          <a href="/commits/5cc450efada669809417cf49275c26d48e69f2d6/">Navigate to next commit
+</a>
+          <a href="/commits/2ed248c6751b4cd8e64689c14a938bc8fd96cc16/">Dynamically determine project title
+</a>
+          <a href="/commits/6c8cffef434204fabf9aa5eff4a2f16981798545/">Extract `UrlHelpers`
+</a>
+          <a href="/commits/9469b52bbdf746fdd6a8da332425202c03aa3e49/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="/commits/e2efb6370ec88f15ebdfe63c51842850061922a1/">Syntax highlight Markdown fenced code blocks
+</a>
+          <a href="/commits/0db12a01e729b7046ee3050572972e3bb7d2a451/">Introduce `bin&#x2F;git-read` command line interface
+</a>
+          <a href="/commits/0e1fb95437a7f178c2567e05358a033b08f63c95/">Add `bin&#x2F;git-read --server` flag
+</a>
+          <a href="/commits/556a2e5bcb4a2f79b21af01b53b3d4b49163a780/">Extract `GitHelpers` from System Test Cases
+</a>
+          <a href="/commits/05834e9d919ce697cc2c6f88b13658670b8042cf/">Add support for re-writing a project&#x27;s history
+</a>
+          <a href="/commits/eedc1bf989c5a77a9b6017a00387ffc21e0c0ae7/">Extract `Commit` model
+</a>
+          <a href="/commits/3c2c609577f76758cf29b51f9959466c93f2da65/">Render how a commit changes the project&#x27;s files
+</a>
+          <a href="/commits/6b1388a4d0e3acaff8785afbddbf170a15fcd85f/" aria-current="page">Integrate with GitHub Actions
+</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+
+        <nav class="navigation">
+
+<a href="/commits/3c2c609577f76758cf29b51f9959466c93f2da65/">              &#8592; Previous
+</a>
+        </nav>
+      </header>
+
+      <section class="container">
+        <article class="container__item commit">
+          <h1>Integrate with GitHub Actions</h1>
+
+<p>Declared a <a href="#.github/workflows/git-read.yml"><code>.github/workflows/git-read.yml</code>
+file</a> to configure steps necessary to
+leverage <a href="https://help.github.com/en/actions">GitHub actions</a>.</p>
+
+<p>The desired outcome is to publish a <code>git-read</code>-generated website to that
+project&rsquo;s [<code>gh-pages</code> branch].</p>
+
+<p>To achieve this, execute the following steps upon a <code>git push
+origin/master</code>:</p>
+
+<ul>
+<li><p><a href="https://github.com/actions/checkout/tree/v2#usage">clone the host project&rsquo;s entire source code history with
+<code>fetch-depth: 0</code> to </a></p></li>
+<li><p><a href="https://github.com/actions/setup-ruby/tree/v1#usage">install Ruby into the Action&rsquo;s container</a></p></li>
+<li><p><a href="https://github.com/actions/checkout/tree/v2#usage">clone and install the <code>git-read</code> project into the
+container</a></p>
+
+<ul>
+<li>execute <code>bin/git-read</code> to generate a website from the host project&rsquo;s
+Git History</li>
+</ul></li>
+<li><p><a href="https://github.com/peaceiris/actions-gh-pages/tree/v3">deploy the output to the host project&rsquo;s <code>gh-pages</code>
+branch</a></p></li>
+</ul>
+
+<h2>Installation Script</h2>
+
+<p>Introduce the <a href="#script/install"><code>script/install</code> file</a> to execute the
+necessary commands to configure the project to be executable. Mainly,
+install its RubyGems dependencies.</p>
+
+        </article>
+          <aside class="container__item diff">
+              <details
+  id=".github/workflows/git-read.yml"
+  open
+>
+  <summary>
+    .github/workflows/git-read.yml
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..6f8a13e
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -0,0 +1,37 @@</span>
+<span class="gi">+name: git-read
++
++on:
++  push:
++    branches:
++      - master
++
++jobs:
++  build:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v2
++        with:
++          fetch-depth: 0
++
++      - uses: actions/cache@v1
++        with:
++          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
++          restore-keys: ${{ runner.os }}-gems-
++          path: vendor/bundle
++
++      - uses: actions/setup-ruby@v1
++        with:
++          ruby-version: "2.6.5"
++          run: bundle config path vendor/bundle
++
++      - name: Build documentation from Git History
++        run: |
++          script/install
++          bin/git-read --git-dir ./ --build-dir ./build
++
++      - name: Deploy
++        uses: peaceiris/actions-gh-pages@v3
++        with:
++          personal_token: ${{ secrets.PERSONAL_TOKEN }}
++          commit_message: ${{ github.event.head_commit.message }}
++          publish_dir: ./build
+</span></code></pre></div></details>
+
+              <details
+  id="script/install"
+  open
+>
+  <summary>
+    script/install
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/script/install b/script/install
+</span><span class="p">new file mode 100755
+</span><span class="gh">index 0000000..125c087
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/script/install
+</span><span class="p">@@ -0,0 +1,10 @@</span>
+<span class="gi">+#!/usr/bin/env bash
++
++set -e
++
++PROJECT_ROOT=$(dirname "${BASH_SOURCE[0]}")/../
++GEMFILE="${PROJECT_ROOT}/Gemfile"
++
++gem install bundler --conservative
++
++bundle check || bundle install --jobs 4 --retry 3 --gemfile=$GEMFILE
+</span></code></pre></div></details>
+
+          </aside>
+      </section>
+    </main>
+  </body>
+</html>
