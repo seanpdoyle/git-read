@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+PROJECT_ROOT=$(dirname "${BASH_SOURCE[0]}")/../
+GEMFILE="${PROJECT_ROOT}/Gemfile"
+
+gem install bundler --conservative
+
+bundle check || bundle install \
+  --without "test" \
+  --jobs 4 \
+  --retry 3 \
+  --gemfile $GEMFILE
