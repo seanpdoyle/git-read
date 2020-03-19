@@ -1,3 +1,5 @@
+require "lib/models/commit"
+
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
@@ -39,13 +41,17 @@ repository = Git.open(repository_directory)
 locals = {
   history: {
     root: repository_directory.basename,
-    commits: repository.log(nil).reverse_each,
+    commits: repository.log(nil).reverse_each.map do |commit|
+      Commit.new(commit: commit)
+    end,
   },
   out_of_date: false,
 }
 
 repository.tags.each do |tag|
-  commits = tag.log(nil).reverse_each
+  commits = tag.log(nil).reverse_each.map do |commit|
+    Commit.new(commit: commit)
+  end
 
   commits.each do |commit|
     proxy(
@@ -55,7 +61,7 @@ repository.tags.each do |tag|
         commit: commit,
         out_of_date: true,
         page: {
-          title: commit.message.lines.first,
+          title: commit.subject,
         },
         history: {
           root: repository_directory.basename,
@@ -80,13 +86,15 @@ proxy(
 )
 
 locals.dig(:history, :commits).each do |commit|
+  commit = Commit.new(commit: commit)
+
   proxy(
     "/commits/#{commit.sha}/index.html",
     "/commits/commit.html",
     locals: locals.merge(
       commit: commit,
       page: {
-        title: commit.message.lines.first,
+        title: commit.subject,
       }
     ),
     ignore: true,
