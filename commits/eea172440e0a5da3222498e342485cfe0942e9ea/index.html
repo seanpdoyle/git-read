@@ -8,9 +8,9 @@
     <!-- Use the title from a page's frontmatter if it has one -->
     <title>Integrate with GitHub Actions
 </title>
-    <link href="/stylesheets/site.css" rel="stylesheet" />
-    <link href="/stylesheets/syntax.css" rel="stylesheet" />
-    <script src="/javascripts/site.js"></script>
+    <link href="../../stylesheets/site.css" rel="stylesheet" />
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+    <script src="../../javascripts/site.js"></script>
   </head>
   <body class="page">
     <details id="table-of-contents" class="page__history" open>
@@ -60,7 +60,7 @@
 </a>
           <a href="/commits/3c2c609577f76758cf29b51f9959466c93f2da65/">Render how a commit changes the project&#x27;s files
 </a>
-          <a href="/commits/6b1388a4d0e3acaff8785afbddbf170a15fcd85f/" aria-current="page">Integrate with GitHub Actions
+          <a href="/commits/eea172440e0a5da3222498e342485cfe0942e9ea/" aria-current="page">Integrate with GitHub Actions
 </a>
       </nav>
     </details>
@@ -103,6 +103,10 @@ Git History</li>
 <li><p><a href="https://github.com/peaceiris/actions-gh-pages/tree/v3">deploy the output to the host project&rsquo;s <code>gh-pages</code>
 branch</a></p></li>
 </ul>
+
+<p>Since the output HTML has a potential to be served under a path (for
+example, https://seanpdoyle.github.io/git-read), serve assets with a
+<a href="https://github.com/middleman/middleman/blob/v4.3.6/middleman-core/lib/middleman-core/extensions/relative_assets.rb">relative path</a>.</p>
 
 <h2>Installation Script</h2>
 
@@ -166,6 +170,28 @@ install its RubyGems dependencies.</p>
 </span></code></pre></div></details>
 
               <details
+  id="config.rb"
+  open
+>
+  <summary>
+    config.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 6f216ab..d06a0af 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -7,6 +7,7 @@</span> activate :aria_current
+ activate :autoprefixer do |prefix|
+   prefix.browsers = "last 2 versions"
+ end
+<span class="gi">+activate :relative_assets
+</span> activate :syntax
+ 
+ set :markdown_engine, :redcarpet
+</code></pre></div></details>
+
+              <details
   id="script/install"
   open
 >
@@ -175,10 +201,10 @@ install its RubyGems dependencies.</p>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/script/install b/script/install
 </span><span class="p">new file mode 100755
-</span><span class="gh">index 0000000..125c087
+</span><span class="gh">index 0000000..1b9a980
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/script/install
-</span><span class="p">@@ -0,0 +1,10 @@</span>
+</span><span class="p">@@ -0,0 +1,14 @@</span>
 <span class="gi">+#!/usr/bin/env bash
 +
 +set -e
@@ -188,7 +214,11 @@ install its RubyGems dependencies.</p>
 +
 +gem install bundler --conservative
 +
-+bundle check || bundle install --jobs 4 --retry 3 --gemfile=$GEMFILE
++bundle check || bundle install \
++  --without "test" \
++  --jobs 4 \
++  --retry 3 \
++  --gemfile $GEMFILE
 </span></code></pre></div></details>
 
           </aside>
