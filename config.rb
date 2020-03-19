@@ -7,6 +7,7 @@ include UrlHelpers
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
 config[:mode] = (ENV.fetch("MODE") { build? ? "build" : "server" }).to_sym
+config[:path_prefix] = ENV.fetch("PATH_PREFIX") { "" }
 
 activate :aria_current
 activate :external_pipeline,
@@ -159,3 +160,7 @@ end
 #   activate :minify_css
 #   activate :minify_javascript
 # end
+
+configure :build do
+  activate :relative_assets
+end

@@ -13,4 +13,5 @@ group :test do
   gem 'capybara', require: 'capybara/minitest'
   gem 'climate_control'
   gem 'minitest-around', require: 'minitest/around/unit'
+  gem 'rake'
 end

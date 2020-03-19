@@ -5,6 +5,7 @@ set -e
 ARGS=( "$@" )
 
 VERBOSE="--no-verbose"
+PATH_PREFIX=""
 
 for i in "${!ARGS[@]}"; do
   case "${ARGS[i]}" in
@@ -22,17 +23,24 @@ for i in "${!ARGS[@]}"; do
       GIT_DIR="${ARGS[i+1]}"
       unset 'ARGS[i+1]'
       ;;
+    -p|--path-prefix)
+      PATH_PREFIX="${ARGS[i+1]}"
+      unset 'ARGS[i+1]'
+      ;;
     -v|--verbose)
       VERBOSE="--verbose"
       ;;
     -h|--help)
       cat <<-HELP
-usage: git read [--help] [-v|--verbose] [-g|--git-dir <path>]
+usage: git read [--help] [-v|--verbose] [-g|--git-dir <path>] [-p|--path-prefix <path>]
                 [-s|--server|--serve] [-o|--output-dir <path>]
 
 Generate HTML from your project's Git history
 
 OPTIONS
+
+      --path-prefix
+          specify the prefix to prepend to URLs. For example, the name of the GitHub Page's subdirectory the output will be served under
 
       --output-dir
           specify the directory where the site will be built
@@ -59,11 +67,12 @@ done
 build_site() {
   git_dir="${1}"
   output_dir="${2}"
-  target="${3}"
-  verbosity="${4}"
+  path_prefix="${3}"
+  target="${4}"
+  verbosity="${5}"
   tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
 
-  export GIT_DIR=$git_dir
+  export GIT_DIR=$git_dir PATH_PREFIX=$path_prefix
 
   mkdir -p $output_dir
   cd $tool_dir
@@ -79,5 +88,6 @@ build_site() {
 build_site \
   $(realpath ${GIT_DIR-./}) \
   $(realpath ${OUTPUT_DIR-./build/}) \
+  "${PATH_PREFIX}" \
   "${TARGET}" \
   "${VERBOSE}"
