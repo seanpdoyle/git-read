@@ -12,6 +12,12 @@ activate :syntax
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
 
+configure :build do
+  activate :relative_assets
+
+  set :relative_links, true
+end
+
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 
