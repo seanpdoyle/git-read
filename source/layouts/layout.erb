@@ -58,7 +58,7 @@
                   "",
                   commit_path(commit),
                   class: "commit-node commit-node--collapsed",
-                  title: commit.message.lines.first
+                  title: commit.subject,
                 ) %>
               <% end %>
             </nav>
@@ -110,7 +110,7 @@
               commit_path(commit),
               class: "commit-node commit-node--full",
             ) do %>
-              <%= markdown(commit.message.lines.first) %>
+              <%= markdown(commit.subject) %>
             <% end %>
           <% end %>
         </nav>
