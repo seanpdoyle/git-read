@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Generate `/index.html` dynamically
+</title>
+    <link href="../../stylesheets/site.css" rel="stylesheet" />
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+    <script src="../../javascripts/site.js"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">
+        Table of Contents
+      </summary>
+      <nav class="history">
+        <a href="../../">git-read</a>
+
+          <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+</a>
+          <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
+</a>
+          <a href="../f2859800cec5f90bb8146d5c7108429a22f25c18/">Replace Generated Files with Static HTML and CSS
+</a>
+          <a href="../49d1766f58a627a8a084f1377fc6ad17755e6ff0/">Exercise the application through a System Test
+</a>
+          <a href="../8160f2abba85592b84535bfa3011fa84f606f776/">Introduce Redcarpet Markdown Engine
+</a>
+          <a href="./" aria-current="page">Generate `&#x2F;index.html` dynamically
+</a>
+          <a href="../f27fe60d06cca57e080d0bdfff9dd02fcd3c0c73/">Extract `ApplicationSystemTestCase`
+</a>
+          <a href="../d871fdaa5456c0d2e33a0291174dbfc3ac194353/">Render the contents of a Commit&#x27;s Message
+</a>
+          <a href="../5a96dc49fd5288d97f0f8e14d2d658dbe9ddeae1/">Navigate to previous commit
+</a>
+          <a href="../77058482950e921f5b96c98b3eb80a2c7bd046a7/">Navigate to next commit
+</a>
+          <a href="../58d4d4f04fe5a4d09ddcbc6fc69d096b9cf15bdd/">Dynamically determine project title
+</a>
+          <a href="../a8010861710698e7dc663094e443110017fcface/">Extract `UrlHelpers`
+</a>
+          <a href="../6bfbb9548a4eaace096c98aaac28d28f1481812b/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="../ab826e64843b2c7f958eda4d98d0262c68a385ec/">Syntax highlight Markdown fenced code blocks
+</a>
+          <a href="../f5bd967244bc5a397f4403c7eb25dfce98782d2d/">Introduce `bin&#x2F;git-read` command line interface
+</a>
+          <a href="../7432f7b3d3e57e85fc144826674ac04664686920/">Add `bin&#x2F;git-read --server` flag
+</a>
+          <a href="../3ba1bbc0812ae6d0675b435ca8310198a7e56f3e/">Extract `GitHelpers` from System Test Cases
+</a>
+          <a href="../3d56723f9f22e24d3b7292f0ed2ee4088762d63b/">Add support for re-writing a project&#x27;s history
+</a>
+          <a href="../a91272bb2216d20a5ce2674dc5804bdb5219e56b/">Extract `Commit` model
+</a>
+          <a href="../87c4a40f24d2212c9d65249f7904e8daef616c73/">Render how a commit changes the project&#x27;s files
+</a>
+          <a href="../44ecd1dd782efab914d13d5c8a160bbe88cd0f83/">Integrate with GitHub Actions
+</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+
+        <nav class="navigation">
+
+<a href="../8160f2abba85592b84535bfa3011fa84f606f776/">              &#8592; Previous
+</a>
+<a href="../f27fe60d06cca57e080d0bdfff9dd02fcd3c0c73/">              Next &#8594;
+</a>        </nav>
+      </header>
+
+      <section class="container">
+        <article class="container__item commit">
+          <h1>Generate <code>/index.html</code> dynamically</h1>
+
+<p>Generate the contents of the site&rsquo;s <code>/index.html</code> page based on the
+contents of the project&rsquo;s <a href="#README.md"><code>README.md</code></a>.</p>
+
+<p>To do so, this commit adds a dependency on the <a href="https://github.com/ruby-git/ruby-git/tree/v1.6.0#examples"><code>ruby-git</code>
+gem</a>, which introspects into the project to read the contents
+of the <em>latest version</em> of the file.</p>
+
+<p>Since the contents of the <a href="#README.md"><code>README.md</code></a> are are dynamic, and
+won&rsquo;t be declared statically in the <code>source/</code> directory, this commit
+transitions the routing for the <code>/index.html</code> page into a <a href="https://middlemanapp.com/advanced/dynamic-pages#defining-proxies">Middleman
+<code>proxy</code> declaration</a>, rendering the <code>source/README.html.md.erb</code>
+template as the <code>/index.html</code> page.</p>
+
+<p>Once again, the sequencing of the template file&rsquo;s extensions are
+crucial, as they hint to the pre-processor to first render ERB, then
+yield those contents as static Markdown to be translated to HTML.</p>
+
+<p>Set the page&rsquo;s <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title"><code>&lt;title&gt;</code> element</a> to the first line of the
+project&rsquo;s <a href="#README.md"><code>README.md</code></a>.</p>
+
+<h2>Testing this behavior</h2>
+
+<p>The order that the directory, repository, and application are declared
+and instantiated is also crucial.</p>
+
+<p>Once the <code>Capybara.app = Middleman.server</code> line is invoked, a call to
+<code>require</code> the application&rsquo;s <a href="#config.rb"><code>config.rb</code></a> file is made, and
+<code>ruby-git</code>&lsquo;s configuration is finalized.</p>
+
+<p>To better control this, the test harness creates a temporary directory
+with <a href="https://ruby-doc.org/stdlib-1.9.3/libdoc/tmpdir/rdoc/Dir.html#mktmpdir-method"><code>Dir.mktmpdir</code></a> from Ruby&rsquo;s Standard Library, which it
+then passes to a <code>Git.init</code> call to prepare it as a Git directory.</p>
+
+<p>Then, the new <code>with_git_repository</code> ensures that the <code>Middleman.server</code>
+call is made after the environment has been configured to point the
+application-side <code>Git</code> repository instance to the newly initialized
+temporary <code>Git</code>-ready directory.</p>
+
+<p>To coordinate this sequence, this commit introduces a dependency on
+<a href="https://github.com/splattael/minitest-around/tree/v0.5.0#unit-tests"><code>minitest-around</code> gem</a> for atomic test setup and
+teardown, and the <a href="https://github.com/thoughtbot/climate_control/tree/v0.1.0"><code>climate_control</code> gem</a> for atomic
+<code>ENV</code> modifications and roll-back.</p>
+
+        </article>
+          <aside class="container__item diff">
+              <details
+  id="Gemfile"
+  open
+>
+  <summary>
+    Gemfile
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
+index e7e8539..2c94c0c 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -1,5 +1,6 @@</span>
+ source 'https://rubygems.org'
+ 
+<span class="gi">+gem 'git'
+</span> gem 'middleman', '~&gt; 4.2'
+ gem 'middleman-autoprefixer', '~&gt; 2.7'
+ gem 'redcarpet'
+<span class="p">@@ -8,4 +9,6 @@</span> gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
+ 
+ group :test do
+   gem 'capybara', require: 'capybara/minitest'
+<span class="gi">+  gem 'climate_control'
++  gem 'minitest-around', require: 'minitest/around/unit'
+</span> end
+</code></pre></div></details>
+
+              <details
+  id="Gemfile.lock"
+  open
+>
+  <summary>
+    Gemfile.lock
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index b338dc5..7aa72e2 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -19,6 +19,7 @@</span> GEM
+       rack-test (&gt;= 0.6.3)
+       regexp_parser (~&gt; 1.5)
+       xpath (~&gt; 3.2)
+<span class="gi">+    climate_control (0.2.0)
+</span>     coffee-script (2.4.1)
+       coffee-script-source
+       execjs
+<span class="p">@@ -34,6 +35,8 @@</span> GEM
+     ffi (1.12.2-java)
+     ffi (1.12.2-x64-mingw32)
+     ffi (1.12.2-x86-mingw32)
+<span class="gi">+    git (1.6.0)
++      rchardet (~&gt; 1.8)
+</span>     haml (5.1.2)
+       temple (&gt;= 0.8.0)
+       tilt
+<span class="p">@@ -84,6 +87,8 @@</span> GEM
+     mini_mime (1.0.2)
+     mini_portile2 (2.4.0)
+     minitest (5.14.0)
+<span class="gi">+    minitest-around (0.5.0)
++      minitest (~&gt; 5.0)
+</span>     nokogiri (1.10.9)
+       mini_portile2 (~&gt; 2.4.0)
+     nokogiri (1.10.9-java)
+<span class="p">@@ -105,6 +110,7 @@</span> GEM
+     rb-fsevent (0.10.3)
+     rb-inotify (0.10.1)
+       ffi (~&gt; 1.0)
+<span class="gi">+    rchardet (1.8.0)
+</span>     redcarpet (3.5.0)
+     regexp_parser (1.7.0)
+     sassc (2.2.1)
+<span class="p">@@ -138,8 +144,11 @@</span> PLATFORMS
+ 
+ DEPENDENCIES
+   capybara
+<span class="gi">+  climate_control
++  git
+</span>   middleman (~&gt; 4.2)
+   middleman-autoprefixer (~&gt; 2.7)
+<span class="gi">+  minitest-around
+</span>   redcarpet
+   tzinfo-data
+   wdm (~&gt; 0.1)
+</code></pre></div></details>
+
+              <details
+  id="config.rb"
+  open
+>
+  <summary>
+    config.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 0f1f702..95ae2cd 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -30,6 +30,24 @@</span> page '/*.txt', layout: false
+ #   },
+ # )
+ 
+<span class="gi">+repository = Git.open(
++  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
++)
++
++latest_readme = repository.show("HEAD:README.md")
++proxy(
++  "index.html",
++  "README.html",
++  locals: {
++    commit: repository.object("HEAD"),
++    contents: latest_readme,
++    page: {
++      title: latest_readme.lines.first,
++    },
++  },
++  ignore: true,
++)
++
+</span> # Helpers
+ # Methods defined in the helpers block are available in templates
+ # https://middlemanapp.com/basics/helper-methods/
+</code></pre></div></details>
+
+              <details
+  id="source/README.html.md.erb"
+  open
+>
+  <summary>
+    source/README.html.md.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/README.html.md.erb b/source/README.html.md.erb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..339e454
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/README.html.md.erb
+</span><span class="p">@@ -0,0 +1 @@</span>
+<span class="gi">+&lt;%= contents %&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/index.html.md"
+  open
+>
+  <summary>
+    source/index.html.md
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/index.html.md b/source/index.html.md
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 03c1d25..0000000
+</span><span class="gd">--- a/source/index.html.md
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,48 +0,0 @@</span>
+<span class="gd">----
+-title: Elaborate on the project's goals in the README.md
+----
+-
+-git-read
+-===
+-
+-Generate a website based on a project's Git history.
+-
+-* Serve the project's
+-  `README.md`
+-  as the homepage
+-* Index the history through its commits
+-* Transforms commit messages HTML through a syntax-aware Markdown parser
+-* Display the commits alongside their code changes
+-
+-Command-line Interface
+----
+-
+-Once installed, make sure that the
+-`bin/git-read`
+-executable is available on
+-your path so that the
+-[`git` program can invoke it as a subcommand][subcommand]
+-
+-To learn of the ways to to invoke the command, execute
+-`git read --help`:
+-
+-```bash
+-usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
+-                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
+-Generate HTML from your project's Git history
+-
+-OPTIONS
+-      --output-dir
+-          specify the directory where the site will be built
+-      --git-dir
+-          specify the parent directory of the project's .git/ directory
+-      --verbose
+-          print debugging information during the build process
+-      --server
+-          build and serve assets with a server available at
+-          http://127.0.0.1:4567
+-      --help
+-          generate this help output
+-```
+-
+-[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
+</span></code></pre></div></details>
+
+              <details
+  id="source/layouts/layout.erb"
+  open
+>
+  <summary>
+    source/layouts/layout.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 2b7f1d2..5048f10 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -6,7 +6,7 @@</span>
+     &lt;meta name="viewport"
+           content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+     &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
+<span class="gd">-    &lt;title&gt;&lt;%= current_page.data.title || "Middleman" %&gt;&lt;/title&gt;
+</span><span class="gi">+    &lt;title&gt;&lt;%= page[:title] || current_page.data.title %&gt;&lt;/title&gt;
+</span>     &lt;%= stylesheet_link_tag "site" %&gt;
+     &lt;%= javascript_include_tag "site" %&gt;
+   &lt;/head&gt;
+</code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_readme_test.rb"
+  open
+>
+  <summary>
+    test/system/visitor_views_readme_test.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
+index 4f48a65..7003315 100644
+</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
+</span><span class="p">@@ -3,24 +3,66 @@</span> require "bundler"
+ Bundler.require(:default, :test)
+ 
+ require "minitest/autorun"
+<span class="gd">-require "middleman/rack"
+</span> require "active_support"
+ require "active_support/test_case"
+ 
+<span class="gd">-Capybara.app = Middleman.server
+</span><span class="gi">+require "pathname"
++require "tmpdir"
++
++require "middleman/rack"
+</span> 
+ class VisitorViewsReadmeTest &lt; ActiveSupport::TestCase
+   include Capybara::DSL
+   include Capybara::Minitest::Assertions
+ 
+<span class="gi">+  def around(&amp;block)
++    directory = Dir.mktmpdir
++    begin
++      @repository = Git.init(directory)
++      block.call
++    ensure
++      FileUtils.rm_rf(directory)
++    end
++  end
++
++  def stage_file(filename, contents)
++    Pathname(@repository.dir.path).join(filename).write(contents)
++
++    @repository.add(filename)
++  end
++
++  def commit(message)
++    @repository.commit(message)
++  end
++
++  def with_git_repository(&amp;block)
++    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
++      Capybara.app = Middleman.server
++
++      block.call
++    end
++  end
++
+</span>   teardown do
+     Capybara.reset_sessions!
+     Capybara.use_default_driver
+   end
+ 
+   test "visitor views README" do
+<span class="gd">-    visit "/index.html"
+</span><span class="gi">+    stage_file("README.md", &lt;&lt;~MARKDOWN)
++    git-read
++    ===
++
++    Hello, from tests!
++    MARKDOWN
++    commit("Initial Commit")
++
++    with_git_repository do
++      visit "/index.html"
+</span> 
+<span class="gd">-    assert_selector "h1", text: "git-read"
+</span><span class="gi">+      assert_title "git-read"
++      assert_selector "h1", text: "git-read"
++      assert_selector "p", text: "Hello, from tests!"
++    end
+</span>   end
+ end
+</code></pre></div></details>
+
+          </aside>
+      </section>
+    </main>
+  </body>
+</html>

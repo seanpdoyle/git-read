@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Introduce `bin/git-read` command line interface
+</title>
+    <link href="../../stylesheets/site.css" rel="stylesheet" />
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+    <script src="../../javascripts/site.js"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">
+        Table of Contents
+      </summary>
+      <nav class="history">
+        <a href="../../">git-read</a>
+
+          <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+</a>
+          <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
+</a>
+          <a href="../f2859800cec5f90bb8146d5c7108429a22f25c18/">Replace Generated Files with Static HTML and CSS
+</a>
+          <a href="../49d1766f58a627a8a084f1377fc6ad17755e6ff0/">Exercise the application through a System Test
+</a>
+          <a href="../8160f2abba85592b84535bfa3011fa84f606f776/">Introduce Redcarpet Markdown Engine
+</a>
+          <a href="../6e5a5f239b07a224a9ada4bb8af47be4eb597455/">Generate `&#x2F;index.html` dynamically
+</a>
+          <a href="../f27fe60d06cca57e080d0bdfff9dd02fcd3c0c73/">Extract `ApplicationSystemTestCase`
+</a>
+          <a href="../d871fdaa5456c0d2e33a0291174dbfc3ac194353/">Render the contents of a Commit&#x27;s Message
+</a>
+          <a href="../5a96dc49fd5288d97f0f8e14d2d658dbe9ddeae1/">Navigate to previous commit
+</a>
+          <a href="../77058482950e921f5b96c98b3eb80a2c7bd046a7/">Navigate to next commit
+</a>
+          <a href="../58d4d4f04fe5a4d09ddcbc6fc69d096b9cf15bdd/">Dynamically determine project title
+</a>
+          <a href="../a8010861710698e7dc663094e443110017fcface/">Extract `UrlHelpers`
+</a>
+          <a href="../6bfbb9548a4eaace096c98aaac28d28f1481812b/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="../ab826e64843b2c7f958eda4d98d0262c68a385ec/">Syntax highlight Markdown fenced code blocks
+</a>
+          <a href="./" aria-current="page">Introduce `bin&#x2F;git-read` command line interface
+</a>
+          <a href="../7432f7b3d3e57e85fc144826674ac04664686920/">Add `bin&#x2F;git-read --server` flag
+</a>
+          <a href="../3ba1bbc0812ae6d0675b435ca8310198a7e56f3e/">Extract `GitHelpers` from System Test Cases
+</a>
+          <a href="../3d56723f9f22e24d3b7292f0ed2ee4088762d63b/">Add support for re-writing a project&#x27;s history
+</a>
+          <a href="../a91272bb2216d20a5ce2674dc5804bdb5219e56b/">Extract `Commit` model
+</a>
+          <a href="../87c4a40f24d2212c9d65249f7904e8daef616c73/">Render how a commit changes the project&#x27;s files
+</a>
+          <a href="../44ecd1dd782efab914d13d5c8a160bbe88cd0f83/">Integrate with GitHub Actions
+</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+
+        <nav class="navigation">
+
+<a href="../ab826e64843b2c7f958eda4d98d0262c68a385ec/">              &#8592; Previous
+</a>
+<a href="../7432f7b3d3e57e85fc144826674ac04664686920/">              Next &#8594;
+</a>        </nav>
+      </header>
+
+      <section class="container">
+        <article class="container__item commit">
+          <h1>Introduce <code>bin/git-read</code> command line interface</h1>
+
+<p>This commit introduces the <a href="#bin/git-read"><code>bin/git-read</code></a> executable. So
+far, the executable can be passed three flags.</p>
+
+<p>To view the possible options, execute with the <code>--help</code> flag to output
+its usage documentation:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>usage: git read [--help] [-v|--verbose] [-g|--git-dir &lt;path&gt;] [-o|--output-dir &lt;path&gt;]
+
+Generate HTML from your project's Git history
+
+OPTIONS
+      --output-dir
+          specify the directory where the site will be built
+
+      --git-dir
+          specify the parent directory of the project's .git/ directory
+</code></pre></div>
+<p>The end result of a successful <a href="#bin/git-read"><code>bin/get-read</code></a> execution
+is that <a href="https://middlemanapp.com/basics/build-and-deploy#deploying-the-site"><code>middleman build</code></a> output will be written to
+the directory passed as the <code>--output-dir</code> flag.</p>
+
+<h2>Test coverage</h2>
+
+<p>To ensure that the output of the <a href="#bin/git-read"><code>bin/git-read</code></a> command
+is the same as what&rsquo;s covered in other System Test cases declared in
+<code>test/system</code>, extract the <code>#with_built_output</code> helper.</p>
+
+<p>The <code>#with_built_output</code> leverages the test harness&rsquo; test-isolated
+temporary directory, and invokes <code>bin/git-read</code> to read from and write
+to a <code>build/</code> directory within the tmpdir. The contents of the <code>build/</code>
+directory are served by a constructed through a <a href="https://www.rubydoc.info/github/rack/rack/master/Rack/Static"><code>Rack::Static</code>
+middleware</a> <a href="https://www.rubydoc.info/github/rack/rack/master/Rack/Builder"><code>Rack::Builder</code> domain specific
+language</a>.</p>
+
+<p>To ensure that executions of <a href="#bin/git-read"><code>bin/git-read</code></a> exit with a
+<code>0</code> status code, this commit introduces the first test case outside of
+the <code>test/system</code> directory.</p>
+
+<p>Since that test case doesn&rsquo;t require all of the System Test case setup,
+the <a href="#test/test_helper.rb"><code>test/test_helper.rb</code></a> file serves as a
+re-usable chunk, shared by both styles of test.</p>
+
+        </article>
+          <aside class="container__item diff">
+              <details
+  id="bin/git-read"
+  open
+>
+  <summary>
+    bin/git-read
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
+</span><span class="p">new file mode 100755
+</span><span class="gh">index 0000000..a9033d6
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/bin/git-read
+</span><span class="p">@@ -0,0 +1,68 @@</span>
+<span class="gi">+#!/usr/bin/env bash
++
++set -e
++
++ARGS=( "$@" )
++
++VERBOSE="--no-verbose"
++
++for i in "${!ARGS[@]}"; do
++  case "${ARGS[i]}" in
++    "")
++      continue
++      ;;
++    -o|--output-dir|--build-dir)
++      OUTPUT_DIR="${ARGS[i+1]}"
++      unset 'ARGS[i+1]'
++      ;;
++    -g|--git-dir)
++      GIT_DIR="${ARGS[i+1]}"
++      unset 'ARGS[i+1]'
++      ;;
++    -v|--verbose)
++      VERBOSE="--verbose"
++      ;;
++    -h|--help)
++      cat &lt;&lt;-HELP
++usage: git read [--help] [-v|--verbose] [-g|--git-dir &lt;path&gt;] [-o|--output-dir &lt;path&gt;]
++
++Generate HTML from your project's Git history
++
++OPTIONS
++
++      --output-dir
++          specify the directory where the site will be built
++
++      --git-dir
++          specify the parent directory of the project's .git/ directory
++
++      --verbose
++          print debugging information during the build process
++HELP
++      exit 0
++      ;;
++    *)
++      continue
++      ;;
++  esac
++  unset 'ARGS[i]'
++done
++
++build_site() {
++  git_dir="${1}"
++  output_dir="${2}"
++  verbosity="${@}"
++  tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
++
++  export GIT_DIR=$git_dir
++
++  mkdir -p $output_dir
++  cd $tool_dir
++  bundle exec middleman build --build-dir=$output_dir $verbosity
++  cd $git_dir
++}
++
++build_site \
++  $(realpath ${GIT_DIR-./}) \
++  $(realpath ${OUTPUT_DIR-./build/}) \
++  "${VERBOSE}"
+</span></code></pre></div></details>
+
+              <details
+  id="test/application_system_test_case.rb"
+  open
+>
+  <summary>
+    test/application_system_test_case.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+index 4f164cd..758e7ed 100644
+</span><span class="gd">--- a/test/application_system_test_case.rb
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -1,9 +1,4 @@</span>
+<span class="gd">-require "bundler"
+-Bundler.require(:default, :test)
+-
+-require "minitest/autorun"
+-require "active_support"
+-require "active_support/test_case"
+</span><span class="gi">+require "test_helper"
+</span> 
+ require "pathname"
+ require "tmpdir"
+<span class="p">@@ -37,6 +32,29 @@</span> class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
+     @repository.commit(message)
+   end
+ 
+<span class="gi">+  def with_built_output(&amp;block)
++    git_directory = Pathname(@repository.dir.path)
++    build_directory = git_directory.join("build")
++
++    system &lt;&lt;~BASH, exception: true
++      bin/git-read \
++        --verbose \
++        --git-dir #{git_directory} \
++        --output-dir #{build_directory}
++    BASH
++
++    Capybara.app = Rack::Builder.new do
++      use Rack::Static,
++        urls: [""],
++        root: build_directory,
++        index: "index.html"
++
++      run -&gt; (*) {}
++    end
++
++    block.call
++  end
++
+</span>   def with_git_repository(&amp;block)
+     ClimateControl.modify(GIT_DIR: @repository.dir.path) do
+       Capybara.app = Middleman.server
+</code></pre></div></details>
+
+              <details
+  id="test/bin/git_read_test.rb"
+  open
+>
+  <summary>
+    test/bin/git_read_test.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/bin/git_read_test.rb b/test/bin/git_read_test.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..e3ae0b6
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/bin/git_read_test.rb
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+require "test_helper"
++
++class GitReadTest &lt; ActiveSupport::TestCase
++  test "bin/git-read --help exits with a 0 status" do
++    system("bin/git-read --help", exception: 0)
++
++    assert_equal(0, $?)
++  end
++end
+</span></code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_built_site_test.rb"
+  open
+>
+  <summary>
+    test/system/visitor_views_built_site_test.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_built_site_test.rb b/test/system/visitor_views_built_site_test.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..ba0fc2e
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/system/visitor_views_built_site_test.rb
+</span><span class="p">@@ -0,0 +1,15 @@</span>
+<span class="gi">+require "application_system_test_case"
++
++class VisitorViewsBuiltSiteTest &lt; ApplicationSystemTestCase
++  test "visitor views built site" do
++    stage_file("README.md", "Ignore me")
++    commit("From the command line")
++
++    with_built_output do
++      visit root_path
++      click_on "From the command line"
++
++      assert_selector "h1", text: "From the command line"
++    end
++  end
++end
+</span></code></pre></div></details>
+
+              <details
+  id="test/test_helper.rb"
+  open
+>
+  <summary>
+    test/test_helper.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/test_helper.rb b/test/test_helper.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..5ab2c4e
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/test_helper.rb
+</span><span class="p">@@ -0,0 +1,6 @@</span>
+<span class="gi">+require "bundler"
++Bundler.require(:default, :test)
++
++require "minitest/autorun"
++require "active_support"
++require "active_support/test_case"
+</span></code></pre></div></details>
+
+          </aside>
+      </section>
+    </main>
+  </body>
+</html>

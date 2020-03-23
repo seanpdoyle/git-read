@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Render the contents of a Commit's Message
+</title>
+    <link href="../../stylesheets/site.css" rel="stylesheet" />
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+    <script src="../../javascripts/site.js"></script>
+  </head>
+  <body class="page">
+    <details id="table-of-contents" class="page__history" open>
+      <summary class="page__history-summary">
+        Table of Contents
+      </summary>
+      <nav class="history">
+        <a href="../../">git-read</a>
+
+          <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">Elaborate on the project&#x27;s goals in the README.md
+</a>
+          <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/">[GENERATED]: Scaffold the project with Middleman
+</a>
+          <a href="../f2859800cec5f90bb8146d5c7108429a22f25c18/">Replace Generated Files with Static HTML and CSS
+</a>
+          <a href="../49d1766f58a627a8a084f1377fc6ad17755e6ff0/">Exercise the application through a System Test
+</a>
+          <a href="../8160f2abba85592b84535bfa3011fa84f606f776/">Introduce Redcarpet Markdown Engine
+</a>
+          <a href="../6e5a5f239b07a224a9ada4bb8af47be4eb597455/">Generate `&#x2F;index.html` dynamically
+</a>
+          <a href="../f27fe60d06cca57e080d0bdfff9dd02fcd3c0c73/">Extract `ApplicationSystemTestCase`
+</a>
+          <a href="./" aria-current="page">Render the contents of a Commit&#x27;s Message
+</a>
+          <a href="../5a96dc49fd5288d97f0f8e14d2d658dbe9ddeae1/">Navigate to previous commit
+</a>
+          <a href="../77058482950e921f5b96c98b3eb80a2c7bd046a7/">Navigate to next commit
+</a>
+          <a href="../58d4d4f04fe5a4d09ddcbc6fc69d096b9cf15bdd/">Dynamically determine project title
+</a>
+          <a href="../a8010861710698e7dc663094e443110017fcface/">Extract `UrlHelpers`
+</a>
+          <a href="../6bfbb9548a4eaace096c98aaac28d28f1481812b/">Add &quot;current&quot; styles to `&lt;a&gt;` elements
+</a>
+          <a href="../ab826e64843b2c7f958eda4d98d0262c68a385ec/">Syntax highlight Markdown fenced code blocks
+</a>
+          <a href="../f5bd967244bc5a397f4403c7eb25dfce98782d2d/">Introduce `bin&#x2F;git-read` command line interface
+</a>
+          <a href="../7432f7b3d3e57e85fc144826674ac04664686920/">Add `bin&#x2F;git-read --server` flag
+</a>
+          <a href="../3ba1bbc0812ae6d0675b435ca8310198a7e56f3e/">Extract `GitHelpers` from System Test Cases
+</a>
+          <a href="../3d56723f9f22e24d3b7292f0ed2ee4088762d63b/">Add support for re-writing a project&#x27;s history
+</a>
+          <a href="../a91272bb2216d20a5ce2674dc5804bdb5219e56b/">Extract `Commit` model
+</a>
+          <a href="../87c4a40f24d2212c9d65249f7904e8daef616c73/">Render how a commit changes the project&#x27;s files
+</a>
+          <a href="../44ecd1dd782efab914d13d5c8a160bbe88cd0f83/">Integrate with GitHub Actions
+</a>
+      </nav>
+    </details>
+
+    <main class="page__content">
+      <header>
+
+        <nav class="navigation">
+
+<a href="../f27fe60d06cca57e080d0bdfff9dd02fcd3c0c73/">              &#8592; Previous
+</a>
+<a href="../5a96dc49fd5288d97f0f8e14d2d658dbe9ddeae1/">              Next &#8594;
+</a>        </nav>
+      </header>
+
+      <section class="container">
+        <article class="container__item commit">
+          <h1>Render the contents of a Commit&rsquo;s Message</h1>
+
+<p>A Git commit message follows a <a href="https://commit.style/">loose structure</a>:</p>
+
+<blockquote>
+<p>The first line of a commit message serves as a summary.  When
+displayed on the web, it&rsquo;s often styled as a heading, and in emails,
+it&rsquo;s typically used as the subject.  As such, you should capitalize
+it and omit any trailing punctuation.  Aim for about 50 characters,
+give or take, otherwise it may be painfully truncated in some
+contexts.</p>
+
+<p>Oftentimes a subject by itself is sufficient.  When it&rsquo;s not, add a
+blank line (this is important) followed by one or more paragraphs hard
+wrapped to 72 characters.</p>
+</blockquote>
+
+<p>Assuming that the commits adhere to that convention, the application
+will split out the commit&rsquo;s subject line from the rest of the message,
+and treat it as the resulting HTML page&rsquo;s title.</p>
+
+<p>The call to <code>subject.strip</code> in the <code>source/commits/commit</code> template is
+deliberate and important. Without it, a trailing new-line character
+would separate the title from its underlining <code>===</code> syntax, which would
+signal to the Markdown generator that it was to be represented as a
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p"><code>&lt;p&gt;</code> element`</a> instead of an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements"><code>&lt;h1&gt;</code> element</a>.</p>
+
+<h2>Navigating the history</h2>
+
+<p>Both the <code>/index.html</code> and specific <code>/commits/$SHA/index.html</code> pages
+render the project&rsquo;s history in a navigable sidebar. To power this
+feature, and to ensure that the data is shared across <a href="https://middlemanapp.com/advanced/dynamic-pages#defining-proxies">Middleman&rsquo;s proxy
+templates</a>, extract a <a href="#config.rb"><code>config.rb</code></a>-local variable,
+which is declared and shared by <a href="https://ruby-doc.org/core-2.7.0/Hash.html#method-i-merge">merging in additional template local
+variables</a> as the <a href="https://middlemanapp.com/basics/partials/"><code>local:</code> key</a>.</p>
+
+<p>The history is meant to be read start-to-finish (as opposed to the
+typical latest-to-first output that a default <a href="https://www.git-scm.com/docs/git-log"><code>git log</code></a> call
+provides).</p>
+
+<p>To achieve this order, chain a call to
+<a href="https://ruby-doc.org/core-2.7.0/Enumerable.html#method-i-reverse_each"><code>Enumerable#reverse_each</code></a> onto calls to
+<code>repository.log</code>. The <code>#log</code> method receives a limit on the number of
+commits to provide. We want the full history, so we pass <code>nil</code>.</p>
+
+<p>There are times when a commit&rsquo;s subject line contains HTML. To support
+this, wrap the navigation item&rsquo;s text in calls to <a href="https://middlemanapp.com/basics/helper-methods/#format-helpers">Middleman&rsquo;s
+<code>#escape_html</code> helper method</a>.</p>
+
+        </article>
+          <aside class="container__item diff">
+              <details
+  id="config.rb"
+  open
+>
+  <summary>
+    config.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 95ae2cd..54e0f8a 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -34,20 +34,40 @@</span> repository = Git.open(
+   Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+ )
+ 
+<span class="gi">+locals = {
++  history: {
++    commits: repository.log(nil).reverse_each,
++  },
++}
++
+</span> latest_readme = repository.show("HEAD:README.md")
+ proxy(
+   "index.html",
+   "README.html",
+<span class="gd">-  locals: {
+</span><span class="gi">+  locals: locals.merge(
+</span>     commit: repository.object("HEAD"),
+     contents: latest_readme,
+     page: {
+       title: latest_readme.lines.first,
+     },
+<span class="gd">-  },
+</span><span class="gi">+  ),
+</span>   ignore: true,
+ )
+ 
+<span class="gi">+locals.dig(:history, :commits).each do |commit|
++  proxy(
++    "/commits/#{commit.sha}/index.html",
++    "/commits/commit.html",
++    locals: locals.merge(
++      commit: commit,
++      page: {
++        title: commit.message.lines.first,
++      }
++    ),
++    ignore: true,
++  )
++end
++
+</span> # Helpers
+ # Methods defined in the helpers block are available in templates
+ # https://middlemanapp.com/basics/helper-methods/
+</code></pre></div></details>
+
+              <details
+  id="source/commits/commit.html.md.erb"
+  open
+>
+  <summary>
+    source/commits/commit.html.md.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/commits/commit.html.md.erb b/source/commits/commit.html.md.erb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..b05055b
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/commits/commit.html.md.erb
+</span><span class="p">@@ -0,0 +1,6 @@</span>
+<span class="gi">+&lt;% subject, *messages = commit.message.lines %&gt;
++
++&lt;%= subject.strip %&gt;
++===
++
++&lt;%= messages.join %&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/layouts/layout.erb"
+  open
+>
+  <summary>
+    source/layouts/layout.erb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 5048f10..a2c045c 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -20,13 +20,11 @@</span>
+           git-read
+         &lt;/a&gt;
+ 
+<span class="gd">-        &lt;a href="#"&gt;
+-          [GENERATED]: Scaffold the project with Middleman
+-        &lt;/a&gt;
+-
+-        &lt;a href="#"&gt;
+-          Elaborate on the project's goals in the README.md
+-        &lt;/a&gt;
+</span><span class="gi">+        &lt;% history[:commits].each do |commit| %&gt;
++          &lt;% link_to "/commits/#{commit.sha}/index.html" do %&gt;
++            &lt;%= escape_html(commit.message.lines.first) %&gt;
++          &lt;% end %&gt;
++        &lt;% end %&gt;
+</span>       &lt;/nav&gt;
+     &lt;/details&gt;
+ 
+</code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_commits_test.rb"
+  open
+>
+  <summary>
+    test/system/visitor_views_commits_test.rb
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_commits_test.rb b/test/system/visitor_views_commits_test.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..8e50c3c
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/system/visitor_views_commits_test.rb
+</span><span class="p">@@ -0,0 +1,33 @@</span>
+<span class="gi">+require "application_system_test_case"
++
++class VisitorViewsCommitsTest &lt; ApplicationSystemTestCase
++  test "visitor views commits" do
++    stage_file("README.md", "Ignore me")
++    commit("Ignore me")
++    stage_file("file.txt", "Ignore me")
++    commit(&lt;&lt;~MARKDOWN)
++    The commit subject
++
++    The commit body
++    MARKDOWN
++
++    with_git_repository do
++      visit "/index.html"
++      click_on "The commit subject"
++
++      assert_selector "h1", text: "The commit subject"
++      assert_selector "p", text: "The commit body"
++    end
++  end
++
++  test "visitor views commit with HTML in the subject line" do
++    stage_file("README.md", "Ignore me")
++    commit("This subject has a `&lt;h1&gt;` in it")
++
++    with_git_repository do
++      visit "/index.html"
++
++      assert_text "This subject has a `&lt;h1&gt;` in it"
++    end
++  end
++end
+</span></code></pre></div></details>
+
+          </aside>
+      </section>
+    </main>
+  </body>
+</html>
