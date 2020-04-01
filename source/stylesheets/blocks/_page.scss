@@ -3,43 +3,24 @@
 
   display: flex;
   flex-direction: column;
+}
 
-  @media(min-width: $breakpoint--mobile) {
-    flex-direction: row;
-  }
+.page__navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .page__content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
-  @media(min-width: $breakpoint--mobile) {
-    width: calc(100vw - var(--history-width) - var(--spacing));
-  }
 }
 
 .page__history {
-  margin-bottom: var(--spacing--small);
-  margin-right: 0;
-
-  @media(min-width: $breakpoint--mobile) {
-    margin-bottom: 0;
-    margin-right: var(--spacing);
-  }
-
+  min-height: 100vh;
 }
 
-.page__history-summary {
-  display: inherit;
-
-  @media(min-width: $breakpoint--mobile) {
-    display: none;
-  }
-}
-
-.page__history > * {
-  @media(min-width: $breakpoint--mobile) {
-    width: 360px;
-  }
+.page__history-conatiner {
+  max-width: 360px;
 }

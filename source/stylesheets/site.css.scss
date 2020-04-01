@@ -1,10 +1,306 @@
 @import "settings/breakpoints";
 @import "settings/variables";
 
-@import "blocks/banner";
-@import "blocks/commit";
-@import "blocks/container";
-@import "blocks/highlight";
-@import "blocks/history";
-@import "blocks/navigation";
-@import "blocks/page";
+:root {
+  --header-height: 3rem;
+  --header-border-width: 2px;
+
+  --accordion-toggle-width: 2rem;
+  --accordion-toggle-border-width: 1px;
+  --commit-history-padding: 1rem;
+  --commit-history-padding: 1rem;
+  --commit-history-width: 25rem;
+}
+
+html {
+  font-size: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+.accordion {
+  position: relative;
+}
+
+.accordion[open] {
+  padding-right: 2rem;
+}
+
+.accordion[open] .accordion__summary {
+  height: 0;
+}
+
+.accordion__summary {
+  display: flex;
+  height: 100%;
+
+  &,
+  &::-webkit-details-marker {
+    list-style: none;
+  }
+}
+
+.accordion[open] .accordion__closed {
+  display: none;
+}
+
+.accordion__closed {
+  display: flex;
+  flex-direction: row;
+}
+
+.accordion[open] .accordion__opened {
+  display: block;
+}
+
+.accordion__opened {
+  display: none;
+}
+
+.accordion__toggle {
+  align-items: center;
+  border-left: solid var(--accordion-toggle-border-width) black;
+  border-right: solid 1px black;
+  cursor: pointer;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: var(--accordion-toggle-width);
+}
+
+.accordion__toggle--fill {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.page {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: var(--header-height);
+  border-bottom: solid var(--header-border-width) black;
+}
+
+.header__name {
+  align-items: center;
+  align-self: stretch;
+  border-right: solid calc(var(--header-border-width) *0.5) black;
+  display: flex;
+  justify-content: center;
+  width: calc(
+    var(--commit-history-width) +
+    var(--commit-history-padding) +
+    var(--accordion-toggle-width) -
+    var(--accordion-toggle-border-width)
+  )
+}
+
+.header__navigation {
+  flex-grow: 1;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.navigation--next {
+  justify-content: flex-end;
+}
+
+.navigation--previous {
+  justify-content: flex-start;
+}
+
+.content {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+}
+
+.content__item {
+  height: calc(
+    100vh -
+    var(--header-height) -
+    var(--header-border-width)
+  );
+}
+
+.content__item--grow {
+  flex-grow: 1;
+}
+
+.commit {
+}
+
+.commit-content--grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.commit-content--single {
+  flex-grow: 1;
+}
+
+.u-overflow-y--auto {
+  overflow-y: auto;
+}
+
+.commit-history {
+  padding: calc(var(--commit-history-padding) * 0.5);
+}
+
+.commit-node {
+  --circle-size: 1rem;
+
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: var(--spacing--small);
+  position: relative;
+
+  &::before {
+    background-color: black;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: var(--circle-size);
+    margin-right: var(--circle-size);
+    width: var(--circle-size);
+    z-index: 1;
+  }
+
+  &::after {
+    background-color: black;
+    content: "";
+    display: block;
+    height: 100%;
+    left: calc(var(--circle-size) * 0.5);
+    position: absolute;
+    top: var(--circle-size);
+    width: 1px;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &:last-of-type::after {
+    display: none;
+  }
+
+  &[aria-current]:not([aria-current="false"]) {
+    &::before {
+      background-color: green;
+    }
+  }
+}
+
+.commit-node--collapsed {
+  &::before {
+    margin-right: 0;
+  }
+}
+
+.commit-node--full {
+  width: var(--commit-history-width);
+}
+
+.commit {
+  --commit-font-size: 1.12rem;
+
+  font-size: var(--commit-font-size);
+}
+
+.commit--message {
+  --commit-message-margin: 1.5rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin-bottom: var(--commit-message-margin);
+  }
+
+  h1 {
+    font-size: 2.0736em;
+  }
+
+  h2 {
+    font-size: 1.728em;
+  }
+
+  h3 {
+    font-size: 1.44em;
+  }
+
+  h4 {
+    font-size: 1.2em;
+  }
+
+  img {
+    box-shadow:
+      inset 0 -3em 3em rgba(0,0,0,0.1),
+            0 0  0 2px rgb(255,255,255),
+            0.3em 0.3em 1em rgba(0,0,0,0.3);
+    max-width: 100%;
+  }
+
+  pre {
+    margin: 0;
+  }
+
+  pre code {
+    padding: 0;
+  }
+}
+
+.banner {
+  text-align: center;
+  padding: var(--commit-font-size);
+  width: 100%;
+}
+
+.commit--message {
+  padding: calc(var(--commit-font-size) * 2) calc(var(--commit-font-size) * 6);
+
+  div.highlight {
+    margin-bottom: var(--commit-message-margin);
+    overflow-x: auto;
+    padding: var(--commit-font-size);
+  }
+}
+
+.commit--diff {
+  .highlight {
+    overflow-x: auto;
+  }
+}
