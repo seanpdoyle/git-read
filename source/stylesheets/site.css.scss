@@ -130,7 +130,6 @@ p {
   width: calc(
     var(--commit-history-width) +
     var(--commit-history-padding) +
-    var(--spacing--small) +
     var(--accordion-toggle-width) -
     var(--accordion-toggle-border-width)
   )
@@ -240,7 +239,7 @@ p {
     flex-grow: 0;
     flex-shrink: 0;
     height: var(--circle-size);
-    margin-right: var(--circle-size);
+    margin-right: var(--spacing--small);
     width: var(--circle-size);
     z-index: 1;
   }
@@ -283,7 +282,6 @@ p {
   @media (min-width: $breakpoint--mobile) {
     flex-direction: row;
     padding: 0;
-    padding-right: var(--spacing--small);
     padding-bottom: var(--spacing--small);
   }
 }
