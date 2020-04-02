@@ -48,8 +48,8 @@
     <main class="content">
       <details class="accordion content__item">
         <summary class="accordion__summary">
-          <div class="accordion__closed u-mb-overflow-x--scroll">
-            <nav class="commit-history">
+          <div class="accordion__closed">
+            <nav class="commit-history u-mb-overflow-x--scroll">
               <% history[:commits].each do |commit| %>
                 <%= current_link_to(
                   "",
@@ -72,7 +72,7 @@
           </div>
         </summary>
 
-        <nav class="commit-history u-mb-overflow-x--scroll">
+        <nav class="commit-history commit-history--full u-mb-overflow-x--scroll">
           <% history[:commits].each do |commit| %>
             <%= current_link_to(
               escape_html(commit.subject),

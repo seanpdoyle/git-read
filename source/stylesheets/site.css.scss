@@ -77,21 +77,32 @@ p {
 
 .accordion__toggle {
   align-items: center;
-  border-left: solid var(--accordion-toggle-border-width) black;
-  border-right: solid 1px black;
-  cursor: pointer;
+  border-bottom: solid var(--accordion-toggle-border-width) black;
+  border-top: solid var(--accordion-toggle-border-width) black;
   color: black;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
+  height: var(--accordion-toggle-width);
   justify-content: center;
-  width: var(--accordion-toggle-width);
+
+  @media (min-width: $breakpoint--mobile) {
+    border-bottom: inherit;
+    border-left: solid var(--accordion-toggle-border-width) black;
+    border-right: solid var(--accordion-toggle-border-width) black;
+    border-top: inherit;
+    height: auto;
+    width: var(--accordion-toggle-width);
+  }
 }
 
 .accordion__toggle--fill {
   bottom: 0;
+  left: 0;
   position: absolute;
+  right: 0;
 
   @media (min-width: $breakpoint--mobile) {
+    left: inherit;
     right: 0;
     top: 0;
   }
@@ -119,6 +130,7 @@ p {
   width: calc(
     var(--commit-history-width) +
     var(--commit-history-padding) +
+    var(--spacing--small) +
     var(--accordion-toggle-width) -
     var(--accordion-toggle-border-width)
   )
@@ -194,10 +206,20 @@ p {
 .commit-history {
   display: flex;
   flex-direction: row;
+  width: 100vw;
 
   @media (min-width: $breakpoint--mobile) {
     flex-direction: column;
     padding: calc(var(--commit-history-padding) * 0.5);
+    width: inherit;
+  }
+}
+
+.commit-history--full {
+  margin-bottom: var(--accordion-toggle-width);
+
+  @media (min-width: $breakpoint--mobile) {
+    margin-bottom: inherit;
   }
 }
 
@@ -206,8 +228,8 @@ p {
 
   align-items: center;
   display: flex;
-  flex-direction: row;
-  padding-bottom: var(--spacing--small);
+  flex-direction: column;
+  padding: var(--spacing--small);
   position: relative;
 
   &::before {
@@ -227,11 +249,21 @@ p {
     background-color: black;
     content: "";
     display: block;
-    height: 100%;
-    left: calc(var(--circle-size) * 0.5);
+    height: 1px;
     position: absolute;
-    top: var(--circle-size);
-    width: 1px;
+    width: 100%;
+    left: var(--circle-size);
+    top: calc(
+      var(--circle-size) * 0.5 +
+      var(--spacing--small)
+    );
+
+    @media (min-width: $breakpoint--mobile) {
+      height: 100%;
+      left: calc(var(--circle-size) * 0.5);
+      top: var(--circle-size);
+      width: 1px;
+    }
   }
 
   &:last-child {
@@ -246,6 +278,13 @@ p {
     &::before {
       background-color: green;
     }
+  }
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: row;
+    padding: 0;
+    padding-right: var(--spacing--small);
+    padding-bottom: var(--spacing--small);
   }
 }
 
