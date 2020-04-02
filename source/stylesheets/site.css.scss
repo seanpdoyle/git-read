@@ -60,7 +60,11 @@ p {
 
 .accordion__closed {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: row;
+  }
 }
 
 .accordion[open] .accordion__opened {
@@ -86,8 +90,11 @@ p {
 .accordion__toggle--fill {
   bottom: 0;
   position: absolute;
-  right: 0;
-  top: 0;
+
+  @media (min-width: $breakpoint--mobile) {
+    right: 0;
+    top: 0;
+  }
 }
 
 .page {
@@ -138,15 +145,21 @@ p {
 .content {
   align-items: stretch;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: row;
+  }
 }
 
 .content__item {
-  height: calc(
-    100vh -
-    var(--header-height) -
-    var(--header-border-width)
-  );
+  @media (min-width: $breakpoint--mobile) {
+    height: calc(
+      100vh -
+      var(--header-height) -
+      var(--header-border-width)
+    );
+  }
 }
 
 .content__item--grow {
@@ -157,20 +170,35 @@ p {
 }
 
 .commit-content--grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $breakpoint--mobile) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .commit-content--single {
   flex-grow: 1;
 }
 
-.u-overflow-y--auto {
-  overflow-y: auto;
+.u-mb-overflow-x--scroll {
+  overflow-x: scroll;
+
+  @media (min-width: $breakpoint--mobile) {
+    overflow-x: initial;
+  }
 }
 
 .commit-history {
-  padding: calc(var(--commit-history-padding) * 0.5);
+  display: flex;
+  flex-direction: row;
+
+  @media (min-width: $breakpoint--mobile) {
+    flex-direction: column;
+    padding: calc(var(--commit-history-padding) * 0.5);
+  }
 }
 
 .commit-node {
@@ -237,6 +265,12 @@ p {
   font-size: var(--commit-font-size);
 }
 
+.commit--long-content {
+  @media (min-width: $breakpoint--mobile) {
+    overflow-y: auto;
+  }
+}
+
 .commit--message {
   --commit-message-margin: 1.5rem;
 
@@ -251,19 +285,35 @@ p {
   }
 
   h1 {
-    font-size: 2.0736em;
+    font-size: 1.728em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 2.0736em;
+    }
   }
 
   h2 {
-    font-size: 1.728em;
+    font-size: 1.44em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 1.728em;
+    }
   }
 
   h3 {
-    font-size: 1.44em;
+    font-size: 1.2em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 1.44em;
+    }
   }
 
   h4 {
-    font-size: 1.2em;
+    font-size: 1em;
+
+    @media (min-width: $breakpoint--mobile) {
+      font-size: 1.2em;
+    }
   }
 
   img {
@@ -290,7 +340,11 @@ p {
 }
 
 .commit--message {
-  padding: calc(var(--commit-font-size) * 2) calc(var(--commit-font-size) * 6);
+  padding: calc(var(--commit-font-size) * 0.5);
+
+  @media (min-width: $breakpoint--mobile) {
+    padding: calc(var(--commit-font-size) * 2) calc(var(--commit-font-size) * 6);
+  }
 
   div.highlight {
     margin-bottom: var(--commit-message-margin);
@@ -300,6 +354,12 @@ p {
 }
 
 .commit--diff {
+  --commit-font-size: 0.8333rem;
+
+  @media (min-width: $breakpoint--mobile) {
+  --commit-font-size: 1.12rem;
+  }
+
   .highlight {
     overflow-x: auto;
   }

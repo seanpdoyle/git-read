@@ -48,7 +48,7 @@
     <main class="content">
       <details class="accordion content__item">
         <summary class="accordion__summary">
-          <div class="accordion__closed">
+          <div class="accordion__closed u-mb-overflow-x--scroll">
             <nav class="commit-history">
               <% history[:commits].each do |commit| %>
                 <%= current_link_to(
@@ -72,7 +72,7 @@
           </div>
         </summary>
 
-        <nav class="commit-history">
+        <nav class="commit-history u-mb-overflow-x--scroll">
           <% history[:commits].each do |commit| %>
             <%= current_link_to(
               escape_html(commit.subject),
@@ -97,7 +97,7 @@
           content__item--grow
         "
       >
-        <section class="commit commit--message <%= "u-overflow-y--auto" if render_diffs %>">
+        <section class="commit commit--message <%= "commit--long-content" if render_diffs %>">
           <% if out_of_date %>
             <aside class="banner">
               <mark>
@@ -114,7 +114,7 @@
         </section>
 
         <% if render_diffs %>
-          <aside class="commit commit--diff u-overflow-y--auto">
+          <aside class="commit commit--diff commit--long-content">
             <% commit.diff_files.each do |diff_file| %>
               <%= partial("commits/file", locals: diff_file) %>
             <% end %>
