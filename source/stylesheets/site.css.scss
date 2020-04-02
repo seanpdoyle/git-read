@@ -47,10 +47,10 @@ p {
 .accordion__summary {
   display: flex;
   height: 100%;
+  list-style: none;
 
-  &,
   &::-webkit-details-marker {
-    list-style: none;
+    display: none;
   }
 }
 
