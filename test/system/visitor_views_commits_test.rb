@@ -14,6 +14,7 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
     with_git_repository do
       visit root_path
       click_on "The commit subject"
+      open_history
 
       assert_selector "h1", text: "The commit subject"
       assert_selector "p", text: "The commit body"

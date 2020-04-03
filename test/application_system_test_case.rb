@@ -13,6 +13,10 @@ class ApplicationSystemTestCase < ActiveSupport::TestCase
     with_git_directory(&block)
   end
 
+  def open_history
+    find("summary", text: "Open history").click
+  end
+
   teardown do
     Capybara.reset_sessions!
     Capybara.use_default_driver

@@ -12,6 +12,7 @@ class VisitorViewsAStaleCommitTest < ApplicationSystemTestCase
 
     with_git_repository do
       visit commit_path(branch_commit_sha)
+      open_history
 
       assert_text "You're viewing an out-of-date version of the project."
       assert_selector "a", text: "Read the latest version."
@@ -31,6 +32,7 @@ class VisitorViewsAStaleCommitTest < ApplicationSystemTestCase
 
     with_git_repository do
       visit root_path
+      open_history
 
       assert_selector "a", text: "Hello from master"
       assert_no_text "You're viewing an out-of-date version of the project."
