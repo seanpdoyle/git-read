@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>[GENERATED]: Scaffold the project with Middleman
+    <title>Generate `/index.html` dynamically
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -22,9 +22,9 @@
         navigation
         
       ">
-<a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">              &#8592; Previous
+<a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/">              &#8592; Previous
 </a>
-<a href="../1874624426883ffed07c46686860aeb53a3d1eee/">              Next &#8594;
+<a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -39,16 +39,16 @@
             ">
                 <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
-" aria-current="page"></a>
+                <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
+"></a>
                 <a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--collapsed" title="Replace Generated Files with Static HTML and CSS
 "></a>
                 <a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/" class="commit-node commit-node--collapsed" title="Exercise the application through a System Test
 "></a>
                 <a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/" class="commit-node commit-node--collapsed" title="Introduce Redcarpet Markdown Engine
 "></a>
-                <a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--collapsed" title="Generate `/index.html` dynamically
-"></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="Generate `/index.html` dynamically
+" aria-current="page"></a>
                 <a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--collapsed" title="Extract `ApplicationSystemTestCase`
 "></a>
                 <a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--collapsed" title="Render the contents of a Commit's Message
@@ -135,7 +135,7 @@
         ">
 <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--full">              <p>Elaborate on the project&#39;s goals in the README.md</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+</a><a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--full">              <p>[GENERATED]: Scaffold the project with Middleman</p>
 
 </a><a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--full">              <p>Replace Generated Files with Static HTML and CSS</p>
 
@@ -143,7 +143,7 @@
 
 </a><a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/" class="commit-node commit-node--full">              <p>Introduce Redcarpet Markdown Engine</p>
 
-</a><a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--full">              <p>Generate <code>/index.html</code> dynamically</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Generate <code>/index.html</code> dynamically</p>
 
 </a><a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--full">              <p>Extract <code>ApplicationSystemTestCase</code></p>
 
@@ -202,64 +202,57 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="generated-scaffold-the-project-with-middleman">[GENERATED]: Scaffold the project with Middleman</h1>
+          <h1 id="generate-index-html-dynamically">Generate <code>/index.html</code> dynamically</h1>
 
-<p>The goals of the <code>git-read</code> project include transforming a project&rsquo;s
-immutable (and static!) commit history into a website that tells the
-story of the project under development.</p>
+<p>Generate the contents of the site&rsquo;s <code>/index.html</code> page based on the
+contents of the project&rsquo;s <a href="#README.md"><code>README.md</code></a>.</p>
 
-<p>The Middleman project is a tool to generate a website&rsquo;s static HTML and
-asset files from a combination of source files, and outputs them to a
-directory.</p>
+<p>To do so, this commit adds a dependency on the <a href="https://github.com/ruby-git/ruby-git/tree/v1.6.0#examples"><code>ruby-git</code>
+gem</a>, which introspects into the project to read the contents
+of the <em>latest version</em> of the file.</p>
 
-<p>The following diff was generated by <a href="https://middlemanapp.com/">Middleman</a> as the output of
-executing:</p>
-<div class="highlight"><pre class="highlight shell"><code>middleman init
-</code></pre></div>
+<p>Since the contents of the <a href="#README.md"><code>README.md</code></a> are are dynamic, and
+won&rsquo;t be declared statically in the <code>source/</code> directory, this commit
+transitions the routing for the <code>/index.html</code> page into a <a href="https://middlemanapp.com/advanced/dynamic-pages#defining-proxies">Middleman
+<code>proxy</code> declaration</a>, rendering the <code>source/README.html.md.erb</code>
+template as the <code>/index.html</code> page.</p>
+
+<p>Once again, the sequencing of the template file&rsquo;s extensions are
+crucial, as they hint to the pre-processor to first render ERB, then
+yield those contents as static Markdown to be translated to HTML.</p>
+
+<p>Set the page&rsquo;s <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title"><code>&lt;title&gt;</code> element</a> to the first line of the
+project&rsquo;s <a href="#README.md"><code>README.md</code></a>.</p>
+
+<h2 id="testing-this-behavior">Testing this behavior</h2>
+
+<p>The order that the directory, repository, and application are declared
+and instantiated is also crucial.</p>
+
+<p>Once the <code>Capybara.app = Middleman.server</code> line is invoked, a call to
+<code>require</code> the application&rsquo;s <a href="#config.rb"><code>config.rb</code></a> file is made, and
+<code>ruby-git</code>&lsquo;s configuration is finalized.</p>
+
+<p>To better control this, the test harness creates a temporary directory
+with <a href="https://ruby-doc.org/stdlib-1.9.3/libdoc/tmpdir/rdoc/Dir.html#mktmpdir-method"><code>Dir.mktmpdir</code></a> from Ruby&rsquo;s Standard Library, which it
+then passes to a <code>Git.init</code> call to prepare it as a Git directory.</p>
+
+<p>Then, the new <code>with_git_repository</code> ensures that the <code>Middleman.server</code>
+call is made after the environment has been configured to point the
+application-side <code>Git</code> repository instance to the newly initialized
+temporary <code>Git</code>-ready directory.</p>
+
+<p>To coordinate this sequence, this commit introduces a dependency on
+<a href="https://github.com/splattael/minitest-around/tree/v0.5.0#unit-tests"><code>minitest-around</code> gem</a> for atomic test setup and
+teardown, and the <a href="https://github.com/thoughtbot/climate_control/tree/v0.1.0"><code>climate_control</code> gem</a> for atomic
+<code>ENV</code> modifications and roll-back.</p>
+
         </section>
 
           <aside class="commit commit--diff commit--long-content">
               <details
-  id=".gitignore"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand .gitignore</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand .gitignore</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      .gitignore
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.gitignore b/.gitignore
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..0dcc3ec
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/.gitignore
-</span><span class="p">@@ -0,0 +1,5 @@</span>
-<span class="gi">+.bundle
-+.cache
-+.DS_Store
-+.sass-cache
-+build/
-</span></code></pre></div></details>
-
-              <details
   id="Gemfile"
-  
+  open
   class="file"
 >
   <summary class="file__name">
@@ -283,22 +276,28 @@ executing:</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..ef64498
-</span><span class="gd">--- /dev/null
+index e7e8539..2c94c0c 100644
+</span><span class="gd">--- a/Gemfile
 </span><span class="gi">+++ b/Gemfile
-</span><span class="p">@@ -0,0 +1,6 @@</span>
-<span class="gi">+source 'https://rubygems.org'
-+
-+gem 'middleman', '~&gt; 4.2'
-+gem 'middleman-autoprefixer', '~&gt; 2.7'
-+gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
-+gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
-</span></code></pre></div></details>
+</span><span class="p">@@ -1,5 +1,6 @@</span>
+ source 'https://rubygems.org'
+ 
+<span class="gi">+gem 'git'
+</span> gem 'middleman', '~&gt; 4.2'
+ gem 'middleman-autoprefixer', '~&gt; 2.7'
+ gem 'redcarpet'
+<span class="p">@@ -8,4 +9,6 @@</span> gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
+ 
+ group :test do
+   gem 'capybara', require: 'capybara/minitest'
+<span class="gi">+  gem 'climate_control'
++  gem 'minitest-around', require: 'minitest/around/unit'
+</span> end
+</code></pre></div></details>
 
               <details
   id="Gemfile.lock"
-  
+  open
   class="file"
 >
   <summary class="file__name">
@@ -322,139 +321,60 @@ executing:</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..921857c
-</span><span class="gd">--- /dev/null
+index b338dc5..7aa72e2 100644
+</span><span class="gd">--- a/Gemfile.lock
 </span><span class="gi">+++ b/Gemfile.lock
-</span><span class="p">@@ -0,0 +1,123 @@</span>
-<span class="gi">+GEM
-+  remote: https://rubygems.org/
-+  specs:
-+    activesupport (5.0.7.2)
-+      concurrent-ruby (~&gt; 1.0, &gt;= 1.0.2)
-+      i18n (&gt;= 0.7, &lt; 2)
-+      minitest (~&gt; 5.1)
-+      tzinfo (~&gt; 1.1)
-+    addressable (2.7.0)
-+      public_suffix (&gt;= 2.0.2, &lt; 5.0)
-+    autoprefixer-rails (9.7.4)
-+      execjs
-+    backports (3.17.0)
-+    coffee-script (2.4.1)
-+      coffee-script-source
-+      execjs
-+    coffee-script-source (1.12.2)
-+    concurrent-ruby (1.1.6)
-+    contracts (0.13.0)
-+    dotenv (2.7.5)
-+    erubis (2.7.0)
-+    execjs (2.7.0)
-+    fast_blank (1.0.0)
-+    fastimage (2.1.7)
-+    ffi (1.12.2)
-+    ffi (1.12.2-java)
-+    ffi (1.12.2-x64-mingw32)
-+    ffi (1.12.2-x86-mingw32)
-+    haml (5.1.2)
-+      temple (&gt;= 0.8.0)
-+      tilt
-+    hamster (3.0.0)
-+      concurrent-ruby (~&gt; 1.0)
-+    hashie (3.6.0)
-+    i18n (0.9.5)
-+      concurrent-ruby (~&gt; 1.0)
-+    kramdown (1.17.0)
-+    listen (3.0.8)
-+      rb-fsevent (~&gt; 0.9, &gt;= 0.9.4)
-+      rb-inotify (~&gt; 0.9, &gt;= 0.9.7)
-+    memoist (0.16.2)
-+    middleman (4.3.6)
-+      coffee-script (~&gt; 2.2)
-+      haml (&gt;= 4.0.5)
-+      kramdown (~&gt; 1.2)
-+      middleman-cli (= 4.3.6)
-+      middleman-core (= 4.3.6)
-+    middleman-autoprefixer (2.10.1)
-+      autoprefixer-rails (~&gt; 9.1)
-+      middleman-core (&gt;= 3.3.3)
-+    middleman-cli (4.3.6)
-+      thor (&gt;= 0.17.0, &lt; 2.0)
-+    middleman-core (4.3.6)
-+      activesupport (&gt;= 4.2, &lt; 5.1)
-+      addressable (~&gt; 2.3)
-+      backports (~&gt; 3.6)
-+      bundler
-+      contracts (~&gt; 0.13.0)
-+      dotenv
-+      erubis
-+      execjs (~&gt; 2.0)
-+      fast_blank
-+      fastimage (~&gt; 2.0)
-+      hamster (~&gt; 3.0)
-+      hashie (~&gt; 3.4)
-+      i18n (~&gt; 0.9.0)
-+      listen (~&gt; 3.0.0)
-+      memoist (~&gt; 0.14)
-+      padrino-helpers (~&gt; 0.13.0)
-+      parallel
-+      rack (&gt;= 1.4.5, &lt; 3)
-+      sassc (~&gt; 2.0)
-+      servolux
-+      tilt (~&gt; 2.0.9)
-+      uglifier (~&gt; 3.0)
-+    minitest (5.14.0)
-+    padrino-helpers (0.13.3.4)
-+      i18n (~&gt; 0.6, &gt;= 0.6.7)
-+      padrino-support (= 0.13.3.4)
-+      tilt (&gt;= 1.4.1, &lt; 3)
-+    padrino-support (0.13.3.4)
-+      activesupport (&gt;= 3.1)
-+    parallel (1.19.1)
-+    public_suffix (4.0.3)
-+    rack (2.2.2)
-+    rb-fsevent (0.10.3)
-+    rb-inotify (0.10.1)
-+      ffi (~&gt; 1.0)
-+    sassc (2.2.1)
-+      ffi (~&gt; 1.9)
-+    sassc (2.2.1-x64-mingw32)
-+      ffi (~&gt; 1.9)
-+    sassc (2.2.1-x86-mingw32)
-+      ffi (~&gt; 1.9)
-+    servolux (0.13.0)
-+    temple (0.8.2)
-+    thor (1.0.1)
-+    thread_safe (0.3.6)
-+    thread_safe (0.3.6-java)
-+    tilt (2.0.10)
-+    tzinfo (1.2.6)
-+      thread_safe (~&gt; 0.1)
-+    tzinfo-data (1.2019.3)
-+      tzinfo (&gt;= 1.0.0)
-+    uglifier (3.2.0)
-+      execjs (&gt;= 0.3.0, &lt; 3)
-+    wdm (0.1.1)
-+
-+PLATFORMS
-+  java
-+  ruby
-+  x64-mingw32
-+  x86-mingw32
-+  x86-mswin32
-+
-+DEPENDENCIES
-+  middleman (~&gt; 4.2)
-+  middleman-autoprefixer (~&gt; 2.7)
-+  tzinfo-data
-+  wdm (~&gt; 0.1)
-+
-+BUNDLED WITH
-+   2.1.4
-</span></code></pre></div></details>
+</span><span class="p">@@ -19,6 +19,7 @@</span> GEM
+       rack-test (&gt;= 0.6.3)
+       regexp_parser (~&gt; 1.5)
+       xpath (~&gt; 3.2)
+<span class="gi">+    climate_control (0.2.0)
+</span>     coffee-script (2.4.1)
+       coffee-script-source
+       execjs
+<span class="p">@@ -34,6 +35,8 @@</span> GEM
+     ffi (1.12.2-java)
+     ffi (1.12.2-x64-mingw32)
+     ffi (1.12.2-x86-mingw32)
+<span class="gi">+    git (1.6.0)
++      rchardet (~&gt; 1.8)
+</span>     haml (5.1.2)
+       temple (&gt;= 0.8.0)
+       tilt
+<span class="p">@@ -84,6 +87,8 @@</span> GEM
+     mini_mime (1.0.2)
+     mini_portile2 (2.4.0)
+     minitest (5.14.0)
+<span class="gi">+    minitest-around (0.5.0)
++      minitest (~&gt; 5.0)
+</span>     nokogiri (1.10.9)
+       mini_portile2 (~&gt; 2.4.0)
+     nokogiri (1.10.9-java)
+<span class="p">@@ -105,6 +110,7 @@</span> GEM
+     rb-fsevent (0.10.3)
+     rb-inotify (0.10.1)
+       ffi (~&gt; 1.0)
+<span class="gi">+    rchardet (1.8.0)
+</span>     redcarpet (3.5.0)
+     regexp_parser (1.7.0)
+     sassc (2.2.1)
+<span class="p">@@ -138,8 +144,11 @@</span> PLATFORMS
+ 
+ DEPENDENCIES
+   capybara
+<span class="gi">+  climate_control
++  git
+</span>   middleman (~&gt; 4.2)
+   middleman-autoprefixer (~&gt; 2.7)
+<span class="gi">+  minitest-around
+</span>   redcarpet
+   tzinfo-data
+   wdm (~&gt; 0.1)
+</code></pre></div></details>
 
               <details
   id="config.rb"
-  
+  open
   class="file"
 >
   <summary class="file__name">
@@ -478,182 +398,154 @@ executing:</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..71ec870
-</span><span class="gd">--- /dev/null
+index 96a1c7a..f261291 100644
+</span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -0,0 +1,46 @@</span>
-<span class="gi">+# Activate and configure extensions
-+# https://middlemanapp.com/advanced/configuration/#configuring-extensions
+</span><span class="p">@@ -30,6 +30,24 @@</span> page '/*.txt', layout: false
+ #   },
+ # )
+ 
+<span class="gi">+repository = Git.open(
++  Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
++)
 +
-+activate :autoprefixer do |prefix|
-+  prefix.browsers = "last 2 versions"
-+end
++latest_readme = repository.show("HEAD:README.md")
++proxy(
++  "index.html",
++  "README.html",
++  locals: {
++    commit: repository.object("HEAD"),
++    contents: latest_readme,
++    page: {
++      title: latest_readme.lines.first,
++    },
++  },
++  ignore: true,
++)
 +
-+# Layouts
-+# https://middlemanapp.com/basics/layouts/
-+
-+# Per-page layout changes
-+page '/*.xml', layout: false
-+page '/*.json', layout: false
-+page '/*.txt', layout: false
-+
-+# With alternative layout
-+# page '/path/to/file.html', layout: 'other_layout'
-+
-+# Proxy pages
-+# https://middlemanapp.com/advanced/dynamic-pages/
-+
-+# proxy(
-+#   '/this-page-has-no-template.html',
-+#   '/template-file.html',
-+#   locals: {
-+#     which_fake_page: 'Rendering a fake page with a local variable'
-+#   },
-+# )
-+
-+# Helpers
-+# Methods defined in the helpers block are available in templates
-+# https://middlemanapp.com/basics/helper-methods/
-+
-+# helpers do
-+#   def some_helper
-+#     'Helping'
-+#   end
-+# end
-+
-+# Build-specific configuration
-+# https://middlemanapp.com/advanced/configuration/#environment-specific-settings
-+
-+# configure :build do
-+#   activate :minify_css
-+#   activate :minify_javascript
-+# end
-</span></code></pre></div></details>
+</span> # Helpers
+ # Methods defined in the helpers block are available in templates
+ # https://middlemanapp.com/basics/helper-methods/
+</code></pre></div></details>
 
               <details
-  id="source/images/.keep"
-  
+  id="source/README.html.md.erb"
+  open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/images/.keep</title>
+        <title>Expand source/README.html.md.erb</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/images/.keep</title>
+        <title>Expand source/README.html.md.erb</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      source/images/.keep
+      source/README.html.md.erb
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/images/.keep b/source/images/.keep
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/README.html.md.erb b/source/README.html.md.erb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..e69de29
-</span></code></pre></div></details>
-
-              <details
-  id="source/index.html.erb"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/index.html.erb</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/index.html.erb</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      source/index.html.erb
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/index.html.erb b/source/index.html.erb
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7147cc5
+</span><span class="gh">index 0000000..339e454
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/index.html.erb
-</span><span class="p">@@ -0,0 +1,23 @@</span>
-<span class="gi">+---
-+title: Welcome to Middleman
-+---
-+
-+&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" class="middleman-logo" aria-labelledby="middleman-logo__title" role="img"&gt;
-+  &lt;title id="middleman-logo__title"&gt;Middleman&lt;/title&gt;
-+  &lt;path class="middleman-logo__top-left-bar" fill-opacity=".45" d="M0 40L200 0v30L0 60z"/&gt;
-+  &lt;path class="middleman-logo__top-right-bar" fill="#fff" d="M200 0l200 40v20L200 30z"/&gt;
-+  &lt;path class="middleman-logo__left-m" fill-opacity=".45" d="M0 78v184l45 5V152l45 83 47-83v129l53 7V52l-57 8-43 83-43-70z"/&gt;
-+  &lt;path class="middleman-logo__right-m" fill="#fff" d="M400 78v184l-45 5V152l-45 83-47-83v129l-53 7V52l57 8 43 83 43-70z"/&gt;
-+  &lt;path class="middleman-logo__bottom-left-bar" fill-opacity=".45" d="M0 300l200 40v-30L0 280z"/&gt;
-+  &lt;path class="middleman-logo__bottom-right-bar" fill="#fff" d="M200 340l200-40v-20l-200 30z"/&gt;
-+&lt;/svg&gt;
-+
-+&lt;h1&gt;
-+  Middleman is Running
-+&lt;/h1&gt;
-+
-+&lt;%= link_to(
-+  "Read Documentation",
-+  "https://middlemanapp.com/basics/templating_language/",
-+  target: "_blank"
-+) %&gt;
-</span></code></pre></div></details>
-
-              <details
-  id="source/javascripts/site.js"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/javascripts/site.js</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/javascripts/site.js</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      source/javascripts/site.js
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..9de6ff3
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/javascripts/site.js
+</span><span class="gi">+++ b/source/README.html.md.erb
 </span><span class="p">@@ -0,0 +1 @@</span>
-<span class="gi">+// This is where it all goes :)
+<span class="gi">+&lt;%= contents %&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/index.html.md"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand source/index.html.md</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand source/index.html.md</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      source/index.html.md
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/index.html.md b/source/index.html.md
+</span><span class="p">deleted file mode 100644
+</span><span class="gh">index 03c1d25..0000000
+</span><span class="gd">--- a/source/index.html.md
+</span><span class="gi">+++ /dev/null
+</span><span class="p">@@ -1,48 +0,0 @@</span>
+<span class="gd">----
+-title: Elaborate on the project's goals in the README.md
+----
+-
+-git-read
+-===
+-
+-Generate a website based on a project's Git history.
+-
+-* Serve the project's
+-  `README.md`
+-  as the homepage
+-* Index the history through its commits
+-* Transforms commit messages HTML through a syntax-aware Markdown parser
+-* Display the commits alongside their code changes
+-
+-Command-line Interface
+----
+-
+-Once installed, make sure that the
+-`bin/git-read`
+-executable is available on
+-your path so that the
+-[`git` program can invoke it as a subcommand][subcommand]
+-
+-To learn of the ways to to invoke the command, execute
+-`git read --help`:
+-
+-```bash
+-usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
+-                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
+-Generate HTML from your project's Git history
+-
+-OPTIONS
+-      --output-dir
+-          specify the directory where the site will be built
+-      --git-dir
+-          specify the parent directory of the project's .git/ directory
+-      --verbose
+-          print debugging information during the build process
+-      --server
+-          build and serve assets with a server available at
+-          http://127.0.0.1:4567
+-      --help
+-          generate this help output
+-```
+-
+-[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
 </span></code></pre></div></details>
 
               <details
   id="source/layouts/layout.erb"
-  
+  open
   class="file"
 >
   <summary class="file__name">
@@ -677,85 +569,121 @@ executing:</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..18f6a22
-</span><span class="gd">--- /dev/null
+index 6be5bda..ad34538 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -0,0 +1,16 @@</span>
-<span class="gi">+&lt;!doctype html&gt;
-+&lt;html&gt;
-+  &lt;head&gt;
-+    &lt;meta charset="utf-8"&gt;
-+    &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
-+    &lt;meta name="viewport"
-+          content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
-+    &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
-+    &lt;title&gt;&lt;%= current_page.data.title || "Middleman" %&gt;&lt;/title&gt;
-+    &lt;%= stylesheet_link_tag "site" %&gt;
-+    &lt;%= javascript_include_tag "site" %&gt;
-+  &lt;/head&gt;
-+  &lt;body&gt;
-+    &lt;%= yield %&gt;
-+  &lt;/body&gt;
-+&lt;/html&gt;
-</span></code></pre></div></details>
+</span><span class="p">@@ -5,7 +5,7 @@</span>
+     &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
+     &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+     &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
+<span class="gd">-    &lt;title&gt;&lt;%= current_page.data.title || "Middleman" %&gt;&lt;/title&gt;
+</span><span class="gi">+    &lt;title&gt;&lt;%= page[:title] || current_page.data.title %&gt;&lt;/title&gt;
+</span>     &lt;%= stylesheet_link_tag "site" %&gt;
+     &lt;%= javascript_include_tag "site" %&gt;
+   &lt;/head&gt;
+</code></pre></div></details>
 
               <details
-  id="source/stylesheets/site.css.scss"
-  
+  id="test/system/visitor_views_readme_test.rb"
+  open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/stylesheets/site.css.scss</title>
+        <title>Expand test/system/visitor_views_readme_test.rb</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/stylesheets/site.css.scss</title>
+        <title>Expand test/system/visitor_views_readme_test.rb</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      source/stylesheets/site.css.scss
+      test/system/visitor_views_readme_test.rb
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..fda2be7
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/stylesheets/site.css.scss
-</span><span class="p">@@ -0,0 +1,24 @@</span>
-<span class="gi">+body {
-+  background-color: #fbc547;
-+  color: #333;
-+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
-+    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
-+    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
-+    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-+  padding: 18vh 1rem;
-+  text-align: center;
-+}
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
+index 4f48a65..7003315 100644
+</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
+</span><span class="p">@@ -3,24 +3,66 @@</span> require "bundler"
+ Bundler.require(:default, :test)
+ 
+ require "minitest/autorun"
+<span class="gd">-require "middleman/rack"
+</span> require "active_support"
+ require "active_support/test_case"
+ 
+<span class="gd">-Capybara.app = Middleman.server
+</span><span class="gi">+require "pathname"
++require "tmpdir"
 +
-+a {
-+  color: rgba(#000, 0.7);
++require "middleman/rack"
+</span> 
+ class VisitorViewsReadmeTest &lt; ActiveSupport::TestCase
+   include Capybara::DSL
+   include Capybara::Minitest::Assertions
+ 
+<span class="gi">+  def around(&amp;block)
++    directory = Dir.mktmpdir
++    begin
++      @repository = Git.init(directory)
++      block.call
++    ensure
++      FileUtils.rm_rf(directory)
++    end
++  end
 +
-+  &amp;:focus,
-+  &amp;:hover {
-+    color: rgba(#000, 0.6);
-+  }
-+}
++  def stage_file(filename, contents)
++    Pathname(@repository.dir.path).join(filename).write(contents)
 +
-+.middleman-logo {
-+  margin-bottom: 1rem;
-+  width: 10rem;
-+}
-</span></code></pre></div></details>
++    @repository.add(filename)
++  end
++
++  def commit(message)
++    @repository.commit(message)
++  end
++
++  def with_git_repository(&amp;block)
++    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
++      Capybara.app = Middleman.server
++
++      block.call
++    end
++  end
++
+</span>   teardown do
+     Capybara.reset_sessions!
+     Capybara.use_default_driver
+   end
+ 
+   test "visitor views README" do
+<span class="gd">-    visit "/index.html"
+</span><span class="gi">+    stage_file("README.md", &lt;&lt;~MARKDOWN)
++    git-read
++    ===
++
++    Hello, from tests!
++    MARKDOWN
++    commit("Initial Commit")
++
++    with_git_repository do
++      visit "/index.html"
+</span> 
+<span class="gd">-    assert_selector "h1", text: "git-read"
+</span><span class="gi">+      assert_title "git-read"
++      assert_selector "h1", text: "git-read"
++      assert_selector "p", text: "Hello, from tests!"
++    end
+</span>   end
+ end
+</code></pre></div></details>
 
           </aside>
       </article>

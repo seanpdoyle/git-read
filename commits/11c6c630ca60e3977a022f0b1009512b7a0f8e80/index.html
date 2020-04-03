@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md
+    <title>Extract `ApplicationSystemTestCase`
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -20,10 +20,11 @@
       <nav class="
         header__navigation
         navigation
-        navigation--next
+        
       ">
-
-<a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/">              Next &#8594;
+<a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/">              &#8592; Previous
+</a>
+<a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -36,8 +37,8 @@
               u-db-overflow-y--auto
               u-mb-overflow-x--scroll
             ">
-                <a href="./" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
-" aria-current="page"></a>
+                <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
+"></a>
                 <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
 "></a>
                 <a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--collapsed" title="Replace Generated Files with Static HTML and CSS
@@ -48,8 +49,8 @@
 "></a>
                 <a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--collapsed" title="Generate `/index.html` dynamically
 "></a>
-                <a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--collapsed" title="Extract `ApplicationSystemTestCase`
-"></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="Extract `ApplicationSystemTestCase`
+" aria-current="page"></a>
                 <a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--collapsed" title="Render the contents of a Commit's Message
 "></a>
                 <a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--collapsed" title="Navigate to previous commit
@@ -132,7 +133,7 @@
           u-db-overflow-y--auto
           u-mb-overflow-x--scroll
         ">
-<a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+<a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--full">              <p>Elaborate on the project&#39;s goals in the README.md</p>
 
 </a><a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--full">              <p>[GENERATED]: Scaffold the project with Middleman</p>
 
@@ -144,7 +145,7 @@
 
 </a><a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--full">              <p>Generate <code>/index.html</code> dynamically</p>
 
-</a><a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--full">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Extract <code>ApplicationSystemTestCase</code></p>
 
 </a><a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--full">              <p>Render the contents of a Commit&#39;s Message</p>
 
@@ -201,94 +202,239 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="extract-applicationsystemtestcase">Extract <code>ApplicationSystemTestCase</code></h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
+<p>In preparation for an additional <a href="https://guides.rubyonrails.org/testing.html#system-testing">System Test</a>, this commit extracts
+the test harness&rsquo; set-up and tear-down code into a super-class that the
+test case inherits from.</p>
 
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<p>To simplify <code>require</code> path resolution, and enable calling <code>require
+&quot;application_system_test_case&quot;</code> instead of <code>require_relative
+&quot;./application_system_test_case&quot;</code>, the test runner will need to append
+the <code>&quot;test&quot;</code> directory onto the <code>$LOAD_PATH</code>.</p>
 
+<p>To do so, declare a <a href="#Rakefile"><code>Rakefile</code></a> that contains a
+<a href="https://ruby.github.io/rake/Rake/TestTask.html"><code>Rake::TestTask</code></a>. Passing <code>-W0</code> as &ldquo;warning, level 0&rdquo; is
+necessary, since our dependency on Middleman results in too much output
+noise without silencing Ruby warnings.</p>
+
+<p>To run the full test suite, execute:</p>
+<div class="highlight"><pre class="highlight shell"><code>rake <span class="nb">test</span>
+</code></pre></div>
         </section>
 
           <aside class="commit commit--diff commit--long-content">
               <details
-  id="README.md"
+  id="Rakefile"
   open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand README.md</title>
+        <title>Expand Rakefile</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand README.md</title>
+        <title>Expand Rakefile</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      README.md
+      Rakefile
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Rakefile b/Rakefile
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
+</span><span class="gh">index 0000000..be924a1
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
+</span><span class="gi">+++ b/Rakefile
+</span><span class="p">@@ -0,0 +1,10 @@</span>
+<span class="gi">+require "rake/testtask"
 +
-+Generate a website based on a project's Git history.
++Rake::TestTask.new do |test|
++  test.libs &lt;&lt; "test"
++  test.pattern = "test/**/*_test.rb"
++  test.verbose = true
++  test.ruby_opts = ["-W0"]
++end
 +
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
-+
-+Command-line Interface
-+---
-+
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
-+
-+To learn of the ways to to invoke the command, execute `git read --help`:
-+
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
++task default: :test
 </span></code></pre></div></details>
+
+              <details
+  id="test/application_system_test_case.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/application_system_test_case.rb</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/application_system_test_case.rb</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      test/application_system_test_case.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..5bd5c3f
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -0,0 +1,49 @@</span>
+<span class="gi">+require "bundler"
++Bundler.require(:default, :test)
++
++require "minitest/autorun"
++require "active_support"
++require "active_support/test_case"
++
++require "pathname"
++require "tmpdir"
++
++require "middleman/rack"
++
++class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
++  include Capybara::DSL
++  include Capybara::Minitest::Assertions
++
++  def around(&amp;block)
++    directory = Dir.mktmpdir
++    begin
++      @repository = Git.init(directory)
++      block.call
++    ensure
++      FileUtils.rm_rf(directory)
++    end
++  end
++
++  def stage_file(filename, contents)
++    Pathname(@repository.dir.path).join(filename).write(contents)
++
++    @repository.add(filename)
++  end
++
++  def commit(message)
++    @repository.commit(message)
++  end
++
++  def with_git_repository(&amp;block)
++    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
++      Capybara.app = Middleman.server
++
++      block.call
++    end
++  end
++
++  teardown do
++    Capybara.reset_sessions!
++    Capybara.use_default_driver
++  end
++end
+</span></code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_readme_test.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/system/visitor_views_readme_test.rb</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/system/visitor_views_readme_test.rb</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      test/system/visitor_views_readme_test.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
+index 7003315..a38ba2f 100644
+</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
+</span><span class="p">@@ -1,53 +1,6 @@</span>
+<span class="gd">-require "bundler"
+-
+-Bundler.require(:default, :test)
+-
+-require "minitest/autorun"
+-require "active_support"
+-require "active_support/test_case"
+-
+-require "pathname"
+-require "tmpdir"
+-
+-require "middleman/rack"
+-
+-class VisitorViewsReadmeTest &lt; ActiveSupport::TestCase
+-  include Capybara::DSL
+-  include Capybara::Minitest::Assertions
+-
+-  def around(&amp;block)
+-    directory = Dir.mktmpdir
+-    begin
+-      @repository = Git.init(directory)
+-      block.call
+-    ensure
+-      FileUtils.rm_rf(directory)
+-    end
+-  end
+-
+-  def stage_file(filename, contents)
+-    Pathname(@repository.dir.path).join(filename).write(contents)
+-
+-    @repository.add(filename)
+-  end
+-
+-  def commit(message)
+-    @repository.commit(message)
+-  end
+-
+-  def with_git_repository(&amp;block)
+-    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
+-      Capybara.app = Middleman.server
+-
+-      block.call
+-    end
+-  end
+-
+-  teardown do
+-    Capybara.reset_sessions!
+-    Capybara.use_default_driver
+-  end
+</span><span class="gi">+require "application_system_test_case"
+</span> 
+<span class="gi">+class VisitorViewsReadmeTest &lt; ApplicationSystemTestCase
+</span>   test "visitor views README" do
+     stage_file("README.md", &lt;&lt;~MARKDOWN)
+     git-read
+</code></pre></div></details>
 
           </aside>
       </article>

@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>[GENERATED]: Scaffold the project with Middleman
+    <title>Render the contents of a Commit's Message
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -22,9 +22,9 @@
         navigation
         
       ">
-<a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">              &#8592; Previous
+<a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/">              &#8592; Previous
 </a>
-<a href="../1874624426883ffed07c46686860aeb53a3d1eee/">              Next &#8594;
+<a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -39,8 +39,8 @@
             ">
                 <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
-" aria-current="page"></a>
+                <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
+"></a>
                 <a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--collapsed" title="Replace Generated Files with Static HTML and CSS
 "></a>
                 <a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/" class="commit-node commit-node--collapsed" title="Exercise the application through a System Test
@@ -51,8 +51,8 @@
 "></a>
                 <a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--collapsed" title="Extract `ApplicationSystemTestCase`
 "></a>
-                <a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--collapsed" title="Render the contents of a Commit's Message
-"></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="Render the contents of a Commit's Message
+" aria-current="page"></a>
                 <a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--collapsed" title="Navigate to previous commit
 "></a>
                 <a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/" class="commit-node commit-node--collapsed" title="Navigate to next commit
@@ -135,7 +135,7 @@
         ">
 <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--full">              <p>Elaborate on the project&#39;s goals in the README.md</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+</a><a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--full">              <p>[GENERATED]: Scaffold the project with Middleman</p>
 
 </a><a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--full">              <p>Replace Generated Files with Static HTML and CSS</p>
 
@@ -147,7 +147,7 @@
 
 </a><a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--full">              <p>Extract <code>ApplicationSystemTestCase</code></p>
 
-</a><a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--full">              <p>Render the contents of a Commit&#39;s Message</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Render the contents of a Commit&#39;s Message</p>
 
 </a><a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--full">              <p>Navigate to previous commit</p>
 
@@ -202,259 +202,64 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="generated-scaffold-the-project-with-middleman">[GENERATED]: Scaffold the project with Middleman</h1>
+          <h1 id="render-the-contents-of-a-commits-message">Render the contents of a Commit&rsquo;s Message</h1>
 
-<p>The goals of the <code>git-read</code> project include transforming a project&rsquo;s
-immutable (and static!) commit history into a website that tells the
-story of the project under development.</p>
+<p>A Git commit message follows a <a href="https://commit.style/">loose structure</a>:</p>
 
-<p>The Middleman project is a tool to generate a website&rsquo;s static HTML and
-asset files from a combination of source files, and outputs them to a
-directory.</p>
+<blockquote>
+<p>The first line of a commit message serves as a summary.  When
+displayed on the web, it&rsquo;s often styled as a heading, and in emails,
+it&rsquo;s typically used as the subject.  As such, you should capitalize
+it and omit any trailing punctuation.  Aim for about 50 characters,
+give or take, otherwise it may be painfully truncated in some
+contexts.</p>
 
-<p>The following diff was generated by <a href="https://middlemanapp.com/">Middleman</a> as the output of
-executing:</p>
-<div class="highlight"><pre class="highlight shell"><code>middleman init
-</code></pre></div>
+<p>Oftentimes a subject by itself is sufficient.  When it&rsquo;s not, add a
+blank line (this is important) followed by one or more paragraphs hard
+wrapped to 72 characters.</p>
+</blockquote>
+
+<p>Assuming that the commits adhere to that convention, the application
+will split out the commit&rsquo;s subject line from the rest of the message,
+and treat it as the resulting HTML page&rsquo;s title.</p>
+
+<p>The call to <code>subject.strip</code> in the <code>source/commits/commit</code> template is
+deliberate and important. Without it, a trailing new-line character
+would separate the title from its underlining <code>===</code> syntax, which would
+signal to the Markdown generator that it was to be represented as a
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p"><code>&lt;p&gt;</code> element`</a> instead of an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements"><code>&lt;h1&gt;</code> element</a>.</p>
+
+<h2 id="navigating-the-history">Navigating the history</h2>
+
+<p>Both the <code>/index.html</code> and specific <code>/commits/$SHA/index.html</code> pages
+render the project&rsquo;s history in a navigable sidebar. To power this
+feature, and to ensure that the data is shared across <a href="https://middlemanapp.com/advanced/dynamic-pages#defining-proxies">Middleman&rsquo;s proxy
+templates</a>, extract a <a href="#config.rb"><code>config.rb</code></a>-local variable,
+which is declared and shared by <a href="https://ruby-doc.org/core-2.7.0/Hash.html#method-i-merge">merging in additional template local
+variables</a> as the <a href="https://middlemanapp.com/basics/partials/"><code>local:</code> key</a>.</p>
+
+<p>The history is meant to be read start-to-finish (as opposed to the
+typical latest-to-first output that a default <a href="https://www.git-scm.com/docs/git-log"><code>git log</code></a> call
+provides).</p>
+
+<p>To achieve this order, chain a call to
+<a href="https://ruby-doc.org/core-2.7.0/Enumerable.html#method-i-reverse_each"><code>Enumerable#reverse_each</code></a> onto calls to
+<code>repository.log</code>. The <code>#log</code> method receives a limit on the number of
+commits to provide. We want the full history, so we pass <code>nil</code>.</p>
+
+<p>There are times when a commit&rsquo;s subject line contains Markdown that we
+<em>do not</em> want to inline as raw HTML. To support this, wrap the
+navigation item&rsquo;s text in calls to the new <code>#markdown</code> helper declared
+within [<code>config.rb</code>][#config.rb]. This helper utilizes the underlying
+<a href="https://middlemanapp.com/basics/templating-language/">Markdown engine that Middleman has registered</a> with
+<a href="https://github.com/rtomayko/tilt/tree/v2.0.10#template-mappings"><code>Tilt</code></a>.</p>
+
         </section>
 
           <aside class="commit commit--diff commit--long-content">
               <details
-  id=".gitignore"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand .gitignore</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand .gitignore</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      .gitignore
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.gitignore b/.gitignore
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..0dcc3ec
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/.gitignore
-</span><span class="p">@@ -0,0 +1,5 @@</span>
-<span class="gi">+.bundle
-+.cache
-+.DS_Store
-+.sass-cache
-+build/
-</span></code></pre></div></details>
-
-              <details
-  id="Gemfile"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand Gemfile</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand Gemfile</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      Gemfile
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..ef64498
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/Gemfile
-</span><span class="p">@@ -0,0 +1,6 @@</span>
-<span class="gi">+source 'https://rubygems.org'
-+
-+gem 'middleman', '~&gt; 4.2'
-+gem 'middleman-autoprefixer', '~&gt; 2.7'
-+gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
-+gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
-</span></code></pre></div></details>
-
-              <details
-  id="Gemfile.lock"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand Gemfile.lock</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand Gemfile.lock</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      Gemfile.lock
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..921857c
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/Gemfile.lock
-</span><span class="p">@@ -0,0 +1,123 @@</span>
-<span class="gi">+GEM
-+  remote: https://rubygems.org/
-+  specs:
-+    activesupport (5.0.7.2)
-+      concurrent-ruby (~&gt; 1.0, &gt;= 1.0.2)
-+      i18n (&gt;= 0.7, &lt; 2)
-+      minitest (~&gt; 5.1)
-+      tzinfo (~&gt; 1.1)
-+    addressable (2.7.0)
-+      public_suffix (&gt;= 2.0.2, &lt; 5.0)
-+    autoprefixer-rails (9.7.4)
-+      execjs
-+    backports (3.17.0)
-+    coffee-script (2.4.1)
-+      coffee-script-source
-+      execjs
-+    coffee-script-source (1.12.2)
-+    concurrent-ruby (1.1.6)
-+    contracts (0.13.0)
-+    dotenv (2.7.5)
-+    erubis (2.7.0)
-+    execjs (2.7.0)
-+    fast_blank (1.0.0)
-+    fastimage (2.1.7)
-+    ffi (1.12.2)
-+    ffi (1.12.2-java)
-+    ffi (1.12.2-x64-mingw32)
-+    ffi (1.12.2-x86-mingw32)
-+    haml (5.1.2)
-+      temple (&gt;= 0.8.0)
-+      tilt
-+    hamster (3.0.0)
-+      concurrent-ruby (~&gt; 1.0)
-+    hashie (3.6.0)
-+    i18n (0.9.5)
-+      concurrent-ruby (~&gt; 1.0)
-+    kramdown (1.17.0)
-+    listen (3.0.8)
-+      rb-fsevent (~&gt; 0.9, &gt;= 0.9.4)
-+      rb-inotify (~&gt; 0.9, &gt;= 0.9.7)
-+    memoist (0.16.2)
-+    middleman (4.3.6)
-+      coffee-script (~&gt; 2.2)
-+      haml (&gt;= 4.0.5)
-+      kramdown (~&gt; 1.2)
-+      middleman-cli (= 4.3.6)
-+      middleman-core (= 4.3.6)
-+    middleman-autoprefixer (2.10.1)
-+      autoprefixer-rails (~&gt; 9.1)
-+      middleman-core (&gt;= 3.3.3)
-+    middleman-cli (4.3.6)
-+      thor (&gt;= 0.17.0, &lt; 2.0)
-+    middleman-core (4.3.6)
-+      activesupport (&gt;= 4.2, &lt; 5.1)
-+      addressable (~&gt; 2.3)
-+      backports (~&gt; 3.6)
-+      bundler
-+      contracts (~&gt; 0.13.0)
-+      dotenv
-+      erubis
-+      execjs (~&gt; 2.0)
-+      fast_blank
-+      fastimage (~&gt; 2.0)
-+      hamster (~&gt; 3.0)
-+      hashie (~&gt; 3.4)
-+      i18n (~&gt; 0.9.0)
-+      listen (~&gt; 3.0.0)
-+      memoist (~&gt; 0.14)
-+      padrino-helpers (~&gt; 0.13.0)
-+      parallel
-+      rack (&gt;= 1.4.5, &lt; 3)
-+      sassc (~&gt; 2.0)
-+      servolux
-+      tilt (~&gt; 2.0.9)
-+      uglifier (~&gt; 3.0)
-+    minitest (5.14.0)
-+    padrino-helpers (0.13.3.4)
-+      i18n (~&gt; 0.6, &gt;= 0.6.7)
-+      padrino-support (= 0.13.3.4)
-+      tilt (&gt;= 1.4.1, &lt; 3)
-+    padrino-support (0.13.3.4)
-+      activesupport (&gt;= 3.1)
-+    parallel (1.19.1)
-+    public_suffix (4.0.3)
-+    rack (2.2.2)
-+    rb-fsevent (0.10.3)
-+    rb-inotify (0.10.1)
-+      ffi (~&gt; 1.0)
-+    sassc (2.2.1)
-+      ffi (~&gt; 1.9)
-+    sassc (2.2.1-x64-mingw32)
-+      ffi (~&gt; 1.9)
-+    sassc (2.2.1-x86-mingw32)
-+      ffi (~&gt; 1.9)
-+    servolux (0.13.0)
-+    temple (0.8.2)
-+    thor (1.0.1)
-+    thread_safe (0.3.6)
-+    thread_safe (0.3.6-java)
-+    tilt (2.0.10)
-+    tzinfo (1.2.6)
-+      thread_safe (~&gt; 0.1)
-+    tzinfo-data (1.2019.3)
-+      tzinfo (&gt;= 1.0.0)
-+    uglifier (3.2.0)
-+      execjs (&gt;= 0.3.0, &lt; 3)
-+    wdm (0.1.1)
-+
-+PLATFORMS
-+  java
-+  ruby
-+  x64-mingw32
-+  x86-mingw32
-+  x86-mswin32
-+
-+DEPENDENCIES
-+  middleman (~&gt; 4.2)
-+  middleman-autoprefixer (~&gt; 2.7)
-+  tzinfo-data
-+  wdm (~&gt; 0.1)
-+
-+BUNDLED WITH
-+   2.1.4
-</span></code></pre></div></details>
-
-              <details
   id="config.rb"
-  
+  open
   class="file"
 >
   <summary class="file__name">
@@ -478,182 +283,111 @@ executing:</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..71ec870
-</span><span class="gd">--- /dev/null
+index f261291..ee25085 100644
+</span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -0,0 +1,46 @@</span>
-<span class="gi">+# Activate and configure extensions
-+# https://middlemanapp.com/advanced/configuration/#configuring-extensions
+</span><span class="p">@@ -34,20 +34,40 @@</span> repository = Git.open(
+   Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__))),
+ )
+ 
+<span class="gi">+locals = {
++  history: {
++    commits: repository.log(nil).reverse_each,
++  },
++}
 +
-+activate :autoprefixer do |prefix|
-+  prefix.browsers = "last 2 versions"
+</span> latest_readme = repository.show("HEAD:README.md")
+ proxy(
+   "index.html",
+   "README.html",
+<span class="gd">-  locals: {
+</span><span class="gi">+  locals: locals.merge(
+</span>     commit: repository.object("HEAD"),
+     contents: latest_readme,
+     page: {
+       title: latest_readme.lines.first,
+     },
+<span class="gd">-  },
+</span><span class="gi">+  ),
+</span>   ignore: true,
+ )
+ 
+<span class="gi">+locals.dig(:history, :commits).each do |commit|
++  proxy(
++    "/commits/#{commit.sha}/index.html",
++    "/commits/commit.html",
++    locals: locals.merge(
++      commit: commit,
++      page: {
++        title: commit.message.lines.first,
++      }
++    ),
++    ignore: true,
++  )
 +end
 +
-+# Layouts
-+# https://middlemanapp.com/basics/layouts/
+</span> # Helpers
+ # Methods defined in the helpers block are available in templates
+ # https://middlemanapp.com/basics/helper-methods/
+<span class="p">@@ -58,6 +78,14 @@</span> proxy(
+ #   end
+ # end
+ 
+<span class="gi">+helpers do
++  def markdown(content)
++    template = Tilt[:md].new { content }
 +
-+# Per-page layout changes
-+page '/*.xml', layout: false
-+page '/*.json', layout: false
-+page '/*.txt', layout: false
++    template.render
++  end
++end
 +
-+# With alternative layout
-+# page '/path/to/file.html', layout: 'other_layout'
-+
-+# Proxy pages
-+# https://middlemanapp.com/advanced/dynamic-pages/
-+
-+# proxy(
-+#   '/this-page-has-no-template.html',
-+#   '/template-file.html',
-+#   locals: {
-+#     which_fake_page: 'Rendering a fake page with a local variable'
-+#   },
-+# )
-+
-+# Helpers
-+# Methods defined in the helpers block are available in templates
-+# https://middlemanapp.com/basics/helper-methods/
-+
-+# helpers do
-+#   def some_helper
-+#     'Helping'
-+#   end
-+# end
-+
-+# Build-specific configuration
-+# https://middlemanapp.com/advanced/configuration/#environment-specific-settings
-+
-+# configure :build do
-+#   activate :minify_css
-+#   activate :minify_javascript
-+# end
-</span></code></pre></div></details>
+</span> # Build-specific configuration
+ # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
+ 
+</code></pre></div></details>
 
               <details
-  id="source/images/.keep"
-  
+  id="source/commits/commit.html.md.erb"
+  open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/images/.keep</title>
+        <title>Expand source/commits/commit.html.md.erb</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/images/.keep</title>
+        <title>Expand source/commits/commit.html.md.erb</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      source/images/.keep
+      source/commits/commit.html.md.erb
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/images/.keep b/source/images/.keep
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/commits/commit.html.md.erb b/source/commits/commit.html.md.erb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..e69de29
-</span></code></pre></div></details>
-
-              <details
-  id="source/index.html.erb"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/index.html.erb</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/index.html.erb</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      source/index.html.erb
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/index.html.erb b/source/index.html.erb
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7147cc5
+</span><span class="gh">index 0000000..b05055b
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/index.html.erb
-</span><span class="p">@@ -0,0 +1,23 @@</span>
-<span class="gi">+---
-+title: Welcome to Middleman
-+---
+</span><span class="gi">+++ b/source/commits/commit.html.md.erb
+</span><span class="p">@@ -0,0 +1,6 @@</span>
+<span class="gi">+&lt;% subject, *messages = commit.message.lines %&gt;
 +
-+&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" class="middleman-logo" aria-labelledby="middleman-logo__title" role="img"&gt;
-+  &lt;title id="middleman-logo__title"&gt;Middleman&lt;/title&gt;
-+  &lt;path class="middleman-logo__top-left-bar" fill-opacity=".45" d="M0 40L200 0v30L0 60z"/&gt;
-+  &lt;path class="middleman-logo__top-right-bar" fill="#fff" d="M200 0l200 40v20L200 30z"/&gt;
-+  &lt;path class="middleman-logo__left-m" fill-opacity=".45" d="M0 78v184l45 5V152l45 83 47-83v129l53 7V52l-57 8-43 83-43-70z"/&gt;
-+  &lt;path class="middleman-logo__right-m" fill="#fff" d="M400 78v184l-45 5V152l-45 83-47-83v129l-53 7V52l57 8 43 83 43-70z"/&gt;
-+  &lt;path class="middleman-logo__bottom-left-bar" fill-opacity=".45" d="M0 300l200 40v-30L0 280z"/&gt;
-+  &lt;path class="middleman-logo__bottom-right-bar" fill="#fff" d="M200 340l200-40v-20l-200 30z"/&gt;
-+&lt;/svg&gt;
++&lt;%= subject.strip %&gt;
++===
 +
-+&lt;h1&gt;
-+  Middleman is Running
-+&lt;/h1&gt;
-+
-+&lt;%= link_to(
-+  "Read Documentation",
-+  "https://middlemanapp.com/basics/templating_language/",
-+  target: "_blank"
-+) %&gt;
-</span></code></pre></div></details>
-
-              <details
-  id="source/javascripts/site.js"
-  
-  class="file"
->
-  <summary class="file__name">
-    <span class="file__toggle file__toggle--close">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/javascripts/site.js</title>
-        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <span class="file__toggle file__toggle--open">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/javascripts/site.js</title>
-        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
-      </svg>
-    </span>
-
-    <code>
-      source/javascripts/site.js
-    </code>
-  </summary>
-
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..9de6ff3
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/javascripts/site.js
-</span><span class="p">@@ -0,0 +1 @@</span>
-<span class="gi">+// This is where it all goes :)
++&lt;%= messages.join %&gt;
 </span></code></pre></div></details>
 
               <details
   id="source/layouts/layout.erb"
-  
+  open
   class="file"
 >
   <summary class="file__name">
@@ -677,84 +411,117 @@ executing:</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..18f6a22
-</span><span class="gd">--- /dev/null
+index ad34538..edafa73 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -0,0 +1,16 @@</span>
-<span class="gi">+&lt;!doctype html&gt;
-+&lt;html&gt;
-+  &lt;head&gt;
-+    &lt;meta charset="utf-8"&gt;
-+    &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
-+    &lt;meta name="viewport"
-+          content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
-+    &lt;!-- Use the title from a page's frontmatter if it has one --&gt;
-+    &lt;title&gt;&lt;%= current_page.data.title || "Middleman" %&gt;&lt;/title&gt;
-+    &lt;%= stylesheet_link_tag "site" %&gt;
-+    &lt;%= javascript_include_tag "site" %&gt;
-+  &lt;/head&gt;
-+  &lt;body&gt;
-+    &lt;%= yield %&gt;
-+  &lt;/body&gt;
-+&lt;/html&gt;
-</span></code></pre></div></details>
+</span><span class="p">@@ -40,11 +40,14 @@</span>
+               u-db-overflow-y--auto
+               u-mb-overflow-x--scroll
+             "&gt;
+<span class="gd">-              &lt;a href="#" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman"&gt;
+-              &lt;/a&gt;
+-
+-              &lt;a href="#" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md"&gt;
+-              &lt;/a&gt;
+</span><span class="gi">+              &lt;% history[:commits].each do |commit| %&gt;
++                &lt;%= link_to(
++                  "",
++                  "/commits/#{commit.sha}/index.html",
++                  class: "commit-node commit-node--collapsed",
++                  title: commit.message.lines.first
++                ) %&gt;
++              &lt;% end %&gt;
+</span>             &lt;/nav&gt;
+ 
+             &lt;div class="accordion__toggle"&gt;
+<span class="p">@@ -89,13 +92,14 @@</span>
+           u-db-overflow-y--auto
+           u-mb-overflow-x--scroll
+         "&gt;
+<span class="gd">-          &lt;a href="#" class="commit-node commit-node--full"&gt;
+-            [GENERATED]: Scaffold the project with Middleman
+-          &lt;/a&gt;
+-
+-          &lt;a href="#" class="commit-node commit-node--full"&gt;
+-            Elaborate on the project's goals in the README.md
+-          &lt;/a&gt;
+</span><span class="gi">+          &lt;% history[:commits].each do |commit| %&gt;
++            &lt;% link_to(
++              "/commits/#{commit.sha}/index.html",
++              class: "commit-node commit-node--full",
++            ) do %&gt;
++              &lt;%= markdown(commit.message.lines.first) %&gt;
++            &lt;% end %&gt;
++          &lt;% end %&gt;
+</span>         &lt;/nav&gt;
+       &lt;/details&gt;
+ 
+</code></pre></div></details>
 
               <details
-  id="source/stylesheets/site.css.scss"
-  
+  id="test/system/visitor_views_commits_test.rb"
+  open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/stylesheets/site.css.scss</title>
+        <title>Expand test/system/visitor_views_commits_test.rb</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/stylesheets/site.css.scss</title>
+        <title>Expand test/system/visitor_views_commits_test.rb</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      source/stylesheets/site.css.scss
+      test/system/visitor_views_commits_test.rb
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css.scss b/source/stylesheets/site.css.scss
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_commits_test.rb b/test/system/visitor_views_commits_test.rb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..fda2be7
+</span><span class="gh">index 0000000..942b0c2
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/stylesheets/site.css.scss
-</span><span class="p">@@ -0,0 +1,24 @@</span>
-<span class="gi">+body {
-+  background-color: #fbc547;
-+  color: #333;
-+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
-+    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
-+    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
-+    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-+  padding: 18vh 1rem;
-+  text-align: center;
-+}
+</span><span class="gi">+++ b/test/system/visitor_views_commits_test.rb
+</span><span class="p">@@ -0,0 +1,33 @@</span>
+<span class="gi">+require "application_system_test_case"
 +
-+a {
-+  color: rgba(#000, 0.7);
++class VisitorViewsCommitsTest &lt; ApplicationSystemTestCase
++  test "visitor views commits" do
++    stage_file("README.md", "Ignore me")
++    commit("Ignore me")
++    stage_file("file.txt", "Ignore me")
++    commit(&lt;&lt;~MARKDOWN)
++    The commit subject
 +
-+  &amp;:focus,
-+  &amp;:hover {
-+    color: rgba(#000, 0.6);
-+  }
-+}
++    The commit body
++    MARKDOWN
 +
-+.middleman-logo {
-+  margin-bottom: 1rem;
-+  width: 10rem;
-+}
++    with_git_repository do
++      visit "/index.html"
++      click_on "The commit subject"
++
++      assert_selector "h1", text: "The commit subject"
++      assert_selector "p", text: "The commit body"
++    end
++  end
++
++  test "visitor views commit with HTML in the subject line" do
++    stage_file("README.md", "Ignore me")
++    commit("This subject has a `&lt;h1&gt;` in it")
++
++    with_git_repository do
++      visit "/index.html"
++
++      assert_text "This subject has a &lt;h1&gt; in it"
++    end
++  end
++end
 </span></code></pre></div></details>
 
           </aside>

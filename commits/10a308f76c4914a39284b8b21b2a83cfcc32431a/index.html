@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md
+    <title>Navigate to previous commit
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -20,10 +20,11 @@
       <nav class="
         header__navigation
         navigation
-        navigation--next
+        
       ">
-
-<a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/">              Next &#8594;
+<a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/">              &#8592; Previous
+</a>
+<a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -36,8 +37,8 @@
               u-db-overflow-y--auto
               u-mb-overflow-x--scroll
             ">
-                <a href="./" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
-" aria-current="page"></a>
+                <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
+"></a>
                 <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
 "></a>
                 <a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--collapsed" title="Replace Generated Files with Static HTML and CSS
@@ -52,8 +53,8 @@
 "></a>
                 <a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--collapsed" title="Render the contents of a Commit's Message
 "></a>
-                <a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--collapsed" title="Navigate to previous commit
-"></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="Navigate to previous commit
+" aria-current="page"></a>
                 <a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/" class="commit-node commit-node--collapsed" title="Navigate to next commit
 "></a>
                 <a href="../a85d19480552b8ded546e4f99228ea5f95d3ddd8/" class="commit-node commit-node--collapsed" title="Dynamically determine project title
@@ -132,7 +133,7 @@
           u-db-overflow-y--auto
           u-mb-overflow-x--scroll
         ">
-<a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+<a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--full">              <p>Elaborate on the project&#39;s goals in the README.md</p>
 
 </a><a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--full">              <p>[GENERATED]: Scaffold the project with Middleman</p>
 
@@ -148,7 +149,7 @@
 
 </a><a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--full">              <p>Render the contents of a Commit&#39;s Message</p>
 
-</a><a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--full">              <p>Navigate to previous commit</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Navigate to previous commit</p>
 
 </a><a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/" class="commit-node commit-node--full">              <p>Navigate to next commit</p>
 
@@ -201,93 +202,138 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="navigate-to-previous-commit">Navigate to previous commit</h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
+<p>When one commit comes before another in a sequence, it can be <a href="https://git-scm.com/docs/git-commit-tree">referred
+to as its parent</a>:</p>
 
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<blockquote>
+<p>A commit object may have any number of parents. With exactly one
+parent, it is an ordinary commit. Having more than one parent makes
+the commit a merge between several lines of history.</p>
+
+<p><strong>Initial (root) commits have no parents</strong></p>
+</blockquote>
+
+<p>When viewing the initial commit, the commit won&rsquo;t have a parent.</p>
+
+<p>To account for this, guard the render block with a <a href="https://api.rubyonrails.org/classes/Object.html#method-i-present-3F">presence checking
+conditional</a>.</p>
 
         </section>
 
           <aside class="commit commit--diff commit--long-content">
               <details
-  id="README.md"
+  id="source/layouts/layout.erb"
   open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand README.md</title>
+        <title>Expand source/layouts/layout.erb</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand README.md</title>
+        <title>Expand source/layouts/layout.erb</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      README.md
+      source/layouts/layout.erb
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index edafa73..4c71bf4 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -21,9 +21,13 @@</span>
+         header__navigation
+         navigation
+       "&gt;
+<span class="gd">-        &lt;a href="#"&gt;
+-          &amp;#8592; Previous
+-        &lt;/a&gt;
+</span><span class="gi">+        &lt;% parent = commit.parent %&gt;
++
++        &lt;% if parent.present? %&gt;
++          &lt;% link_to "/commits/#{parent.sha}/index.html" do %&gt;
++            &amp;#8592; Previous
++          &lt;% end %&gt;
++        &lt;% end %&gt;
+</span> 
+         &lt;a href="#"&gt;
+           Next &amp;#8594;
+</code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_previous_commit_test.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/system/visitor_views_previous_commit_test.rb</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/system/visitor_views_previous_commit_test.rb</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      test/system/visitor_views_previous_commit_test.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_previous_commit_test.rb b/test/system/visitor_views_previous_commit_test.rb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
+</span><span class="gh">index 0000000..7180de4
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
+</span><span class="gi">+++ b/test/system/visitor_views_previous_commit_test.rb
+</span><span class="p">@@ -0,0 +1,32 @@</span>
+<span class="gi">+require "application_system_test_case"
 +
-+Generate a website based on a project's Git history.
++class VisitorViewsPreviousCommitTest &lt; ApplicationSystemTestCase
++  test "visitor views previous commit" do
++    stage_file("README.md", "First version")
++    commit("First commit")
++    stage_file("README.md", "Middle version")
++    commit("Middle commit")
++    stage_file("README.md", "Last version")
++    commit("Last commit")
 +
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
++    with_git_repository do
++      visit "/index.html"
++      click_on "Last commit"
++      click_on "Previous"
 +
-+Command-line Interface
-+---
++      assert_selector "h1", text: "Middle commit"
++    end
++  end
 +
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
++  test "visitor views commit without a previous commit" do
++    stage_file("README.md", "First version")
++    commit("First commit")
 +
-+To learn of the ways to to invoke the command, execute `git read --help`:
++    with_git_repository do
++      visit "/index.html"
++      click_on "First commit"
 +
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
++      assert_no_link "Previous"
++    end
++  end
++end
 </span></code></pre></div></details>
 
           </aside>
