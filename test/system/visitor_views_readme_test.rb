@@ -19,6 +19,24 @@ class VisitorViewsReadmeTest < ApplicationSystemTestCase
     end
   end
 
+  test "visitor navigates to initial commit from README" do
+    stage_file("README.md", "The README")
+    commit(<<~MARKDOWN)
+      Initial Commit
+      ===
+
+      The first commit
+    MARKDOWN
+
+    with_git_repository do |directory|
+      visit root_path
+      click_on "Next"
+
+      assert_selector "h1", text: "Initial Commit"
+      assert_selector "p", text: "The first commit"
+    end
+  end
+
   test "visitor navigates to README from another page" do
     stage_file("README.md", "The README")
     commit("Initial Commit")

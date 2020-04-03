@@ -23,23 +23,29 @@
           header__navigation
           navigation
           <%= (
-            if parent.present? && child.blank?
-              "navigation--previous"
-            elsif parent.blank? && child.present?
+            if defined?(contents) || parent.blank? && child.present?
               "navigation--next"
+            elsif parent.present? && child.blank?
+              "navigation--previous"
             end
           ) %>
         "
       >
-        <% if parent.present? %>
-          <% link_to commit_path(parent) do %>
-            &#8592; Previous
-          <% end %>
-        <% end %>
-
-        <% if child.present? %>
-          <% link_to commit_path(child) do %>
+        <% if defined?(contents) %>
+          <% link_to commit_path(history[:commits].first) do %>
             Next &#8594;
+          <% end %>
+        <% else %>
+          <% if parent.present? %>
+            <% link_to commit_path(parent) do %>
+              &#8592; Previous
+            <% end %>
+          <% end %>
+
+          <% if child.present? %>
+            <% link_to commit_path(child) do %>
+              Next &#8594;
+            <% end %>
           <% end %>
         <% end %>
       </nav>
