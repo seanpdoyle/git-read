@@ -86,7 +86,7 @@
         <nav class="commit-history commit-history--full u-mb-overflow-x--scroll">
           <% history[:commits].each do |commit| %>
             <%= current_link_to(
-              (Tilt["md"].new { commit.subject }).render,
+              markdown(commit.subject),
               commit_path(commit),
               class: "commit-node commit-node--full",
             ) %>

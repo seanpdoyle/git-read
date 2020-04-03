@@ -138,6 +138,12 @@ helpers do
       commit.sha == middle.sha
     end
   end
+
+  def markdown(content)
+    template = Tilt[:md].new { content }
+
+    template.render
+  end
 end
 
 # Build-specific configuration

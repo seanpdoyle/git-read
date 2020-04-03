@@ -29,7 +29,7 @@ class VisitorViewsCommitsTest < ApplicationSystemTestCase
     with_git_repository do
       visit root_path
 
-      assert_text "This subject has a `<h1>` in it"
+      assert_text "This subject has a <h1> in it"
     end
   end
 end
