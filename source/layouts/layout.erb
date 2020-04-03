@@ -13,7 +13,9 @@
   <body class="page">
     <header class="header">
       <h1 class="header__name">
-        <%= current_link_to escape_html(history[:name]), root_path(history[:root]) %>
+        <% current_link_to root_path(history[:root]) do %>
+          <%= escape_html(history[:name]) %>
+        <% end %>
       </h1>
 
       <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>

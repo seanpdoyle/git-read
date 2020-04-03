@@ -4,7 +4,7 @@ gem 'git'
 gem 'middleman', '~> 4.2'
 gem 'middleman-aria_current',
   github: 'thoughtbot/middleman-aria_current',
-  branch: 'sitemap'
+  branch: 'master'
 gem 'middleman-inline_svg'
 gem 'middleman-autoprefixer', '~> 2.7'
 gem 'middleman-syntax'

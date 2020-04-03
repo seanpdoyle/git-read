@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/thoughtbot/middleman-aria_current.git
-  revision: 27c5f328ac36d641a1afa4a55223673e3688f89b
-  branch: sitemap
+  revision: 16d3e539ae65ee515314661e415c5b21f1a1f28b
+  branch: master
   specs:
     middleman-aria_current (0.1.1)
       middleman-core (~> 4.0)
