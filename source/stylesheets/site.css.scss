@@ -227,6 +227,7 @@ p {
 
   @media (min-width: $breakpoint--mobile) {
     margin-bottom: inherit;
+    width: var(--commit-history-width);
   }
 }
 
@@ -283,8 +284,6 @@ p {
   }
 
   &:last-of-type::after {
-    width: var(--circle-size);
-
     @media (min-width: $breakpoint--mobile) {
       display: none;
     }
@@ -310,7 +309,23 @@ p {
 }
 
 .commit-node--full {
-  width: var(--commit-history-width);
+  &:first-of-type::after {
+    display: none;
+  }
+
+  &:last-of-type::after {
+    width: var(--circle-size);
+  }
+
+  @media (min-width: $breakpoint--mobile) {
+    &:first-of-type::after {
+      display: inherit;
+    }
+
+    &:last-of-type::after {
+      display: none;
+    }
+  }
 }
 
 .commit {
