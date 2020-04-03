@@ -1,16 +1,22 @@
-@import "settings/breakpoints";
-@import "settings/variables";
-
 :root {
+  --accordion-toggle-width: 2rem;
+  --accordion-toggle-border-width: 1px;
+
   --header-height: 3rem;
   --header-border-width: 2px;
 
-  --accordion-toggle-width: 2rem;
-  --accordion-toggle-border-width: 1px;
   --commit-history-padding: 1rem;
   --commit-history-padding: 1rem;
   --commit-history-width: 25rem;
+
+  --spacing: 1.5rem;
+  --spacing--small: 0.75rem;
 }
+
+<%= Rouge::Themes::Github.render(scope: ".highlight") %>
+
+$breakpoint--desktop: 100rem;
+$breakpoint--mobile: 60rem;
 
 html {
   font-size: 100%;
