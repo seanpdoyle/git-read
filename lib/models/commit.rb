@@ -22,7 +22,7 @@ class Commit < SimpleDelegator
         }
       end
     else
-      gtree.files.map do |filename, _|
+      files_in_tree(node: gtree).flat_map do |filename|
         contents = show_root_diff(filename)
 
         {
@@ -37,6 +37,16 @@ class Commit < SimpleDelegator
   end
 
   private
+
+  def files_in_tree(node:, parents: [])
+    files = node.files.map { |file, _| File.join(*parents, file) }
+
+    files_from_leafs = node.subtrees.map do |child, root|
+      files_in_tree(node: root, parents: parents + [child])
+    end
+
+    files + files_from_leafs.flatten
+  end
 
   def generated?
     subject.start_with?("[GENERATED]")

@@ -5,7 +5,11 @@ require "middleman/rack"
 
 module GitHelpers
   def stage_file(filename, contents)
-    Pathname(@repository.dir.path).join(filename).write(contents)
+    filepath = Pathname(@repository.dir.path).join(filename)
+
+    filepath.dirname.mkpath
+
+    filepath.write(contents)
 
     @repository.add(filename)
   end

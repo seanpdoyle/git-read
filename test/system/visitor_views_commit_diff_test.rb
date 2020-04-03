@@ -4,6 +4,7 @@ class VisitorViewsCommitDiffTest < ApplicationSystemTestCase
   test "visitor views commit diff when it is the first commit" do
     stage_file("README.md", "Ignore me")
     stage_file("file.txt", "File contents")
+    stage_file("src/file.txt", "Nested file contents")
     git_commit = commit("First commit")
 
     with_git_repository do
@@ -11,6 +12,8 @@ class VisitorViewsCommitDiffTest < ApplicationSystemTestCase
 
       assert_selector "details summary", text: "file.txt"
       assert_selector "details[open]", text: "File contents"
+      assert_selector "details summary", text: "src/file.txt"
+      assert_selector "details[open]", text: "Nested file contents"
     end
   end
 
