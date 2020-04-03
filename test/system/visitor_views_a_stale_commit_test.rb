@@ -21,6 +21,44 @@ class VisitorViewsAStaleCommitTest < ApplicationSystemTestCase
     end
   end
 
+  test "visitor views stale README" do
+    stage_file("README.md", "Ignore me ")
+    commit("Initial commit")
+    branch_commit_sha = switch_branch("my-branch") do
+      stage_file("README.md", "# Tagged README")
+      commit("Hello from the branch")
+      tag_head_commit("my-tag")
+    end
+
+    with_git_repository do
+      visit tag_path("my-tag")
+      expand_history
+
+      assert_text "You're viewing an out-of-date version of the project."
+      assert_selector "h1", text: "Tagged README"
+    end
+  end
+
+  test "visitor navigates to the stale root" do
+    stage_file("README.md", "README contents from master branch")
+    commit("Initial commit")
+    branch_commit_sha = switch_branch("my-branch") do
+      stage_file("file.txt", "Ignore me")
+      commit("Hello from the branch")
+      tag_head_commit("my-tag")
+    end
+
+    with_git_repository do |directory|
+      visit commit_path(branch_commit_sha)
+      click_on directory.basename
+      expand_history
+
+      assert_text "You're viewing an out-of-date version of the project."
+      assert_text "README contents from master branch"
+      assert_selector "a", text: "Hello from the branch"
+    end
+  end
+
   test "visitor views a does not see stale commit from master" do
     stage_file("README.md", "Ignore me")
     commit("Hello from master")

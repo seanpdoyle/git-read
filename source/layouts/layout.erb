@@ -12,7 +12,7 @@
   <body class="page">
     <header class="header">
       <h1 class="header__name">
-        <% current_link_to root_path do %>
+        <% current_link_to root_path(history[:root]) do %>
           <%= escape_html(history[:root]) %>
         <% end %>
       </h1>
