@@ -1,1 +1,3 @@
-console.log("Hello, from webpack")
+import Turbolinks from "turbolinks"
+
+Turbolinks.start()
