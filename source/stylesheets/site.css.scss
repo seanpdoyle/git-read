@@ -212,21 +212,20 @@ p {
   flex-grow: 1;
 }
 
-.commit {
-}
+.commit-content {
+  --commit-content-columns: 1fr;
 
-.commit-content--grid {
   display: flex;
   flex-direction: column;
 
   @media (min-width: $breakpoint--mobile) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: var(--commit-content-columns);
   }
 }
 
-.commit-content--single {
-  flex-grow: 1;
+.commit-content--double {
+  --commit-content-columns: 1fr 1fr;
 }
 
 .commit-history {
@@ -351,9 +350,7 @@ p {
   --commit-font-size: 1.12rem;
 
   font-size: var(--commit-font-size);
-}
 
-.commit--long-content {
   @media (min-width: $breakpoint--mobile) {
     overflow-y: auto;
   }
@@ -431,6 +428,10 @@ p {
   padding: calc(var(--commit-font-size) * 0.5);
 
   @media (min-width: $breakpoint--mobile) {
+    padding: calc(var(--commit-font-size) * 2);
+  }
+
+  @media (min-width: $breakpoint--desktop) {
     padding: calc(var(--commit-font-size) * 2) calc(var(--commit-font-size) * 6);
   }
 
@@ -450,6 +451,12 @@ p {
 
   .highlight {
     overflow-x: auto;
+  }
+}
+
+.u-db-overflow-y--auto {
+  @media (min-width: $breakpoint--mobile) {
+    overflow-y: auto;
   }
 }
 

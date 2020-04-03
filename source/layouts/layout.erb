@@ -55,7 +55,11 @@
       <details class="accordion content__item" data-controller="commit-history">
         <summary class="accordion__summary">
           <div class="accordion__closed">
-            <nav class="commit-history u-mb-overflow-x--scroll">
+            <nav class="
+              commit-history
+              u-db-overflow-y--auto
+              u-mb-overflow-x--scroll
+            ">
               <% history[:commits].each do |commit| %>
                 <%= current_link_to(
                   "",
@@ -89,7 +93,12 @@
           </div>
         </summary>
 
-        <nav class="commit-history commit-history--full u-mb-overflow-x--scroll">
+        <nav class="
+          commit-history
+          commit-history--full
+          u-db-overflow-y--auto
+          u-mb-overflow-x--scroll
+        ">
           <% history[:commits].each do |commit| %>
             <%= current_link_to(
               markdown(commit.subject),
@@ -103,18 +112,12 @@
       <article
         class="
           commit-content
-          <%= (
-            if render_diffs
-              "commit-content--grid"
-            else
-              "commit-content--single"
-            end
-          )%>
+          <%= ("commit-content--double" if render_diffs)%>
           content__item
           content__item--grow
         "
       >
-        <section class="commit commit--message <%= "commit--long-content" if render_diffs %>">
+        <section class="commit commit--message">
           <% if out_of_date %>
             <aside class="banner">
               <mark>
