@@ -7,6 +7,11 @@ activate :aria_current
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
+activate :external_pipeline,
+         name: :webpack,
+         command: build? ?  "yarn build" : "yarn start",
+         source: "tmp/dist",
+         latency: 1
 activate :inline_svg
 activate :syntax
 
