@@ -1,0 +1,16 @@
+{
+  "name": "git-read",
+  "version": "0.1.0",
+  "description": "Generate a website based on a project's Git history.",
+  "repository": "git@github.com:seanpdoyle/git-read.git",
+  "author": "Sean Doyle <sean.p.doyle24@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production yarn webpack --bail --mode=production",
+    "start": "yarn webpack --bail --mode=development --color"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
