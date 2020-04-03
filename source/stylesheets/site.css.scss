@@ -274,11 +274,20 @@ p {
   }
 
   &:last-child {
-    padding-bottom: 0;
+    padding-right: 0;
+
+    @media (min-width: $breakpoint--mobile) {
+      padding-right: inherit;
+      padding-bottom: 0;
+    }
   }
 
   &:last-of-type::after {
-    display: none;
+    width: var(--circle-size);
+
+    @media (min-width: $breakpoint--mobile) {
+      display: none;
+    }
   }
 
   &[aria-current]:not([aria-current="false"]) {
@@ -379,9 +388,8 @@ p {
 }
 
 .banner {
-  text-align: center;
   padding: var(--commit-font-size);
-  width: 100%;
+  text-align: center;
 }
 
 .commit--message {
