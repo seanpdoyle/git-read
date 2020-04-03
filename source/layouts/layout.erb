@@ -12,33 +12,39 @@
   <body class="page">
     <header class="header">
       <h1 class="header__name">
-        <% current_link_to root_path do %>
-          <%= escape_html(history[:root]) %>
+        <% current_link_to root_path(history.root) do %>
+          <%= escape_html(history.name) %>
         <% end %>
       </h1>
 
-      <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
+      <% parent, _, child = adjacent_commits(history.commits, commit: commit) %>
 
       <nav class="
         header__navigation
         navigation
         <%= (
-          if parent.blank? && child.present?
+          if defined?(contents) || parent.blank? && child.present?
             "navigation--next"
           elsif parent.present? && child.blank?
             "navigation--previous"
           end
         ) %>
       ">
-        <% if parent.present? %>
-          <% current_link_to commit_path(parent) do %>
-            &#8592; Previous
+        <% if defined?(contents) %>
+          <% link_to commit_path(history.commits.first) do %>
+            Get Started &#8594;
           <% end %>
-        <% end %>
+        <% else %>
+          <% if parent.present? %>
+            <% current_link_to commit_path(parent) do %>
+              &#8592; Previous
+            <% end %>
+          <% end %>
 
-        <% if child.present? %>
-          <% current_link_to commit_path(child) do %>
-            Next &#8594;
+          <% if child.present? %>
+            <% link_to commit_path(child) do %>
+              Next &#8594;
+            <% end %>
           <% end %>
         <% end %>
       </nav>
@@ -53,7 +59,7 @@
               u-db-overflow-y--auto
               u-mb-overflow-x--scroll
             ">
-              <% history[:commits].each do |commit| %>
+              <% history.commits.each do |commit| %>
                 <%= current_link_to(
                   "",
                   commit_path(commit),
@@ -101,7 +107,7 @@
           u-db-overflow-y--auto
           u-mb-overflow-x--scroll
         ">
-          <% history[:commits].each do |commit| %>
+          <% history.commits.each do |commit| %>
             <% current_link_to(
               commit_path(commit),
               class: "commit-node commit-node--full",
@@ -119,7 +125,7 @@
         content__item--grow
       ">
         <section class="commit commit--message">
-          <% if out_of_date %>
+          <% if history.out_of_date? %>
             <aside class="banner">
               <mark>
                 You're viewing an out-of-date version of the project.
