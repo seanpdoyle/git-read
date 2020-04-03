@@ -13,7 +13,7 @@
     <header class="header">
       <h1 class="header__name">
         <% current_link_to root_path(history[:root]) do %>
-          <%= escape_html(history[:root]) %>
+          <%= escape_html(history[:name]) %>
         <% end %>
       </h1>
 
@@ -23,22 +23,28 @@
         header__navigation
         navigation
         <%= (
-          if parent.blank? && child.present?
+          if defined?(contents) || parent.blank? && child.present?
             "navigation--next"
           elsif parent.present? && child.blank?
             "navigation--previous"
           end
         ) %>
       ">
-        <% if parent.present? %>
-          <% current_link_to commit_path(parent) do %>
-            &#8592; Previous
+        <% if defined?(contents) %>
+          <% link_to commit_path(history[:commits].first) do %>
+            Get Started &#8594;
           <% end %>
-        <% end %>
+        <% else %>
+          <% if parent.present? %>
+            <% current_link_to commit_path(parent) do %>
+              &#8592; Previous
+            <% end %>
+          <% end %>
 
-        <% if child.present? %>
-          <% current_link_to commit_path(child) do %>
-            Next &#8594;
+          <% if child.present? %>
+            <% link_to commit_path(child) do %>
+              Next &#8594;
+            <% end %>
           <% end %>
         <% end %>
       </nav>
