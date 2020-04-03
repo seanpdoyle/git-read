@@ -47,7 +47,7 @@ repository = Git.open(repository_directory)
 
 locals = {
   history: {
-    root: repository_directory.basename,
+    name: repository_directory.basename,
     commits: repository.log(nil).reverse_each.map do |commit|
       Commit.new(
         commit: commit,
@@ -79,13 +79,35 @@ repository.tags.each do |tag|
           title: commit.subject,
         },
         history: {
-          root: repository_directory.basename,
           commits: commits,
+          name: repository_directory.basename,
+          root: tag,
         }
       ),
       ignore: true,
     )
   end
+
+  tagged_readme = repository.show("#{tag.name}:README.md")
+  proxy(
+    "/tags/#{tag.name}/index.html",
+    "README.html",
+    locals: locals.merge(
+      commit: repository.object(tag.name),
+      contents: tagged_readme,
+      page: {
+        title: tagged_readme.lines.first,
+      },
+      history: {
+        commits: commits,
+        name: repository_directory.basename,
+        root: tag,
+      },
+      out_of_date: true,
+      render_diffs: false,
+    ),
+    ignore: true,
+  )
 end
 
 latest_readme = repository.show("HEAD:README.md")
