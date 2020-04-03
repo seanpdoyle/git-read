@@ -1,3 +1,4 @@
+import "details-element-polyfill"
 import Turbolinks from "turbolinks"
 
 Turbolinks.start()

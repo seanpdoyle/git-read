@@ -17,6 +17,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "details-element-polyfill": "^2.4.0",
     "turbolinks": "^5.2.0"
   }
 }
