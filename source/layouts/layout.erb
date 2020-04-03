@@ -61,13 +61,24 @@
             </nav>
 
             <div class="accordion__toggle">
-              <%= inline_svg("chevron-right.svg", title: "Open history") %>
+              <span class="accordion--desktop">
+                <%= inline_svg("chevron-right.svg", title: "Open history") %>
+              </span>
+
+              <span class="accordion--mobile">
+                <%= inline_svg("chevron-down.svg", title: "Open history") %>
+              </span>
             </div>
           </div>
 
           <div class="accordion__opened">
             <div class="accordion__toggle accordion__toggle--fill">
-              <%= inline_svg("chevron-left.svg", title: "Close history") %>
+              <span class="accordion--desktop">
+                <%= inline_svg("chevron-left.svg", title: "Close history") %>
+              </span>
+              <span class="accordion--mobile">
+                <%= inline_svg("chevron-up.svg", title: "Close history") %>
+              </span>
             </div>
           </div>
         </summary>

@@ -36,6 +36,22 @@ p {
   position: relative;
 }
 
+.accordion--desktop {
+  display: none;
+
+  @media (min-width: $breakpoint--mobile) {
+    display: inherit;
+  }
+}
+
+.accordion--mobile {
+  display: inherit;
+
+  @media (min-width: $breakpoint--mobile) {
+    display: none;
+  }
+}
+
 .accordion[open] {
   padding-right: 2rem;
 }
@@ -192,14 +208,6 @@ p {
 
 .commit-content--single {
   flex-grow: 1;
-}
-
-.u-mb-overflow-x--scroll {
-  overflow-x: scroll;
-
-  @media (min-width: $breakpoint--mobile) {
-    overflow-x: initial;
-  }
 }
 
 .commit-history {
@@ -399,5 +407,13 @@ p {
 
   .highlight {
     overflow-x: auto;
+  }
+}
+
+.u-mb-overflow-x--scroll {
+  overflow-x: scroll;
+
+  @media (min-width: $breakpoint--mobile) {
+    overflow-x: initial;
   }
 }
