@@ -16,6 +16,11 @@ html {
   font-size: 100%;
 }
 
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
 h1,
 h2,
 h3,
@@ -124,11 +129,6 @@ p {
   }
 }
 
-.page {
-  margin: 0;
-  min-height: 100vh;
-}
-
 .header {
   align-items: center;
   display: flex;
@@ -188,14 +188,27 @@ p {
   justify-content: flex-start;
 }
 
-.content {
-  align-items: stretch;
+.page {
   display: flex;
   flex-direction: column;
 
   @media (min-width: $breakpoint--mobile) {
-    flex-direction: row;
+    grid-template-areas:  "header  header"
+                          "history commit";
   }
+}
+
+.page__commit {
+  grid-area: commit;
+}
+
+.page__header {
+  grid-area: header;
+}
+
+.page__history {
+  grid-area: history;
+  order: -1;
 }
 
 .content__item {

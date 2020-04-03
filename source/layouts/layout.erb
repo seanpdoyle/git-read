@@ -10,49 +10,49 @@
     <%= stylesheet_link_tag "syntax" %>
     <%= javascript_include_tag "packs/application" %>
   </head>
-  <body class="page">
-    <header class="header">
-      <h1 class="header__name">
-        <%= current_link_to escape_html(history[:name]), root_path(history[:root]) %>
-      </h1>
+  <body>
+    <main class="page content">
+      <header class="header page__header">
+        <h1 class="header__name">
+          <%= current_link_to escape_html(history[:name]), root_path(history[:root]) %>
+        </h1>
 
-      <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
+        <% parent, _, child = adjacent_commits(history[:commits], commit: commit) %>
 
-      <nav
-        class="
-          header__navigation
-          navigation
-          <%= (
-            if defined?(contents) || parent.blank? && child.present?
-              "navigation--next"
-            elsif parent.present? && child.blank?
-              "navigation--previous"
-            end
-          ) %>
-        "
-      >
-        <% if defined?(contents) %>
-          <% link_to commit_path(history[:commits].first) do %>
-            Next &#8594;
-          <% end %>
-        <% else %>
-          <% if parent.present? %>
-            <% link_to commit_path(parent) do %>
-              &#8592; Previous
-            <% end %>
-          <% end %>
-
-          <% if child.present? %>
-            <% link_to commit_path(child) do %>
+        <nav
+          class="
+            header__navigation
+            navigation
+            <%= (
+              if defined?(contents) || parent.blank? && child.present?
+                "navigation--next"
+              elsif parent.present? && child.blank?
+                "navigation--previous"
+              end
+            ) %>
+          "
+        >
+          <% if defined?(contents) %>
+            <% link_to commit_path(history[:commits].first) do %>
               Next &#8594;
             <% end %>
-          <% end %>
-        <% end %>
-      </nav>
-    </header>
+          <% else %>
+            <% if parent.present? %>
+              <% link_to commit_path(parent) do %>
+                &#8592; Previous
+              <% end %>
+            <% end %>
 
-    <main class="content">
-      <details class="accordion content__item">
+            <% if child.present? %>
+              <% link_to commit_path(child) do %>
+                Next &#8594;
+              <% end %>
+            <% end %>
+          <% end %>
+        </nav>
+      </header>
+
+      <details class="accordion page__history content__item">
         <summary class="accordion__summary">
           <div class="accordion__closed">
             <nav class="commit-history u-mb-overflow-x--scroll">
@@ -112,6 +112,7 @@
           )%>
           content__item
           content__item--grow
+          page__commit
         "
       >
         <section class="commit commit--message <%= "commit--long-content" if render_diffs %>">
