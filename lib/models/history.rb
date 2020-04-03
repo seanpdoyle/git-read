@@ -12,7 +12,7 @@ class History
   end
 
   def initial_commit
-    commits.first
+    commits.reject(&:skip?).first || commits.first
   end
 
   def commits
