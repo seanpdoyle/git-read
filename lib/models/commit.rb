@@ -36,6 +36,10 @@ class Commit < SimpleDelegator
     end
   end
 
+  def skip?
+    subject.start_with? "[GENERATED]", "[SKIP]"
+  end
+
   private
 
   def files_in_tree(node:, parents: [])

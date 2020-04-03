@@ -1,4 +1,5 @@
 require "lib/models/commit"
+require "lib/models/history"
 
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
@@ -43,79 +44,79 @@ repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
 
 repository = Git.open(repository_directory)
 
-locals = {
-  history: {
-    root: repository_directory.basename,
-    commits: repository.log(nil).reverse_each.map do |commit|
-      Commit.new(
-        commit: commit,
-        repository: repository,
-      )
-    end,
-  },
-  out_of_date: false,
-  render_diffs: true,
+history = History.new(
+  readme: repository.show("HEAD:README.md"),
   repository: repository,
-}
+  root: repository,
+)
 
 repository.tags.each do |tag|
-  commits = tag.log(nil).reverse_each.map do |commit|
-    Commit.new(
-      commit: commit,
-      repository: repository,
-    )
-  end
+  tag_history = History.new(
+    out_of_date: true,
+    readme: repository.show("#{tag.name}:README.md"),
+    repository: repository,
+    root: tag,
+  )
 
-  commits.each do |commit|
+  tag_history.commits.each do |commit|
     proxy(
       "/commits/#{commit.sha}/index.html",
       "/commits/commit.html",
-      locals: locals.merge(
+      locals: {
         commit: commit,
-        out_of_date: true,
         page: {
           title: commit.subject,
         },
-        history: {
-          root: repository_directory.basename,
-          commits: commits,
-        }
-      ),
+        history: tag_history,
+        render_diffs: true,
+      },
       ignore: true,
     )
   end
+
+  proxy(
+    "/tags/#{tag.name}/index.html",
+    "README.html",
+    locals: {
+      commit: repository.object(tag.name),
+      contents: tag_history.readme,
+      page: {
+        title: tag_history.readme.lines.first,
+      },
+      history: tag_history,
+      render_diffs: false,
+    },
+    ignore: true,
+  )
 end
 
-latest_readme = repository.show("HEAD:README.md")
 proxy(
   "index.html",
   "README.html",
-  locals: locals.merge(
+  locals: {
     commit: repository.object("HEAD"),
-    contents: latest_readme,
+    contents: history.readme,
     page: {
-      title: latest_readme.lines.first,
+      title: history.readme.lines.first,
     },
+    history: history,
     render_diffs: false,
-  ),
+  },
   ignore: true,
 )
 
-locals.dig(:history, :commits).each do |commit|
-  commit = Commit.new(
-    commit: commit,
-    repository: repository,
-  )
-
+history.commits.each do |commit|
   proxy(
     "/commits/#{commit.sha}/index.html",
     "/commits/commit.html",
-    locals: locals.merge(
+    locals: {
       commit: commit,
       page: {
         title: commit.subject,
-      }
-    ),
+      },
+      history: history,
+      render_diffs: true,
+    },
     ignore: true,
   )
 end
