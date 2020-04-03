@@ -5,9 +5,20 @@
       "open"
     end
   ) %>
+  class="file"
 >
-  <summary>
-    <%= name %>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <%= inline_svg("chevron-up.svg", title: "Collapse #{name}") %>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <%= inline_svg("chevron-down.svg", title: "Open #{name}") %>
+    </span>
+
+    <code>
+      <%= name %>
+    </code>
   </summary>
 
   <% code(language) do %>
