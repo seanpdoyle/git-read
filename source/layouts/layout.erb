@@ -42,9 +42,7 @@
           <span class="sr-only open:hidden">Expand History</span>
           <span class="sr-only hidden open:initial">Collapse History</span>
           <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
-            <svg class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/>
-            </svg>
+            <%= inline_svg("caret-right.svg", class: "transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180") %>
           </div>
         </summary>
 
