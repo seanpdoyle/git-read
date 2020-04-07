@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Scroll Current Commit into view
+    <title>add turbolinks for faster navigation
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -20,12 +20,11 @@
       <nav class="
         header__navigation
         navigation
-        
+        navigation--previous
       ">
-<a href="../9f9245886f467c7800083e32d301ea3b09fbe715/">              &#8592; Previous
+<a href="../bec571e3b3b004f1466f3582a6199aa8e22c28e1/">              &#8592; Previous
 </a>
-<a href="../9b5db0075d454b5b1485684502ccb117406af51c/">              Next &#8594;
-</a>      </nav>
+      </nav>
     </header>
 
     <main class="content">
@@ -85,10 +84,10 @@
 "></a>
                 <a href="../9f9245886f467c7800083e32d301ea3b09fbe715/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="Scroll Current Commit into view
-" aria-current="page"></a>
-                <a href="../9b5db0075d454b5b1485684502ccb117406af51c/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
+                <a href="../bec571e3b3b004f1466f3582a6199aa8e22c28e1/" class="commit-node commit-node--collapsed" title="Scroll Current Commit into view
 "></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
+" aria-current="page"></a>
             </nav>
 
             <div class="accordion__toggle">
@@ -183,9 +182,9 @@
 
 </a><a href="../9f9245886f467c7800083e32d301ea3b09fbe715/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Scroll Current Commit into view</p>
+</a><a href="../bec571e3b3b004f1466f3582a6199aa8e22c28e1/" class="commit-node commit-node--full">              <p>Scroll Current Commit into view</p>
 
-</a><a href="../9b5db0075d454b5b1485684502ccb117406af51c/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>add turbolinks for faster navigation</p>
 
 </a>        </nav>
       </details>
@@ -198,33 +197,7 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="scroll-current-commit-into-view">Scroll Current Commit into view</h1>
-
-<p>When navigation to a commit completes, scroll that commit&rsquo;s node in the
-history navigator into view.</p>
-
-<p>When the browser finished loading and parsing the page&rsquo;s necessary
-assets and elements, it fires a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event"><code>DOMContentLoaded</code>
-event</a> on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document"><code>document</code> object</a>.</p>
-
-<p>This commit adds an <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">event listener</a> that fires a callback whenever a
-<code>DOMContentLoaded</code> event is triggered.</p>
-
-<p>That callback <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">queries</a> all on <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details">`<details> elements</a> that are
-present on the page and attaches callbacks that will be triggered when
-those elements&rsquo; <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>open</code> attribute</a> is
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Events"><code>toggle</code>-d</a>.</p>
-
-<p>Whenever a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> is expanded, scroll any
-descendant elements annotated with the <a href="https://tink.uk/using-the-aria-current-attribute/"><code>[aria-current=&quot;page&quot;]</code>
-attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView</code>
-method</a> directly on the element.</p>
-
-<p>Unfortunately, support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>Element.scrollIntoView</code>
-method</a> is not as widespread as support for the
-<code>&lt;details&gt;</code> element. Luckily, there is a <a href="https://github.com/wessberg/scroll-behavior-polyfill/tree/v2.0.13#applying-the-polyfill">community-sourced
-polyfill</a> for invoking <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView#Parameters"><code>.scrollIntoView</code> with
-options</a>.</p>
+          <h1 id="add-turbolinks-for-faster-navigation">add turbolinks for faster navigation</h1>
 
         </section>
 
@@ -255,16 +228,16 @@ options</a>.</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/package.json b/package.json
-index ad6c7da..39aabfe 100644
+index 39aabfe..c184217 100644
 </span><span class="gd">--- a/package.json
 </span><span class="gi">+++ b/package.json
-</span><span class="p">@@ -14,6 +14,7 @@</span>
-     "webpack-cli": "^3.3.11"
+</span><span class="p">@@ -15,6 +15,7 @@</span>
    },
    "dependencies": {
-<span class="gd">-    "details-element-polyfill": "^2.4.0"
-</span><span class="gi">+    "details-element-polyfill": "^2.4.0",
-+    "scroll-behavior-polyfill": "^2.0.13"
+     "details-element-polyfill": "^2.4.0",
+<span class="gd">-    "scroll-behavior-polyfill": "^2.0.13"
+</span><span class="gi">+    "scroll-behavior-polyfill": "^2.0.13",
++    "turbolinks": "^5.2.0"
 </span>   }
  }
 </code></pre></div></details>
@@ -295,31 +268,28 @@ index ad6c7da..39aabfe 100644
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
-index c7153a9..400e235 100644
+index 400e235..5eef6f5 100644
 </span><span class="gd">--- a/source/javascripts/site.js
 </span><span class="gi">+++ b/source/javascripts/site.js
-</span><span class="p">@@ -1 +1,20 @@</span>
+</span><span class="p">@@ -1,5 +1,8 @@</span>
  import "details-element-polyfill"
-<span class="gi">+import "scroll-behavior-polyfill"
+ import "scroll-behavior-polyfill"
+<span class="gi">+import Turbolinks from "turbolinks"
 +
-+const scrollToCurrent = (scope) =&gt; {
-+  for (const current of scope.querySelectorAll('[aria-current="page"]')) {
-+    current.scrollIntoView({ inline: "center" })
-+  }
-+}
-+
-+document.addEventListener("DOMContentLoaded", () =&gt; {
-+  scrollToCurrent(document)
-+
-+  for (const detailsElement of document.querySelectorAll("details")) {
-+    detailsElement.addEventListener("toggle", () =&gt; {
-+      if (detailsElement.open) {
-+        scrollToCurrent(detailsElement)
-+      }
-+    })
-+  }
-+})
-</span></code></pre></div></details>
++Turbolinks.start()
+</span> 
+ const scrollToCurrent = (scope) =&gt; {
+   for (const current of scope.querySelectorAll('[aria-current="page"]')) {
+<span class="p">@@ -7,7 +10,7 @@</span> const scrollToCurrent = (scope) =&gt; {
+   }
+ }
+ 
+<span class="gd">-document.addEventListener("DOMContentLoaded", () =&gt; {
+</span><span class="gi">+document.addEventListener("turbolinks:load", () =&gt; {
+</span>   scrollToCurrent(document)
+ 
+   for (const detailsElement of document.querySelectorAll("details")) {
+</code></pre></div></details>
 
               <details
   id="yarn.lock"
@@ -347,21 +317,21 @@ index c7153a9..400e235 100644
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/yarn.lock b/yarn.lock
-index a53a870..faca719 100644
+index faca719..b2076a7 100644
 </span><span class="gd">--- a/yarn.lock
 </span><span class="gi">+++ b/yarn.lock
-</span><span class="p">@@ -2116,6 +2116,11 @@</span> schema-utils@^1.0.0:
-     ajv-errors "^1.0.0"
-     ajv-keywords "^3.1.0"
+</span><span class="p">@@ -2432,6 +2432,11 @@</span> tty-browserify@0.0.0:
+   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
+   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
  
-<span class="gi">+scroll-behavior-polyfill@^2.0.13:
-+  version "2.0.13"
-+  resolved "https://registry.yarnpkg.com/scroll-behavior-polyfill/-/scroll-behavior-polyfill-2.0.13.tgz#f6f4db9eecdb94d5744b85b653440602fcf3b24b"
-+  integrity sha512-X1AC6+k0++Y3XOT8Likr5Dh4XMmwvbTolr3Mp2g1jYPpOQ3++wff/JPfPEK6zqPCkZ88Ac0/OMRW/Uwh16U+HQ==
+<span class="gi">+turbolinks@^5.2.0:
++  version "5.2.0"
++  resolved "https://registry.yarnpkg.com/turbolinks/-/turbolinks-5.2.0.tgz#e6877a55ea5c1cb3bb225f0a4ae303d6d32ff77c"
++  integrity sha512-pMiez3tyBo6uRHFNNZoYMmrES/IaGgMhQQM+VFF36keryjb5ms0XkVpmKHkfW/4Vy96qiGW3K9bz0tF5sK9bBw==
 +
-</span> semver@^5.5.0, semver@^5.6.0:
-   version "5.7.1"
-   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
+</span> typedarray@^0.0.6:
+   version "0.0.6"
+   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 </code></pre></div></details>
 
           </aside>
