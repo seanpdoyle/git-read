@@ -357,19 +357,16 @@ p {
   display: none; }
 
 .file[open] .file__toggle--close {
-  display: inherit; }
+  display: inline; }
 
 .file__toggle--open {
-  display: inherit; }
+  display: inline; }
 
 .file[open] .file__toggle--open {
   display: none; }
 
 .file__name {
-  align-items: baseline;
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
   list-style: none;
   padding: 1rem; }
   .file__name::-webkit-details-marker {
