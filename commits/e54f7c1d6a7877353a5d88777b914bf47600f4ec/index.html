@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Introduce Redcarpet Markdown Engine
+    <title>Extract SVG images
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -20,12 +20,11 @@
       <nav class="
         header__navigation
         navigation
-        
+        navigation--previous
       ">
-<a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/">              &#8592; Previous
+<a href="../42928603524e7c1dc2bf204bdaeb7b99a166dead/">              &#8592; Previous
 </a>
-<a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/">              Next &#8594;
-</a>      </nav>
+      </nav>
     </header>
 
     <main class="content">
@@ -45,8 +44,8 @@
 "></a>
                 <a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/" class="commit-node commit-node--collapsed" title="Exercise the application through a System Test
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="Introduce Redcarpet Markdown Engine
-" aria-current="page"></a>
+                <a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/" class="commit-node commit-node--collapsed" title="Introduce Redcarpet Markdown Engine
+"></a>
                 <a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--collapsed" title="Generate `/index.html` dynamically
 "></a>
                 <a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--collapsed" title="Extract `ApplicationSystemTestCase`
@@ -89,8 +88,8 @@
 "></a>
                 <a href="../42928603524e7c1dc2bf204bdaeb7b99a166dead/" class="commit-node commit-node--collapsed" title="Integrate with GitHub Actions
 "></a>
-                <a href="../e54f7c1d6a7877353a5d88777b914bf47600f4ec/" class="commit-node commit-node--collapsed" title="Extract SVG images
-"></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="Extract SVG images
+" aria-current="page"></a>
             </nav>
 
             <div class="accordion__toggle">
@@ -135,7 +134,7 @@
 
 </a><a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/" class="commit-node commit-node--full">              <p>Exercise the application through a System Test</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Introduce Redcarpet Markdown Engine</p>
+</a><a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/" class="commit-node commit-node--full">              <p>Introduce Redcarpet Markdown Engine</p>
 
 </a><a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--full">              <p>Generate <code>/index.html</code> dynamically</p>
 
@@ -179,7 +178,7 @@
 
 </a><a href="../42928603524e7c1dc2bf204bdaeb7b99a166dead/" class="commit-node commit-node--full">              <p>Integrate with GitHub Actions</p>
 
-</a><a href="../e54f7c1d6a7877353a5d88777b914bf47600f4ec/" class="commit-node commit-node--full">              <p>Extract SVG images</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Extract SVG images</p>
 
 </a>        </nav>
       </details>
@@ -192,31 +191,30 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="introduce-redcarpet-markdown-engine">Introduce Redcarpet Markdown Engine</h1>
+          <h1 id="extract-svg-images">Extract SVG images</h1>
 
-<p>Add a dependency on the <a href="https://github.com/vmg/redcarpet/tree/v3.5.0#and-its-like-really-simple-to-use"><code>redcarpet</code> gem</a> to parse the
-project&rsquo;s imminent <a href="https://guides.github.com/features/mastering-markdown/">Markdown</a> files.</p>
+<p>Several affordances throughout the application are visualized through
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg"><code>&lt;svg&gt;</code> elements</a>. Prior to this commit, they were declared
+directly in the template HTML.</p>
 
-<p>Additionally, configure Middleman to make use of the parser by:</p>
+<p>Some of the application&rsquo;s iconography was shared across several parts of
+the interface. For instance, the commit history&rsquo;s <code>&lt;summary&gt;</code> element in
+mobile dimensions shared the same icon <code>&lt;svg&gt;</code> elements as the file
+diff&rsquo;s <code>&lt;summary&gt;</code> element.</p>
 
-<ul>
-<li>setting the <code>:markdown_engine</code> setting, along with additional
-<code>:markdown</code> configuration values from within <a href="#config.rb"><code>config.rb</code></a></li>
-<li>renaming the <code>source/index.html.erb</code> to <code>source/index.html.md</code></li>
-</ul>
+<p>To re-use the shared elements, this commit adds a dependency on the
+<a href="https://github.com/thoughtbot/middleman-inline_svg#usage"><code>middleman-inline_svg</code> gem</a>, which reads files
+from the <code>source/images</code> directory and renders the contents of files
+inline as HTML, similar to what was done before.</p>
 
-<p>The previous file extension sequence was significant, as it encoded a
-<a href="https://middlemanapp.com/basics/templating-language/#template-basics">pre-processing sequence</a> of <a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/erb/rdoc/ERB.html">ERB</a> to HTML.</p>
+<p>The main value that <code>middleman-inline_svg</code> provides is that it affords
+an opportunity for the rendering context to insert HTML attributes
+(like <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class"><code>class</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles"><code>role</code></a>) or an SVG <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/title"><code>&lt;title&gt;</code>
+element</a>.</p>
 
-<p>The <em>new</em> sequence encodes that the source files will be written in
-<a href="https://guides.github.com/features/mastering-markdown/">Markdown</a> (as denoted by the <code>.md</code>), then transformed into HTML (as
-denoted by the <code>.html</code>).</p>
-
-<p>To ensure that the templating engine change was successful, change the
-test&rsquo;s <a href="https://rubydoc.info/github/teamcapybara/capybara/master/Capybara/Minitest/Assertions:assert_text"><code>assert_text</code></a> verification to a more strict
-<a href="https://rubydoc.info/github/teamcapybara/capybara/master/Capybara/Minitest/Assertions:assert_selector"><code>assert_selector</code></a> that asserts that the <code>git-read</code>
-text appears within an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements"><code>&lt;h1&gt;</code> element</a>, which is what Markdown
-transforms text underlined with <code>===</code> into.</p>
+<p>To that end, this commit also <a href="https://github.com/thoughtbot/middleman-inline_svg#configuration">configures the extension</a>
+to specify <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Role_Img"><code>role=&quot;img&quot;</code></a> for each SVG, since each collection
+of elements represents a single entity.</p>
 
         </section>
 
@@ -243,17 +241,17 @@ transforms text underlined with <code>===</code> into.</p>
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
-index 972703e..e7e8539 100644
+index 10b7e68..250ec10 100644
 </span><span class="gd">--- a/Gemfile
 </span><span class="gi">+++ b/Gemfile
-</span><span class="p">@@ -2,6 +2,7 @@</span> source 'https://rubygems.org'
- 
+</span><span class="p">@@ -4,6 +4,7 @@</span> gem 'git'
  gem 'middleman', '~&gt; 4.2'
+ gem 'middleman-aria_current'
  gem 'middleman-autoprefixer', '~&gt; 2.7'
-<span class="gi">+gem 'redcarpet'
-</span> gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
- gem 'wdm', '~&gt; 0.1', platforms: [:mswin, :mingw, :x64_mingw]
- 
+<span class="gi">+gem 'middleman-inline_svg'
+</span> gem 'middleman-syntax'
+ gem 'redcarpet'
+ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
 </code></pre></div></details>
 
               <details
@@ -278,25 +276,27 @@ index 972703e..e7e8539 100644
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
-index c4f6511..b338dc5 100644
+index a6241b0..de75f45 100644
 </span><span class="gd">--- a/Gemfile.lock
 </span><span class="gi">+++ b/Gemfile.lock
-</span><span class="p">@@ -105,6 +105,7 @@</span> GEM
-     rb-fsevent (0.10.3)
-     rb-inotify (0.10.1)
-       ffi (~&gt; 1.0)
-<span class="gi">+    redcarpet (3.5.0)
-</span>     regexp_parser (1.7.0)
-     sassc (2.2.1)
-       ffi (~&gt; 1.9)
-<span class="p">@@ -139,6 +140,7 @@</span> DEPENDENCIES
-   capybara
+</span><span class="p">@@ -86,6 +86,9 @@</span> GEM
+       servolux
+       tilt (~&gt; 2.0.9)
+       uglifier (~&gt; 3.0)
+<span class="gi">+    middleman-inline_svg (0.1.2)
++      middleman-core (&gt;= 3.4.1)
++      nokogiri (&gt;= 1.8)
+</span>     middleman-syntax (3.2.0)
+       middleman-core (&gt;= 3.2)
+       rouge (~&gt; 3.2)
+<span class="p">@@ -155,6 +158,7 @@</span> DEPENDENCIES
    middleman (~&gt; 4.2)
+   middleman-aria_current
    middleman-autoprefixer (~&gt; 2.7)
-<span class="gi">+  redcarpet
-</span>   tzinfo-data
-   wdm (~&gt; 0.1)
- 
+<span class="gi">+  middleman-inline_svg
+</span>   middleman-syntax
+   minitest-around
+   redcarpet
 </code></pre></div></details>
 
               <details
@@ -321,229 +321,291 @@ index c4f6511..b338dc5 100644
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-index 71ec870..96a1c7a 100644
+index a55c46f..0ad7f26 100644
 </span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -5,6 +5,9 @@</span> activate :autoprefixer do |prefix|
-   prefix.browsers = "last 2 versions"
- end
+</span><span class="p">@@ -12,6 +12,11 @@</span> activate :external_pipeline,
+          command: build? ?  "yarn build" : "yarn start",
+          source: "tmp/dist",
+          latency: 1
+<span class="gi">+activate :inline_svg do |config|
++  config.defaults = {
++    role: "img",
++  }
++end
+</span> activate :syntax
  
-<span class="gi">+set :markdown_engine, :redcarpet
-+set :markdown, fenced_code_blocks: true, smartypants: true, with_toc_data: true
-+
-</span> # Layouts
- # https://middlemanapp.com/basics/layouts/
- 
+ set :markdown_engine, :redcarpet
 </code></pre></div></details>
 
               <details
-  id="source/index.html.erb"
+  id="source/commits/_file.html.erb"
   open
   class="file"
 >
   <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/index.html.erb</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/commits/_file.html.erb</title>
   <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/index.html.erb</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/commits/_file.html.erb</title>
   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
     <code>
-      source/index.html.erb
+      source/commits/_file.html.erb
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/index.html.erb b/source/index.html.erb
-</span><span class="p">deleted file mode 100644
-</span><span class="gh">index c5a68ef..0000000
-</span><span class="gd">--- a/source/index.html.erb
-</span><span class="gi">+++ /dev/null
-</span><span class="p">@@ -1,69 +0,0 @@</span>
-<span class="gd">----
--title: Elaborate on the project's goals in the README.md
-----
--
--&lt;h1&gt;
--  git-read
--&lt;/h1&gt;
--
--&lt;p&gt;
--  Generate a website based on a project's Git history.
--&lt;/p&gt;
--
--&lt;ul&gt;
--  &lt;li&gt;
--    Serve the project's
--    &lt;code&gt;README.md&lt;/code&gt;
--    as the homepage
--  &lt;/li&gt;
--  &lt;li&gt;
--    Index the history through its commits
--  &lt;/li&gt;
--  &lt;li&gt;
--    Transforms commit messages HTML through a syntax-aware Markdown parser
--  &lt;/li&gt;
--  &lt;li&gt;
--    Display the commits alongside their code changes
--  &lt;/li&gt;
--&lt;/ul&gt;
--
--&lt;h2&gt;
--  Command-line Interface
--&lt;/h2&gt;
--
--&lt;p&gt;
--  Once installed, make sure that the
--  &lt;code&gt;bin/git-read&lt;/code&gt;
--  executable is available on
--  your path so that the
--  &lt;a href="http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html"&gt;
--    &lt;code&gt;git&lt;/code&gt; program can invoke it as a subcommand
--  &lt;/a&gt;.
--&lt;/p&gt;
--
--&lt;p&gt;
--  To learn of the ways to to invoke the command, execute
--  &lt;code&gt;git read --help&lt;/code&gt;
--  :
--&lt;/p&gt;
--
--&lt;code&gt;
--  &lt;pre&gt;
--    usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
--                    [-g | --git-dir &amp;lt;path&amp;gt;] [-o | --output-dir &amp;lt;path&amp;gt;]
--    Generate HTML from your project's Git history
--
--    OPTIONS
--          --output-dir
--              specify the directory where the site will be built
--          --git-dir
--              specify the parent directory of the project's .git/ directory
--          --verbose
--              print debugging information during the build process
--          --server
--              build and serve assets with a server available at
--              http://127.0.0.1:4567
--          --help
--              generate this help output
--  &lt;/pre&gt;
--&lt;/code&gt;
-</span></code></pre></div></details>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/commits/_file.html.erb b/source/commits/_file.html.erb
+index 33f8e3e..8c15b69 100644
+</span><span class="gd">--- a/source/commits/_file.html.erb
+</span><span class="gi">+++ b/source/commits/_file.html.erb
+</span><span class="p">@@ -8,19 +8,17 @@</span>
+   class="file"
+ &gt;
+   &lt;summary class="file__name"&gt;
+<span class="gd">-    &lt;span class="file__toggle file__toggle--close"&gt;
+-      &lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+-        &lt;title&gt;Expand &lt;%= name %&gt;&lt;/title&gt;
+-        &lt;path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/&gt;
+-      &lt;/svg&gt;
+-    &lt;/span&gt;
+</span><span class="gi">+    &lt;%= inline_svg(
++      "caret-up.svg",
++      class: "file__toggle file__toggle--close",
++      title: "Collapse #{name}",
++    ) %&gt;
+</span> 
+<span class="gd">-    &lt;span class="file__toggle file__toggle--open"&gt;
+-      &lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+-        &lt;title&gt;Expand &lt;%= name %&gt;&lt;/title&gt;
+-        &lt;path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/&gt;
+-      &lt;/svg&gt;
+-    &lt;/span&gt;
+</span><span class="gi">+    &lt;%= inline_svg(
++      "caret-down.svg",
++      class: "file__toggle file__toggle--open",
++      title: "Expand #{name}",
++    ) %&gt;
+</span> 
+     &lt;code&gt;
+       &lt;%= name %&gt;
+</code></pre></div></details>
 
               <details
-  id="source/index.html.md"
+  id="source/images/caret-down.svg"
   open
   class="file"
 >
   <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/index.html.md</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/images/caret-down.svg</title>
   <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/index.html.md</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/images/caret-down.svg</title>
   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
     <code>
-      source/index.html.md
+      source/images/caret-down.svg
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/index.html.md b/source/index.html.md
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/images/caret-down.svg b/source/images/caret-down.svg
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..03c1d25
+</span><span class="gh">index 0000000..4c5133b
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/source/index.html.md
-</span><span class="p">@@ -0,0 +1,48 @@</span>
-<span class="gi">+---
-+title: Elaborate on the project's goals in the README.md
-+---
-+
-+git-read
-+===
-+
-+Generate a website based on a project's Git history.
-+
-+* Serve the project's
-+  `README.md`
-+  as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
-+
-+Command-line Interface
-+---
-+
-+Once installed, make sure that the
-+`bin/git-read`
-+executable is available on
-+your path so that the
-+[`git` program can invoke it as a subcommand][subcommand]
-+
-+To learn of the ways to to invoke the command, execute
-+`git read --help`:
-+
-+```bash
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+      --output-dir
-+          specify the directory where the site will be built
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+      --verbose
-+          print debugging information during the build process
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
+</span><span class="gi">+++ b/source/images/caret-down.svg
+</span><span class="p">@@ -0,0 +1,3 @@</span>
+<span class="gi">+&lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
++  &lt;path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/&gt;
++&lt;/svg&gt;
 </span></code></pre></div></details>
 
               <details
-  id="test/system/visitor_views_readme_test.rb"
+  id="source/images/caret-left.svg"
   open
   class="file"
 >
   <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse test/system/visitor_views_readme_test.rb</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/images/caret-left.svg</title>
   <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand test/system/visitor_views_readme_test.rb</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/images/caret-left.svg</title>
   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
     <code>
-      test/system/visitor_views_readme_test.rb
+      source/images/caret-left.svg
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
-index 25cd19a..4f48a65 100644
-</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
-</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
-</span><span class="p">@@ -21,6 +21,6 @@</span> class VisitorViewsReadmeTest &lt; ActiveSupport::TestCase
-   test "visitor views README" do
-     visit "/index.html"
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/images/caret-left.svg b/source/images/caret-left.svg
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..241f058
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/images/caret-left.svg
+</span><span class="p">@@ -0,0 +1,3 @@</span>
+<span class="gi">+&lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
++  &lt;path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z" clip-rule="evenodd"/&gt;
++&lt;/svg&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/images/caret-right.svg"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/images/caret-right.svg</title>
+  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/images/caret-right.svg</title>
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code>
+      source/images/caret-right.svg
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/images/caret-right.svg b/source/images/caret-right.svg
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..0fbd23a
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/images/caret-right.svg
+</span><span class="p">@@ -0,0 +1,3 @@</span>
+<span class="gi">+&lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
++  &lt;path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/&gt;
++&lt;/svg&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/images/caret-up.svg"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/images/caret-up.svg</title>
+  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/images/caret-up.svg</title>
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code>
+      source/images/caret-up.svg
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/images/caret-up.svg b/source/images/caret-up.svg
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..cbe6e75
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/images/caret-up.svg
+</span><span class="p">@@ -0,0 +1,3 @@</span>
+<span class="gi">+&lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
++  &lt;path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/&gt;
++&lt;/svg&gt;
+</span></code></pre></div></details>
+
+              <details
+  id="source/layouts/layout.erb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/layouts/layout.erb</title>
+  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/layouts/layout.erb</title>
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code>
+      source/layouts/layout.erb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 399e778..92e62a4 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -70,37 +70,33 @@</span>
+             &lt;/nav&gt;
  
-<span class="gd">-    assert_text "git-read"
-</span><span class="gi">+    assert_selector "h1", text: "git-read"
-</span>   end
- end
+             &lt;div class="accordion__toggle"&gt;
+<span class="gd">-              &lt;span class="accordion--desktop"&gt;
+-                &lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+-                  &lt;title&gt;Expand History&lt;/title&gt;
+-                  &lt;path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/&gt;
+-                &lt;/svg&gt;
+-              &lt;/span&gt;
+</span><span class="gi">+              &lt;%= inline_svg(
++                "caret-right.svg",
++                class: "accordion--desktop",
++                title: "Expand History",
++              ) %&gt;
+</span> 
+<span class="gd">-              &lt;span class="accordion--mobile"&gt;
+-                &lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+-                  &lt;title&gt;Expand History&lt;/title&gt;
+-                  &lt;path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/&gt;
+-                &lt;/svg&gt;
+-              &lt;/span&gt;
+</span><span class="gi">+              &lt;%= inline_svg(
++                "caret-down.svg",
++                class: "accordion--mobile",
++                title: "Expand History",
++              ) %&gt;
+</span>             &lt;/div&gt;
+           &lt;/div&gt;
+ 
+           &lt;div class="accordion__opened"&gt;
+             &lt;div class="accordion__toggle accordion__toggle--fill"&gt;
+<span class="gd">-              &lt;span class="accordion--desktop"&gt;
+-                &lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+-                  &lt;title&gt;Collapse History&lt;/title&gt;
+-                  &lt;path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z" clip-rule="evenodd"/&gt;
+-                &lt;/svg&gt;
+-              &lt;/span&gt;
+</span><span class="gi">+              &lt;%= inline_svg(
++                "caret-left.svg",
++                class: "accordion--desktop",
++                title: "Collapse History",
++              ) %&gt;
+</span> 
+<span class="gd">-              &lt;span class="accordion--mobile"&gt;
+-                &lt;svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+-                  &lt;title&gt;Collapse History&lt;/title&gt;
+-                  &lt;path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/&gt;
+-                &lt;/svg&gt;
+-              &lt;/span&gt;
+</span><span class="gi">+              &lt;%= inline_svg(
++                "caret-up.svg",
++                class: "accordion--mobile",
++                title: "Collapse History",
++              ) %&gt;
+</span>             &lt;/div&gt;
+           &lt;/div&gt;
+         &lt;/summary&gt;
 </code></pre></div></details>
 
           </aside>
