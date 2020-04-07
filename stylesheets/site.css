@@ -348,7 +348,9 @@ p {
   min-height: 100vh; }
 
 .file {
-  border: solid 1px black; }
+  --file-border: solid 1px black;
+  border-left: var(--file-border);
+  border-right: var(--file-border); }
 
 .file__toggle {
   margin-right: 1rem; }
@@ -366,6 +368,7 @@ p {
   display: none; }
 
 .file__name {
+  border-bottom: var(--file-border);
   cursor: pointer;
   list-style: none;
   padding: 1rem; }
