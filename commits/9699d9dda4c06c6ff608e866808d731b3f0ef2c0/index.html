@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Scroll Current Commit into view
+    <title>Scroll current Commit into view
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -24,7 +24,7 @@
       ">
 <a href="../9f9245886f467c7800083e32d301ea3b09fbe715/">              &#8592; Previous
 </a>
-<a href="../7feafd297e00a280de7342b8803bb1f23e733fa5/">              Next &#8594;
+<a href="../def454590ddb96bfb613f112bb0ea8d18eae1d97/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -85,9 +85,9 @@
 "></a>
                 <a href="../9f9245886f467c7800083e32d301ea3b09fbe715/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="Scroll Current Commit into view
+                <a href="./" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
 " aria-current="page"></a>
-                <a href="../7feafd297e00a280de7342b8803bb1f23e733fa5/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
+                <a href="../def454590ddb96bfb613f112bb0ea8d18eae1d97/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
 "></a>
             </nav>
 
@@ -183,9 +183,9 @@
 
 </a><a href="../9f9245886f467c7800083e32d301ea3b09fbe715/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Scroll Current Commit into view</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Scroll current Commit into view</p>
 
-</a><a href="../7feafd297e00a280de7342b8803bb1f23e733fa5/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
+</a><a href="../def454590ddb96bfb613f112bb0ea8d18eae1d97/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
 
 </a>        </nav>
       </details>
@@ -198,7 +198,7 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="scroll-current-commit-into-view">Scroll Current Commit into view</h1>
+          <h1 id="scroll-current-commit-into-view">Scroll current Commit into view</h1>
 
 <p>When navigation to a commit completes, scroll that commit&rsquo;s node in the
 history navigator into view.</p>
@@ -210,21 +210,32 @@ event</a> on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Docum
 <p>This commit adds an <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">event listener</a> that fires a callback whenever a
 <code>DOMContentLoaded</code> event is triggered.</p>
 
-<p>That callback <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">queries</a> all on <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> elements</a> that
-are present on the page and attaches callbacks that will be triggered
-when those elements&rsquo; <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>open</code> attribute</a> is
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Events"><code>toggle</code>-d</a>.</p>
+<p>When the browser finalizes loading and parsing its contents, scroll any
+descendant elements annotated with the <a href="https://tink.uk/using-the-aria-current-attribute/"><code>[aria-current=&quot;page&quot;]</code>
+attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView()</code>
+method</a> directly on the elements.</p>
+
+<p>Unfortunately, support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>Element.scrollIntoView()</code>
+method</a> is not as widespread as support for the
+<code>&lt;details&gt;</code> element. Luckily, there is a <a href="https://github.com/wessberg/scroll-behavior-polyfill/tree/v2.0.13#applying-the-polyfill">community-sourced
+polyfill</a> for invoking <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView#Parameters"><code>.scrollIntoView()</code> with
+options</a>.</p>
+
+<p>Invoking <code>.scrollIntoView()</code> upon <code>DOMContentLoaded</code> will improve the
+visibility of any <code>[aria-current]</code> elements present on the page.
+However, pages include a current element in the project&rsquo;s history that
+is hidden within a <code>&lt;details&gt;</code> element that does not specify an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>[open]</code>
+attribute</a>.</p>
+
+<p>To account for that, extend the <code>DOMContentLoaded</code> callback so that it
+queries all on <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt; elements</code></a> that are present on the
+page and attaches callbacks that will be triggered when those <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open">elements’
+<code>[open]</code> attribute</a> is <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Events"><code>toggle</code>-d</a>.</p>
 
 <p>Whenever a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> is expanded, scroll any
 descendant elements annotated with the <a href="https://tink.uk/using-the-aria-current-attribute/"><code>[aria-current=&quot;page&quot;]</code>
-attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView</code>
+attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView()</code>
 method</a> directly on the element.</p>
-
-<p>Unfortunately, support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>Element.scrollIntoView</code>
-method</a> is not as widespread as support for the
-<code>&lt;details&gt;</code> element. Luckily, there is a <a href="https://github.com/wessberg/scroll-behavior-polyfill/tree/v2.0.13#applying-the-polyfill">community-sourced
-polyfill</a> for invoking <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView#Parameters"><code>.scrollIntoView</code> with
-options</a>.</p>
 
         </section>
 
