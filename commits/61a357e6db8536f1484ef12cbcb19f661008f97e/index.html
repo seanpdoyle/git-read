@@ -5,7 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>scroll to current when expanding history</title>
+    <title>add turbolinks for faster navigation
+</title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
   </head>
@@ -19,16 +20,15 @@
       <nav class="
         header__navigation
         navigation
-        
+        navigation--previous
       ">
-<a href="../6f1746cc8dfb95b6ef48a46637c6bdf9d8cb7be5/">              &#8592; Previous
+<a href="../5879fdd14dd38ab817f84bd197dfa73f373d6eeb/">              &#8592; Previous
 </a>
-<a href="../d73b59b45c374432cf3763f55609c6bcba29714f/">              Next &#8594;
-</a>      </nav>
+      </nav>
     </header>
 
     <main class="content">
-      <details class="accordion content__item" data-controller="commit-history">
+      <details class="accordion content__item">
         <summary class="accordion__summary">
           <div class="accordion__closed">
             <nav class="
@@ -80,13 +80,13 @@
 "></a>
                 <a href="../082a12900d1beb780a5f4665d3dcf9574557b761/" class="commit-node commit-node--collapsed" title="Render history of tag, commits to home link"></a>
                 <a href="../0c9d43e19e25799f3fac8ac1cc4aa15be66b686f/" class="commit-node commit-node--collapsed" title="BUGFIX: Render &quot;Next&quot; from root"></a>
-                <a href="../30e3fe7749619201266c38ab40728e21974475b3/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
+                <a href="../77410cf05c40257068bf2c69e5a750d11314963b/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
 "></a>
-                <a href="../e3a0178e5da496504b4ab3b62f7e7a719f654b8e/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation"></a>
-                <a href="../6f1746cc8dfb95b6ef48a46637c6bdf9d8cb7be5/" class="commit-node commit-node--collapsed" title="Scroll to current commit during navigation
+                <a href="../a8190a6e56a92bcda5b21191370cb7c23196ec0d/" class="commit-node commit-node--collapsed" title="polyfill details element"></a>
+                <a href="../5879fdd14dd38ab817f84bd197dfa73f373d6eeb/" class="commit-node commit-node--collapsed" title="scrollIntoView to current
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="scroll to current when expanding history" aria-current="page"></a>
-                <a href="../d73b59b45c374432cf3763f55609c6bcba29714f/" class="commit-node commit-node--collapsed" title="polyfill once we have JS"></a>
+                <a href="./" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
+" aria-current="page"></a>
             </nav>
 
             <div class="accordion__toggle">
@@ -177,15 +177,13 @@
 
 </a><a href="../0c9d43e19e25799f3fac8ac1cc4aa15be66b686f/" class="commit-node commit-node--full">              <p>BUGFIX: Render &quot;Next&quot; from root</p>
 
-</a><a href="../30e3fe7749619201266c38ab40728e21974475b3/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
+</a><a href="../77410cf05c40257068bf2c69e5a750d11314963b/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
 
-</a><a href="../e3a0178e5da496504b4ab3b62f7e7a719f654b8e/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
+</a><a href="../a8190a6e56a92bcda5b21191370cb7c23196ec0d/" class="commit-node commit-node--full">              <p>polyfill details element</p>
 
-</a><a href="../6f1746cc8dfb95b6ef48a46637c6bdf9d8cb7be5/" class="commit-node commit-node--full">              <p>Scroll to current commit during navigation</p>
+</a><a href="../5879fdd14dd38ab817f84bd197dfa73f373d6eeb/" class="commit-node commit-node--full">              <p>scrollIntoView to current</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>scroll to current when expanding history</p>
-
-</a><a href="../d73b59b45c374432cf3763f55609c6bcba29714f/" class="commit-node commit-node--full">              <p>polyfill once we have JS</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>add turbolinks for faster navigation</p>
 
 </a>        </nav>
       </details>
@@ -198,11 +196,51 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="scroll-to-current-when-expanding-history">scroll to current when expanding history</h1>
+          <h1 id="add-turbolinks-for-faster-navigation">add turbolinks for faster navigation</h1>
 
         </section>
 
           <aside class="commit commit--diff commit--long-content">
+              <details
+  id="package.json"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand package.json</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand package.json</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      package.json
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/package.json b/package.json
+index 39aabfe..c184217 100644
+</span><span class="gd">--- a/package.json
+</span><span class="gi">+++ b/package.json
+</span><span class="p">@@ -15,6 +15,7 @@</span>
+   },
+   "dependencies": {
+     "details-element-polyfill": "^2.4.0",
+<span class="gd">-    "scroll-behavior-polyfill": "^2.0.13"
+</span><span class="gi">+    "scroll-behavior-polyfill": "^2.0.13",
++    "turbolinks": "^5.2.0"
+</span>   }
+ }
+</code></pre></div></details>
+
               <details
   id="source/javascripts/site.js"
   open
@@ -229,72 +267,70 @@
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
-index d87f7d5..e09d0c7 100644
+index 400e235..5eef6f5 100644
 </span><span class="gd">--- a/source/javascripts/site.js
 </span><span class="gi">+++ b/source/javascripts/site.js
-</span><span class="p">@@ -2,8 +2,20 @@</span> import Turbolinks from "turbolinks"
- 
- Turbolinks.start()
- 
-<span class="gd">-document.addEventListener("turbolinks:load", () =&gt; {
--  for (const current of document.querySelectorAll('[aria-current="page"]')) {
-</span><span class="gi">+const scrollToCurrentCommit = (element) =&gt; {
-+  for (const current of element.querySelectorAll('[aria-current="page"]')) {
-</span>     current.scrollIntoView({ block: "center", inline: "center" })
+</span><span class="p">@@ -1,5 +1,8 @@</span>
+ import "details-element-polyfill"
+ import "scroll-behavior-polyfill"
+<span class="gi">+import Turbolinks from "turbolinks"
++
++Turbolinks.start()
+</span> 
+ const scrollToCurrent = (scope) =&gt; {
+   for (const current of scope.querySelectorAll('[aria-current="page"]')) {
+<span class="p">@@ -7,7 +10,7 @@</span> const scrollToCurrent = (scope) =&gt; {
    }
-<span class="gi">+}
-+
-+document.addEventListener("turbolinks:load", () =&gt; {
-+  for (const details of document.querySelectorAll('details[data-controller*="commit-history"]')) {
-+    details.addEventListener("toggle", (event) =&gt; {
-+      if (details.open) {
-+        scrollToCurrentCommit(details)
-+      }
-+    })
-+  }
-+
-+  scrollToCurrentCommit(document)
-</span> })
+ }
+ 
+<span class="gd">-document.addEventListener("DOMContentLoaded", () =&gt; {
+</span><span class="gi">+document.addEventListener("turbolinks:load", () =&gt; {
+</span>   scrollToCurrent(document)
+ 
+   for (const detailsElement of document.querySelectorAll("details")) {
 </code></pre></div></details>
 
               <details
-  id="source/layouts/layout.erb"
+  id="yarn.lock"
   open
   class="file"
 >
   <summary class="file__name">
     <span class="file__toggle file__toggle--close">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/layouts/layout.erb</title>
+        <title>Expand yarn.lock</title>
         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <span class="file__toggle file__toggle--open">
       <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <title>Expand source/layouts/layout.erb</title>
+        <title>Expand yarn.lock</title>
         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
       </svg>
     </span>
 
     <code>
-      source/layouts/layout.erb
+      yarn.lock
     </code>
   </summary>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 399e778..88f84ed 100644
-</span><span class="gd">--- a/source/layouts/layout.erb
-</span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -51,7 +51,7 @@</span>
-     &lt;/header&gt;
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/yarn.lock b/yarn.lock
+index faca719..b2076a7 100644
+</span><span class="gd">--- a/yarn.lock
+</span><span class="gi">+++ b/yarn.lock
+</span><span class="p">@@ -2432,6 +2432,11 @@</span> tty-browserify@0.0.0:
+   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
+   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
  
-     &lt;main class="content"&gt;
-<span class="gd">-      &lt;details class="accordion content__item"&gt;
-</span><span class="gi">+      &lt;details class="accordion content__item" data-controller="commit-history"&gt;
-</span>         &lt;summary class="accordion__summary"&gt;
-           &lt;div class="accordion__closed"&gt;
-             &lt;nav class="
+<span class="gi">+turbolinks@^5.2.0:
++  version "5.2.0"
++  resolved "https://registry.yarnpkg.com/turbolinks/-/turbolinks-5.2.0.tgz#e6877a55ea5c1cb3bb225f0a4ae303d6d32ff77c"
++  integrity sha512-pMiez3tyBo6uRHFNNZoYMmrES/IaGgMhQQM+VFF36keryjb5ms0XkVpmKHkfW/4Vy96qiGW3K9bz0tF5sK9bBw==
++
+</span> typedarray@^0.0.6:
+   version "0.0.6"
+   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 </code></pre></div></details>
 
           </aside>
