@@ -4,6 +4,7 @@ gem 'git'
 gem 'middleman', '~> 4.2'
 gem 'middleman-aria_current'
 gem 'middleman-autoprefixer', '~> 2.7'
+gem 'middleman-inline_svg'
 gem 'middleman-syntax'
 gem 'redcarpet'
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby, :x64_mingw]
