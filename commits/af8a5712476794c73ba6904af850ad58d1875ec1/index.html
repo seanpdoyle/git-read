@@ -5,7 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>BUGFIX: Render "Next" from root</title>
+    <title>Render history of tag, commits to home link
+</title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
   </head>
@@ -21,9 +22,9 @@
         navigation
         
       ">
-<a href="../e81051f1635a4c53ec59cc7fc440954e87707b2c/">              &#8592; Previous
+<a href="../3ddc61cdd2a61986a04204689023746c8c4ab43b/">              &#8592; Previous
 </a>
-<a href="../5e4cdf6f5e8464098bb779945a2980fc2e42e2ee/">              Next &#8594;
+<a href="../2b642a03be4228f639c7194a37e85a96fcab0e2c/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -78,15 +79,15 @@
 "></a>
                 <a href="../3ddc61cdd2a61986a04204689023746c8c4ab43b/" class="commit-node commit-node--collapsed" title="Integrate with GitHub Actions
 "></a>
-                <a href="../e81051f1635a4c53ec59cc7fc440954e87707b2c/" class="commit-node commit-node--collapsed" title="Render history of tag, commits to home link"></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="BUGFIX: Render &quot;Next&quot; from root" aria-current="page"></a>
-                <a href="../5e4cdf6f5e8464098bb779945a2980fc2e42e2ee/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
+                <a href="./" class="commit-node commit-node--collapsed" title="Render history of tag, commits to home link
+" aria-current="page"></a>
+                <a href="../2b642a03be4228f639c7194a37e85a96fcab0e2c/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
 "></a>
-                <a href="../9f9245886f467c7800083e32d301ea3b09fbe715/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
+                <a href="../8b0b6b190c067992d4de4f11e7179b401689de62/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
 "></a>
-                <a href="../9699d9dda4c06c6ff608e866808d731b3f0ef2c0/" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
+                <a href="../8049465e509a384dcfa2c7f2d10139de805c7419/" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
 "></a>
-                <a href="../bcf4e062269cc77b001fdcf8db7a850e48c936c8/" class="commit-node commit-node--collapsed" title="Navigate with Turbolinks
+                <a href="../14913f04163e7ea099ed26a918f7c1f587d2c58b/" class="commit-node commit-node--collapsed" title="Navigate with Turbolinks
 "></a>
             </nav>
 
@@ -174,17 +175,15 @@
 
 </a><a href="../3ddc61cdd2a61986a04204689023746c8c4ab43b/" class="commit-node commit-node--full">              <p>Integrate with GitHub Actions</p>
 
-</a><a href="../e81051f1635a4c53ec59cc7fc440954e87707b2c/" class="commit-node commit-node--full">              <p>Render history of tag, commits to home link</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Render history of tag, commits to home link</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>BUGFIX: Render &quot;Next&quot; from root</p>
+</a><a href="../2b642a03be4228f639c7194a37e85a96fcab0e2c/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
 
-</a><a href="../5e4cdf6f5e8464098bb779945a2980fc2e42e2ee/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
+</a><a href="../8b0b6b190c067992d4de4f11e7179b401689de62/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
 
-</a><a href="../9f9245886f467c7800083e32d301ea3b09fbe715/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+</a><a href="../8049465e509a384dcfa2c7f2d10139de805c7419/" class="commit-node commit-node--full">              <p>Scroll current Commit into view</p>
 
-</a><a href="../9699d9dda4c06c6ff608e866808d731b3f0ef2c0/" class="commit-node commit-node--full">              <p>Scroll current Commit into view</p>
-
-</a><a href="../bcf4e062269cc77b001fdcf8db7a850e48c936c8/" class="commit-node commit-node--full">              <p>Navigate with Turbolinks</p>
+</a><a href="../14913f04163e7ea099ed26a918f7c1f587d2c58b/" class="commit-node commit-node--full">              <p>Navigate with Turbolinks</p>
 
 </a>        </nav>
       </details>
@@ -197,11 +196,144 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="bugfix-render-next-from-root">BUGFIX: Render &ldquo;Next&rdquo; from root</h1>
+          <h1 id="render-history-of-tag-commits-to-home-link">Render history of tag, commits to home link</h1>
+
+<p>BUGFIX: Render &ldquo;Next&rdquo; from root</p>
 
         </section>
 
           <aside class="commit commit--diff commit--long-content">
+              <details
+  id="config.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand config.rb</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand config.rb</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      config.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index b1d7a32..8438751 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -46,7 +46,7 @@</span> repository = Git.open(repository_directory)
+ 
+ locals = {
+   history: {
+<span class="gd">-    root: repository_directory.basename,
+</span><span class="gi">+    name: repository_directory.basename,
+</span>     commits: repository.log(nil).reverse_each.map do |commit|
+       Commit.new(
+         commit: commit,
+<span class="p">@@ -78,13 +78,35 @@</span> repository.tags.each do |tag|
+           title: commit.subject,
+         },
+         history: {
+<span class="gd">-          root: repository_directory.basename,
+</span>           commits: commits,
+<span class="gi">+          name: repository_directory.basename,
++          root: tag,
+</span>         }
+       ),
+       ignore: true,
+     )
+   end
+<span class="gi">+
++  tagged_readme = repository.show("#{tag.name}:README.md")
++  proxy(
++    "/tags/#{tag.name}/index.html",
++    "README.html",
++    locals: locals.merge(
++      commit: repository.object(tag.name),
++      contents: tagged_readme,
++      page: {
++        title: tagged_readme.lines.first,
++      },
++      history: {
++        commits: commits,
++        name: repository_directory.basename,
++        root: tag,
++      },
++      out_of_date: true,
++      render_diffs: false,
++    ),
++    ignore: true,
++  )
+</span> end
+ 
+ latest_readme = repository.show("HEAD:README.md")
+</code></pre></div></details>
+
+              <details
+  id="helpers/url_helpers.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand helpers/url_helpers.rb</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand helpers/url_helpers.rb</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      helpers/url_helpers.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/helpers/url_helpers.rb b/helpers/url_helpers.rb
+index b375b35..78c1e39 100644
+</span><span class="gd">--- a/helpers/url_helpers.rb
+</span><span class="gi">+++ b/helpers/url_helpers.rb
+</span><span class="p">@@ -3,7 +3,20 @@</span> module UrlHelpers
+     "/commits/#{commit.sha}/index.html"
+   end
+ 
+<span class="gd">-  def root_path
+-    "/index.html"
+</span><span class="gi">+  def tag_path(tag)
++    case tag
++    when String
++      "/tags/#{tag}/index.html"
++    else
++      "/tags/#{tag.name}/index.html"
++    end
++  end
++
++  def root_path(commit = nil)
++    if commit.respond_to? :name
++      tag_path(commit)
++    else
++      "/index.html"
++    end
+</span>   end
+ end
+</code></pre></div></details>
+
               <details
   id="source/layouts/layout.erb"
   open
@@ -228,15 +360,17 @@
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 0c51fe2..399e778 100644
+index e10fa96..399e778 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -13,7 +13,7 @@</span>
+</span><span class="p">@@ -12,8 +12,8 @@</span>
+   &lt;body class="page"&gt;
      &lt;header class="header"&gt;
        &lt;h1 class="header__name"&gt;
-         &lt;% current_link_to root_path(history[:root]) do %&gt;
-<span class="gd">-          &lt;%= escape_html(history[:root]) %&gt;
-</span><span class="gi">+          &lt;%= escape_html(history[:name]) %&gt;
+<span class="gd">-        &lt;% current_link_to root_path do %&gt;
+-          &lt;%= escape_html(history[:root]) %&gt;
+</span><span class="gi">+        &lt;% current_link_to root_path(history[:root]) do %&gt;
++          &lt;%= escape_html(history[:name]) %&gt;
 </span>         &lt;% end %&gt;
        &lt;/h1&gt;
  
@@ -277,6 +411,82 @@ index 0c51fe2..399e778 100644
 </span>           &lt;% end %&gt;
          &lt;% end %&gt;
        &lt;/nav&gt;
+</code></pre></div></details>
+
+              <details
+  id="test/system/visitor_views_a_stale_commit_test.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/system/visitor_views_a_stale_commit_test.rb</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand test/system/visitor_views_a_stale_commit_test.rb</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      test/system/visitor_views_a_stale_commit_test.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_a_stale_commit_test.rb b/test/system/visitor_views_a_stale_commit_test.rb
+index d46d293..c049b88 100644
+</span><span class="gd">--- a/test/system/visitor_views_a_stale_commit_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_a_stale_commit_test.rb
+</span><span class="p">@@ -21,6 +21,44 @@</span> class VisitorViewsAStaleCommitTest &lt; ApplicationSystemTestCase
+     end
+   end
+ 
+<span class="gi">+  test "visitor views stale README" do
++    stage_file("README.md", "Ignore me ")
++    commit("Initial commit")
++    branch_commit_sha = switch_branch("my-branch") do
++      stage_file("README.md", "# Tagged README")
++      commit("Hello from the branch")
++      tag_head_commit("my-tag")
++    end
++
++    with_git_repository do
++      visit tag_path("my-tag")
++      expand_history
++
++      assert_text "You're viewing an out-of-date version of the project."
++      assert_selector "h1", text: "Tagged README"
++    end
++  end
++
++  test "visitor navigates to the stale root" do
++    stage_file("README.md", "README contents from master branch")
++    commit("Initial commit")
++    branch_commit_sha = switch_branch("my-branch") do
++      stage_file("file.txt", "Ignore me")
++      commit("Hello from the branch")
++      tag_head_commit("my-tag")
++    end
++
++    with_git_repository do |directory|
++      visit commit_path(branch_commit_sha)
++      click_on directory.basename
++      expand_history
++
++      assert_text "You're viewing an out-of-date version of the project."
++      assert_text "README contents from master branch"
++      assert_selector "a", text: "Hello from the branch"
++    end
++  end
++
+</span>   test "visitor views a does not see stale commit from master" do
+     stage_file("README.md", "Ignore me")
+     commit("Hello from master")
 </code></pre></div></details>
 
               <details
