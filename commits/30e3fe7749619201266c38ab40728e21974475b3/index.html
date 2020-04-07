@@ -24,7 +24,7 @@
       ">
 <a href="../0c9d43e19e25799f3fac8ac1cc4aa15be66b686f/">              &#8592; Previous
 </a>
-<a href="../4d96195b7423d4d5fec63b37171fe0892ee0a296/">              Next &#8594;
+<a href="../e3a0178e5da496504b4ab3b62f7e7a719f654b8e/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -83,12 +83,11 @@
                 <a href="../0c9d43e19e25799f3fac8ac1cc4aa15be66b686f/" class="commit-node commit-node--collapsed" title="BUGFIX: Render &quot;Next&quot; from root"></a>
                 <a href="./" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
 " aria-current="page"></a>
-                <a href="../4d96195b7423d4d5fec63b37171fe0892ee0a296/" class="commit-node commit-node--collapsed" title="configure Actions to integrate with webpack"></a>
-                <a href="../d9f589e8db456da9a502119d8cb98a0bdbaf9ab2/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation"></a>
-                <a href="../e3f4f873fe6845343f80fa8ef5d0a22e70c2cc02/" class="commit-node commit-node--collapsed" title="Scroll to current commit during navigation
+                <a href="../e3a0178e5da496504b4ab3b62f7e7a719f654b8e/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation"></a>
+                <a href="../6f1746cc8dfb95b6ef48a46637c6bdf9d8cb7be5/" class="commit-node commit-node--collapsed" title="Scroll to current commit during navigation
 "></a>
-                <a href="../17eb1d44845686104410df7309f2ae258c69540f/" class="commit-node commit-node--collapsed" title="scroll to current when expanding history"></a>
-                <a href="../f7512f73e09581e69bb46c053846103953f359a2/" class="commit-node commit-node--collapsed" title="polyfill once we have JS"></a>
+                <a href="../a82964fdb984472044534085f90dcdb583a38568/" class="commit-node commit-node--collapsed" title="scroll to current when expanding history"></a>
+                <a href="../d73b59b45c374432cf3763f55609c6bcba29714f/" class="commit-node commit-node--collapsed" title="polyfill once we have JS"></a>
             </nav>
 
             <div class="accordion__toggle">
@@ -181,15 +180,13 @@
 
 </a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Add webpack for building JavaScript</p>
 
-</a><a href="../4d96195b7423d4d5fec63b37171fe0892ee0a296/" class="commit-node commit-node--full">              <p>configure Actions to integrate with webpack</p>
+</a><a href="../e3a0178e5da496504b4ab3b62f7e7a719f654b8e/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
 
-</a><a href="../d9f589e8db456da9a502119d8cb98a0bdbaf9ab2/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
+</a><a href="../6f1746cc8dfb95b6ef48a46637c6bdf9d8cb7be5/" class="commit-node commit-node--full">              <p>Scroll to current commit during navigation</p>
 
-</a><a href="../e3f4f873fe6845343f80fa8ef5d0a22e70c2cc02/" class="commit-node commit-node--full">              <p>Scroll to current commit during navigation</p>
+</a><a href="../a82964fdb984472044534085f90dcdb583a38568/" class="commit-node commit-node--full">              <p>scroll to current when expanding history</p>
 
-</a><a href="../17eb1d44845686104410df7309f2ae258c69540f/" class="commit-node commit-node--full">              <p>scroll to current when expanding history</p>
-
-</a><a href="../f7512f73e09581e69bb46c053846103953f359a2/" class="commit-node commit-node--full">              <p>polyfill once we have JS</p>
+</a><a href="../d73b59b45c374432cf3763f55609c6bcba29714f/" class="commit-node commit-node--full">              <p>polyfill once we have JS</p>
 
 </a>        </nav>
       </details>
@@ -208,17 +205,69 @@
 to Middleman</em></a> article.</p>
 
 <p>This commit introduces the <a href="#webpack.config.js"><code>webpack.config.js</code></a>
-file, declaring both our application&rsquo;s entry point, along with the
-<code>tmp/dist</code> directory it will output assets to.</p>
+file, declaring our application&rsquo;s entry point as the <code>site</code> key, along
+with the <code>tmp/dist</code> directory as the destination to output assets to.</p>
 
 <p>The <code>tmp/dist</code> directory declared in
 <a href="#webpack.config.js"><code>webpack.config.js</code></a> is echoed by the
 <code>[config.rb</code>]<a href="#config.rb">config.rb</a> file&rsquo;s declaration of the the
 <code>external_pipeline</code> activation call&rsquo;s <code>source</code> property.</p>
 
+<p>To account for the new dependency on JavaScript dependencies being
+installed through <a href="https://yarnpkg.com/">Yarn</a>, extend the
+<a href="#script/install"><code>script/install</code></a> file to execute <a href="https://yarnpkg.com/cli/install"><code>yarn
+install</code></a>.</p>
+
+<p>Finally, add a <a href="https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions">GitHub Actions</a>-level step, depending on the
+<a href="https://github.com/actions/setup-node/tree/v1#usage"><code>actions/setup-node</code></a> project to install and configure a
+version of <a href="https://nodejs.dev/">NodeJS</a> so that Actions are executed with the appropriate
+tools available to them.</p>
+
         </section>
 
           <aside class="commit commit--diff commit--long-content">
+              <details
+  id=".github/workflows/git-read.yml"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand .github/workflows/git-read.yml</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand .github/workflows/git-read.yml</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      .github/workflows/git-read.yml
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+index 6f8a13e..5399088 100644
+</span><span class="gd">--- a/.github/workflows/git-read.yml
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -24,6 +24,10 @@</span> jobs:
+           ruby-version: "2.6.5"
+           run: bundle config path vendor/bundle
+ 
+<span class="gi">+      - uses: actions/setup-node@v1
++        with:
++          node-version: '10.x'
++
+</span>       - name: Build documentation from Git History
+         run: |
+           script/install
+</code></pre></div></details>
+
               <details
   id=".gitignore"
   open
@@ -346,6 +395,43 @@ index 8438751..a55c46f 100644
 +    "webpack-cli": "^3.3.11"
 +  }
 +}
+</span></code></pre></div></details>
+
+              <details
+  id="script/install"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <span class="file__toggle file__toggle--close">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand script/install</title>
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <span class="file__toggle file__toggle--open">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <title>Expand script/install</title>
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+      </svg>
+    </span>
+
+    <code>
+      script/install
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/script/install b/script/install
+index 1b9a980..edf9a8f 100755
+</span><span class="gd">--- a/script/install
+</span><span class="gi">+++ b/script/install
+</span><span class="p">@@ -12,3 +12,5 @@</span> bundle check || bundle install \
+   --jobs 4 \
+   --retry 3 \
+   --gemfile $GEMFILE
+<span class="gi">+
++yarn install
 </span></code></pre></div></details>
 
               <details
