@@ -1,8 +1,6 @@
 <details id="<%= name %>" <%= ("open" if expanded) %> class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
-    <svg class="h-8 mr-4 inline transform rotate-90 open:-rotate-90" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/>
-    </svg>
+    <%= inline_svg("caret-right.svg", class: "h-8 mr-4 inline transform rotate-90 open:-rotate-90") %>
 
     <code class="break-all"><%= name %></code>
   </summary>

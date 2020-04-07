@@ -11,6 +11,11 @@ activate :external_pipeline,
          command: build? ?  "yarn build" : "yarn start",
          source: "tmp/dist",
          latency: 1
+activate :inline_svg do |config|
+  config.defaults = {
+    role: "img",
+  }
+end
 activate :syntax
 
 set :markdown_engine, :redcarpet
