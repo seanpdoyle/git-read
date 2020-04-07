@@ -5,7 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>polyfill details element</title>
+    <title>Add `<details>` element polyfill
+</title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
   </head>
@@ -23,7 +24,7 @@
       ">
 <a href="../5e4cdf6f5e8464098bb779945a2980fc2e42e2ee/">              &#8592; Previous
 </a>
-<a href="../bcaf735138ce70d45034a02af2da63d270598c89/">              Next &#8594;
+<a href="../eb749fb6f1359929f1d34f12cfa669c949521684/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -82,10 +83,11 @@
                 <a href="../5fdcee94fbae7f0c677deb5ec922f1c45c24f1d4/" class="commit-node commit-node--collapsed" title="BUGFIX: Render &quot;Next&quot; from root"></a>
                 <a href="../5e4cdf6f5e8464098bb779945a2980fc2e42e2ee/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="polyfill details element" aria-current="page"></a>
-                <a href="../bcaf735138ce70d45034a02af2da63d270598c89/" class="commit-node commit-node--collapsed" title="scrollIntoView to current
+                <a href="./" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
+" aria-current="page"></a>
+                <a href="../eb749fb6f1359929f1d34f12cfa669c949521684/" class="commit-node commit-node--collapsed" title="Scroll Current Commit into view
 "></a>
-                <a href="../5dffa25af3e19b63b4d50d23328bde1f420d46e8/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
+                <a href="../9b5db0075d454b5b1485684502ccb117406af51c/" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
 "></a>
             </nav>
 
@@ -179,11 +181,11 @@
 
 </a><a href="../5e4cdf6f5e8464098bb779945a2980fc2e42e2ee/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>polyfill details element</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
 
-</a><a href="../bcaf735138ce70d45034a02af2da63d270598c89/" class="commit-node commit-node--full">              <p>scrollIntoView to current</p>
+</a><a href="../eb749fb6f1359929f1d34f12cfa669c949521684/" class="commit-node commit-node--full">              <p>Scroll Current Commit into view</p>
 
-</a><a href="../5dffa25af3e19b63b4d50d23328bde1f420d46e8/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
+</a><a href="../9b5db0075d454b5b1485684502ccb117406af51c/" class="commit-node commit-node--full">              <p>add turbolinks for faster navigation</p>
 
 </a>        </nav>
       </details>
@@ -196,7 +198,18 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="polyfill-details-element">polyfill details element</h1>
+          <h1 id="add-details-element-polyfill">Add <code>&lt;details&gt;</code> element polyfill</h1>
+
+<p>While support for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> that powers this
+application&rsquo;s commit history browser is widespread, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Browser_compatibility">it is not supported
+by all available browsers</a>.</p>
+
+<p>Now that <a href="https://docs.npmjs.com/about-npm/">NPM packages</a> are available to the application&rsquo;s pages,
+we can <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfill</a> missing support.</p>
+
+<p>There is a <a href="https://github.com/javan/details-element-polyfill/tree/2.4.0#html-details-element-polyfill">third-party, community sourced
+polyfill</a> for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code>
+element</a> that this commit adds a dependency on.</p>
 
         </section>
 
