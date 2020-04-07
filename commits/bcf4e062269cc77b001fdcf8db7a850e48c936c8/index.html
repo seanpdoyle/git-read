@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>add turbolinks for faster navigation
+    <title>Navigate with Turbolinks
 </title>
     <link href="../../stylesheets/site.css" rel="stylesheet" />
     <script src="../../javascripts/site.js"></script>
@@ -86,7 +86,7 @@
 "></a>
                 <a href="../9699d9dda4c06c6ff608e866808d731b3f0ef2c0/" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
 "></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="add turbolinks for faster navigation
+                <a href="./" class="commit-node commit-node--collapsed" title="Navigate with Turbolinks
 " aria-current="page"></a>
             </nav>
 
@@ -184,7 +184,7 @@
 
 </a><a href="../9699d9dda4c06c6ff608e866808d731b3f0ef2c0/" class="commit-node commit-node--full">              <p>Scroll current Commit into view</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>add turbolinks for faster navigation</p>
+</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Navigate with Turbolinks</p>
 
 </a>        </nav>
       </details>
@@ -197,7 +197,30 @@
       ">
         <section class="commit commit--message">
 
-          <h1 id="add-turbolinks-for-faster-navigation">add turbolinks for faster navigation</h1>
+          <h1 id="navigate-with-turbolinks">Navigate with Turbolinks</h1>
+
+<p>The HTML pages output by <code>git-read</code> commands are intended to be served
+directly, through static site servers like <a href="https://guides.github.com/features/pages/">GitHub pages</a>.</p>
+
+<p>Despite the absence of a server-side component, the application&rsquo;s
+navigation could still stand to benefit from the value that
+<a href="https://github.com/turbolinks/turbolinks/tree/v5.2.0#observing-navigation-events">Turbolinks</a> proposes:</p>
+
+<blockquote>
+<p><strong>Turbolinks® makes navigating your web application faster</strong>. Get the
+performance benefits of a single-page application without the added
+complexity of a client-side JavaScript framework. Use HTML to render
+your views on the server side and link to pages as usual. When you
+follow a link, Turbolinks automatically fetches the page, swaps in its
+<code>&lt;body&gt;</code>, and merges its <code>&lt;head&gt;</code>, all without incurring the cost of a
+full page load.</p>
+</blockquote>
+
+<p>To integrate with <a href="https://github.com/turbolinks/turbolinks/tree/v5.2.0#observing-navigation-events">Turbolinks</a>, modify existing event listeners that
+are firing callbacks for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event"><code>DOMContentLoaded</code>
+event</a> declared on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">page&rsquo;s <code>document</code></a>,
+replacing them with event listeners on the <a href="https://github.com/turbolinks/turbolinks/tree/v5.2.0#observing-navigation-events"><code>turbolinks:load</code>
+event</a>.</p>
 
         </section>
 
