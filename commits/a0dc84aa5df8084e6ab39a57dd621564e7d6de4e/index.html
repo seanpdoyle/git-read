@@ -24,7 +24,7 @@
       ">
 <a href="../cc4c6f5bf9fe63f34491da0c1852a9a303208eec/">              &#8592; Previous
 </a>
-<a href="../15f6d518f71eacdf7337a928166795e124763cb1/">              Next &#8594;
+<a href="../9aaa9d06bedc43a09f2f34c14f5e2514d9a7dc9f/">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -81,15 +81,15 @@
 "></a>
                 <a href="./" class="commit-node commit-node--collapsed" title="Render history of tag, commits to home link
 " aria-current="page"></a>
-                <a href="../15f6d518f71eacdf7337a928166795e124763cb1/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
+                <a href="../9aaa9d06bedc43a09f2f34c14f5e2514d9a7dc9f/" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
 "></a>
-                <a href="../faf6382007e932a16e16e0b842390e7f9d5ee958/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
+                <a href="../652987fdff9fe2d1eab66f5caf6237a8045ada6e/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
 "></a>
-                <a href="../08a9a50eff893327e591067e4f52493ab69d104d/" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
+                <a href="../69a285e2036c2f0ee76e253387bcd55043c17a59/" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
 "></a>
-                <a href="../6380fbc4db452535fff6717cd93b7c6c19d2d083/" class="commit-node commit-node--collapsed" title="Navigate with Turbolinks
+                <a href="../44689afb54a6c90fd7bf5281b404e395570b45f9/" class="commit-node commit-node--collapsed" title="Navigate with Turbolinks
 "></a>
-                <a href="../74a2c48ba262eac69c1991acd2c651683884d96c/" class="commit-node commit-node--collapsed" title="Integrate with GitHub Actions
+                <a href="../98e3f0d0a406f47b56ddf3f9f86fecbfb9f4f5b0/" class="commit-node commit-node--collapsed" title="Integrate with GitHub Actions
 "></a>
             </nav>
 
@@ -171,15 +171,15 @@
 
 </a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Render history of tag, commits to home link</p>
 
-</a><a href="../15f6d518f71eacdf7337a928166795e124763cb1/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
+</a><a href="../9aaa9d06bedc43a09f2f34c14f5e2514d9a7dc9f/" class="commit-node commit-node--full">              <p>Add webpack for building JavaScript</p>
 
-</a><a href="../faf6382007e932a16e16e0b842390e7f9d5ee958/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+</a><a href="../652987fdff9fe2d1eab66f5caf6237a8045ada6e/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
 
-</a><a href="../08a9a50eff893327e591067e4f52493ab69d104d/" class="commit-node commit-node--full">              <p>Scroll current Commit into view</p>
+</a><a href="../69a285e2036c2f0ee76e253387bcd55043c17a59/" class="commit-node commit-node--full">              <p>Scroll current Commit into view</p>
 
-</a><a href="../6380fbc4db452535fff6717cd93b7c6c19d2d083/" class="commit-node commit-node--full">              <p>Navigate with Turbolinks</p>
+</a><a href="../44689afb54a6c90fd7bf5281b404e395570b45f9/" class="commit-node commit-node--full">              <p>Navigate with Turbolinks</p>
 
-</a><a href="../74a2c48ba262eac69c1991acd2c651683884d96c/" class="commit-node commit-node--full">              <p>Integrate with GitHub Actions</p>
+</a><a href="../98e3f0d0a406f47b56ddf3f9f86fecbfb9f4f5b0/" class="commit-node commit-node--full">              <p>Integrate with GitHub Actions</p>
 
 </a>        </nav>
       </details>
@@ -201,7 +201,7 @@
           <aside class="commit commit--diff commit--long-content">
               <details
   id="config.rb"
-  open
+  
   class="file"
 >
   <summary class="file__name">
@@ -221,55 +221,136 @@
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-index 39c9ba8..0ca9cb9 100644
+index 39c9ba8..a97e2fc 100644
 </span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
-</span><span class="p">@@ -45,7 +45,7 @@</span> repository = Git.open(repository_directory)
+</span><span class="p">@@ -1,4 +1,5 @@</span>
+ require "lib/models/commit"
+<span class="gi">+require "lib/models/history"
+</span> 
+ # Activate and configure extensions
+ # https://middlemanapp.com/advanced/configuration/#configuring-extensions
+<span class="p">@@ -43,79 +44,79 @@</span> repository_directory = Pathname(ENV.fetch("GIT_DIR", File.dirname(__FILE__)))
  
- locals = {
-   history: {
-<span class="gd">-    root: repository_directory.basename,
-</span><span class="gi">+    name: repository_directory.basename,
-</span>     commits: repository.log(nil).reverse_each.map do |commit|
-       Commit.new(
-         commit: commit,
-<span class="p">@@ -77,13 +77,35 @@</span> repository.tags.each do |tag|
+ repository = Git.open(repository_directory)
+ 
+<span class="gd">-locals = {
+-  history: {
+-    root: repository_directory.basename,
+-    commits: repository.log(nil).reverse_each.map do |commit|
+-      Commit.new(
+-        commit: commit,
+-        repository: repository,
+-      )
+-    end,
+-  },
+-  out_of_date: false,
+-  render_diffs: true,
+</span><span class="gi">+history = History.new(
++  readme: repository.show("HEAD:README.md"),
+</span>   repository: repository,
+<span class="gd">-}
+</span><span class="gi">+  root: repository,
++)
+</span> 
+ repository.tags.each do |tag|
+<span class="gd">-  commits = tag.log(nil).reverse_each.map do |commit|
+-    Commit.new(
+-      commit: commit,
+-      repository: repository,
+-    )
+-  end
+</span><span class="gi">+  tag_history = History.new(
++    out_of_date: true,
++    readme: repository.show("#{tag.name}:README.md"),
++    repository: repository,
++    root: tag,
++  )
+</span> 
+<span class="gd">-  commits.each do |commit|
+</span><span class="gi">+  tag_history.commits.each do |commit|
+</span>     proxy(
+       "/commits/#{commit.sha}/index.html",
+       "/commits/commit.html",
+<span class="gd">-      locals: locals.merge(
+</span><span class="gi">+      locals: {
+</span>         commit: commit,
+<span class="gd">-        out_of_date: true,
+</span>         page: {
            title: commit.subject,
          },
-         history: {
-<span class="gd">-          root: repository_directory.basename,
-</span>           commits: commits,
-<span class="gi">+          name: repository_directory.basename,
-+          root: tag,
-</span>         }
-       ),
-       ignore: true,
+<span class="gd">-        history: {
+-          root: repository_directory.basename,
+-          commits: commits,
+-        }
+-      ),
+</span><span class="gi">+        history: tag_history,
++        render_diffs: true,
++      },
+</span>       ignore: true,
      )
    end
 <span class="gi">+
-+  tagged_readme = repository.show("#{tag.name}:README.md")
 +  proxy(
 +    "/tags/#{tag.name}/index.html",
 +    "README.html",
-+    locals: locals.merge(
++    locals: {
 +      commit: repository.object(tag.name),
-+      contents: tagged_readme,
++      contents: tag_history.readme,
 +      page: {
-+        title: tagged_readme.lines.first,
++        title: tag_history.readme.lines.first,
 +      },
-+      history: {
-+        commits: commits,
-+        name: repository_directory.basename,
-+        root: tag,
-+      },
-+      out_of_date: true,
++      history: tag_history,
 +      render_diffs: false,
-+    ),
++    },
 +    ignore: true,
 +  )
 </span> end
  
- latest_readme = repository.show("HEAD:README.md")
+<span class="gd">-latest_readme = repository.show("HEAD:README.md")
+</span> proxy(
+   "index.html",
+   "README.html",
+<span class="gd">-  locals: locals.merge(
+</span><span class="gi">+  locals: {
+</span>     commit: repository.object("HEAD"),
+<span class="gd">-    contents: latest_readme,
+</span><span class="gi">+    contents: history.readme,
+</span>     page: {
+<span class="gd">-      title: latest_readme.lines.first,
+</span><span class="gi">+      title: history.readme.lines.first,
+</span>     },
+<span class="gi">+    history: history,
+</span>     render_diffs: false,
+<span class="gd">-  ),
+</span><span class="gi">+  },
+</span>   ignore: true,
+ )
+ 
+<span class="gd">-locals.dig(:history, :commits).each do |commit|
+-  commit = Commit.new(
+-    commit: commit,
+-    repository: repository,
+-  )
+-
+</span><span class="gi">+history.commits.each do |commit|
+</span>   proxy(
+     "/commits/#{commit.sha}/index.html",
+     "/commits/commit.html",
+<span class="gd">-    locals: locals.merge(
+</span><span class="gi">+    locals: {
+</span>       commit: commit,
+       page: {
+         title: commit.subject,
+<span class="gd">-      }
+-    ),
+</span><span class="gi">+      },
++      history: history,
++      render_diffs: true,
++    },
+</span>     ignore: true,
+   )
+ end
 </code></pre></div></details>
 
               <details
@@ -323,6 +404,62 @@ index b375b35..78c1e39 100644
 </code></pre></div></details>
 
               <details
+  id="lib/models/history.rb"
+  open
+  class="file"
+>
+  <summary class="file__name">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse lib/models/history.rb</title>
+  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand lib/models/history.rb</title>
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code>
+      lib/models/history.rb
+    </code>
+  </summary>
+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/history.rb b/lib/models/history.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..edfb4b1
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/lib/models/history.rb
+</span><span class="p">@@ -0,0 +1,27 @@</span>
+<span class="gi">+class History
++  attr_reader :readme, :repository, :root
++
++  def initialize(readme:, repository:, root:, out_of_date: false)
++    @readme = readme
++    @root = root
++    @repository = repository
++    @out_of_date = out_of_date
++  end
++
++  def out_of_date?
++    @out_of_date
++  end
++
++  def name
++    File.basename(repository.dir.path)
++  end
++
++  def commits
++    root.log(nil).reverse_each.map do |commit|
++      Commit.new(
++        commit: commit,
++        repository: repository,
++      )
++    end
++  end
++end
+</span></code></pre></div></details>
+
+              <details
   id="source/layouts/layout.erb"
   open
   class="file"
@@ -344,21 +481,24 @@ index b375b35..78c1e39 100644
   </summary>
 
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
-index 9629fbd..92e62a4 100644
+index 9629fbd..88b2c26 100644
 </span><span class="gd">--- a/source/layouts/layout.erb
 </span><span class="gi">+++ b/source/layouts/layout.erb
-</span><span class="p">@@ -12,8 +12,8 @@</span>
+</span><span class="p">@@ -12,33 +12,39 @@</span>
    &lt;body class="page"&gt;
      &lt;header class="header"&gt;
        &lt;h1 class="header__name"&gt;
 <span class="gd">-        &lt;% current_link_to root_path do %&gt;
 -          &lt;%= escape_html(history[:root]) %&gt;
-</span><span class="gi">+        &lt;% current_link_to root_path(history[:root]) do %&gt;
-+          &lt;%= escape_html(history[:name]) %&gt;
+</span><span class="gi">+        &lt;% current_link_to root_path(history.root) do %&gt;
++          &lt;%= escape_html(history.name) %&gt;
 </span>         &lt;% end %&gt;
        &lt;/h1&gt;
  
-<span class="p">@@ -23,22 +23,28 @@</span>
+<span class="gd">-      &lt;% parent, _, child = adjacent_commits(history[:commits], commit: commit) %&gt;
+</span><span class="gi">+      &lt;% parent, _, child = adjacent_commits(history.commits, commit: commit) %&gt;
+</span> 
+       &lt;nav class="
          header__navigation
          navigation
          &lt;%= (
@@ -374,7 +514,7 @@ index 9629fbd..92e62a4 100644
 -          &lt;% current_link_to commit_path(parent) do %&gt;
 -            &amp;#8592; Previous
 </span><span class="gi">+        &lt;% if defined?(contents) %&gt;
-+          &lt;% link_to commit_path(history[:commits].first) do %&gt;
++          &lt;% link_to commit_path(history.commits.first) do %&gt;
 +            Get Started &amp;#8594;
 +          &lt;% end %&gt;
 +        &lt;% else %&gt;
@@ -395,6 +535,33 @@ index 9629fbd..92e62a4 100644
 </span>           &lt;% end %&gt;
          &lt;% end %&gt;
        &lt;/nav&gt;
+<span class="p">@@ -53,7 +59,7 @@</span>
+               u-db-overflow-y--auto
+               u-mb-overflow-x--scroll
+             "&gt;
+<span class="gd">-              &lt;% history[:commits].each do |commit| %&gt;
+</span><span class="gi">+              &lt;% history.commits.each do |commit| %&gt;
+</span>                 &lt;%= current_link_to(
+                   "",
+                   commit_path(commit),
+<span class="p">@@ -101,7 +107,7 @@</span>
+           u-db-overflow-y--auto
+           u-mb-overflow-x--scroll
+         "&gt;
+<span class="gd">-          &lt;% history[:commits].each do |commit| %&gt;
+</span><span class="gi">+          &lt;% history.commits.each do |commit| %&gt;
+</span>             &lt;% current_link_to(
+               commit_path(commit),
+               class: "commit-node commit-node--full",
+<span class="p">@@ -119,7 +125,7 @@</span>
+         content__item--grow
+       "&gt;
+         &lt;section class="commit commit--message"&gt;
+<span class="gd">-          &lt;% if out_of_date %&gt;
+</span><span class="gi">+          &lt;% if history.out_of_date? %&gt;
+</span>             &lt;aside class="banner"&gt;
+               &lt;mark&gt;
+                 You're viewing an out-of-date version of the project.
 </code></pre></div></details>
 
               <details
