@@ -1,1 +1,1 @@
-console.log("Hello, from webpack")
+import "tailwindcss/tailwind.css"
