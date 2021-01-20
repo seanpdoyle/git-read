@@ -51,13 +51,13 @@
         <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
           <% history.commits.each do |commit| %>
             <% current_link_to(commit_path(commit)) do %>
-              <%= markdown(commit.message.lines.first) %>
+              <%= markdown(commit.subject) %>
             <% end %>
           <% end %>
         </nav>
       </details>
 
-      <article class="flex-grow justify-center p-4 md:flex md:h-screen-fit md:p-8 md:overflow-y-auto">
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto <%= "lg:w-7/12" if render_diffs %>">
         <section class="prose prose-lg md:prose-xl">
           <% if history.out_of_date? %>
             <aside class="text-center p-5">
@@ -74,6 +74,14 @@
           <%= yield %>
         </section>
       </article>
+
+      <% if render_diffs %>
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+          <% commit.diff_files.each do |diff_file| %>
+            <%= partial("commits/file", locals: diff_file) %>
+          <% end %>
+        </aside>
+      <% end %>
     </main>
   </body>
 </html>
