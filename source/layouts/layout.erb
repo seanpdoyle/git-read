@@ -7,6 +7,7 @@
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= page[:title] || current_page.data.title %></title>
     <%= javascript_include_tag "site" %>
+    <%= stylesheet_link_tag "syntax" %>
   </head>
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
