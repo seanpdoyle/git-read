@@ -6,6 +6,11 @@ summary::-webkit-details-marker {
   @apply hidden;
 }
 
+[open].open\:inline,
+[open] .open\:inline {
+  @apply inline;
+}
+
 [open].open\:hidden,
 [open] .open\:hidden {
   @apply hidden;

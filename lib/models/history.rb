@@ -17,7 +17,7 @@ class History
 
   def commits
     root.log(nil).reverse_each.map do |commit|
-      Commit.new(commit: commit)
+      Commit.new(commit: commit, repository: repository)
     end
   end
 

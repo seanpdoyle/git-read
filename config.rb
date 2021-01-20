@@ -60,6 +60,7 @@ repository.tags.each do |tag|
         page: {
           title: commit.subject,
         },
+        render_diffs: true,
       },
       ignore: true,
     )
@@ -75,6 +76,7 @@ repository.tags.each do |tag|
       page: {
         title: stale_history.readme.lines.first,
       },
+      render_diffs: false,
     },
     ignore: true,
   )
@@ -96,7 +98,8 @@ history.commits.each do |commit|
       commit: commit,
       page: {
         title: commit.subject,
-      }
+      },
+      render_diffs: true,
     },
     ignore: true,
   )
@@ -112,6 +115,7 @@ proxy(
     page: {
       title: history.readme.lines.first,
     },
+    render_diffs: false,
   },
   ignore: true,
 )
