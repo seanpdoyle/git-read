@@ -81,6 +81,9 @@ GEM
       servolux
       tilt (~> 2.0.9)
       uglifier (~> 3.0)
+    middleman-syntax (3.2.0)
+      middleman-core (>= 3.2)
+      rouge (~> 3.2)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
@@ -110,6 +113,7 @@ GEM
     rchardet (1.8.0)
     redcarpet (3.5.0)
     regexp_parser (1.7.0)
+    rouge (3.26.0)
     sassc (2.2.1)
       ffi (~> 1.9)
     sassc (2.2.1-x64-mingw32)
@@ -145,6 +149,7 @@ DEPENDENCIES
   git
   middleman (~> 4.2)
   middleman-aria_current
+  middleman-syntax
   minitest-around
   redcarpet
   tzinfo-data
