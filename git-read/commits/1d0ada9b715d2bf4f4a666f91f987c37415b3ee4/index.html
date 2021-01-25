@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Add support for re-writing a project's history</title>
+    <script src="/javascripts/site.js"></script>
+    <link href="/stylesheets/syntax.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="/git-read/tags/v0.0.1/">          git-read
+</a>      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+
+<a href="/git-read/commits/cd81aed41b5b4d59686a14498b8eecfd37153501/">              &#8592; Previous
+</a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+<a href="/git-read/commits/30f633965982817836211760978097b8d0179fd3/">              Next &#8594;
+</a>      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="/git-read/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+
+</a><a href="/git-read/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+
+</a><a href="/git-read/commits/1874624426883ffed07c46686860aeb53a3d1eee/">              <p>Replace Generated Files with Static HTML and CSS</p>
+
+</a><a href="/git-read/commits/fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/">              <p>Exercise the application through a System Test</p>
+
+</a><a href="/git-read/commits/8cec38432ea0f127de4d3229a475f9dbb541d613/">              <p>Introduce Redcarpet Markdown Engine</p>
+
+</a><a href="/git-read/commits/f6656aeaaee85534e9cbe29bec7b1d57fda69af8/">              <p>Generate <code>/index.html</code> dynamically</p>
+
+</a><a href="/git-read/commits/11c6c630ca60e3977a022f0b1009512b7a0f8e80/">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+
+</a><a href="/git-read/commits/f20a636c79ff7c83028608e9df1804378feb7ea2/">              <p>Render the contents of a Commit&#39;s Message</p>
+
+</a><a href="/git-read/commits/10a308f76c4914a39284b8b21b2a83cfcc32431a/">              <p>Navigate to previous commit</p>
+
+</a><a href="/git-read/commits/ad86bb3ef42db28e3e425e650ff5e3579d98e088/">              <p>Navigate to next commit</p>
+
+</a><a href="/git-read/commits/a85d19480552b8ded546e4f99228ea5f95d3ddd8/">              <p>Dynamically determine project title</p>
+
+</a><a href="/git-read/commits/15131b02c6807fc8b18a5809679443fcb4b7c37f/">              <p>Extract <code>UrlHelpers</code></p>
+
+</a><a href="/git-read/commits/1c0dfb0535399cf1b8775a997d41c4d104db3887/">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+
+</a><a href="/git-read/commits/bcbe51be2fe7c9e79df007c2de056c4caa515f65/">              <p>Syntax highlight Markdown fenced code blocks</p>
+
+</a><a href="/git-read/commits/54dda3db29b3cea6d0534fe7d959c4b61617eb5d/">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+
+</a><a href="/git-read/commits/5811e0f19e12228cad2bba4380258622fd4fbf25/">              <p>Add <code>bin/git-read --server</code> flag</p>
+
+</a><a href="/git-read/commits/cd81aed41b5b4d59686a14498b8eecfd37153501/">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+
+</a><a href="/git-read/commits/1d0ada9b715d2bf4f4a666f91f987c37415b3ee4/" aria-current="page">              <p>Add support for re-writing a project&#39;s history</p>
+
+</a><a href="/git-read/commits/30f633965982817836211760978097b8d0179fd3/">              <p>Extract <code>Commit</code> model</p>
+
+</a><a href="/git-read/commits/55bae90277ece29a7bac3d79ce5fe825ab5d1ab7/">              <p>Render how a commit changes the project&#39;s files</p>
+
+</a><a href="/git-read/commits/e40faa75c25412b851d03549131f51d3bc6720ad/">              <p>Extract SVG images</p>
+
+</a><a href="/git-read/commits/747c19f320046bb704f26524dd67d1ee5bf9a06c/">              <p>Render history of tag, commits to home link</p>
+
+</a><a href="/git-read/commits/d60a984134d03c8dda80bd08106aa50d756f2771/">              <p>Add webpack for building JavaScript</p>
+
+</a><a href="/git-read/commits/dc1940b7effce4ea44c0014eff2e317865444e76/">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+
+</a><a href="/git-read/commits/a047c2b8512f5b1465a9ee9b8259c30f40a60bbc/">              <p>Scroll current Commit into view</p>
+
+</a><a href="/git-read/commits/a7ac4f6979148c2cfffd3a927d76402dc9e647d2/">              <p>Navigate with Turbolinks</p>
+
+</a><a href="/git-read/commits/9db5c96654bee1451f3c71f00019de07c243a7ab/">              <p>Integrate with GitHub Actions</p>
+
+</a>        </nav>
+      </details>
+
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+            <aside class="text-center p-5">
+              <mark>
+                You're viewing an out-of-date version of the project.
+
+<a href="/git-read/">                  Read the latest version.
+</a>              </mark>
+            </aside>
+
+          <h1 id="add-support-for-re-writing-a-projects-history">Add support for re-writing a project&rsquo;s history</h1>
+
+<p>If you&rsquo;re consuming this tool and using it to tell the story of your
+project&rsquo;s origins and growth, you might be tempted to become a bit of a
+revisionist historian.</p>
+
+<p>This might come as a shock, but this project was not perfected
+implemented from the start, and is in fact the result of countless
+<a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_changing_multiple"><code>pick</code>, <code>squash</code>, <code>reword</code>, <code>fixup</code>, and <code>drop</code> rebase
+operations</a>.</p>
+
+<p>While this can be harmless for pre-released projects, rewriting history
+once the resulting website is deployed and publicized would result in
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"><code>404</code>s and broken URLs</a>.</p>
+
+<p>To counteract this, <code>git-read</code> will include and compile pages for any
+commits that are <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging"><code>git tag</code>-ed</a>, along with the rest of their
+history.</p>
+
+<p>To denote that a commit is &ldquo;out of date&rdquo;, and is no longer available on
+the main branch, calls to Middleman&rsquo;s <a href="https://middlemanapp.com/advanced/dynamic-pages#defining-proxies"><code>proxy</code></a> have been updated
+to pass in the <code>out_of_date</code> local Boolean to denote whether or not a
+page is built from a tagged commit. When rendering from the main branch
+or the project&rsquo;s <code>README.md</code>, <code>out_of_date</code> is declared as <code>false</code>.</p>
+
+<p>In the case where the main branch and the tagged commit share ancestors,
+the main branch&rsquo;s version will be rendered second, and won&rsquo;t display the
+&ldquo;stale&rdquo; banner.</p>
+
+<h2 id="test-coverage">Test coverage</h2>
+
+<p>To ensure that the new feature is covered by tests, this commit extends
+the new <a href="#test/git_helpers.rb"><code>GitHelpers</code> module</a> to enable tests to
+switch <code>git</code> branches (via <code>#switch_branch</code>), and to add tagged commits
+(via <code>#add_tag</code>).</p>
+
+        </section>
+      </article>
+
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id="README.md" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">README.md</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+index 7762285..111c8db 100644
+</span><span class="gd">--- a/README.md
+</span><span class="gi">+++ b/README.md
+</span><span class="p">@@ -42,3 +42,27 @@</span> OPTIONS
+ ```
+ 
+ [subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
+<span class="gi">+
++Revising a Project's History
++---
++
++If you're consuming this tool and using it to tell the story of your
++project's origins and growth, you might be tempted to become a bit of a
++revisionist historian.
++
++This might come as a shock, but this project was not perfected
++implemented from the start, and is in fact the result of countless
++[`pick`, `squash`, `reword`, `fixup`, and `drop` rebase
++operations][rebase].
++
++While this can be harmless for pre-released projects, rewriting history
++once the resulting website is deployed and publicized would result in
++[`404`s and broken URLs][404].
++
++To counteract this, `git-read` will include and compile pages for any
++commits that are [`git tag`-ed][git-tag], along with the rest of their
++history.
++
++[rebase]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_changing_multiple
++[404]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
++[git-tag]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
+</span></code></pre></div></details>
+
+            <details id="config.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">config.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 668b5cf..ea00cb5 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -41,8 +41,32 @@</span> locals = {
+     root: repository_directory.basename,
+     commits: repository.log(nil).reverse_each,
+   },
+<span class="gi">+  out_of_date: false,
+</span> }
+ 
+<span class="gi">+repository.tags.each do |tag|
++  commits = tag.log(nil).reverse_each
++
++  commits.each do |commit|
++    proxy(
++      "/commits/#{commit.sha}/index.html",
++      "/commits/commit.html",
++      locals: locals.merge(
++        commit: commit,
++        out_of_date: true,
++        page: {
++          title: commit.message.lines.first,
++        },
++        history: {
++          root: repository_directory.basename,
++          commits: commits,
++        }
++      ),
++      ignore: true,
++    )
++  end
++end
++
+</span> latest_readme = repository.show("HEAD:README.md")
+ proxy(
+   "index.html",
+</code></pre></div></details>
+
+            <details id="source/layouts/layout.erb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/layouts/layout.erb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index df254de..45e5f85 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -122,6 +122,18 @@</span>
+         content__item--grow
+       "&gt;
+         &lt;section class="commit commit--message"&gt;
+<span class="gi">+          &lt;% if out_of_date %&gt;
++            &lt;aside class="banner"&gt;
++              &lt;mark&gt;
++                You're viewing an out-of-date version of the project.
++
++                &lt;% link_to root_path do %&gt;
++                  Read the latest version.
++                &lt;% end %&gt;
++              &lt;/mark&gt;
++            &lt;/aside&gt;
++          &lt;% end %&gt;
++
+</span>           &lt;%= yield %&gt;
+         &lt;/section&gt;
+       &lt;/article&gt;
+</code></pre></div></details>
+
+            <details id="test/git_helpers.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/git_helpers.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/git_helpers.rb b/test/git_helpers.rb
+index 38fc342..6701c74 100644
+</span><span class="gd">--- a/test/git_helpers.rb
+</span><span class="gi">+++ b/test/git_helpers.rb
+</span><span class="p">@@ -54,4 +54,24 @@</span> module GitHelpers
+       FileUtils.rm_rf(directory)
+     end
+   end
+<span class="gi">+
++  def switch_branch(branch_name, &amp;block)
++    current_branch = @repository.branch
++
++    branch = @repository.branch(branch_name)
++
++    branch.checkout
++
++    block.call
++
++    branch_head = branch.gcommit
++
++    current_branch.checkout
++
++    branch_head
++  end
++
++  def tag_head_commit(tag_name)
++    @repository.add_tag(tag_name)
++  end
+</span> end
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_a_stale_commit_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_a_stale_commit_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_a_stale_commit_test.rb b/test/system/visitor_views_a_stale_commit_test.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..c86e2a3
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/system/visitor_views_a_stale_commit_test.rb
+</span><span class="p">@@ -0,0 +1,43 @@</span>
+<span class="gi">+require "application_system_test_case"
++
++class VisitorViewsAStaleCommitTest &lt; ApplicationSystemTestCase
++  test "visitor views a stale commit" do
++    stage_file("README.md", "Ignore me ")
++    commit("Initial commit")
++    branch_commit_sha = switch_branch("my-branch") do
++      stage_file("file.txt", "Ignore me")
++      commit("Hello from the branch")
++      tag_head_commit("my-tag")
++    end
++
++    with_git_repository do
++      visit commit_path(branch_commit_sha)
++      expand_history
++
++      assert_text "You're viewing an out-of-date version of the project."
++      assert_selector "a", text: "Read the latest version."
++      assert_selector "h1", text: "Hello from the branch"
++      assert_selector "[aria-current]", text: "Hello from the branch"
++    end
++  end
++
++  test "visitor views a does not see stale commit from main branch" do
++    stage_file("README.md", "Ignore me")
++    commit("Hello from main branch")
++    switch_branch("my-branch") do
++      stage_file("file.txt", "Ignore me")
++      commit("Hello from the branch")
++      tag_head_commit("my-tag")
++    end
++
++    with_git_repository do
++      visit root_path
++      expand_history
++
++      assert_selector "a", text: "Hello from main branch"
++      assert_no_text "You're viewing an out-of-date version of the project."
++      assert_no_selector "a", text: "Read the latest version."
++      assert_no_selector "a", text: "Hello from the branch"
++    end
++  end
++end
+</span></code></pre></div></details>
+
+        </aside>
+    </main>
+  </body>
+</html>

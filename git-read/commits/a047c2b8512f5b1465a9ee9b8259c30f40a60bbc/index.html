@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Scroll current Commit into view</title>
+    <script src="/javascripts/site.js"></script>
+    <link href="/stylesheets/syntax.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="/git-read/tags/v0.0.1/">          git-read
+</a>      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+
+<a href="/git-read/commits/dc1940b7effce4ea44c0014eff2e317865444e76/">              &#8592; Previous
+</a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+<a href="/git-read/commits/a7ac4f6979148c2cfffd3a927d76402dc9e647d2/">              Next &#8594;
+</a>      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="/git-read/commits/2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+
+</a><a href="/git-read/commits/1b46163dfde3fcdc734ef11daef07972c7fd4c99/">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+
+</a><a href="/git-read/commits/1874624426883ffed07c46686860aeb53a3d1eee/">              <p>Replace Generated Files with Static HTML and CSS</p>
+
+</a><a href="/git-read/commits/fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/">              <p>Exercise the application through a System Test</p>
+
+</a><a href="/git-read/commits/8cec38432ea0f127de4d3229a475f9dbb541d613/">              <p>Introduce Redcarpet Markdown Engine</p>
+
+</a><a href="/git-read/commits/f6656aeaaee85534e9cbe29bec7b1d57fda69af8/">              <p>Generate <code>/index.html</code> dynamically</p>
+
+</a><a href="/git-read/commits/11c6c630ca60e3977a022f0b1009512b7a0f8e80/">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+
+</a><a href="/git-read/commits/f20a636c79ff7c83028608e9df1804378feb7ea2/">              <p>Render the contents of a Commit&#39;s Message</p>
+
+</a><a href="/git-read/commits/10a308f76c4914a39284b8b21b2a83cfcc32431a/">              <p>Navigate to previous commit</p>
+
+</a><a href="/git-read/commits/ad86bb3ef42db28e3e425e650ff5e3579d98e088/">              <p>Navigate to next commit</p>
+
+</a><a href="/git-read/commits/a85d19480552b8ded546e4f99228ea5f95d3ddd8/">              <p>Dynamically determine project title</p>
+
+</a><a href="/git-read/commits/15131b02c6807fc8b18a5809679443fcb4b7c37f/">              <p>Extract <code>UrlHelpers</code></p>
+
+</a><a href="/git-read/commits/1c0dfb0535399cf1b8775a997d41c4d104db3887/">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+
+</a><a href="/git-read/commits/bcbe51be2fe7c9e79df007c2de056c4caa515f65/">              <p>Syntax highlight Markdown fenced code blocks</p>
+
+</a><a href="/git-read/commits/54dda3db29b3cea6d0534fe7d959c4b61617eb5d/">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+
+</a><a href="/git-read/commits/5811e0f19e12228cad2bba4380258622fd4fbf25/">              <p>Add <code>bin/git-read --server</code> flag</p>
+
+</a><a href="/git-read/commits/cd81aed41b5b4d59686a14498b8eecfd37153501/">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+
+</a><a href="/git-read/commits/1d0ada9b715d2bf4f4a666f91f987c37415b3ee4/">              <p>Add support for re-writing a project&#39;s history</p>
+
+</a><a href="/git-read/commits/30f633965982817836211760978097b8d0179fd3/">              <p>Extract <code>Commit</code> model</p>
+
+</a><a href="/git-read/commits/55bae90277ece29a7bac3d79ce5fe825ab5d1ab7/">              <p>Render how a commit changes the project&#39;s files</p>
+
+</a><a href="/git-read/commits/e40faa75c25412b851d03549131f51d3bc6720ad/">              <p>Extract SVG images</p>
+
+</a><a href="/git-read/commits/747c19f320046bb704f26524dd67d1ee5bf9a06c/">              <p>Render history of tag, commits to home link</p>
+
+</a><a href="/git-read/commits/d60a984134d03c8dda80bd08106aa50d756f2771/">              <p>Add webpack for building JavaScript</p>
+
+</a><a href="/git-read/commits/dc1940b7effce4ea44c0014eff2e317865444e76/">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+
+</a><a href="/git-read/commits/a047c2b8512f5b1465a9ee9b8259c30f40a60bbc/" aria-current="page">              <p>Scroll current Commit into view</p>
+
+</a><a href="/git-read/commits/a7ac4f6979148c2cfffd3a927d76402dc9e647d2/">              <p>Navigate with Turbolinks</p>
+
+</a><a href="/git-read/commits/9db5c96654bee1451f3c71f00019de07c243a7ab/">              <p>Integrate with GitHub Actions</p>
+
+</a>        </nav>
+      </details>
+
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+            <aside class="text-center p-5">
+              <mark>
+                You're viewing an out-of-date version of the project.
+
+<a href="/git-read/">                  Read the latest version.
+</a>              </mark>
+            </aside>
+
+          <h1 id="scroll-current-commit-into-view">Scroll current Commit into view</h1>
+
+<p>When navigation to a commit completes, scroll that commit&rsquo;s node in the
+history navigator into view.</p>
+
+<p>When the browser finished loading and parsing the page&rsquo;s necessary
+assets and elements, it fires a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event"><code>DOMContentLoaded</code>
+event</a> on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document"><code>document</code> object</a>.</p>
+
+<p>This commit adds an <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">event listener</a> that fires a callback whenever a
+<code>DOMContentLoaded</code> event is triggered.</p>
+
+<p>When the browser finalizes loading and parsing its contents, scroll any
+descendant elements annotated with the <a href="https://tink.uk/using-the-aria-current-attribute/"><code>[aria-current=&quot;page&quot;]</code>
+attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView()</code>
+method</a> directly on the elements.</p>
+
+<p>Unfortunately, support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>Element.scrollIntoView()</code>
+method</a> is not as widespread as support for the
+<code>&lt;details&gt;</code> element. Luckily, there is a <a href="https://github.com/wessberg/scroll-behavior-polyfill/tree/v2.0.13#applying-the-polyfill">community-sourced
+polyfill</a> for invoking <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView#Parameters"><code>.scrollIntoView()</code> with
+options</a>.</p>
+
+<p>Invoking <code>.scrollIntoView()</code> upon <code>DOMContentLoaded</code> will improve the
+visibility of any <code>[aria-current]</code> elements present on the page.
+However, pages include a current element in the project&rsquo;s history that
+is hidden within a <code>&lt;details&gt;</code> element that does not specify an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>[open]</code>
+attribute</a>.</p>
+
+<p>To account for that, extend the <code>DOMContentLoaded</code> callback so that it
+queries all on <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt; elements</code></a> that are present on the
+page and attaches callbacks that will be triggered when those <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open">elements’
+<code>[open]</code> attribute</a> is <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Events"><code>toggle</code>-d</a>.</p>
+
+<p>Whenever a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> is expanded, scroll any
+descendant elements annotated with the <a href="https://tink.uk/using-the-aria-current-attribute/"><code>[aria-current=&quot;page&quot;]</code>
+attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView()</code>
+method</a> directly on the element.</p>
+
+        </section>
+      </article>
+
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id="package.json" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">package.json</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/package.json b/package.json
+index ad6c7da..39aabfe 100644
+</span><span class="gd">--- a/package.json
+</span><span class="gi">+++ b/package.json
+</span><span class="p">@@ -14,6 +14,7 @@</span>
+     "webpack-cli": "^3.3.11"
+   },
+   "dependencies": {
+<span class="gd">-    "details-element-polyfill": "^2.4.0"
+</span><span class="gi">+    "details-element-polyfill": "^2.4.0",
++    "scroll-behavior-polyfill": "^2.0.13"
+</span>   }
+ }
+</code></pre></div></details>
+
+            <details id="source/javascripts/site.js" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/javascripts/site.js</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
+index c7153a9..400e235 100644
+</span><span class="gd">--- a/source/javascripts/site.js
+</span><span class="gi">+++ b/source/javascripts/site.js
+</span><span class="p">@@ -1 +1,20 @@</span>
+ import "details-element-polyfill"
+<span class="gi">+import "scroll-behavior-polyfill"
++
++const scrollToCurrent = (scope) =&gt; {
++  for (const current of scope.querySelectorAll('[aria-current="page"]')) {
++    current.scrollIntoView({ inline: "center" })
++  }
++}
++
++document.addEventListener("DOMContentLoaded", () =&gt; {
++  scrollToCurrent(document)
++
++  for (const detailsElement of document.querySelectorAll("details")) {
++    detailsElement.addEventListener("toggle", () =&gt; {
++      if (detailsElement.open) {
++        scrollToCurrent(detailsElement)
++      }
++    })
++  }
++})
+</span></code></pre></div></details>
+
+            <details id="yarn.lock" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">yarn.lock</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/yarn.lock b/yarn.lock
+index a53a870..faca719 100644
+</span><span class="gd">--- a/yarn.lock
+</span><span class="gi">+++ b/yarn.lock
+</span><span class="p">@@ -2116,6 +2116,11 @@</span> schema-utils@^1.0.0:
+     ajv-errors "^1.0.0"
+     ajv-keywords "^3.1.0"
+ 
+<span class="gi">+scroll-behavior-polyfill@^2.0.13:
++  version "2.0.13"
++  resolved "https://registry.yarnpkg.com/scroll-behavior-polyfill/-/scroll-behavior-polyfill-2.0.13.tgz#f6f4db9eecdb94d5744b85b653440602fcf3b24b"
++  integrity sha512-X1AC6+k0++Y3XOT8Likr5Dh4XMmwvbTolr3Mp2g1jYPpOQ3++wff/JPfPEK6zqPCkZ88Ac0/OMRW/Uwh16U+HQ==
++
+</span> semver@^5.5.0, semver@^5.6.0:
+   version "5.7.1"
+   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
+</code></pre></div></details>
+
+        </aside>
+    </main>
+  </body>
+</html>
