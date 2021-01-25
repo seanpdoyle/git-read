@@ -159,7 +159,7 @@ regressions.</p>
   </summary>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..3225072
+</span><span class="gh">index 0000000..6111c72
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/.github/workflows/ci.yml
 </span><span class="p">@@ -0,0 +1,26 @@</span>
@@ -182,11 +182,11 @@ regressions.</p>
 +        node-version: "12.x"
 +
 +    - run: |
-+      git config --global user.email "ci@example.com"
-+      git config --global user.name "GitHub Actions"
++        git config --global user.email "ci@example.com"
++        git config --global user.name "GitHub Actions"
 +
-+      bundle install --jobs 4 --retry 3
-+      yarn install
++        bundle install --jobs 4 --retry 3
++        yarn install
 +
 +    - run: rake
 </span></code></pre></div></details>
