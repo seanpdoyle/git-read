@@ -1,196 +1,110 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Add webpack for building JavaScript
-</title>
-    <link href="../../stylesheets/site.css" rel="stylesheet" />
+    <title>Add webpack for building JavaScript</title>
     <script src="../../javascripts/site.js"></script>
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
   </head>
-  <body class="page">
-    <header class="header">
-      <h1 class="header__name">
-<a href="../../">          git-read
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="../../tags/v0.0.1/">          git-read
 </a>      </h1>
 
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
 
-      <nav class="
-        header__navigation
-        navigation
-        
-      ">
 <a href="../747c19f320046bb704f26524dd67d1ee5bf9a06c/">              &#8592; Previous
 </a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
 <a href="../dc1940b7effce4ea44c0014eff2e317865444e76/">              Next &#8594;
 </a>      </nav>
     </header>
 
-    <main class="content">
-      <details class="accordion content__item">
-        <summary class="accordion__summary">
-          <div class="accordion__closed">
-            <nav class="
-              commit-history
-              u-db-overflow-y--auto
-              u-mb-overflow-x--scroll
-            ">
-                <a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--collapsed" title="Elaborate on the project's goals in the README.md
-"></a>
-                <a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--collapsed" title="[GENERATED]: Scaffold the project with Middleman
-"></a>
-                <a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--collapsed" title="Replace Generated Files with Static HTML and CSS
-"></a>
-                <a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/" class="commit-node commit-node--collapsed" title="Exercise the application through a System Test
-"></a>
-                <a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/" class="commit-node commit-node--collapsed" title="Introduce Redcarpet Markdown Engine
-"></a>
-                <a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--collapsed" title="Generate `/index.html` dynamically
-"></a>
-                <a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--collapsed" title="Extract `ApplicationSystemTestCase`
-"></a>
-                <a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--collapsed" title="Render the contents of a Commit's Message
-"></a>
-                <a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--collapsed" title="Navigate to previous commit
-"></a>
-                <a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/" class="commit-node commit-node--collapsed" title="Navigate to next commit
-"></a>
-                <a href="../a85d19480552b8ded546e4f99228ea5f95d3ddd8/" class="commit-node commit-node--collapsed" title="Dynamically determine project title
-"></a>
-                <a href="../15131b02c6807fc8b18a5809679443fcb4b7c37f/" class="commit-node commit-node--collapsed" title="Extract `UrlHelpers`
-"></a>
-                <a href="../1c0dfb0535399cf1b8775a997d41c4d104db3887/" class="commit-node commit-node--collapsed" title="Add &quot;current&quot; styles to `&lt;a&gt;` elements
-"></a>
-                <a href="../bcbe51be2fe7c9e79df007c2de056c4caa515f65/" class="commit-node commit-node--collapsed" title="Syntax highlight Markdown fenced code blocks
-"></a>
-                <a href="../54dda3db29b3cea6d0534fe7d959c4b61617eb5d/" class="commit-node commit-node--collapsed" title="Introduce `bin/git-read` command line interface
-"></a>
-                <a href="../5811e0f19e12228cad2bba4380258622fd4fbf25/" class="commit-node commit-node--collapsed" title="Add `bin/git-read --server` flag
-"></a>
-                <a href="../cd81aed41b5b4d59686a14498b8eecfd37153501/" class="commit-node commit-node--collapsed" title="Extract `GitHelpers` from System Test Cases
-"></a>
-                <a href="../1d0ada9b715d2bf4f4a666f91f987c37415b3ee4/" class="commit-node commit-node--collapsed" title="Add support for re-writing a project's history
-"></a>
-                <a href="../30f633965982817836211760978097b8d0179fd3/" class="commit-node commit-node--collapsed" title="Extract `Commit` model
-"></a>
-                <a href="../55bae90277ece29a7bac3d79ce5fe825ab5d1ab7/" class="commit-node commit-node--collapsed" title="Render how a commit changes the project's files
-"></a>
-                <a href="../e40faa75c25412b851d03549131f51d3bc6720ad/" class="commit-node commit-node--collapsed" title="Extract SVG images
-"></a>
-                <a href="../747c19f320046bb704f26524dd67d1ee5bf9a06c/" class="commit-node commit-node--collapsed" title="Render history of tag, commits to home link
-"></a>
-                <a href="./" class="commit-node commit-node--collapsed" title="Add webpack for building JavaScript
-" aria-current="page"></a>
-                <a href="../dc1940b7effce4ea44c0014eff2e317865444e76/" class="commit-node commit-node--collapsed" title="Add `&lt;details&gt;` element polyfill
-"></a>
-                <a href="../a047c2b8512f5b1465a9ee9b8259c30f40a60bbc/" class="commit-node commit-node--collapsed" title="Scroll current Commit into view
-"></a>
-                <a href="../a7ac4f6979148c2cfffd3a927d76402dc9e647d2/" class="commit-node commit-node--collapsed" title="Navigate with Turbolinks
-"></a>
-                <a href="../9db5c96654bee1451f3c71f00019de07c243a7ab/" class="commit-node commit-node--collapsed" title="Integrate with GitHub Actions
-"></a>
-            </nav>
-
-            <div class="accordion__toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="accordion--desktop"><title>Expand History</title>
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="accordion--mobile"><title>Expand History</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-            </div>
-          </div>
-
-          <div class="accordion__opened">
-            <div class="accordion__toggle accordion__toggle--fill">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="accordion--desktop"><title>Collapse History</title>
-  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z" clip-rule="evenodd"></path>
-</svg>
-
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="accordion--mobile"><title>Collapse History</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
-</svg>
-
-            </div>
           </div>
         </summary>
 
-        <nav class="
-          commit-history
-          commit-history--full
-          u-db-overflow-y--auto
-          u-mb-overflow-x--scroll
-        ">
-<a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/" class="commit-node commit-node--full">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="../2a4441cc551f2fd73f05b8d25328a6d0d0d9ed99/">              <p>Elaborate on the project&#39;s goals in the README.md</p>
 
-</a><a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/" class="commit-node commit-node--full">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+</a><a href="../1b46163dfde3fcdc734ef11daef07972c7fd4c99/">              <p>[GENERATED]: Scaffold the project with Middleman</p>
 
-</a><a href="../1874624426883ffed07c46686860aeb53a3d1eee/" class="commit-node commit-node--full">              <p>Replace Generated Files with Static HTML and CSS</p>
+</a><a href="../1874624426883ffed07c46686860aeb53a3d1eee/">              <p>Replace Generated Files with Static HTML and CSS</p>
 
-</a><a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/" class="commit-node commit-node--full">              <p>Exercise the application through a System Test</p>
+</a><a href="../fbe6992e7bed119e25961f6c7f0c8c051c8f1cbe/">              <p>Exercise the application through a System Test</p>
 
-</a><a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/" class="commit-node commit-node--full">              <p>Introduce Redcarpet Markdown Engine</p>
+</a><a href="../8cec38432ea0f127de4d3229a475f9dbb541d613/">              <p>Introduce Redcarpet Markdown Engine</p>
 
-</a><a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/" class="commit-node commit-node--full">              <p>Generate <code>/index.html</code> dynamically</p>
+</a><a href="../f6656aeaaee85534e9cbe29bec7b1d57fda69af8/">              <p>Generate <code>/index.html</code> dynamically</p>
 
-</a><a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/" class="commit-node commit-node--full">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+</a><a href="../11c6c630ca60e3977a022f0b1009512b7a0f8e80/">              <p>Extract <code>ApplicationSystemTestCase</code></p>
 
-</a><a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/" class="commit-node commit-node--full">              <p>Render the contents of a Commit&#39;s Message</p>
+</a><a href="../f20a636c79ff7c83028608e9df1804378feb7ea2/">              <p>Render the contents of a Commit&#39;s Message</p>
 
-</a><a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/" class="commit-node commit-node--full">              <p>Navigate to previous commit</p>
+</a><a href="../10a308f76c4914a39284b8b21b2a83cfcc32431a/">              <p>Navigate to previous commit</p>
 
-</a><a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/" class="commit-node commit-node--full">              <p>Navigate to next commit</p>
+</a><a href="../ad86bb3ef42db28e3e425e650ff5e3579d98e088/">              <p>Navigate to next commit</p>
 
-</a><a href="../a85d19480552b8ded546e4f99228ea5f95d3ddd8/" class="commit-node commit-node--full">              <p>Dynamically determine project title</p>
+</a><a href="../a85d19480552b8ded546e4f99228ea5f95d3ddd8/">              <p>Dynamically determine project title</p>
 
-</a><a href="../15131b02c6807fc8b18a5809679443fcb4b7c37f/" class="commit-node commit-node--full">              <p>Extract <code>UrlHelpers</code></p>
+</a><a href="../15131b02c6807fc8b18a5809679443fcb4b7c37f/">              <p>Extract <code>UrlHelpers</code></p>
 
-</a><a href="../1c0dfb0535399cf1b8775a997d41c4d104db3887/" class="commit-node commit-node--full">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+</a><a href="../1c0dfb0535399cf1b8775a997d41c4d104db3887/">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
 
-</a><a href="../bcbe51be2fe7c9e79df007c2de056c4caa515f65/" class="commit-node commit-node--full">              <p>Syntax highlight Markdown fenced code blocks</p>
+</a><a href="../bcbe51be2fe7c9e79df007c2de056c4caa515f65/">              <p>Syntax highlight Markdown fenced code blocks</p>
 
-</a><a href="../54dda3db29b3cea6d0534fe7d959c4b61617eb5d/" class="commit-node commit-node--full">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+</a><a href="../54dda3db29b3cea6d0534fe7d959c4b61617eb5d/">              <p>Introduce <code>bin/git-read</code> command line interface</p>
 
-</a><a href="../5811e0f19e12228cad2bba4380258622fd4fbf25/" class="commit-node commit-node--full">              <p>Add <code>bin/git-read --server</code> flag</p>
+</a><a href="../5811e0f19e12228cad2bba4380258622fd4fbf25/">              <p>Add <code>bin/git-read --server</code> flag</p>
 
-</a><a href="../cd81aed41b5b4d59686a14498b8eecfd37153501/" class="commit-node commit-node--full">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+</a><a href="../cd81aed41b5b4d59686a14498b8eecfd37153501/">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
 
-</a><a href="../1d0ada9b715d2bf4f4a666f91f987c37415b3ee4/" class="commit-node commit-node--full">              <p>Add support for re-writing a project&#39;s history</p>
+</a><a href="../1d0ada9b715d2bf4f4a666f91f987c37415b3ee4/">              <p>Add support for re-writing a project&#39;s history</p>
 
-</a><a href="../30f633965982817836211760978097b8d0179fd3/" class="commit-node commit-node--full">              <p>Extract <code>Commit</code> model</p>
+</a><a href="../30f633965982817836211760978097b8d0179fd3/">              <p>Extract <code>Commit</code> model</p>
 
-</a><a href="../55bae90277ece29a7bac3d79ce5fe825ab5d1ab7/" class="commit-node commit-node--full">              <p>Render how a commit changes the project&#39;s files</p>
+</a><a href="../55bae90277ece29a7bac3d79ce5fe825ab5d1ab7/">              <p>Render how a commit changes the project&#39;s files</p>
 
-</a><a href="../e40faa75c25412b851d03549131f51d3bc6720ad/" class="commit-node commit-node--full">              <p>Extract SVG images</p>
+</a><a href="../e40faa75c25412b851d03549131f51d3bc6720ad/">              <p>Extract SVG images</p>
 
-</a><a href="../747c19f320046bb704f26524dd67d1ee5bf9a06c/" class="commit-node commit-node--full">              <p>Render history of tag, commits to home link</p>
+</a><a href="../747c19f320046bb704f26524dd67d1ee5bf9a06c/">              <p>Render history of tag, commits to home link</p>
 
-</a><a href="./" class="commit-node commit-node--full" aria-current="page">              <p>Add webpack for building JavaScript</p>
+</a><a href="./" aria-current="page">              <p>Add webpack for building JavaScript</p>
 
-</a><a href="../dc1940b7effce4ea44c0014eff2e317865444e76/" class="commit-node commit-node--full">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+</a><a href="../dc1940b7effce4ea44c0014eff2e317865444e76/">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
 
-</a><a href="../a047c2b8512f5b1465a9ee9b8259c30f40a60bbc/" class="commit-node commit-node--full">              <p>Scroll current Commit into view</p>
+</a><a href="../a047c2b8512f5b1465a9ee9b8259c30f40a60bbc/">              <p>Scroll current Commit into view</p>
 
-</a><a href="../a7ac4f6979148c2cfffd3a927d76402dc9e647d2/" class="commit-node commit-node--full">              <p>Navigate with Turbolinks</p>
+</a><a href="../a7ac4f6979148c2cfffd3a927d76402dc9e647d2/">              <p>Navigate with Turbolinks</p>
 
-</a><a href="../9db5c96654bee1451f3c71f00019de07c243a7ab/" class="commit-node commit-node--full">              <p>Integrate with GitHub Actions</p>
+</a><a href="../9db5c96654bee1451f3c71f00019de07c243a7ab/">              <p>Integrate with GitHub Actions</p>
 
 </a>        </nav>
       </details>
 
-      <article class="
-        commit-content
-        commit-content--double
-        content__item
-        content__item--grow
-      ">
-        <section class="commit commit--message">
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+            <aside class="text-center p-5">
+              <mark>
+                You're viewing an out-of-date version of the project.
+
+<a href="../../">                  Read the latest version.
+</a>              </mark>
+            </aside>
 
           <h1 id="add-webpack-for-building-javascript">Add webpack for building JavaScript</h1>
 
@@ -207,29 +121,18 @@ with the <code>tmp/dist</code> directory as the destination to output assets to.
 activation call&rsquo;s <code>source</code> property.</p>
 
         </section>
+      </article>
 
-          <aside class="commit commit--diff commit--long-content">
-              <details
-  id=".gitignore"
-  open
-  class="file"
->
-  <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse .gitignore</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id=".gitignore" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand .gitignore</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code>
-      .gitignore
-    </code>
+    <code class="break-all">.gitignore</code>
   </summary>
-
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.gitignore b/.gitignore
 index 0dcc3ec..8ea7e08 100644
 </span><span class="gd">--- a/.gitignore
@@ -242,27 +145,15 @@ index 0dcc3ec..8ea7e08 100644
 +node_modules/
 </span></code></pre></div></details>
 
-              <details
-  id="config.rb"
-  open
-  class="file"
->
-  <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse config.rb</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+            <details id="config.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand config.rb</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code>
-      config.rb
-    </code>
+    <code class="break-all">config.rb</code>
   </summary>
-
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
 index a97e2fc..9a76d44 100644
 </span><span class="gd">--- a/config.rb
@@ -281,27 +172,15 @@ index a97e2fc..9a76d44 100644
      role: "img",
 </code></pre></div></details>
 
-              <details
-  id="package.json"
-  open
-  class="file"
->
-  <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse package.json</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+            <details id="package.json" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand package.json</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code>
-      package.json
-    </code>
+    <code class="break-all">package.json</code>
   </summary>
-
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/package.json b/package.json
 </span><span class="p">new file mode 100644
 </span><span class="gh">index 0000000..7a51ac9
@@ -326,27 +205,15 @@ index a97e2fc..9a76d44 100644
 +}
 </span></code></pre></div></details>
 
-              <details
-  id="source/javascripts/site.js"
-  open
-  class="file"
->
-  <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse source/javascripts/site.js</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+            <details id="source/javascripts/site.js" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand source/javascripts/site.js</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code>
-      source/javascripts/site.js
-    </code>
+    <code class="break-all">source/javascripts/site.js</code>
   </summary>
-
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
 index 9de6ff3..910533f 100644
 </span><span class="gd">--- a/source/javascripts/site.js
@@ -356,27 +223,15 @@ index 9de6ff3..910533f 100644
 </span><span class="gi">+console.log("Hello, from webpack")
 </span></code></pre></div></details>
 
-              <details
-  id="webpack.config.js"
-  open
-  class="file"
->
-  <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse webpack.config.js</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+            <details id="webpack.config.js" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand webpack.config.js</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code>
-      webpack.config.js
-    </code>
+    <code class="break-all">webpack.config.js</code>
   </summary>
-
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/webpack.config.js b/webpack.config.js
 </span><span class="p">new file mode 100644
 </span><span class="gh">index 0000000..3c3e80f
@@ -394,27 +249,15 @@ index 9de6ff3..910533f 100644
 +};
 </span></code></pre></div></details>
 
-              <details
-  id="yarn.lock"
-  
-  class="file"
->
-  <summary class="file__name">
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--close"><title>Collapse yarn.lock</title>
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"></path>
+            <details id="yarn.lock"  class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" role="img" class="file__toggle file__toggle--open"><title>Expand yarn.lock</title>
-  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code>
-      yarn.lock
-    </code>
+    <code class="break-all">yarn.lock</code>
   </summary>
-
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/yarn.lock b/yarn.lock
 </span><span class="p">new file mode 100644
 </span><span class="gh">index 0000000..eac0134
@@ -3078,8 +2921,7 @@ index 9de6ff3..910533f 100644
 +    yargs-parser "^13.1.0"
 </span></code></pre></div></details>
 
-          </aside>
-      </article>
+        </aside>
     </main>
   </body>
 </html>
