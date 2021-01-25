@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Extract `ApplicationSystemTestCase`</title>
+    <script src="../../javascripts/site.js"></script>
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="/git-read/index.html">          git-read
+</a>      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+
+<a href="/git-read/commits/31d1d172cf74e9aec83f122aedb651bed7f84223/index.html">              &#8592; Previous
+</a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+<a href="/git-read/commits/526a192a0e91290e8feeb4232ff663eaf29aedf3/index.html">              Next &#8594;
+</a>      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+
+</a><a href="/git-read/commits/dbc622945b1bddf16efdc03a2406269f453f8715/index.html">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+
+</a><a href="/git-read/commits/142c189b0a66e2ada323a6e1ff543db6f88cb576/index.html">              <p>Add webpack for managing assets</p>
+
+</a><a href="/git-read/commits/7ab9d8b8db09c0500079a6a361c58b89169fc503/index.html">              <p>Install Tailwind</p>
+
+</a><a href="/git-read/commits/43f859cdc039678749e4e9a3b379c580b1d2ab0b/index.html">              <p>Replace Generated Files with Static HTML and CSS</p>
+
+</a><a href="/git-read/commits/1fbc5f4419ab05a5ffb18f9a7bf3b79ba43e9493/index.html">              <p>Exercise the application through a System Test</p>
+
+</a><a href="/git-read/commits/106de0c51188b8763253a6a2862a17c6702eddce/index.html">              <p>Introduce Redcarpet Markdown Engine</p>
+
+</a><a href="/git-read/commits/31d1d172cf74e9aec83f122aedb651bed7f84223/index.html">              <p>Generate <code>/index.html</code> dynamically</p>
+
+</a><a href="/git-read/commits/361179806288a09eeff7e85a41a82986dd70a0a9/index.html">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+
+</a><a href="/git-read/commits/526a192a0e91290e8feeb4232ff663eaf29aedf3/index.html">              <p>Render the contents of a Commit&#39;s Message</p>
+
+</a><a href="/git-read/commits/26b2f62115a195db0e99e7d1d57c940956cb8c35/index.html">              <p>Navigate to previous commit</p>
+
+</a><a href="/git-read/commits/6d005bbdcf7b5f6040948dcf975c3c3329ef687b/index.html">              <p>Navigate to next commit</p>
+
+</a><a href="/git-read/commits/04aa0f49c8293c5503a5d4fc29942a35eff521ea/index.html">              <p>Dynamically determine project title</p>
+
+</a><a href="/git-read/commits/20c1225b144630f66a76d0d58d4b2fe60315cc57/index.html">              <p>Extract <code>UrlHelpers</code></p>
+
+</a><a href="/git-read/commits/00efca458eb2d1071fef4a53ffe0001940567476/index.html">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+
+</a><a href="/git-read/commits/87fd39ad5758a6ed678171992b92009c3e0b3d9f/index.html">              <p>Syntax highlight Markdown fenced code blocks</p>
+
+</a><a href="/git-read/commits/e445883f61849bf564c2038897ce4e83ea6cd681/index.html">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+
+</a><a href="/git-read/commits/429a248e85a134fca2442e540e471607cedd2c13/index.html">              <p>Add <code>bin/git-read --server</code> flag</p>
+
+</a><a href="/git-read/commits/69e7b00de80fde2ecdc1eabf5645f2b14d5717d8/index.html">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+
+</a><a href="/git-read/commits/70bb25bf9539eff39e764d77d60aec97771a878a/index.html">              <p>Add support for re-writing a project&#39;s history</p>
+
+</a><a href="/git-read/commits/3645b82156de34692341344ced1d23fe50605e65/index.html">              <p>Extract <code>Commit</code> model</p>
+
+</a><a href="/git-read/commits/ad14a3b141fce9cd0cbd8f550118f2b63c93c542/index.html">              <p>Render how a commit changes the project&#39;s files</p>
+
+</a><a href="/git-read/commits/7b11d523fa0f277ca3b11d7cbcb0abbe76e8eb86/index.html">              <p>Extract SVG images</p>
+
+</a><a href="/git-read/commits/c94d853a88c1c443046c123d1cb9a2f37dc1b4ed/index.html">              <p>Get Started from README skipping generated commits</p>
+
+</a><a href="/git-read/commits/bcc3cc36e083f0049c58ad60109c2d791c5acf3a/index.html">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+
+</a><a href="/git-read/commits/594fa61c39bdde3558038f227681c5dbf6ac23a5/index.html">              <p>Navigate with Turbolinks</p>
+
+</a><a href="/git-read/commits/457ee5fb5650e1ec34ae43b95650d88d1ef59274/index.html">              <p>Integrate with GitHub Actions</p>
+
+</a>        </nav>
+      </details>
+
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+
+          <h1 id="extract-applicationsystemtestcase">Extract <code>ApplicationSystemTestCase</code></h1>
+
+<p>In preparation for an additional <a href="https://guides.rubyonrails.org/testing.html#system-testing">System Test</a>, this commit extracts
+the test harness&rsquo; set-up and tear-down code into a super-class that the
+test case inherits from.</p>
+
+<p>To simplify <code>require</code> path resolution, and enable calling <code>require
+&quot;application_system_test_case&quot;</code> instead of <code>require_relative
+&quot;./application_system_test_case&quot;</code>, the test runner will need to append
+the <code>&quot;test&quot;</code> directory onto the <code>$LOAD_PATH</code>.</p>
+
+<p>To do so, declare a <a href="#Rakefile"><code>Rakefile</code></a> that contains a
+<a href="https://ruby.github.io/rake/Rake/TestTask.html"><code>Rake::TestTask</code></a>. Passing <code>-W0</code> as &ldquo;warning, level 0&rdquo; is
+necessary, since our dependency on Middleman results in too much output
+noise without silencing Ruby warnings.</p>
+
+<p>To run the full test suite, execute:</p>
+<div class="highlight"><pre class="highlight shell"><code>rake <span class="nb">test</span>
+</code></pre></div>
+        </section>
+      </article>
+
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id="Rakefile" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">Rakefile</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Rakefile b/Rakefile
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..be924a1
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/Rakefile
+</span><span class="p">@@ -0,0 +1,10 @@</span>
+<span class="gi">+require "rake/testtask"
++
++Rake::TestTask.new do |test|
++  test.libs &lt;&lt; "test"
++  test.pattern = "test/**/*_test.rb"
++  test.verbose = true
++  test.ruby_opts = ["-W0"]
++end
++
++task default: :test
+</span></code></pre></div></details>
+
+            <details id="test/application_system_test_case.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/application_system_test_case.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..dd46a69
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -0,0 +1,51 @@</span>
+<span class="gi">+require "bundler"
++
++Bundler.require(:default, :test)
++
++ENV["MODE"] ||= "build"
++
++require "minitest/autorun"
++require "middleman/rack"
++require "active_support"
++require "active_support/test_case"
++require "pathname"
++require "tmpdir"
++
++
++class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
++  include Capybara::DSL
++  include Capybara::Minitest::Assertions
++
++  def around(&amp;block)
++    directory = Dir.mktmpdir
++    begin
++      @repository = Git.init(directory)
++      block.call
++    ensure
++      FileUtils.rm_rf(directory)
++    end
++  end
++
++  def stage_file(filename, contents)
++    Pathname(@repository.dir.path).join(filename).write(contents)
++
++    @repository.add(filename)
++  end
++
++  def commit(message)
++    @repository.commit(message)
++  end
++
++  def with_git_repository(&amp;block)
++    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
++      Capybara.app = Middleman.server
++
++      block.call
++    end
++  end
++
++  teardown do
++    Capybara.reset_sessions!
++    Capybara.use_default_driver
++  end
++end
+</span></code></pre></div></details>
+
+            <details id="test/system/visitor_views_readme_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_readme_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
+index 4778e4c..a38ba2f 100644
+</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
+</span><span class="p">@@ -1,54 +1,6 @@</span>
+<span class="gd">-require "bundler"
+-
+-Bundler.require(:default, :test)
+-
+-ENV["MODE"] ||= "build"
+-
+-require "minitest/autorun"
+-require "middleman/rack"
+-require "active_support"
+-require "active_support/test_case"
+-require "pathname"
+-require "tmpdir"
+-
+-
+-class VisitorViewsReadmeTest &lt; ActiveSupport::TestCase
+-  include Capybara::DSL
+-  include Capybara::Minitest::Assertions
+-
+-  def around(&amp;block)
+-    directory = Dir.mktmpdir
+-    begin
+-      @repository = Git.init(directory)
+-      block.call
+-    ensure
+-      FileUtils.rm_rf(directory)
+-    end
+-  end
+-
+-  def stage_file(filename, contents)
+-    Pathname(@repository.dir.path).join(filename).write(contents)
+-
+-    @repository.add(filename)
+-  end
+-
+-  def commit(message)
+-    @repository.commit(message)
+-  end
+-
+-  def with_git_repository(&amp;block)
+-    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
+-      Capybara.app = Middleman.server
+-
+-      block.call
+-    end
+-  end
+-
+-  teardown do
+-    Capybara.reset_sessions!
+-    Capybara.use_default_driver
+-  end
+</span><span class="gi">+require "application_system_test_case"
+</span> 
+<span class="gi">+class VisitorViewsReadmeTest &lt; ApplicationSystemTestCase
+</span>   test "visitor views README" do
+     stage_file("README.md", &lt;&lt;~MARKDOWN)
+     git-read
+</code></pre></div></details>
+
+        </aside>
+    </main>
+  </body>
+</html>

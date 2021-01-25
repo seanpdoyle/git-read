@@ -1,0 +1,579 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Render how a commit changes the project's files</title>
+    <script src="../../javascripts/site.js"></script>
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="/git-read/index.html">          git-read
+</a>      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+
+<a href="/git-read/commits/3645b82156de34692341344ced1d23fe50605e65/index.html">              &#8592; Previous
+</a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+<a href="/git-read/commits/7b11d523fa0f277ca3b11d7cbcb0abbe76e8eb86/index.html">              Next &#8594;
+</a>      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+
+</a><a href="/git-read/commits/dbc622945b1bddf16efdc03a2406269f453f8715/index.html">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+
+</a><a href="/git-read/commits/142c189b0a66e2ada323a6e1ff543db6f88cb576/index.html">              <p>Add webpack for managing assets</p>
+
+</a><a href="/git-read/commits/7ab9d8b8db09c0500079a6a361c58b89169fc503/index.html">              <p>Install Tailwind</p>
+
+</a><a href="/git-read/commits/43f859cdc039678749e4e9a3b379c580b1d2ab0b/index.html">              <p>Replace Generated Files with Static HTML and CSS</p>
+
+</a><a href="/git-read/commits/1fbc5f4419ab05a5ffb18f9a7bf3b79ba43e9493/index.html">              <p>Exercise the application through a System Test</p>
+
+</a><a href="/git-read/commits/106de0c51188b8763253a6a2862a17c6702eddce/index.html">              <p>Introduce Redcarpet Markdown Engine</p>
+
+</a><a href="/git-read/commits/31d1d172cf74e9aec83f122aedb651bed7f84223/index.html">              <p>Generate <code>/index.html</code> dynamically</p>
+
+</a><a href="/git-read/commits/361179806288a09eeff7e85a41a82986dd70a0a9/index.html">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+
+</a><a href="/git-read/commits/526a192a0e91290e8feeb4232ff663eaf29aedf3/index.html">              <p>Render the contents of a Commit&#39;s Message</p>
+
+</a><a href="/git-read/commits/26b2f62115a195db0e99e7d1d57c940956cb8c35/index.html">              <p>Navigate to previous commit</p>
+
+</a><a href="/git-read/commits/6d005bbdcf7b5f6040948dcf975c3c3329ef687b/index.html">              <p>Navigate to next commit</p>
+
+</a><a href="/git-read/commits/04aa0f49c8293c5503a5d4fc29942a35eff521ea/index.html">              <p>Dynamically determine project title</p>
+
+</a><a href="/git-read/commits/20c1225b144630f66a76d0d58d4b2fe60315cc57/index.html">              <p>Extract <code>UrlHelpers</code></p>
+
+</a><a href="/git-read/commits/00efca458eb2d1071fef4a53ffe0001940567476/index.html">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+
+</a><a href="/git-read/commits/87fd39ad5758a6ed678171992b92009c3e0b3d9f/index.html">              <p>Syntax highlight Markdown fenced code blocks</p>
+
+</a><a href="/git-read/commits/e445883f61849bf564c2038897ce4e83ea6cd681/index.html">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+
+</a><a href="/git-read/commits/429a248e85a134fca2442e540e471607cedd2c13/index.html">              <p>Add <code>bin/git-read --server</code> flag</p>
+
+</a><a href="/git-read/commits/69e7b00de80fde2ecdc1eabf5645f2b14d5717d8/index.html">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+
+</a><a href="/git-read/commits/70bb25bf9539eff39e764d77d60aec97771a878a/index.html">              <p>Add support for re-writing a project&#39;s history</p>
+
+</a><a href="/git-read/commits/3645b82156de34692341344ced1d23fe50605e65/index.html">              <p>Extract <code>Commit</code> model</p>
+
+</a><a href="/git-read/commits/ad14a3b141fce9cd0cbd8f550118f2b63c93c542/index.html">              <p>Render how a commit changes the project&#39;s files</p>
+
+</a><a href="/git-read/commits/7b11d523fa0f277ca3b11d7cbcb0abbe76e8eb86/index.html">              <p>Extract SVG images</p>
+
+</a><a href="/git-read/commits/c94d853a88c1c443046c123d1cb9a2f37dc1b4ed/index.html">              <p>Get Started from README skipping generated commits</p>
+
+</a><a href="/git-read/commits/bcc3cc36e083f0049c58ad60109c2d791c5acf3a/index.html">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+
+</a><a href="/git-read/commits/594fa61c39bdde3558038f227681c5dbf6ac23a5/index.html">              <p>Navigate with Turbolinks</p>
+
+</a><a href="/git-read/commits/457ee5fb5650e1ec34ae43b95650d88d1ef59274/index.html">              <p>Integrate with GitHub Actions</p>
+
+</a>        </nav>
+      </details>
+
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+
+          <h1 id="render-how-a-commit-changes-the-projects-files">Render how a commit changes the project&rsquo;s files</h1>
+
+<p>To provide the reader with ample context, render each commits&rsquo; file
+changes alongside their commit messages.</p>
+
+<p>Descendants will split the remaining page width amongst themselves.</p>
+
+<p>In the case of the project root, the diff will be omitted, and the
+commit message will span the width of the page (by virtue of it being
+the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child"><code>:only-child</code> to the <code>.container</code></a>.
+for project root</p>
+
+<p>When a file&rsquo;s diff is longer than 100 lines, render the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code>
+element</a> as collapsed by default. To do so, omit the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>open</code>
+attribute</a>.</p>
+
+<p>Likewise, when a commit&rsquo;s subject starts with <code>[GENERATED]</code>, don&rsquo;t
+render the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> with an <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#attr-open"><code>open</code>
+attribute</a>.</p>
+
+<h2 id="determining-the-diff-contents">Determining the diff contents</h2>
+
+<p>When a commit has a parent, generating the diff with the <a href="https://github.com/ruby-git/ruby-git/tree/v1.6.0#examples"><code>ruby-git</code>
+provided interface</a> is straightforward:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">diff</span> <span class="o">=</span> <span class="n">parent</span><span class="p">.</span><span class="nf">diff</span><span class="p">(</span><span class="n">commit</span><span class="p">)</span>
+</code></pre></div>
+<p>However, when the commit is the project&rsquo;s root, it has no parent, and
+cannot be &ldquo;diffed&rdquo;.</p>
+
+<p>To counteract this restriction, this commit invokes a <a href="https://git-scm.com/docs/git-show"><code>git
+show</code></a> command for each file included in the commit, passing
+the <a href="https://git-scm.com/docs/git-show#_combined_diff_format"><code>--cc</code> combined diff flag</a>. The <code>--cc</code> flag will ensure
+that the output contains the code diff. In order to separate out the
+code from the prose, pass the command a <a href="https://git-scm.com/docs/pretty-formats"><code>--format=%n</code>
+flag</a> which includes the <code>%n</code> as a &ldquo;newline&rdquo; placeholder,
+intended to serve as an omission of the prose.</p>
+
+<p>The padding <code>\n</code> character is subsequently omitted by the trailing
+Ruby-side call to <a href="https://ruby-doc.org/core-2.7.0/String.html#method-i-strip"><code>String#strip</code></a>.</p>
+
+<p>The net result is that the contents of the diff include the changes to
+the code, and <em>do not</em> include the prose in the commit&rsquo;s message.</p>
+
+<h2 id="test-coverage">Test Coverage</h2>
+
+<p>To ensure that this new behavior is covered, this commit includes
+corresponding System Tests.</p>
+
+<p>To enable direct navigation to a commit, modify the existing <code>commit</code>
+test helper to return the new commit object, so that the test can pass
+it directly to the <code>commit_path</code> helper.</p>
+
+<h2 id="desktop">Desktop</h2>
+
+<p><img src="https://user-images.githubusercontent.com/2575027/78403921-4edae280-75cb-11ea-84d5-34b3548affaa.png" alt="git-read file diff in desktop dimensions" /></p>
+
+<h2 id="mobile">Mobile</h2>
+
+<p><img src="https://user-images.githubusercontent.com/2575027/78403923-4f737900-75cb-11ea-9411-bf7df3d0a663.png" alt="git-read file diff in mobile dimensions" /></p>
+
+        </section>
+      </article>
+
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id="config.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">config.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 216299c..e2c9792 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -63,6 +63,7 @@</span> repository.tags.each do |tag|
+         page: {
+           title: commit.subject,
+         },
+<span class="gi">+        render_diffs: true,
+</span>       },
+       ignore: true,
+     )
+<span class="p">@@ -78,6 +79,7 @@</span> repository.tags.each do |tag|
+       page: {
+         title: stale_history.readme.lines.first,
+       },
+<span class="gi">+      render_diffs: false,
+</span>     },
+     ignore: true,
+   )
+<span class="p">@@ -99,7 +101,8 @@</span> history.commits.each do |commit|
+       commit: commit,
+       page: {
+         title: commit.subject,
+<span class="gd">-      }
+</span><span class="gi">+      },
++      render_diffs: true,
+</span>     },
+     ignore: true,
+   )
+<span class="p">@@ -115,6 +118,7 @@</span> proxy(
+     page: {
+       title: history.readme.lines.first,
+     },
+<span class="gi">+    render_diffs: false,
+</span>   },
+   ignore: true,
+ )
+</code></pre></div></details>
+
+            <details id="lib/models/commit.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">lib/models/commit.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/commit.rb b/lib/models/commit.rb
+index 49a67ed..196b928 100644
+</span><span class="gd">--- a/lib/models/commit.rb
+</span><span class="gi">+++ b/lib/models/commit.rb
+</span><span class="p">@@ -1,9 +1,68 @@</span>
+ class Commit &lt; SimpleDelegator
+<span class="gd">-  def initialize(commit:)
+</span><span class="gi">+  def initialize(commit:, repository:)
+</span>     super(commit)
+<span class="gi">+    @repository = repository
+</span>   end
+ 
+   def subject
+     message.lines.first.strip
+   end
+<span class="gi">+
++  def diff_files
++    if parent.present?
++      parent.diff(self).map do |file|
++        contents = file.patch
++
++        {
++          subject: subject,
++          name: file.path,
++          language: "diff",
++          contents: contents,
++          expanded: expanded?(contents),
++        }
++      end
++    else
++      files_in_tree(node: gtree).flat_map do |filename|
++        contents = show_root_diff(filename)
++
++        {
++          subject: subject,
++          name: filename,
++          language: "diff",
++          contents: contents,
++          expanded: expanded?(contents),
++        }
++      end
++    end
++  end
++
++  private
++
++  def files_in_tree(node:, parents: [])
++    files = node.files.map { |file, _| File.join(*parents, file) }
++
++    files_from_leafs = node.subtrees.map do |child, root|
++      files_in_tree(node: root, parents: parents + [child])
++    end
++
++    files + files_from_leafs.flatten
++  end
++
++  def generated?
++    subject.start_with?("[GENERATED]")
++  end
++
++  def expanded?(contents)
++    !generated? &amp;&amp; contents.lines.count &lt; 100
++  end
++
++  def show_root_diff(filename)
++    @repository.lib.send(:command, "show", [
++      "--cc",
++      %(--format=%n),
++      sha,
++      "--",
++      filename,
++    ]).strip
++  end
+</span> end
+</code></pre></div></details>
+
+            <details id="lib/models/history.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">lib/models/history.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/history.rb b/lib/models/history.rb
+index 6507c3d..3b0fbeb 100644
+</span><span class="gd">--- a/lib/models/history.rb
+</span><span class="gi">+++ b/lib/models/history.rb
+</span><span class="p">@@ -17,7 +17,7 @@</span> class History
+ 
+   def commits
+     root.log(nil).reverse_each.map do |commit|
+<span class="gd">-      Commit.new(commit: commit)
+</span><span class="gi">+      Commit.new(commit: commit, repository: repository)
+</span>     end
+   end
+ 
+</code></pre></div></details>
+
+            <details id="source/commits/_file.html.erb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/commits/_file.html.erb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/commits/_file.html.erb b/source/commits/_file.html.erb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..5f4fa4b
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/source/commits/_file.html.erb
+</span><span class="p">@@ -0,0 +1,13 @@</span>
+<span class="gi">+&lt;details id="&lt;%= name %&gt;" &lt;%= ("open" if expanded) %&gt; class="border-l border-r"&gt;
++  &lt;summary class="border-b cursor-pointer list-style-none p-4 outline-none"&gt;
++    &lt;svg class="h-8 mr-4 inline transform rotate-90 open:-rotate-90" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
++      &lt;path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/&gt;
++    &lt;/svg&gt;
++
++    &lt;code class="break-all"&gt;&lt;%= name %&gt;&lt;/code&gt;
++  &lt;/summary&gt;
++  &lt;% code(language) do %&gt;
++&lt;%# The lack of leading indentation is significant %&gt;
++&lt;%= contents %&gt;
++  &lt;% end -%&gt;
++&lt;/details&gt;
+</span></code></pre></div></details>
+
+            <details id="source/layouts/layout.erb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/layouts/layout.erb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 3be8415..6c3ab13 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -51,13 +51,13 @@</span>
+         &lt;nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2"&gt;
+           &lt;% history.commits.each do |commit| %&gt;
+             &lt;% current_link_to(commit_path(commit)) do %&gt;
+<span class="gd">-              &lt;%= markdown(commit.message.lines.first) %&gt;
+</span><span class="gi">+              &lt;%= markdown(commit.subject) %&gt;
+</span>             &lt;% end %&gt;
+           &lt;% end %&gt;
+         &lt;/nav&gt;
+       &lt;/details&gt;
+ 
+<span class="gd">-      &lt;article class="flex-grow justify-center p-4 md:flex md:h-screen-fit md:p-8 md:overflow-y-auto"&gt;
+</span><span class="gi">+      &lt;article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto &lt;%= "lg:w-7/12" if render_diffs %&gt;"&gt;
+</span>         &lt;section class="prose prose-lg md:prose-xl"&gt;
+           &lt;% if history.out_of_date? %&gt;
+             &lt;aside class="text-center p-5"&gt;
+<span class="p">@@ -74,6 +74,14 @@</span>
+           &lt;%= yield %&gt;
+         &lt;/section&gt;
+       &lt;/article&gt;
+<span class="gi">+
++      &lt;% if render_diffs %&gt;
++        &lt;aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12"&gt;
++          &lt;% commit.diff_files.each do |diff_file| %&gt;
++            &lt;%= partial("commits/file", locals: diff_file) %&gt;
++          &lt;% end %&gt;
++        &lt;/aside&gt;
++      &lt;% end %&gt;
+</span>     &lt;/main&gt;
+   &lt;/body&gt;
+ &lt;/html&gt;
+</code></pre></div></details>
+
+            <details id="source/stylesheets/site.css" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/stylesheets/site.css</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/site.css b/source/stylesheets/site.css
+index bad299b..7279786 100644
+</span><span class="gd">--- a/source/stylesheets/site.css
+</span><span class="gi">+++ b/source/stylesheets/site.css
+</span><span class="p">@@ -6,6 +6,11 @@</span> summary::-webkit-details-marker {
+   @apply hidden;
+ }
+ 
+<span class="gi">+[open].open\:inline,
++[open] .open\:inline {
++  @apply inline;
++}
++
+</span> [open].open\:hidden,
+ [open] .open\:hidden {
+   @apply hidden;
+</code></pre></div></details>
+
+            <details id="source/stylesheets/syntax.css.erb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/stylesheets/syntax.css.erb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/stylesheets/syntax.css.erb b/source/stylesheets/syntax.css.erb
+index afd2c8d..daa742a 100644
+</span><span class="gd">--- a/source/stylesheets/syntax.css.erb
+</span><span class="gi">+++ b/source/stylesheets/syntax.css.erb
+</span><span class="p">@@ -1 +1,5 @@</span>
+<span class="gi">+pre.highlight {
++  overflow-x: auto;
++}
++
+</span> &lt;%= Rouge::Themes::Github.render(scope: ".highlight") %&gt;
+</code></pre></div></details>
+
+            <details id="test/git_helpers.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/git_helpers.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/git_helpers.rb b/test/git_helpers.rb
+index 7985e7e..bd493af 100644
+</span><span class="gd">--- a/test/git_helpers.rb
+</span><span class="gi">+++ b/test/git_helpers.rb
+</span><span class="p">@@ -4,13 +4,19 @@</span> require "tmpdir"
+ 
+ module GitHelpers
+   def stage_file(filename, contents)
+<span class="gd">-    Pathname(@repository.dir.path).join(filename).write(contents)
+</span><span class="gi">+    filepath = Pathname(@repository.dir.path).join(filename)
++
++    filepath.dirname.mkpath
++
++    filepath.write(contents)
+</span> 
+     @repository.add(filename)
+   end
+ 
+   def commit(message)
+     @repository.commit(message)
+<span class="gi">+
++    @repository.object("HEAD")
+</span>   end
+ 
+   def with_built_output(&amp;block)
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_commit_diff_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_commit_diff_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_commit_diff_test.rb b/test/system/visitor_views_commit_diff_test.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..0a9dc3d
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/system/visitor_views_commit_diff_test.rb
+</span><span class="p">@@ -0,0 +1,75 @@</span>
+<span class="gi">+require "application_system_test_case"
++
++class VisitorViewsCommitDiffTest &lt; ApplicationSystemTestCase
++  test "visitor views commit diff when it is the first commit" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", "File contents")
++    stage_file("src/file.txt", "Nested file contents")
++    git_commit = commit("First commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_selector "details summary", text: "file.txt"
++      assert_selector "details[open]", text: "File contents"
++      assert_selector "details summary", text: "src/file.txt"
++      assert_selector "details[open]", text: "Nested file contents"
++    end
++  end
++
++  test "visitor views commit diff when it has parents" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", &lt;&lt;~TEXT)
++      First line
++    TEXT
++    commit("First commit")
++    stage_file("file.txt", &lt;&lt;~TEXT)
++      First line
++      Next line
++    TEXT
++    git_commit = commit("Last commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_selector "details summary", text: "file.txt"
++      assert_selector "details[open]", text: "+Next line"
++    end
++  end
++
++  test "collapses diffs for files that have more than 100 lines" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", 101.times.reduce("") { |lines| lines + "\ndiff line" })
++    git_commit = commit("First commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_no_selector "details[open]", text: "diff line"
++    end
++  end
++
++  test "collapses diffs for commits that start with [GENERATED]" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", "File contents")
++    git_commit = commit("[GENERATED] Initial Commit")
++
++    with_git_repository do
++      visit commit_path(git_commit)
++
++      assert_no_selector "details[open]", text: "File contents"
++    end
++  end
++
++  test "visitor views home page" do
++    stage_file("README.md", "Ignore me")
++    stage_file("file.txt", "File contents")
++    commit("First commit")
++
++    with_git_repository do
++      visit root_path
++
++      assert_no_text "File contents"
++    end
++  end
++end
+</span></code></pre></div></details>
+
+        </aside>
+    </main>
+  </body>
+</html>
