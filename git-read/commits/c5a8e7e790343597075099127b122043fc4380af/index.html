@@ -12,7 +12,7 @@
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
       <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
-<a href="/git-read/">          git-read
+<a href="/">          git-read
 </a>      </h1>
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
@@ -90,7 +90,7 @@
 
 </a><a href="/git-read/commits/cdd4f183b8b1ba832ab24d726d2b50dd9eb9f2d1/">              <p>Navigate with Turbolinks</p>
 
-</a><a href="/git-read/commits/7cfc513bde6ae13f7fbde8c21694da201ae98db3/" aria-current="page">              <p>Integrate with GitHub Actions</p>
+</a><a href="/git-read/commits/c5a8e7e790343597075099127b122043fc4380af/" aria-current="page">              <p>Integrate with GitHub Actions</p>
 
 </a>        </nav>
       </details>
@@ -331,7 +331,7 @@ index d1ed809..1b2afd4 100755
     <code class="break-all">config.rb</code>
   </summary>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
-index f8bbc63..7c11f27 100644
+index f8bbc63..3301671 100644
 </span><span class="gd">--- a/config.rb
 </span><span class="gi">+++ b/config.rb
 </span><span class="p">@@ -7,6 +7,7 @@</span> include UrlHelpers
@@ -342,6 +342,15 @@ index f8bbc63..7c11f27 100644
 </span> 
  activate :aria_current
  activate :external_pipeline,
+<span class="p">@@ -114,7 +115,7 @@</span> history.commits.each do |commit|
+ end
+ 
+ proxy(
+<span class="gd">-  root_path,
+</span><span class="gi">+  "/index.html",
+</span>   "README.html",
+   locals: {
+     history: history,
 </code></pre></div></details>
 
             <details id="helpers/url_helpers.rb" open class="border-l border-r">
@@ -354,10 +363,10 @@ index f8bbc63..7c11f27 100644
     <code class="break-all">helpers/url_helpers.rb</code>
   </summary>
 <div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/helpers/url_helpers.rb b/helpers/url_helpers.rb
-index 3db5e7b..8a8292f 100644
+index 3db5e7b..139a363 100644
 </span><span class="gd">--- a/helpers/url_helpers.rb
 </span><span class="gi">+++ b/helpers/url_helpers.rb
-</span><span class="p">@@ -1,17 +1,17 @@</span>
+</span><span class="p">@@ -1,10 +1,10 @@</span>
  module UrlHelpers
    def commit_path(commit)
 <span class="gd">-    "/commits/#{commit.sha}/index.html"
@@ -370,14 +379,6 @@ index 3db5e7b..8a8292f 100644
 </span>   end
  
    def root_path(root = nil)
-     if root.respond_to? :name
-       tag_path(root)
-     else
-<span class="gd">-      "/index.html"
-</span><span class="gi">+      "#{config[:path_prefix]}/index.html"
-</span>     end
-   end
- end
 </code></pre></div></details>
 
             <details id="script/install" open class="border-l border-r">
