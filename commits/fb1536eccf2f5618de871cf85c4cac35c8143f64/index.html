@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md</title>
+    <title>Extract `GitHelpers` from System Test Cases</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
   </head>
@@ -17,11 +17,11 @@
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
 
-<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              &#8592; Previous
+<a href="/git-read/commits/f090e69a9c4d5ce3d58c99b7218e3d60fc4f6103/index.html">              &#8592; Previous
 </a>
           <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
-<a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              Next &#8594;
+<a href="/git-read/commits/9419d14e977e162ad14e94c1e7e01936e3c65299/index.html">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -99,78 +99,185 @@
       <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
         <section class="prose prose-lg md:prose-xl">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="extract-githelpers-from-system-test-cases">Extract <code>GitHelpers</code> from System Test Cases</h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
+<p>The majority of the test helpers declared in the
+<a href="#test/application_system_test_case.rb"><code>ApplicationSystemTestCase</code></a> are
+focused on <code>git</code> operations.</p>
 
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<p>In an effort to prevent the
+<a href="#test/application_system_test_case.rb"><code>ApplicationSystemTestCase</code></a>
+from growing unchecked, this commit extracts the
+<a href="#test/git_helpers.rb"><code>GitHelpers</code></a>, then calls
+<a href="https://ruby-doc.org/core-2.7.0/Module.html#method-i-include"><code>Module.include</code></a> in to mix the helpers back into the parent
+class.</p>
 
         </section>
       </article>
 
         <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
-            <details id="README.md" open class="border-l border-r">
+            <details id="test/application_system_test_case.rb" open class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <code class="break-all">README.md</code>
+    <code class="break-all">test/application_system_test_case.rb</code>
   </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+index c73caa8..a90ca46 100644
+</span><span class="gd">--- a/test/application_system_test_case.rb
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -1,74 +1,22 @@</span>
+ require "test_helper"
+<span class="gd">-require "middleman/rack"
+-require "pathname"
+-require "tmpdir"
+</span> 
+ require_relative "../helpers/url_helpers"
+<span class="gi">+require "git_helpers"
+</span> 
+ class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
+   include Capybara::DSL
+   include Capybara::Minitest::Assertions
+   include UrlHelpers
+<span class="gi">+  include GitHelpers
+</span> 
+   def around(&amp;block)
+<span class="gd">-    directory = Dir.mktmpdir
+-    begin
+-      @repository = Git.init(directory)
+-      block.call
+-    ensure
+-      FileUtils.rm_rf(directory)
+-    end
+</span><span class="gi">+    with_git_directory(&amp;block)
+</span>   end
+ 
+   def expand_history
+     find("summary", text: "Expand History").click
+   end
+ 
+<span class="gd">-  def stage_file(filename, contents)
+-    Pathname(@repository.dir.path).join(filename).write(contents)
+-
+-    @repository.add(filename)
+-  end
+-
+-  def commit(message)
+-    @repository.commit(message)
+-  end
+-
+-  def with_built_output(&amp;block)
+-    git_directory = Pathname(@repository.dir.path)
+-    build_directory = git_directory.join("build")
+-
+-    system &lt;&lt;~BASH, exception: true
+-      bin/git-read \
+-        --verbose \
+-        --git-dir #{git_directory} \
+-        --output-dir #{build_directory}
+-    BASH
+-
+-    Capybara.app = Rack::Builder.new do
+-      use Rack::Static,
+-        urls: [""],
+-        root: build_directory,
+-        index: "index.html"
+-
+-      run -&gt; (*) {}
+-    end
+-
+-    block.call
+-  end
+-
+-  def with_git_repository(&amp;block)
+-    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
+-      Capybara.app = Middleman.server
+-
+-      block.call Pathname(@repository.dir.path)
+-    end
+-  end
+-
+-  def expand_history
+-    find("details &gt; summary", text: "Expand History").click
+-  end
+-
+</span>   teardown do
+     Capybara.reset_sessions!
+     Capybara.use_default_driver
+</code></pre></div></details>
+
+            <details id="test/git_helpers.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/git_helpers.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/git_helpers.rb b/test/git_helpers.rb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
+</span><span class="gh">index 0000000..0cff2c7
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
+</span><span class="gi">+++ b/test/git_helpers.rb
+</span><span class="p">@@ -0,0 +1,54 @@</span>
+<span class="gi">+require "middleman/rack"
++require "pathname"
++require "tmpdir"
 +
-+Generate a website based on a project's Git history.
++module GitHelpers
++  def stage_file(filename, contents)
++    Pathname(@repository.dir.path).join(filename).write(contents)
 +
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
++    @repository.add(filename)
++  end
 +
-+Command-line Interface
-+---
++  def commit(message)
++    @repository.commit(message)
++  end
 +
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
++  def with_built_output(&amp;block)
++    git_directory = Pathname(@repository.dir.path)
++    build_directory = git_directory.join("build")
 +
-+To learn of the ways to to invoke the command, execute `git read --help`:
++    system &lt;&lt;~BASH, exception: true
++    bin/git-read \
++      --verbose \
++      --git-dir #{git_directory} \
++      --output-dir #{build_directory}
++    BASH
 +
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
++    Capybara.app = Rack::Builder.new do
++      use Rack::Static,
++        urls: [""],
++        root: build_directory,
++        index: "index.html"
 +
-+Generate HTML from your project's Git history
++      run -&gt; (*) {}
++    end
 +
-+OPTIONS
++    block.call
++  end
 +
-+      --output-dir
-+          specify the directory where the site will be built
++  def with_git_repository(&amp;block)
++    ClimateControl.modify(GIT_DIR: @repository.dir.path) do
++      Capybara.app = Middleman.server
 +
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
++      block.call Pathname(@repository.dir.path)
++    end
++  end
 +
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
++  def with_git_directory(&amp;block)
++    directory = Dir.mktmpdir
++    @repository = Git.init(directory)
++    block.call
++  ensure
++    FileUtils.rm_rf(directory)
++  end
++end
 </span></code></pre></div></details>
 
         </aside>

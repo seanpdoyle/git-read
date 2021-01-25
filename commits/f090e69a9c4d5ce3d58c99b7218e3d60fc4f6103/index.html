@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md</title>
+    <title>Add `bin/git-read --server` flag</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
   </head>
@@ -17,11 +17,11 @@
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
 
-<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              &#8592; Previous
+<a href="/git-read/commits/3017c39a1ec734f6cdd280b5bba62150fe1f75ca/index.html">              &#8592; Previous
 </a>
           <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
-<a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              Next &#8594;
+<a href="/git-read/commits/fb1536eccf2f5618de871cf85c4cac35c8143f64/index.html">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -99,79 +99,90 @@
       <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
         <section class="prose prose-lg md:prose-xl">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="add-bin-git-read-server-flag">Add <code>bin/git-read --server</code> flag</h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
-
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<p>Extend the <code>bin/git-read</code> command line interface to accept <code>-s</code>,
+<code>--server</code>, or <code>--server</code> to execute a long-running process that manages
+the Middleman preview server, serving the site at
+<a href="#">http://localhost:4567</a>.</p>
 
         </section>
       </article>
 
         <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
-            <details id="README.md" open class="border-l border-r">
+            <details id="bin/git-read" open class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <code class="break-all">README.md</code>
+    <code class="break-all">bin/git-read</code>
   </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
-+
-+Generate a website based on a project's Git history.
-+
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
-+
-+Command-line Interface
-+---
-+
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
-+
-+To learn of the ways to to invoke the command, execute `git read --help`:
-+
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
+index a9033d6..d1ed809 100755
+</span><span class="gd">--- a/bin/git-read
+</span><span class="gi">+++ b/bin/git-read
+</span><span class="p">@@ -15,6 +15,9 @@</span> for i in "${!ARGS[@]}"; do
+       OUTPUT_DIR="${ARGS[i+1]}"
+       unset 'ARGS[i+1]'
+       ;;
+<span class="gi">+    -s|--server|--serve)
++      TARGET="serve"
++      ;;
+</span>     -g|--git-dir)
+       GIT_DIR="${ARGS[i+1]}"
+       unset 'ARGS[i+1]'
+<span class="p">@@ -24,7 +27,8 @@</span> for i in "${!ARGS[@]}"; do
+       ;;
+     -h|--help)
+       cat &lt;&lt;-HELP
+<span class="gd">-usage: git read [--help] [-v|--verbose] [-g|--git-dir &lt;path&gt;] [-o|--output-dir &lt;path&gt;]
+</span><span class="gi">+usage: git read [--help] [-v|--verbose] [-g|--git-dir &lt;path&gt;]
++                [-s|--server|--serve] [-o|--output-dir &lt;path&gt;]
+</span> 
+ Generate HTML from your project's Git history
+ 
+<span class="p">@@ -38,6 +42,10 @@</span> OPTIONS
+ 
+       --verbose
+           print debugging information during the build process
+<span class="gi">+
 +      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
-</span></code></pre></div></details>
++            build and serve assets with a server available at
++            http://127.0.0.1:4567
+</span> HELP
+       exit 0
+       ;;
+<span class="p">@@ -51,18 +59,25 @@</span> done
+ build_site() {
+   git_dir="${1}"
+   output_dir="${2}"
+<span class="gd">-  verbosity="${@}"
+</span><span class="gi">+  target="${3}"
++  verbosity="${4}"
+</span>   tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
+ 
+   export GIT_DIR=$git_dir
+ 
+   mkdir -p $output_dir
+   cd $tool_dir
+<span class="gd">-  bundle exec middleman build --build-dir=$output_dir $verbosity
+</span><span class="gi">+
++  if [ "$target" == "serve" ]; then
++    bundle exec middleman server
++  else
++    bundle exec middleman build --build-dir=$output_dir $verbosity
++  fi
+</span>   cd $git_dir
+ }
+ 
+ build_site \
+   $(realpath ${GIT_DIR-./}) \
+   $(realpath ${OUTPUT_DIR-./build/}) \
+<span class="gi">+  "${TARGET}" \
+</span>   "${VERBOSE}"
+</code></pre></div></details>
 
         </aside>
     </main>

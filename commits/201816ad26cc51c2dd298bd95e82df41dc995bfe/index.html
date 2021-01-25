@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md</title>
+    <title>Extract `Commit` model</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
   </head>
@@ -17,11 +17,11 @@
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
 
-<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              &#8592; Previous
+<a href="/git-read/commits/9419d14e977e162ad14e94c1e7e01936e3c65299/index.html">              &#8592; Previous
 </a>
           <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
-<a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              Next &#8594;
+<a href="/git-read/commits/06969aa4ff82b17cdb12fb0e08bda346c7fb2d52/index.html">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -99,79 +99,149 @@
       <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
         <section class="prose prose-lg md:prose-xl">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="extract-commit-model">Extract <code>Commit</code> model</h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
+<p>Throughout the application, there are several occurrences of logic that
+extract&rsquo;s a commit message&rsquo;s subject:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">commit</span><span class="p">.</span><span class="nf">message</span><span class="p">.</span><span class="nf">lines</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">strip</span>
+</code></pre></div>
+<p>In reaction to this repeated logic, we have several solutions at our
+disposal.</p>
 
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<h2 id="helper-method">Helper method</h2>
+
+<p>One potential solution is to extract <code>subject</code> method in the <code>helpers</code>
+block in our <a href="#config.rb"><code>config.rb</code></a>:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">helpers</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="nf">subject</span><span class="p">(</span><span class="n">commit</span><span class="p">)</span>
+    <span class="n">commit</span><span class="p">.</span><span class="nf">message</span><span class="p">.</span><span class="nf">lines</span><span class="p">.</span><span class="nf">first</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Methods declared in the <code>helpers</code> block are made available within our
+application templates (namely,
+<a href="#source/layouts/layout.erb"><code>source/layouts/layout.erb</code></a>.</p>
+
+<p>This would resolve the instances of duplication within that template,
+but doesn&rsquo;t resolve instances within the <a href="#config.rb"><code>config.rb</code></a>
+itself.</p>
+
+<h2 id="model-instance-method">Model Instance method</h2>
+
+<p>As an alternative to a helper method, this commit extracts the <a href="#lib/models/commit.rb"><code>Commit</code>
+class</a>, and declares it in the new <code>lib/models</code>
+directory.</p>
+
+<p>Similar to a helper method, an instance method centralizes the logic to
+a single place. In the current implementation, the <code>Commit</code> class
+inherits from <a href="https://ruby-doc.org/stdlib-2.5.1/libdoc/delegate/rdoc/SimpleDelegator.html"><code>SimpleDelegator</code></a>, which makes the
+methods declared in it an <em>expansion</em> on the existing
+<a href="https://github.com/ruby-git/ruby-git/blob/v1.6.0/lib/git/object.rb"><code>Git::Object</code></a> interface.</p>
+
+<p>An additional benefit of an instance method on a model is that contexts
+that have access to the <code>commit</code> template-local variable can invoke
+<code>subject</code>, without requiring knowledge of the internals of the <code>commit</code>
+reference. This style of message sending adheres to the <a href="https://pragprog.com/articles/tell-dont-ask">&ldquo;Tell, Don&rsquo;t
+Ask&rdquo;</a> principle of software design.</p>
+
+<p>Centralizing the logic of transforming the <a href="https://github.com/ruby-git/ruby-git/blob/v1.6.0/lib/git/object.rb"><code>Git::Object</code>
+instances</a> into <code>git-read</code>-specific models will simplify
+this project&rsquo;s future improvements.</p>
 
         </section>
       </article>
 
         <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
-            <details id="README.md" open class="border-l border-r">
+            <details id="config.rb" open class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <code class="break-all">README.md</code>
+    <code class="break-all">config.rb</code>
   </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 465fb82..216299c 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -61,7 +61,7 @@</span> repository.tags.each do |tag|
+         history: stale_history,
+         commit: commit,
+         page: {
+<span class="gd">-          title: commit.message.lines.first,
+</span><span class="gi">+          title: commit.subject,
+</span>         },
+       },
+       ignore: true,
+<span class="p">@@ -98,7 +98,7 @@</span> history.commits.each do |commit|
+       history: history,
+       commit: commit,
+       page: {
+<span class="gd">-        title: commit.message.lines.first,
+</span><span class="gi">+        title: commit.subject,
+</span>       }
+     },
+     ignore: true,
+</code></pre></div></details>
+
+            <details id="lib/models/commit.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">lib/models/commit.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/commit.rb b/lib/models/commit.rb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
+</span><span class="gh">index 0000000..49a67ed
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
+</span><span class="gi">+++ b/lib/models/commit.rb
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+class Commit &lt; SimpleDelegator
++  def initialize(commit:)
++    super(commit)
++  end
 +
-+Generate a website based on a project's Git history.
-+
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
-+
-+Command-line Interface
-+---
-+
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
-+
-+To learn of the ways to to invoke the command, execute `git read --help`:
-+
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
++  def subject
++    message.lines.first.strip
++  end
++end
 </span></code></pre></div></details>
+
+            <details id="lib/models/history.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">lib/models/history.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/history.rb b/lib/models/history.rb
+index c156a3c..6507c3d 100644
+</span><span class="gd">--- a/lib/models/history.rb
+</span><span class="gi">+++ b/lib/models/history.rb
+</span><span class="p">@@ -1,3 +1,5 @@</span>
+<span class="gi">+require "lib/models/commit"
++
+</span> class History
+   attr_reader :name, :readme, :repository, :root
+ 
+<span class="p">@@ -14,7 +16,9 @@</span> class History
+   end
+ 
+   def commits
+<span class="gd">-    root.log(nil).reverse_each
+</span><span class="gi">+    root.log(nil).reverse_each.map do |commit|
++      Commit.new(commit: commit)
++    end
+</span>   end
+ 
+   def out_of_date?
+</code></pre></div></details>
 
         </aside>
     </main>

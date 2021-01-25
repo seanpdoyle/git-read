@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Extract `UrlHelpers`</title>
+    <script src="../../javascripts/site.js"></script>
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="/git-read/index.html">          git-read
+</a>      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+
+<a href="/git-read/commits/df2e83a5e4715d17ddbd06ba533171426f7200b4/index.html">              &#8592; Previous
+</a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+<a href="/git-read/commits/876195313464b78ac280a8fc8b4e986008b0acb4/index.html">              Next &#8594;
+</a>      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+
+</a><a href="/git-read/commits/dbc622945b1bddf16efdc03a2406269f453f8715/index.html">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+
+</a><a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              <p>Add webpack for managing assets</p>
+
+</a><a href="/git-read/commits/4b5836dd53627297d5b6310c4a6f0d85840c466b/index.html">              <p>Install Tailwind</p>
+
+</a><a href="/git-read/commits/b91d54dd5036a8ce69999af75fe6126102fcaac9/index.html">              <p>Replace Generated Files with Static HTML and CSS</p>
+
+</a><a href="/git-read/commits/e1c885cc55a675f138db8185159b430aab71e9cf/index.html">              <p>Exercise the application through a System Test</p>
+
+</a><a href="/git-read/commits/a002785d225f38277dbe736a29a815662b073c6f/index.html">              <p>Introduce Redcarpet Markdown Engine</p>
+
+</a><a href="/git-read/commits/7f5d26388b905159321686ff630bb036d6d7e12f/index.html">              <p>Generate <code>/index.html</code> dynamically</p>
+
+</a><a href="/git-read/commits/6d38b4dc08ed6e7495bba57c091d5571570998ef/index.html">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+
+</a><a href="/git-read/commits/1d9e32b3260f02c3b433b1103daf0ee8034bdeb7/index.html">              <p>Render the contents of a Commit&#39;s Message</p>
+
+</a><a href="/git-read/commits/53aff71d2d7f407e32599da7b57946b4626a5d32/index.html">              <p>Navigate to previous commit</p>
+
+</a><a href="/git-read/commits/8cf026425cd18a306023b9db81584603ce6f2454/index.html">              <p>Navigate to next commit</p>
+
+</a><a href="/git-read/commits/df2e83a5e4715d17ddbd06ba533171426f7200b4/index.html">              <p>Dynamically determine project title</p>
+
+</a><a href="/git-read/commits/0e4e5b9a6a52fd9036fff968561361b001881bba/index.html">              <p>Extract <code>UrlHelpers</code></p>
+
+</a><a href="/git-read/commits/876195313464b78ac280a8fc8b4e986008b0acb4/index.html">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+
+</a><a href="/git-read/commits/dcd4cdb09c63378dfd48d48efc98ee9fc93f047c/index.html">              <p>Syntax highlight Markdown fenced code blocks</p>
+
+</a><a href="/git-read/commits/3017c39a1ec734f6cdd280b5bba62150fe1f75ca/index.html">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+
+</a><a href="/git-read/commits/f090e69a9c4d5ce3d58c99b7218e3d60fc4f6103/index.html">              <p>Add <code>bin/git-read --server</code> flag</p>
+
+</a><a href="/git-read/commits/fb1536eccf2f5618de871cf85c4cac35c8143f64/index.html">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+
+</a><a href="/git-read/commits/9419d14e977e162ad14e94c1e7e01936e3c65299/index.html">              <p>Add support for re-writing a project&#39;s history</p>
+
+</a><a href="/git-read/commits/201816ad26cc51c2dd298bd95e82df41dc995bfe/index.html">              <p>Extract <code>Commit</code> model</p>
+
+</a><a href="/git-read/commits/06969aa4ff82b17cdb12fb0e08bda346c7fb2d52/index.html">              <p>Render how a commit changes the project&#39;s files</p>
+
+</a><a href="/git-read/commits/f9e486cbf8d90e12cca64758fa607615f50b85d4/index.html">              <p>Extract SVG images</p>
+
+</a><a href="/git-read/commits/9c1da72abeeac1beef2e1f05fbe157da86c7a4e4/index.html">              <p>Get Started from README skipping generated commits</p>
+
+</a><a href="/git-read/commits/ad791e1df7c6e6a1246636accac242048b17e0aa/index.html">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+
+</a><a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              <p>Navigate with Turbolinks</p>
+
+</a><a href="/git-read/commits/2325b95a81830eb6b406de6284153842a4862ea8/index.html">              <p>Integrate with GitHub Actions</p>
+
+</a>        </nav>
+      </details>
+
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+
+          <h1 id="extract-urlhelpers">Extract <code>UrlHelpers</code></h1>
+
+<p>This commit extracts commonly hard-coded path values into a singular
+location, which is shared in the implementation and the test suite
+through the newly declared <code>UrlHelpers</code> module.</p>
+
+<p>Middleman support extending the rendering context by passing modules to
+the <a href="https://middlemanapp.com/basics/helper-methods/#custom-defined-helpers"><code>helpers</code> method</a>:</p>
+
+<blockquote>
+<p>In addition to the helpers provided by Middleman out of the box, you
+can also add your own helper methods and classes that will be
+accessible within any controller or view automatically.</p>
+
+<p>Alternatively, you can create external Ruby modules which contain
+helpers and include them. You can put files in the <code>lib</code> directory.</p>
+
+<p>An even easier way is to put your helpers in the <code>helpers</code> directory
+and name them after their module (i.e., <code>CustomHelpers</code> lives in
+<code>helpers/custom_helpers.rb</code>). Then, Middleman will automatically load
+them and register them as helpers.</p>
+</blockquote>
+
+        </section>
+      </article>
+
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id="config.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">config.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 951d5d3..95ce586 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -1,4 +1,7 @@</span>
+ require "lib/models/history"
+<span class="gi">+require "helpers/url_helpers"
++
++include UrlHelpers
+</span> 
+ # Activate and configure extensions
+ # https://middlemanapp.com/advanced/configuration/#configuring-extensions
+</code></pre></div></details>
+
+            <details id="helpers/url_helpers.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">helpers/url_helpers.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/helpers/url_helpers.rb b/helpers/url_helpers.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..b375b35
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/helpers/url_helpers.rb
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+module UrlHelpers
++  def commit_path(commit)
++    "/commits/#{commit.sha}/index.html"
++  end
++
++  def root_path
++    "/index.html"
++  end
++end
+</span></code></pre></div></details>
+
+            <details id="source/layouts/layout.erb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/layouts/layout.erb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 1c67def..35acfe4 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -11,16 +11,16 @@</span>
+   &lt;body class="min-h-screen"&gt;
+     &lt;header class="flex flex-row h-12 border-b"&gt;
+       &lt;h1 class="flex items-center justify-center w-full md:border-r md:w-96"&gt;
+<span class="gd">-        &lt;a href="/index.html"&gt;
+</span><span class="gi">+        &lt;% link_to root_path do %&gt;
+</span>           &lt;%= escape_html(history.name) %&gt;
+<span class="gd">-        &lt;/a&gt;
+</span><span class="gi">+        &lt;% end %&gt;
+</span>       &lt;/h1&gt;
+ 
+       &lt;nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative"&gt;
+         &lt;% parent, _, child = adjacent_commits(history.commits, commit: commit) %&gt;
+ 
+         &lt;% if parent.present? %&gt;
+<span class="gd">-          &lt;% link_to "/commits/#{parent.sha}/index.html" do %&gt;
+</span><span class="gi">+          &lt;% link_to commit_path(parent) do %&gt;
+</span>             &amp;#8592; Previous
+           &lt;% end %&gt;
+         &lt;% end %&gt;
+<span class="p">@@ -28,7 +28,7 @@</span>
+         &lt;span class="flex-grow"&gt;&lt;!-- ensure the links are pushed to the container's extremes --&gt;&lt;/span&gt;
+ 
+         &lt;% if child.present? %&gt;
+<span class="gd">-          &lt;% link_to "/commits/#{child.sha}/index.html" do %&gt;
+</span><span class="gi">+          &lt;% link_to commit_path(child) do %&gt;
+</span>             Next &amp;#8594;
+           &lt;% end %&gt;
+         &lt;% end %&gt;
+</code></pre></div></details>
+
+            <details id="test/application_system_test_case.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/application_system_test_case.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+index e7b1a93..099079b 100644
+</span><span class="gd">--- a/test/application_system_test_case.rb
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -12,9 +12,12 @@</span> require "pathname"
+ require "tmpdir"
+ 
+ 
+<span class="gi">+require_relative "../helpers/url_helpers"
++
+</span> class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
+   include Capybara::DSL
+   include Capybara::Minitest::Assertions
+<span class="gi">+  include UrlHelpers
+</span> 
+   def around(&amp;block)
+     directory = Dir.mktmpdir
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_commits_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_commits_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_commits_test.rb b/test/system/visitor_views_commits_test.rb
+index 6b243aa..575858d 100644
+</span><span class="gd">--- a/test/system/visitor_views_commits_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_commits_test.rb
+</span><span class="p">@@ -12,7 +12,7 @@</span> class VisitorViewsCommitsTest &lt; ApplicationSystemTestCase
+     MARKDOWN
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span>       expand_history
+       click_on "The commit subject"
+ 
+<span class="p">@@ -26,7 +26,7 @@</span> class VisitorViewsCommitsTest &lt; ApplicationSystemTestCase
+     commit("This subject has a `&lt;h1&gt;` in it")
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span> 
+       assert_text "This subject has a &lt;h1&gt; in it"
+     end
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_next_commit_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_next_commit_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_next_commit_test.rb b/test/system/visitor_views_next_commit_test.rb
+index a175fa7..80caaa3 100644
+</span><span class="gd">--- a/test/system/visitor_views_next_commit_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_next_commit_test.rb
+</span><span class="p">@@ -10,7 +10,7 @@</span> class VisitorViewsNextCommitTest &lt; ApplicationSystemTestCase
+     commit("Last commit")
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span>       expand_history
+       click_on "First commit"
+       click_on "Next"
+<span class="p">@@ -24,7 +24,7 @@</span> class VisitorViewsNextCommitTest &lt; ApplicationSystemTestCase
+     commit("First commit")
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span>       expand_history
+       click_on "First commit"
+ 
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_previous_commit_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_previous_commit_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_previous_commit_test.rb b/test/system/visitor_views_previous_commit_test.rb
+index ed752da..7778684 100644
+</span><span class="gd">--- a/test/system/visitor_views_previous_commit_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_previous_commit_test.rb
+</span><span class="p">@@ -10,7 +10,7 @@</span> class VisitorViewsPreviousCommitTest &lt; ApplicationSystemTestCase
+     commit("Last commit")
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span>       expand_history
+       click_on "Last commit"
+       click_on "Previous"
+<span class="p">@@ -24,7 +24,7 @@</span> class VisitorViewsPreviousCommitTest &lt; ApplicationSystemTestCase
+     commit("First commit")
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span>       expand_history
+       click_on "First commit"
+ 
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_readme_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_readme_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_readme_test.rb b/test/system/visitor_views_readme_test.rb
+index 4b35496..d7ca58e 100644
+</span><span class="gd">--- a/test/system/visitor_views_readme_test.rb
+</span><span class="gi">+++ b/test/system/visitor_views_readme_test.rb
+</span><span class="p">@@ -11,7 +11,7 @@</span> class VisitorViewsReadmeTest &lt; ApplicationSystemTestCase
+     commit("Initial Commit")
+ 
+     with_git_repository do
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span> 
+       assert_title "git-read"
+       assert_selector "h1", text: "git-read"
+<span class="p">@@ -26,7 +26,7 @@</span> class VisitorViewsReadmeTest &lt; ApplicationSystemTestCase
+     commit("Last commit")
+ 
+     with_git_repository do |directory|
+<span class="gd">-      visit "/index.html"
+</span><span class="gi">+      visit root_path
+</span>       expand_history
+       click_on "Last commit"
+       click_on directory.basename.to_s
+</code></pre></div></details>
+
+        </aside>
+    </main>
+  </body>
+</html>

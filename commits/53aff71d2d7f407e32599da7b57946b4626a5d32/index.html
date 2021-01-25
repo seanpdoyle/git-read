@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md</title>
+    <title>Navigate to previous commit</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
   </head>
@@ -17,11 +17,11 @@
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
 
-<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              &#8592; Previous
+<a href="/git-read/commits/1d9e32b3260f02c3b433b1103daf0ee8034bdeb7/index.html">              &#8592; Previous
 </a>
           <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
-<a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              Next &#8594;
+<a href="/git-read/commits/8cf026425cd18a306023b9db81584603ce6f2454/index.html">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -99,78 +99,156 @@
       <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
         <section class="prose prose-lg md:prose-xl">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="navigate-to-previous-commit">Navigate to previous commit</h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
+<p>When one commit comes before another in a sequence, it can be <a href="https://git-scm.com/docs/git-commit-tree">referred
+to as its parent</a>:</p>
 
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<blockquote>
+<p>A commit object may have any number of parents. With exactly one
+parent, it is an ordinary commit. Having more than one parent makes
+the commit a merge between several lines of history.</p>
+
+<p><strong>Initial (root) commits have no parents</strong></p>
+</blockquote>
+
+<p>When viewing the initial commit, the commit won&rsquo;t have a parent.</p>
+
+<p>To account for this, guard the render block with a <a href="https://api.rubyonrails.org/classes/Object.html#method-i-present-3F">presence checking
+conditional</a>.</p>
 
         </section>
       </article>
 
         <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
-            <details id="README.md" open class="border-l border-r">
+            <details id="config.rb" open class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <code class="break-all">README.md</code>
+    <code class="break-all">config.rb</code>
   </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 74a2a47..bfa63da 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -64,6 +64,7 @@</span> proxy(
+   "README.html",
+   locals: {
+     history: history,
+<span class="gi">+    commit: history.initial_commit,
+</span>     contents: history.readme,
+     page: {
+       title: history.readme.lines.first,
+</code></pre></div></details>
+
+            <details id="lib/models/history.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">lib/models/history.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/lib/models/history.rb b/lib/models/history.rb
+index 32db695..ab6707b 100644
+</span><span class="gd">--- a/lib/models/history.rb
+</span><span class="gi">+++ b/lib/models/history.rb
+</span><span class="p">@@ -6,6 +6,10 @@</span> class History
+     @repository = repository
+   end
+ 
+<span class="gi">+  def initial_commit
++    commits.first
++  end
++
+</span>   def commits
+     repository.log(nil).reverse_each
+   end
+</code></pre></div></details>
+
+            <details id="source/layouts/layout.erb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/layouts/layout.erb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 26f02f2..8931ecf 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -17,9 +17,11 @@</span>
+       &lt;/h1&gt;
+ 
+       &lt;nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative"&gt;
+<span class="gd">-        &lt;a href="#"&gt;
+-          &amp;#8592; Previous
+-        &lt;/a&gt;
+</span><span class="gi">+        &lt;% if commit.parent.present? %&gt;
++          &lt;% link_to "/commits/#{commit.parent.sha}/index.html" do %&gt;
++            &amp;#8592; Previous
++          &lt;% end %&gt;
++        &lt;% end %&gt;
+</span> 
+         &lt;a href="#"&gt;
+           Next &amp;#8594;
+</code></pre></div></details>
+
+            <details id="test/system/visitor_views_previous_commit_test.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/system/visitor_views_previous_commit_test.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/system/visitor_views_previous_commit_test.rb b/test/system/visitor_views_previous_commit_test.rb
 </span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
+</span><span class="gh">index 0000000..ed752da
 </span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
+</span><span class="gi">+++ b/test/system/visitor_views_previous_commit_test.rb
+</span><span class="p">@@ -0,0 +1,34 @@</span>
+<span class="gi">+require "application_system_test_case"
 +
-+Generate a website based on a project's Git history.
++class VisitorViewsPreviousCommitTest &lt; ApplicationSystemTestCase
++  test "visitor views previous commit" do
++    stage_file("README.md", "First version")
++    commit("First commit")
++    stage_file("README.md", "Middle version")
++    commit("Middle commit")
++    stage_file("README.md", "Last version")
++    commit("Last commit")
 +
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
++    with_git_repository do
++      visit "/index.html"
++      expand_history
++      click_on "Last commit"
++      click_on "Previous"
 +
-+Command-line Interface
-+---
++      assert_selector "h1", text: "Middle commit"
++    end
++  end
 +
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
++  test "visitor views commit without a previous commit" do
++    stage_file("README.md", "First version")
++    commit("First commit")
 +
-+To learn of the ways to to invoke the command, execute `git read --help`:
++    with_git_repository do
++      visit "/index.html"
++      expand_history
++      click_on "First commit"
 +
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
++      assert_no_link "Previous"
++    end
++  end
++end
 </span></code></pre></div></details>
 
         </aside>

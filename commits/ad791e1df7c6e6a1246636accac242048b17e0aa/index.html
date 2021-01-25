@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Elaborate on the project's goals in the README.md</title>
+    <title>Add `<details>` element polyfill</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
   </head>
@@ -17,11 +17,11 @@
 
       <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
 
-<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              &#8592; Previous
+<a href="/git-read/commits/9c1da72abeeac1beef2e1f05fbe157da86c7a4e4/index.html">              &#8592; Previous
 </a>
           <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
-<a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              Next &#8594;
+<a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              Next &#8594;
 </a>      </nav>
     </header>
 
@@ -99,79 +99,91 @@
       <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
         <section class="prose prose-lg md:prose-xl">
 
-          <h1 id="elaborate-on-the-projects-goals-in-the-readme-md">Elaborate on the project&rsquo;s goals in the README.md</h1>
+          <h1 id="add-details-element-polyfill">Add <code>&lt;details&gt;</code> element polyfill</h1>
 
-<p>Although the tool itself doesn&rsquo;t do anything yet, this commit introduces
-the <a href="#README.md"><code>README.md</code></a> file to serve as an informative welcome to
-contributors and readers of the project&rsquo;s source code&rsquo;s history.</p>
+<p>While support for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> that powers this
+application&rsquo;s commit history browser is widespread, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Browser_compatibility">it is not supported
+by all available browsers</a>.</p>
 
-<p>Once the project works as described, the <a href="#README.md"><code>README.md</code></a> will
-serve as the home page for the generated website.</p>
+<p>Now that <a href="https://docs.npmjs.com/about-npm/">NPM packages</a> are available to the application&rsquo;s pages,
+we can <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfill</a> missing support.</p>
+
+<p>There is a <a href="https://github.com/javan/details-element-polyfill/tree/2.4.0#html-details-element-polyfill">third-party, community sourced
+polyfill</a> for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code>
+element</a> that this commit adds a dependency on.</p>
 
         </section>
       </article>
 
         <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
-            <details id="README.md" open class="border-l border-r">
+            <details id="package.json" open class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <code class="break-all">README.md</code>
+    <code class="break-all">package.json</code>
   </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/README.md b/README.md
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..7762285
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/README.md
-</span><span class="p">@@ -0,0 +1,44 @@</span>
-<span class="gi">+git-read
-+===
-+
-+Generate a website based on a project's Git history.
-+
-+* Serve the project's `README.md` as the homepage
-+* Index the history through its commits
-+* Transforms commit messages HTML through a syntax-aware Markdown parser
-+* Display the commits alongside their code changes
-+
-+Command-line Interface
-+---
-+
-+Once installed, make sure that the `bin/git-read` executable is available on
-+your path so that the [`git` program can invoke it as a subcommand][subcommand].
-+
-+To learn of the ways to to invoke the command, execute `git read --help`:
-+
-+```
-+usage: git read [--help] [-v|--verbose] [-s|--server|--serve]
-+                [-g | --git-dir &lt;path&gt;] [-o | --output-dir &lt;path&gt;]
-+
-+Generate HTML from your project's Git history
-+
-+OPTIONS
-+
-+      --output-dir
-+          specify the directory where the site will be built
-+
-+      --git-dir
-+          specify the parent directory of the project's .git/ directory
-+
-+      --verbose
-+          print debugging information during the build process
-+
-+      --server
-+          build and serve assets with a server available at
-+          http://127.0.0.1:4567
-+
-+      --help
-+          generate this help output
-+```
-+
-+[subcommand]: http://mirrors.edge.kernel.org/pub/software/scm/git/docs/howto/new-command.html
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/package.json b/package.json
+index 9c2c580..1746012 100644
+</span><span class="gd">--- a/package.json
+</span><span class="gi">+++ b/package.json
+</span><span class="p">@@ -20,6 +20,7 @@</span>
+   "dependencies": {
+     "@tailwindcss/typography": "^0.4.0",
+     "autoprefixer": "^10.2.1",
+<span class="gi">+    "details-element-polyfill": "^2.4.0",
+</span>     "postcss": "^8.2.4",
+     "tailwindcss": "^2.0.2"
+   }
+</code></pre></div></details>
+
+            <details id="source/javascripts/site.js" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">source/javascripts/site.js</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
+index 6a4c3be..8fea308 100644
+</span><span class="gd">--- a/source/javascripts/site.js
+</span><span class="gi">+++ b/source/javascripts/site.js
+</span><span class="p">@@ -1 +1,3 @@</span>
+ import "../stylesheets/site.css"
+<span class="gi">+
++import "details-element-polyfill"
 </span></code></pre></div></details>
+
+            <details id="yarn.lock" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">yarn.lock</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/yarn.lock b/yarn.lock
+index 828d2d0..239c5e4 100644
+</span><span class="gd">--- a/yarn.lock
+</span><span class="gi">+++ b/yarn.lock
+</span><span class="p">@@ -1004,6 +1004,11 @@</span> des.js@^1.0.0:
+     inherits "^2.0.1"
+     minimalistic-assert "^1.0.0"
+ 
+<span class="gi">+details-element-polyfill@^2.4.0:
++  version "2.4.0"
++  resolved "https://registry.yarnpkg.com/details-element-polyfill/-/details-element-polyfill-2.4.0.tgz#e0622adef7902662faf27b4ab8acba5dc4e3a6e6"
++  integrity sha512-jnZ/m0+b1gz3EcooitqL7oDEkKHEro659dt8bWB/T/HjiILucoQhHvvi5MEOAIFJXxxO+rIYJ/t3qCgfUOSU5g==
++
+</span> detect-file@^1.0.0:
+   version "1.0.0"
+   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
+</code></pre></div></details>
 
         </aside>
     </main>

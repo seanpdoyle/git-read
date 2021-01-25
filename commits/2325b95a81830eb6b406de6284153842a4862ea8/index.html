@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Integrate with GitHub Actions</title>
+    <script src="../../javascripts/site.js"></script>
+    <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen">
+    <header class="flex flex-row h-12 border-b">
+      <h1 class="flex items-center justify-center w-full md:border-r md:w-96">
+<a href="/git-read/index.html">          git-read
+</a>      </h1>
+
+      <nav class="flex flex-grow justify-between items-center border-t p-3 fixed inset-x-0 bottom-0 bg-white z-10 md:px-4 md:py-0 md:bg-transparent md:border-0 md:relative">
+
+<a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              &#8592; Previous
+</a>
+          <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
+
+      </nav>
+    </header>
+
+    <main class="flex flex-col md:flex-row">
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+        <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
+          <span class="sr-only open:hidden">Expand History</span>
+          <span class="sr-only hidden open:initial">Collapse History</span>
+          <div class="md:h-screen-fit flex flex-col border-b border-t h-8 w-full justify-center md:w-8 md:border-r md:border-l md:border-t-0 open:absolute inset-x-0 bottom-0 top-auto md:top-0 md:left-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="transform rotate-90 open:-rotate-90 md:rotate-0 md:open:rotate-180">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+          </div>
+        </summary>
+
+        <nav class="flex flex-col px-4 my-4 overflow-y-auto h-48 w-screen current-within:font-bold md:h-screen-fit md:w-96 md:my-auto md:p-2 md:pr-10 md:space-y-2">
+<a href="/git-read/commits/b569a6e924f814f61e4abab68583509b3f07d5de/index.html">              <p>[GENERATED]: Scaffold the project with Middleman</p>
+
+</a><a href="/git-read/commits/dbc622945b1bddf16efdc03a2406269f453f8715/index.html">              <p>Elaborate on the project&#39;s goals in the README.md</p>
+
+</a><a href="/git-read/commits/bf43ccf18bce2ef85031a550b6459a062748ad98/index.html">              <p>Add webpack for managing assets</p>
+
+</a><a href="/git-read/commits/4b5836dd53627297d5b6310c4a6f0d85840c466b/index.html">              <p>Install Tailwind</p>
+
+</a><a href="/git-read/commits/b91d54dd5036a8ce69999af75fe6126102fcaac9/index.html">              <p>Replace Generated Files with Static HTML and CSS</p>
+
+</a><a href="/git-read/commits/e1c885cc55a675f138db8185159b430aab71e9cf/index.html">              <p>Exercise the application through a System Test</p>
+
+</a><a href="/git-read/commits/a002785d225f38277dbe736a29a815662b073c6f/index.html">              <p>Introduce Redcarpet Markdown Engine</p>
+
+</a><a href="/git-read/commits/7f5d26388b905159321686ff630bb036d6d7e12f/index.html">              <p>Generate <code>/index.html</code> dynamically</p>
+
+</a><a href="/git-read/commits/6d38b4dc08ed6e7495bba57c091d5571570998ef/index.html">              <p>Extract <code>ApplicationSystemTestCase</code></p>
+
+</a><a href="/git-read/commits/1d9e32b3260f02c3b433b1103daf0ee8034bdeb7/index.html">              <p>Render the contents of a Commit&#39;s Message</p>
+
+</a><a href="/git-read/commits/53aff71d2d7f407e32599da7b57946b4626a5d32/index.html">              <p>Navigate to previous commit</p>
+
+</a><a href="/git-read/commits/8cf026425cd18a306023b9db81584603ce6f2454/index.html">              <p>Navigate to next commit</p>
+
+</a><a href="/git-read/commits/df2e83a5e4715d17ddbd06ba533171426f7200b4/index.html">              <p>Dynamically determine project title</p>
+
+</a><a href="/git-read/commits/0e4e5b9a6a52fd9036fff968561361b001881bba/index.html">              <p>Extract <code>UrlHelpers</code></p>
+
+</a><a href="/git-read/commits/876195313464b78ac280a8fc8b4e986008b0acb4/index.html">              <p>Add &quot;current&quot; styles to <code>&lt;a&gt;</code> elements</p>
+
+</a><a href="/git-read/commits/dcd4cdb09c63378dfd48d48efc98ee9fc93f047c/index.html">              <p>Syntax highlight Markdown fenced code blocks</p>
+
+</a><a href="/git-read/commits/3017c39a1ec734f6cdd280b5bba62150fe1f75ca/index.html">              <p>Introduce <code>bin/git-read</code> command line interface</p>
+
+</a><a href="/git-read/commits/f090e69a9c4d5ce3d58c99b7218e3d60fc4f6103/index.html">              <p>Add <code>bin/git-read --server</code> flag</p>
+
+</a><a href="/git-read/commits/fb1536eccf2f5618de871cf85c4cac35c8143f64/index.html">              <p>Extract <code>GitHelpers</code> from System Test Cases</p>
+
+</a><a href="/git-read/commits/9419d14e977e162ad14e94c1e7e01936e3c65299/index.html">              <p>Add support for re-writing a project&#39;s history</p>
+
+</a><a href="/git-read/commits/201816ad26cc51c2dd298bd95e82df41dc995bfe/index.html">              <p>Extract <code>Commit</code> model</p>
+
+</a><a href="/git-read/commits/06969aa4ff82b17cdb12fb0e08bda346c7fb2d52/index.html">              <p>Render how a commit changes the project&#39;s files</p>
+
+</a><a href="/git-read/commits/f9e486cbf8d90e12cca64758fa607615f50b85d4/index.html">              <p>Extract SVG images</p>
+
+</a><a href="/git-read/commits/9c1da72abeeac1beef2e1f05fbe157da86c7a4e4/index.html">              <p>Get Started from README skipping generated commits</p>
+
+</a><a href="/git-read/commits/ad791e1df7c6e6a1246636accac242048b17e0aa/index.html">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+
+</a><a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              <p>Navigate with Turbolinks</p>
+
+</a><a href="/git-read/commits/2325b95a81830eb6b406de6284153842a4862ea8/index.html">              <p>Integrate with GitHub Actions</p>
+
+</a>        </nav>
+      </details>
+
+      <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
+        <section class="prose prose-lg md:prose-xl">
+
+          <h1 id="integrate-with-github-actions">Integrate with GitHub Actions</h1>
+
+<p>Declared a <a href="#.github/workflows/git-read.yml"><code>.github/workflows/git-read.yml</code>
+file</a> to configure steps necessary to
+leverage <a href="https://help.github.com/en/actions">GitHub actions</a>.</p>
+
+<p>The desired outcome is to publish a <code>git-read</code>-generated website to that
+project&rsquo;s <a href="https://pages.github.com/"><code>gh-pages</code> branch</a>.</p>
+
+<p>To achieve this, execute the following steps upon a <code>git push
+origin/main</code>:</p>
+
+<ul>
+<li><p><a href="https://github.com/actions/checkout/tree/v2#usage">clone the host project&rsquo;s entire source code history with
+<code>fetch-depth: 0</code> to </a></p></li>
+<li><p><a href="https://github.com/actions/setup-ruby/tree/v1.1.1#usage">install Ruby into the Action&rsquo;s container</a></p></li>
+<li><p><a href="https://github.com/actions/setup-node/tree/v1#usage">install NodeNJS into the Action&rsquo;s container</a></p></li>
+<li><p><a href="https://github.com/actions/checkout/tree/v2#usage">clone and install the <code>git-read</code> project into the
+container</a></p></li>
+<li><p>execute <code>bin/git-read</code> to generate a website from the host project&rsquo;s
+Git History</p></li>
+<li><p><a href="https://github.com/peaceiris/actions-gh-pages/tree/v3">deploy the output to the host project&rsquo;s <code>gh-pages</code>
+branch</a></p></li>
+</ul>
+
+<p>In support of deploying to a GitHub pages, we&rsquo;ll also need to add
+support for nesting the output under a subdirectory. Since the output
+HTML has a potential to be served under a path (for example,
+<a href="https://seanpdoyle.github.io/git-read">https://seanpdoyle.github.io/git-read</a>), read from the <code>PATH_PREFIX</code>
+environment variable, then prefix all sitemap URLs with that prefix.</p>
+
+<h2 id="installation-script">Installation Script</h2>
+
+<p>Introduce the <a href="#script/install"><code>script/install</code> file</a> to execute the
+necessary commands to configure the project to be executable. Mainly,
+install its <a href="https://guides.rubygems.org/rubygems-basics/">RubyGems dependencies</a> and its <a href="https://yarnpkg.com/">Yarn
+dependencies</a>.</p>
+
+<h2 id="test-suite">Test Suite</h2>
+
+<p>While the <a href="#.github/workflows/git-read.yml"><code>.github/workflows/git-read.yml</code>
+file</a> serves as an example of how to
+integrate <code>git-read</code> into a project&rsquo;s GitHub Actions, the
+<a href="#.github/workflows/ci.yml"><code>.github/workflows/ci.yml</code></a> declares its own
+GitHub Action to run the project&rsquo;s test suite, ensuring that the tool
+behaves as expected, and that future revisions won&rsquo;t introduce
+regressions.</p>
+
+        </section>
+      </article>
+
+        <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
+            <details id=".github/workflows/ci.yml" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">.github/workflows/ci.yml</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..e43a27b
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/.github/workflows/ci.yml
+</span><span class="p">@@ -0,0 +1,26 @@</span>
+<span class="gi">+name: CI
++
++on: [push, pull_request]
++
++jobs:
++  test:
++    runs-on: ubuntu-latest
++
++    steps:
++    - uses: actions/checkout@v2
++    - uses: ruby/setup-ruby@v1
++      with:
++        ruby-version: "2.6.6"
++        bundler-cache: true
++    - uses: actions/setup-node@v2
++      with:
++        node-version: "12.x"
++
++    - run: |
++        git config --global user.email "ci@example.com"
++        git config --global user.name "GitHub Actions"
++
++        bundle install --jobs 4 --retry 3
++        yarn install
++
++    - run: rake
+</span></code></pre></div></details>
+
+            <details id=".github/workflows/git-read.yml" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">.github/workflows/git-read.yml</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/.github/workflows/git-read.yml b/.github/workflows/git-read.yml
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..3f1a4b2
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/.github/workflows/git-read.yml
+</span><span class="p">@@ -0,0 +1,38 @@</span>
+<span class="gi">+name: git-read
++
++on:
++  push:
++    branches:
++      - main
++
++jobs:
++  build:
++    runs-on: ubuntu-latest
++
++    steps:
++    - uses: actions/checkout@v2
++      with:
++        fetch-depth: 0
++
++    - uses: ruby/setup-ruby@v1
++      with:
++        ruby-version: "2.6.6"
++        bundler-cache: true
++
++    - uses: actions/setup-node@v1
++      with:
++        node-version: "12.x"
++
++    - name: Build documentation from Git History
++      env:
++        BUNDLE_PATH: vendor/bundle
++      run: |
++        script/install
++        bin/git-read --git-dir ./ --build-dir ./build --path-prefix "/$(basename $GITHUB_REPOSITORY)"
++
++    - name: Deploy
++      uses: peaceiris/actions-gh-pages@v3
++      with:
++        personal_token: ${{ secrets.PERSONAL_TOKEN }}
++        commit_message: ${{ github.event.head_commit.message }}
++        publish_dir: ./build
+</span></code></pre></div></details>
+
+            <details id="bin/git-read" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">bin/git-read</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/bin/git-read b/bin/git-read
+index d1ed809..1b2afd4 100755
+</span><span class="gd">--- a/bin/git-read
+</span><span class="gi">+++ b/bin/git-read
+</span><span class="p">@@ -5,6 +5,7 @@</span> set -e
+ ARGS=( "$@" )
+ 
+ VERBOSE="--no-verbose"
+<span class="gi">+PATH_PREFIX=""
+</span> 
+ for i in "${!ARGS[@]}"; do
+   case "${ARGS[i]}" in
+<span class="p">@@ -22,18 +23,25 @@</span> for i in "${!ARGS[@]}"; do
+       GIT_DIR="${ARGS[i+1]}"
+       unset 'ARGS[i+1]'
+       ;;
+<span class="gi">+    -p|--path-prefix)
++      PATH_PREFIX="${ARGS[i+1]}"
++      unset 'ARGS[i+1]'
++      ;;
+</span>     -v|--verbose)
+       VERBOSE="--verbose"
+       ;;
+     -h|--help)
+       cat &lt;&lt;-HELP
+<span class="gd">-usage: git read [--help] [-v|--verbose] [-g|--git-dir &lt;path&gt;]
+</span><span class="gi">+usage: git read [--help] [-v|--verbose] [-g|--git-dir &lt;path&gt;] [-p|--path-prefix &lt;path&gt;]
+</span>                 [-s|--server|--serve] [-o|--output-dir &lt;path&gt;]
+ 
+ Generate HTML from your project's Git history
+ 
+ OPTIONS
+ 
+<span class="gi">+      --path-prefix
++          specify the prefix to prepend to URLs. For example, the name of the GitHub Page's subdirectory the output will be served under
++
+</span>       --output-dir
+           specify the directory where the site will be built
+ 
+<span class="p">@@ -59,11 +67,12 @@</span> done
+ build_site() {
+   git_dir="${1}"
+   output_dir="${2}"
+<span class="gd">-  target="${3}"
+-  verbosity="${4}"
+</span><span class="gi">+  path_prefix="${3}"
++  target="${4}"
++  verbosity="${5}"
+</span>   tool_dir="$(dirname "${BASH_SOURCE[0]}")/../"
+ 
+<span class="gd">-  export GIT_DIR=$git_dir
+</span><span class="gi">+  export GIT_DIR=$git_dir PATH_PREFIX=$path_prefix
+</span> 
+   mkdir -p $output_dir
+   cd $tool_dir
+<span class="p">@@ -79,5 +88,6 @@</span> build_site() {
+ build_site \
+   $(realpath ${GIT_DIR-./}) \
+   $(realpath ${OUTPUT_DIR-./build/}) \
+<span class="gi">+  "${PATH_PREFIX}" \
+</span>   "${TARGET}" \
+   "${VERBOSE}"
+</code></pre></div></details>
+
+            <details id="config.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">config.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/config.rb b/config.rb
+index 2d57184..7cbade4 100644
+</span><span class="gd">--- a/config.rb
+</span><span class="gi">+++ b/config.rb
+</span><span class="p">@@ -7,6 +7,7 @@</span> include UrlHelpers
+ # https://middlemanapp.com/advanced/configuration/#configuring-extensions
+ 
+ config[:mode] = (ENV.fetch("MODE") { build? ? "build" : "server" }).to_sym
+<span class="gi">+config[:path_prefix] = ENV.fetch("PATH_PREFIX") { "" }
+</span> 
+ activate :aria_current
+ activate :external_pipeline,
+<span class="p">@@ -159,3 +160,7 @@</span> end
+ #   activate :minify_css
+ #   activate :minify_javascript
+ # end
+<span class="gi">+
++configure :build do
++  activate :relative_assets
++end
+</span></code></pre></div></details>
+
+            <details id="helpers/url_helpers.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">helpers/url_helpers.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/helpers/url_helpers.rb b/helpers/url_helpers.rb
+index 3db5e7b..8a8292f 100644
+</span><span class="gd">--- a/helpers/url_helpers.rb
+</span><span class="gi">+++ b/helpers/url_helpers.rb
+</span><span class="p">@@ -1,17 +1,17 @@</span>
+ module UrlHelpers
+   def commit_path(commit)
+<span class="gd">-    "/commits/#{commit.sha}/index.html"
+</span><span class="gi">+    "#{config[:path_prefix]}/commits/#{commit.sha}/index.html"
+</span>   end
+ 
+   def tag_path(tag)
+<span class="gd">-    "/tags/#{tag.name}/index.html"
+</span><span class="gi">+    "#{config[:path_prefix]}/tags/#{tag.name}/index.html"
+</span>   end
+ 
+   def root_path(root = nil)
+     if root.respond_to? :name
+       tag_path(root)
+     else
+<span class="gd">-      "/index.html"
+</span><span class="gi">+      "#{config[:path_prefix]}/index.html"
+</span>     end
+   end
+ end
+</code></pre></div></details>
+
+            <details id="script/install" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">script/install</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/script/install b/script/install
+</span><span class="p">new file mode 100755
+</span><span class="gh">index 0000000..754d413
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/script/install
+</span><span class="p">@@ -0,0 +1,12 @@</span>
+<span class="gi">+#!/usr/bin/env bash
++set -e
++PROJECT_ROOT=$(dirname "${BASH_SOURCE[0]}")/../
++GEMFILE="${PROJECT_ROOT}/Gemfile"
++gem install bundler --conservative
++bundle check || bundle install \
++  --without "test" \
++  --jobs 4 \
++  --retry 3 \
++  --gemfile $GEMFILE
++
++yarn install
+</span></code></pre></div></details>
+
+            <details id="test/application_system_test_case.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/application_system_test_case.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/application_system_test_case.rb b/test/application_system_test_case.rb
+index a90ca46..b7e4e37 100644
+</span><span class="gd">--- a/test/application_system_test_case.rb
+</span><span class="gi">+++ b/test/application_system_test_case.rb
+</span><span class="p">@@ -2,12 +2,14 @@</span> require "test_helper"
+ 
+ require_relative "../helpers/url_helpers"
+ require "git_helpers"
+<span class="gi">+require "middleman_helpers"
+</span> 
+ class ApplicationSystemTestCase &lt; ActiveSupport::TestCase
+   include Capybara::DSL
+   include Capybara::Minitest::Assertions
+   include UrlHelpers
+   include GitHelpers
+<span class="gi">+  include MiddlemanHelpers
+</span> 
+   def around(&amp;block)
+     with_git_directory(&amp;block)
+</code></pre></div></details>
+
+            <details id="test/middleman_helpers.rb" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">test/middleman_helpers.rb</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/test/middleman_helpers.rb b/test/middleman_helpers.rb
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..526da7a
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/test/middleman_helpers.rb
+</span><span class="p">@@ -0,0 +1,11 @@</span>
+<span class="gi">+require "middleman/rack"
++
++module MiddlemanHelpers
++  def application
++    @application ||= Middleman::Application.new
++  end
++
++  def config
++    application.config
++  end
++end
+</span></code></pre></div></details>
+
+        </aside>
+    </main>
+  </body>
+</html>
