@@ -8,6 +8,22 @@
     <title>Exercise the application through a System Test</title>
     <script src="../../../javascripts/site.js"></script>
     <link href="../../../stylesheets/syntax.css" rel="stylesheet" />
+    <script type="module">
+      import "https://cdn.skypack.dev/@hotwired/turbo@latest"
+
+      addEventListener("turbo:load", () => {
+        for (let current of document.querySelectorAll('[aria-current="page"]')) {
+          current.removeAttribute("aria-current")
+        }
+
+        for (const link of document.querySelectorAll("a")) {
+          if (link.pathname === window.location.pathname) {
+            link.setAttribute("aria-current", "page")
+            link.scrollIntoView({ block: "center", scroll: "smooth" })
+          }
+        }
+      })
+    </script>
   </head>
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
@@ -26,7 +42,7 @@
     </header>
 
     <main class="flex flex-col md:flex-row">
-      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbo-permanent>
         <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
           <span class="sr-only open:hidden">Expand History</span>
           <span class="sr-only hidden open:initial">Collapse History</span>

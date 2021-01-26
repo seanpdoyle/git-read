@@ -5,9 +5,25 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
-    <title>Add `<details>` element polyfill</title>
+    <title>Navigate with @hotwired/turbo</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+    <script type="module">
+      import "https://cdn.skypack.dev/@hotwired/turbo@latest"
+
+      addEventListener("turbo:load", () => {
+        for (let current of document.querySelectorAll('[aria-current="page"]')) {
+          current.removeAttribute("aria-current")
+        }
+
+        for (const link of document.querySelectorAll("a")) {
+          if (link.pathname === window.location.pathname) {
+            link.setAttribute("aria-current", "page")
+            link.scrollIntoView({ block: "center", scroll: "smooth" })
+          }
+        }
+      })
+    </script>
   </head>
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
@@ -21,12 +37,12 @@
 </a>
           <span class="flex-grow"><!-- ensure the links are pushed to the container's extremes --></span>
 
-<a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              Next &#8594;
+<a href="/git-read/commits/3bd78402c3bc4aac9b73f5232c38c8c3850ff565/index.html">              Next &#8594;
 </a>      </nav>
     </header>
 
     <main class="flex flex-col md:flex-row">
-      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbo-permanent>
         <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
           <span class="sr-only open:hidden">Expand History</span>
           <span class="sr-only hidden open:initial">Collapse History</span>
@@ -87,11 +103,9 @@
 
 </a><a href="/git-read/commits/9c1da72abeeac1beef2e1f05fbe157da86c7a4e4/index.html">              <p>Get Started from README skipping generated commits</p>
 
-</a><a href="/git-read/commits/ad791e1df7c6e6a1246636accac242048b17e0aa/index.html">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+</a><a href="/git-read/commits/d61c50689815fa927ae73d5d615d55ea78bd7c7b/index.html">              <p>Navigate with @hotwired/turbo</p>
 
-</a><a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              <p>Navigate with Turbolinks</p>
-
-</a><a href="/git-read/commits/34bec43f6b3c43d0c6753b64ac350368b5df43d1/index.html">              <p>Integrate with GitHub Actions</p>
+</a><a href="/git-read/commits/3bd78402c3bc4aac9b73f5232c38c8c3850ff565/index.html">              <p>Integrate with GitHub Actions</p>
 
 </a>        </nav>
       </details>
@@ -99,90 +113,100 @@
       <article class="flex-grow p-4 md:flex md:justify-center md:h-screen-fit md:p-8 md:overflow-y-auto lg:w-7/12">
         <section class="prose prose-lg md:prose-xl">
 
-          <h1 id="add-details-element-polyfill">Add <code>&lt;details&gt;</code> element polyfill</h1>
+          <h1 id="navigate-with-hotwired-turbo">Navigate with @hotwired/turbo</h1>
 
-<p>While support for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code> element</a> that powers this
-application&rsquo;s commit history browser is widespread, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#Browser_compatibility">it is not supported
-by all available browsers</a>.</p>
+<p>The HTML pages output by <code>git-read</code> commands are intended to be served
+directly, through static site servers like <a href="https://guides.github.com/features/pages/">GitHub pages</a>.</p>
 
-<p>Now that <a href="https://docs.npmjs.com/about-npm/">NPM packages</a> are available to the application&rsquo;s pages,
-we can <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfill</a> missing support.</p>
+<p>Despite the absence of a server-side component, the application&rsquo;s
+navigation could still stand to benefit from the value that
+<a href="https://turbo.hotwire.dev/handbook/drive">Turbo</a> proposes:</p>
 
-<p>There is a <a href="https://github.com/javan/details-element-polyfill/tree/2.4.0#html-details-element-polyfill">third-party, community sourced
-polyfill</a> for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code>
-element</a> that this commit adds a dependency on.</p>
+<blockquote>
+<p>Turbo bundles several techniques for creating fast, modern,
+progressively enhanced web applications without using much JavaScript.
+It offers a simpler alternative to the prevailing client-side
+frameworks which put all the logic in the front-end and confine the
+server side of your app to being little more than a JSON API.</p>
+
+<p><a href="https://turbo.hotwire.dev/handbook/drive">Turbo Drive</a> is the part of Turbo that enhances page-level
+navigation. It watches for link clicks and form submissions, performs
+them in the background, and updates the page without doing a full
+reload. It’s the evolution of a library previously known as
+<a href="https://github.com/turbolinks/turbolinks/tree/v5.2.0#observing-navigation-events">Turbolinks</a>.</p>
+</blockquote>
+
+<p>To integrate with <a href="https://turbo.hotwire.dev/handbook/drive">Turbo</a>, modify existing [event listeners][] that
+are firing callbacks for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event"><code>DOMContentLoaded</code>
+event</a> declared on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">page&rsquo;s <code>document</code></a>,
+replacing them with event listeners on the <a href="https://turbo.hotwire.dev/reference/events"><code>turbo:load</code>
+event</a>.</p>
+
+<h2 id="scroll-current-commit-into-view">Scroll current Commit into view</h2>
+
+<p>When navigation to a commit completes, scroll that commit&rsquo;s node in the
+history navigator into view.</p>
+
+<p>When the browser finished loading and parsing the page&rsquo;s necessary
+assets and elements, it fires a <a href="https://turbo.hotwire.dev/reference/events"><code>turbo:load</code> event</a> on the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document"><code>document</code> object</a>.</p>
+
+<p>When the browser finalizes loading and parsing its contents, scroll any
+descendant elements annotated with the <a href="https://tink.uk/using-the-aria-current-attribute/"><code>[aria-current=&quot;page&quot;]</code>
+attribute</a> into view my invoking the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView"><code>.scrollIntoView()</code>
+method</a> directly on the elements. Invoking
+<code>.scrollIntoView()</code> upon <code>turbo:load</code> will improve the visibility of any
+<code>[aria-current]</code> elements present on the page.</p>
 
         </section>
       </article>
 
         <aside class="md:h-screen-fit md:overflow-y-auto lg:w-5/12">
-            <details id="package.json" open class="border-l border-r">
+            <details id="source/layouts/layout.erb" open class="border-l border-r">
   <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
 </svg>
 
 
-    <code class="break-all">package.json</code>
+    <code class="break-all">source/layouts/layout.erb</code>
   </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/package.json b/package.json
-index 9c2c580..1746012 100644
-</span><span class="gd">--- a/package.json
-</span><span class="gi">+++ b/package.json
-</span><span class="p">@@ -20,6 +20,7 @@</span>
-   "dependencies": {
-     "@tailwindcss/typography": "^0.4.0",
-     "autoprefixer": "^10.2.1",
-<span class="gi">+    "details-element-polyfill": "^2.4.0",
-</span>     "postcss": "^8.2.4",
-     "tailwindcss": "^2.0.2"
-   }
-</code></pre></div></details>
-
-            <details id="source/javascripts/site.js" open class="border-l border-r">
-  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
-  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code class="break-all">source/javascripts/site.js</code>
-  </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/javascripts/site.js b/source/javascripts/site.js
-index 6a4c3be..8fea308 100644
-</span><span class="gd">--- a/source/javascripts/site.js
-</span><span class="gi">+++ b/source/javascripts/site.js
-</span><span class="p">@@ -1 +1,3 @@</span>
- import "../stylesheets/site.css"
-<span class="gi">+
-+import "details-element-polyfill"
-</span></code></pre></div></details>
-
-            <details id="yarn.lock" open class="border-l border-r">
-  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
-  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-</svg>
-
-
-    <code class="break-all">yarn.lock</code>
-  </summary>
-<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/yarn.lock b/yarn.lock
-index 828d2d0..239c5e4 100644
-</span><span class="gd">--- a/yarn.lock
-</span><span class="gi">+++ b/yarn.lock
-</span><span class="p">@@ -1004,6 +1004,11 @@</span> des.js@^1.0.0:
-     inherits "^2.0.1"
-     minimalistic-assert "^1.0.0"
- 
-<span class="gi">+details-element-polyfill@^2.4.0:
-+  version "2.4.0"
-+  resolved "https://registry.yarnpkg.com/details-element-polyfill/-/details-element-polyfill-2.4.0.tgz#e0622adef7902662faf27b4ab8acba5dc4e3a6e6"
-+  integrity sha512-jnZ/m0+b1gz3EcooitqL7oDEkKHEro659dt8bWB/T/HjiILucoQhHvvi5MEOAIFJXxxO+rIYJ/t3qCgfUOSU5g==
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/source/layouts/layout.erb b/source/layouts/layout.erb
+index 126e356..cf9753c 100644
+</span><span class="gd">--- a/source/layouts/layout.erb
+</span><span class="gi">+++ b/source/layouts/layout.erb
+</span><span class="p">@@ -8,6 +8,22 @@</span>
+     &lt;title&gt;&lt;%= page[:title] || current_page.data.title %&gt;&lt;/title&gt;
+     &lt;%= javascript_include_tag "site" %&gt;
+     &lt;%= stylesheet_link_tag "syntax" %&gt;
+<span class="gi">+    &lt;script type="module"&gt;
++      import "https://cdn.skypack.dev/@hotwired/turbo@latest"
 +
-</span> detect-file@^1.0.0:
-   version "1.0.0"
-   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
++      addEventListener("turbo:load", () =&gt; {
++        for (let current of document.querySelectorAll('[aria-current="page"]')) {
++          current.removeAttribute("aria-current")
++        }
++
++        for (const link of document.querySelectorAll("a")) {
++          if (link.pathname === window.location.pathname) {
++            link.setAttribute("aria-current", "page")
++            link.scrollIntoView({ block: "center", scroll: "smooth" })
++          }
++        }
++      })
++    &lt;/script&gt;
+</span>   &lt;/head&gt;
+   &lt;body class="min-h-screen"&gt;
+     &lt;header class="flex flex-row h-12 border-b"&gt;
+<span class="p">@@ -45,7 +61,7 @@</span>
+     &lt;/header&gt;
+ 
+     &lt;main class="flex flex-col md:flex-row"&gt;
+<span class="gd">-      &lt;details class="relative pb-8 md:h-screen-fit"&gt;
+</span><span class="gi">+      &lt;details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbo-permanent&gt;
+</span>         &lt;summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative"&gt;
+           &lt;span class="sr-only open:hidden"&gt;Expand History&lt;/span&gt;
+           &lt;span class="sr-only hidden open:initial"&gt;Collapse History&lt;/span&gt;
 </code></pre></div></details>
 
         </aside>

@@ -8,6 +8,22 @@
     <title>Add "current" styles to `<a>` elements</title>
     <script src="../../javascripts/site.js"></script>
     <link href="../../stylesheets/syntax.css" rel="stylesheet" />
+    <script type="module">
+      import "https://cdn.skypack.dev/@hotwired/turbo@latest"
+
+      addEventListener("turbo:load", () => {
+        for (let current of document.querySelectorAll('[aria-current="page"]')) {
+          current.removeAttribute("aria-current")
+        }
+
+        for (const link of document.querySelectorAll("a")) {
+          if (link.pathname === window.location.pathname) {
+            link.setAttribute("aria-current", "page")
+            link.scrollIntoView({ block: "center", scroll: "smooth" })
+          }
+        }
+      })
+    </script>
   </head>
   <body class="min-h-screen">
     <header class="flex flex-row h-12 border-b">
@@ -26,7 +42,7 @@
     </header>
 
     <main class="flex flex-col md:flex-row">
-      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbolinks-permanent>
+      <details id="navigation" class="relative pb-8 md:h-screen-fit" data-turbo-permanent>
         <summary class="cursor-pointer inset-0 top-auto list-none outline-none md:relative">
           <span class="sr-only open:hidden">Expand History</span>
           <span class="sr-only hidden open:initial">Collapse History</span>
@@ -87,11 +103,9 @@
 
 </a><a href="/git-read/commits/9c1da72abeeac1beef2e1f05fbe157da86c7a4e4/index.html">              <p>Get Started from README skipping generated commits</p>
 
-</a><a href="/git-read/commits/ad791e1df7c6e6a1246636accac242048b17e0aa/index.html">              <p>Add <code>&lt;details&gt;</code> element polyfill</p>
+</a><a href="/git-read/commits/d61c50689815fa927ae73d5d615d55ea78bd7c7b/index.html">              <p>Navigate with @hotwired/turbo</p>
 
-</a><a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              <p>Navigate with Turbolinks</p>
-
-</a><a href="/git-read/commits/34bec43f6b3c43d0c6753b64ac350368b5df43d1/index.html">              <p>Integrate with GitHub Actions</p>
+</a><a href="/git-read/commits/3bd78402c3bc4aac9b73f5232c38c8c3850ff565/index.html">              <p>Integrate with GitHub Actions</p>
 
 </a>        </nav>
       </details>
