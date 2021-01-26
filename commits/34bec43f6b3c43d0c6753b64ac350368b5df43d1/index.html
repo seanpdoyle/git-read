@@ -90,7 +90,7 @@
 
 </a><a href="/git-read/commits/fca5220bc2e81a7c3deab87b6d4ff9244868cc21/index.html">              <p>Navigate with Turbolinks</p>
 
-</a><a href="/git-read/commits/8bd8299978799dff93e122f61b023afe3b3e8f19/index.html">              <p>Integrate with GitHub Actions</p>
+</a><a href="/git-read/commits/34bec43f6b3c43d0c6753b64ac350368b5df43d1/index.html">              <p>Integrate with GitHub Actions</p>
 
 </a>        </nav>
       </details>
@@ -244,6 +244,62 @@ regressions.</p>
 +        personal_token: ${{ secrets.PERSONAL_TOKEN }}
 +        commit_message: ${{ github.event.head_commit.message }}
 +        publish_dir: ./build
+</span></code></pre></div></details>
+
+            <details id="Gemfile" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">Gemfile</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile b/Gemfile
+index 2d4c808..805a6cc 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -13,4 +13,5 @@</span> group :test do
+   gem 'capybara', require: 'capybara/minitest'
+   gem 'climate_control'
+   gem 'minitest-around', require: 'minitest/around/unit'
+<span class="gi">+  gem 'rake'
+</span> end
+</code></pre></div></details>
+
+            <details id="Gemfile.lock" open class="border-l border-r">
+  <summary class="border-b cursor-pointer list-style-none p-4 outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" role="img" class="h-8 mr-4 inline transform rotate-90 open:-rotate-90">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"></path>
+</svg>
+
+
+    <code class="break-all">Gemfile.lock</code>
+  </summary>
+<div class="highlight"><pre class="highlight diff"><code><span class="gh">diff --git a/Gemfile.lock b/Gemfile.lock
+index 134f225..b899381 100644
+</span><span class="gd">--- a/Gemfile.lock
+</span><span class="gi">+++ b/Gemfile.lock
+</span><span class="p">@@ -110,6 +110,7 @@</span> GEM
+     rack (2.2.2)
+     rack-test (1.1.0)
+       rack (&gt;= 1.0, &lt; 3)
+<span class="gi">+    rake (13.0.3)
+</span>     rb-fsevent (0.10.3)
+     rb-inotify (0.10.1)
+       ffi (~&gt; 1.0)
+<span class="p">@@ -155,9 +156,10 @@</span> DEPENDENCIES
+   middleman-inline_svg
+   middleman-syntax
+   minitest-around
+<span class="gi">+  rake
+</span>   redcarpet
+   tzinfo-data
+   wdm (~&gt; 0.1)
+ 
+ BUNDLED WITH
+<span class="gd">-   2.2.3
+</span><span class="gi">+   2.2.6
 </span></code></pre></div></details>
 
             <details id="bin/git-read" open class="border-l border-r">
